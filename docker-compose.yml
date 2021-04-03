@@ -5,7 +5,7 @@ services:
     image: obserfy/postgres-dev:latest
     container_name: grayson-postgres
     environment:
-      POSTGRES_MULTIPLE_DATABASES: defaultdb,defaultdb_test
+      POSTGRES_MULTIPLE_DATABASES: main
       POSTGRES_PASSWORD: postgres
     command: ["postgres", "-c", "log_statement=all"]
     ports:
