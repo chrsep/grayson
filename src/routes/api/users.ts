@@ -1,5 +1,5 @@
-import Prisma from "@prisma/client"
 import type { RequestHandler } from "@sveltejs/kit"
+import Prisma from "@prisma/client/index.js"
 
 const prisma = new Prisma.PrismaClient()
 

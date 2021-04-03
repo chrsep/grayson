@@ -24,14 +24,9 @@ module.exports = {
     target: "#svelte",
 
     vite: {
-      resolve: {
-        alias: {
-          "@prisma/client": "@prisma/client/index.js"
-        }
-      },
       ssr: {
         noExternal: Object.keys(pkg.dependencies || {})
-      }
+      },
     }
   }
 }
