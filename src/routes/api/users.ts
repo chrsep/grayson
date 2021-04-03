@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import Prisma from '@prisma/client'
 import type { RequestHandler } from '@sveltejs/kit'
 
-const prisma = new PrismaClient()
+const prisma = new Prisma.PrismaClient()
 
 export const get: RequestHandler = async () => {
 	await prisma.$connect()
