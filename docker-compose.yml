@@ -1,0 +1,32 @@
+## Docker Compose for development
+version: "3"
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: grayson-minio
+    entrypoint: sh
+    command: -c 'mkdir -p /data/media && /usr/bin/minio server /data'
+    environment:
+      MINIO_HTTP_TRACE: "/dev/stdout"
+    ports:
+      - 9000:9000
+    volumes:
+      - grayson-minio:/data
+    env_file:
+      - .env
+
+  db:
+    image: obserfy/postgres-dev:latest
+    container_name: grayson-postgres
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: defaultdb,defaultdb_test
+      POSTGRES_PASSWORD: postgres
+    command: ["postgres", "-c", "log_statement=all"]
+    ports:
+      - "5432:5432"
+    volumes:
+      - grayson-db:/var/lib/postgresql/data
+
+volumes:
+  grayson-db:
+  grayson-minio:
