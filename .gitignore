@@ -6,3 +6,5 @@ node_modules
 .env.local
 .vercel_build_output
 .idea/dataSources.xml
+
+.vercel
