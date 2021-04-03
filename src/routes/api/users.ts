@@ -1,11 +1,9 @@
+import db from "$lib/db"
 import type { RequestHandler } from "@sveltejs/kit"
-import Prisma from "@prisma/client/index.js"
-
-const prisma = new Prisma.PrismaClient()
 
 export const get: RequestHandler = async () => {
-  await prisma.$connect()
-  const users = await prisma.user.findMany()
+  await db.$connect()
+  const users = await db.user.findMany()
 
   return {
     body: users
