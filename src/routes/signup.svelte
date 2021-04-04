@@ -9,23 +9,31 @@
   let name = ""
   let email = ""
   let password = ""
+
+  const handleSignUp = async () => {
+    const result = await fetch("/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+    })
+  }
 </script>
 
 <div class="w-screen h-screen flex">
   <div class="bg-black w-1/2 h-full hidden md:block" />
 
-
   <div class="flex flex-col justify-center max-w-xs w-full mx-auto">
-    <h1 class="text-center mb-3">
-      Selamat Datang
-    </h1>
+    <h1 class="text-center mb-3">Selamat Datang</h1>
 
     <TextField
       class="mb-3"
       inputType="text"
       label="Nama Lengkap"
       value={name}
-      on:input={(e) => name = e.target.value }
+      on:input={(e) => (name = e.target.value)}
     />
 
     <TextField
@@ -33,7 +41,7 @@
       inputType="email"
       label="E-mail"
       value={email}
-      on:input={(e) => email = e.target.value }
+      on:input={(e) => (email = e.target.value)}
     />
 
     <TextField
@@ -41,12 +49,10 @@
       inputType="password"
       label="Password"
       value={password}
-      on:input={(e) => password = e.target.value }
+      on:input={(e) => (password = e.target.value)}
     />
 
-    <Button>
-      Masuk
-    </Button>
+    <Button on:click={handleSignUp}>Masuk</Button>
 
     <div class="text-center my-6">
       Sudah punya akun? <a sveltekit:prefetch href="/login" class="font-bold">Masuk</a>

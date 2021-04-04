@@ -44,6 +44,8 @@
     "yup": "^0.32.9"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
+    "jsonwebtoken": "^8.5.1",
     "svelte-feather-icons": "^3.3.0"
   },
   "type": "module"
