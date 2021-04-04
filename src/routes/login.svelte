@@ -8,6 +8,13 @@
 
   let email = ""
   let password = ""
+
+  const handleLogin = async () => {
+    const response = await fetch("/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password })
+    })
+  }
 </script>
 
 <div class="w-screen h-screen flex">
@@ -35,7 +42,7 @@
       on:input={(e) => password = e.target.value }
     />
 
-    <Button>
+    <Button on:click={handleLogin} type="button">
       Masuk
     </Button>
 
