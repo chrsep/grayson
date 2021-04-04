@@ -1,5 +1,5 @@
 import type { PrismaClient } from "@prisma/client/index.js"
-import prisma from "@prisma/client/index.js" // it seems to not like this
+import * as prisma from "@prisma/client/index.js" // it seems to not like this
 
 let db: PrismaClient
 if (prisma.PrismaClient) {
