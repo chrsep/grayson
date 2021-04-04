@@ -9,5 +9,5 @@
 
 <label class="{clazz} flex flex-col w-full">
   {label}
-  <input type={inputType} {value} on:change class="rounded border w-full" />
+  <input type={inputType} {value} on:change on:input class="rounded border w-full" />
 </label>

@@ -1,6 +1,13 @@
-<script>
+<script context="module" lang="ts">
+  export const prerender = true
+</script>
+
+<script lang="ts">
   import TextField from "../lib/TextField.svelte"
   import Button from "../lib/Button.svelte"
+
+  let email = ""
+  let password = ""
 </script>
 
 <div class="w-screen h-screen flex">
@@ -12,16 +19,28 @@
       Selamat Datang
     </h1>
 
-    <TextField class="mb-3" inputType="email" label="E-mail" />
+    <TextField
+      class="mb-3"
+      inputType="email"
+      label="E-mail"
+      value={email}
+      on:input={(e) => email = e.target.value }
+    />
 
-    <TextField class="mb-3" inputType="password" label="Password" />
+    <TextField
+      class="mb-3"
+      inputType="password"
+      label="Password"
+      value={password}
+      on:input={(e) => password = e.target.value }
+    />
 
     <Button>
       Masuk
     </Button>
 
     <div class="text-center my-6">
-      Belum punya akun? <a href="/signup" class="font-bold">Daftar sekarang</a>
+      Belum punya akun? <a sveltekit:prefetch href="/signup" class="font-bold">Daftar sekarang</a>
     </div>
   </div>
 </div>
