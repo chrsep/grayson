@@ -7,8 +7,7 @@
     "start": "svelte-kit start --host",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",
-    "prisma:studio": "prisma studio",
-    "postinstall": "prisma generate"
+    "prisma:studio": "prisma studio"
   },
   "devDependencies": {
     "@prisma/client": "2.20.1",
