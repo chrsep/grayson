@@ -8,7 +8,7 @@
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",
     "prisma:studio": "prisma studio",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "next",
