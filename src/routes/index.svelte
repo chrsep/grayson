@@ -3,7 +3,7 @@
 </script>
 
 <main>
-  <h1>Hello world!</h1>
+  <h1>Why world!</h1>
 
   <Counter />
 
