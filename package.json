@@ -35,5 +35,8 @@
     "@prisma/client": "2.20.1",
     "rollup": "2.44.0"
   },
+  "dependencies": {
+    "@prisma/client": "2.20.1"
+  },
   "type": "module"
 }
