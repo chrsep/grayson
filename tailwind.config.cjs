@@ -16,7 +16,11 @@ module.exports = {
     }
   },
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        primary: "blue"
+      }
+    }
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")]
 }
