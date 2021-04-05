@@ -15,11 +15,11 @@ export const post: RequestHandler = async (req) => {
   try {
     const user = await SignUp.validate(parsedBody)
 
-    const newUser = await createAccount(user)
+    const id = await createAccount(user)
 
-    if (newUser) {
+    if (id !== null) {
       const access_token = await createSession()
-      const token = createToken({ id: newUser.id, access_token })
+      const token = createToken({ id, access_token })
       const sessionCookie = createCookie("session", token)
       return {
         status: 200,
@@ -31,7 +31,7 @@ export const post: RequestHandler = async (req) => {
     if (e.code === "P2002") {
       return badRequest("Email is already registered")
     }
-    return badRequest(e)
+    return badRequest(e.message)
   }
 
   return unauthorized("Wrong password")

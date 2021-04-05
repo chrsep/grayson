@@ -3,6 +3,7 @@ import db from "$lib/db"
 import jwt from "jsonwebtoken"
 import { now } from "$lib/time"
 import { parse, serialize } from "$lib/cookie"
+import type { User } from "$lib/domain"
 
 const { VITE_JWT_SECRET } = import.meta.env
 
@@ -14,33 +15,35 @@ interface Credentials {
 export const authenticate = async ({
   email,
   password
-}: Credentials): Promise<boolean | Credentials> => {
+}: Credentials): Promise<null | Omit<User, "stores">> => {
   const user = await db.user.findFirst({
     where: { email }
   })
 
-  if (!user) return false
+  if (!user) return null
 
   const isValid = await argon2.verify(user.password, password)
   if (isValid) return user
 
-  return false
+  return null
 }
 
-interface NewUser {
+export const createAccount = async (user: {
   name: string
   password: string
   email: string
-}
-
-export const createAccount = async (user: NewUser): Promise<NewUser | boolean> => {
+}): Promise<string | null> => {
   const password = await argon2.hash(user.password)
-  return await db.user.create({
+  const newUser = await db.user.create({
     data: {
       ...user,
       password
     }
   })
+
+  if (newUser !== null) return newUser.id
+
+  return null
 }
 
 export const createSession = async (): Promise<string> => {
