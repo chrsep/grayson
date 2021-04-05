@@ -11,7 +11,39 @@ generator client {
 }
 
 model User {
-  id      Int      @default(autoincrement()) @id
-  email   String   @unique
-  name    String?
+  id       String  @id @default(cuid())
+  email    String  @unique
+  password String
+  name     String  @default("")
+  stores   Store[]
+}
+
+model Store {
+  id          String    @id @default(cuid())
+  name        String    @default("")
+  description String    @default("")
+  user        User[]
+  products    Product[]
+}
+
+model Product {
+  id          String @id @default(cuid())
+  name        String @default("")
+  description String @default("")
+  tags        Tag[]
+
+  Store   Store  @relation(fields: [storeId], references: [id])
+  storeId String
+}
+
+model Tag {
+  id       String    @id @default(cuid())
+  name     String    @default("")
+  products Product[]
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
+  expires_at DateTime
 }
