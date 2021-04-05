@@ -11,7 +11,9 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate-prod": "prisma migrate deploy",
     "prisma:migrate-dev": "prisma migrate dev",
-    "check": "svelte-check"
+    "check": "svelte-check",
+    "prepare": "husky install",
+    "pretty-quick": "pretty-quick --staged"
   },
   "devDependencies": {
     "@prisma/client": "2.20.1",
@@ -31,12 +33,14 @@
     "eslint": "7.23.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-svelte3": "3.1.2",
+    "husky": "^6.0.0",
     "jsonwebtoken": "8.5.1",
     "postcss": "8.2.9",
     "postcss-load-config": "3.0.1",
     "prettier": "2.2.1",
     "prettier-plugin-prisma": "0.7.0",
     "prettier-plugin-svelte": "2.2.0",
+    "pretty-quick": "^3.1.0",
     "prisma": "2.20.1",
     "rollup": "2.44.0",
     "svelte": "3.37.0",
