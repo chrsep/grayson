@@ -1,7 +1,5 @@
 <script context="module" lang="ts">
-  import type { Load } from "@sveltejs/kit"
-
-  export const load: Load = async ({ session }) => {
+  export const load = async ({ session }) => {
     if (session.user !== null) {
       return {
         status: 200,

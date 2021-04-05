@@ -1,9 +1,7 @@
 <script context="module" lang="ts">
-  import { Load } from "@sveltejs/kit"
-
   export const prerender = true
 
-  export const load: Load = async ({ session }) => {
+  export const load = async ({ session }) => {
     if (session.user !== null) {
       return {
         status: 302,
