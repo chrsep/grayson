@@ -1,11 +1,11 @@
 <script context="module" lang="ts">
-  export const load = async ({ session }) => {
-    if (session.user !== null) {
-      return {
-        status: 200,
-        props: {
-          user: session.user
-        }
+
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ session }) {
+    return {
+      status: 200,
+      props: {
+        user: session.user
       }
     }
   }

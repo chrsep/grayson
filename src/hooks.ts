@@ -21,10 +21,14 @@ export const getContext: GetContext = async ({ headers }) => {
 }
 
 export const getSession: GetSession = ({ context }) => {
-  return {
-    user: {
-      name: context.user?.name,
-      email: context.user?.email
+  if (context.user) {
+    return {
+      user: {
+        name: context.user?.name,
+        email: context.user?.email
+      }
     }
   }
+
+  return { user: null }
 }

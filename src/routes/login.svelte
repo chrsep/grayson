@@ -1,13 +1,16 @@
 <script context="module" lang="ts">
   export const prerender = true
 
-  export const load = async ({ session }) => {
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ session }) {
     if (session.user !== null) {
       return {
         status: 302,
         redirect: "/"
       }
     }
+
+    return { status: 200 }
   }
 </script>
 
