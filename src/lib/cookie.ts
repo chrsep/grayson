@@ -38,7 +38,7 @@ export const parse: typeof Parse = (str, options) => {
     throw new TypeError("argument str must be a string")
   }
 
-  const obj = {}
+  const obj: any = {}
   const opt = options || {}
   const pairs = str.split(pairSplitRegExp)
   const dec = opt.decode || decode
@@ -178,7 +178,7 @@ export const serialize: typeof Serialize = (name, val, options) => {
  * @private
  */
 
-function tryDecode(str, decode) {
+function tryDecode(str: string, decode: (str: string) => void) {
   try {
     return decode(str)
   } catch (e) {

@@ -8,8 +8,8 @@ const Login = object({
   password: string().required()
 })
 
-export const post: RequestHandler = async ({ body }) => {
-  const parsedBody = await JSON.parse(body + "")
+export const post: RequestHandler = async (req) => {
+  const parsedBody = await JSON.parse(req?.body + "")
 
   try {
     const credentials = await Login.validate(parsedBody)

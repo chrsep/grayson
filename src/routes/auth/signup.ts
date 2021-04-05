@@ -1,19 +1,20 @@
 import type { RequestHandler } from "@sveltejs/kit"
 import { object, string } from "yup"
 import { createAccount, createCookie, createSession, createToken } from "$lib/auth"
-import { badRequest, noContent, unauthorized } from "$lib/rest"
+import { badRequest, unauthorized } from "$lib/rest"
 
 const SignUp = object({
-  name: string(),
+  name: string().required(),
   email: string().email().required(),
   password: string().required()
 })
 
-export const post: RequestHandler = async ({ body }) => {
-  const parsedBody = await JSON.parse(body + "")
+export const post: RequestHandler = async (req) => {
+  const parsedBody = await JSON.parse(req?.body + "")
 
   try {
     const user = await SignUp.validate(parsedBody)
+
     const newUser = await createAccount(user)
 
     if (newUser) {

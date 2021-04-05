@@ -14,3 +14,8 @@ export const unauthorized = (message: string = "Unauthorized"): Response => ({
   status: 403,
   body: { message }
 })
+
+export const internalError = (): Response => ({
+  status: 500,
+  body: { message: "internal server error" }
+})
