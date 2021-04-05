@@ -25,9 +25,9 @@ export const post: RequestHandler = async ({ body }) => {
         body: { message: "success" }
       }
     }
+
+    return unauthorized("Wrong password")
   } catch (e) {
     return badRequest(e.message)
   }
-
-  return unauthorized("Wrong password")
 }

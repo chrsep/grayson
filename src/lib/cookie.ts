@@ -1,3 +1,4 @@
+import type { serialize as Serialize, parse as Parse } from "cookie"
 /*!
  * cookie
  * Copyright(c) 2012-2014 Roman Shtylman
@@ -32,7 +33,7 @@ const fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/
  * @return {object}
  * @public
  */
-export function parse(str, options) {
+export const parse: typeof Parse = (str, options) => {
   if (typeof str !== "string") {
     throw new TypeError("argument str must be a string")
   }
@@ -83,7 +84,7 @@ export function parse(str, options) {
  * @return {string}
  * @public
  */
-export function serialize(name, val, options) {
+export const serialize: typeof Serialize = (name, val, options) => {
   const opt = options || {}
   const enc = opt.encode || encode
 

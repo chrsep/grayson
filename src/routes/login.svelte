@@ -5,15 +5,20 @@
 <script lang="ts">
   import TextField from "../lib/TextField.svelte"
   import Button from "../lib/Button.svelte"
+  import { goto } from "$app/navigation"
 
   let email = ""
   let password = ""
 
   const handleLogin = async () => {
-    const response = await fetch("/auth/login", {
+    const result = await fetch("/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password })
     })
+
+    if (result.ok) {
+      goto("/")
+    }
   }
 </script>
 

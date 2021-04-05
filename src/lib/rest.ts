@@ -11,6 +11,6 @@ export const noContent = (): Response => ({
 })
 
 export const unauthorized = (message: string = "Unauthorized"): Response => ({
-  status: 400,
+  status: 403,
   body: { message }
 })

@@ -1,3 +1,7 @@
+<script context="module" lang="ts">
+  export const prerender = true
+</script>
+
 <script>
   import Button from "$lib/Button.svelte"
   import { MenuIcon } from "svelte-feather-icons"

@@ -48,8 +48,9 @@ export const createSession = async () => {
 
 export const createCookie = (name: string, value: string) => {
   return serialize(name, value, {
-    secure: true,
+    httpOnly: true,
     sameSite: "strict",
-    maxAge: 60 * 60 * 24
+    maxAge: 60 * 60 * 24,
+    secure: import.meta.env.PROD
   })
 }

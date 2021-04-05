@@ -5,6 +5,7 @@
 <script lang="ts">
   import TextField from "../lib/TextField.svelte"
   import Button from "../lib/Button.svelte"
+  import { goto } from "$app/navigation"
 
   let name = ""
   let email = ""
@@ -19,6 +20,8 @@
         password
       })
     })
+
+    if (result.ok) goto("/")
   }
 </script>
 
@@ -52,7 +55,7 @@
       on:input={(e) => (password = e.target.value)}
     />
 
-    <Button on:click={handleSignUp}>Masuk</Button>
+    <Button on:click={handleSignUp}>Daftar</Button>
 
     <div class="text-center my-6">
       Sudah punya akun? <a sveltekit:prefetch href="/login" class="font-bold">Masuk</a>
