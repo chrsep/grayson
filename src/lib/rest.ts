@@ -1,6 +1,6 @@
 import type { Response } from "@sveltejs/kit"
 
-export const badRequest = (message: string = "invalid request body"): Response => ({
+export const badRequest = (message = "invalid request body"): Response => ({
   status: 400,
   body: { message }
 })
@@ -10,7 +10,7 @@ export const noContent = (): Response => ({
   body: { message: "success" }
 })
 
-export const unauthorized = (message: string = "Unauthorized"): Response => ({
+export const unauthorized = (message = "Unauthorized"): Response => ({
   status: 403,
   body: { message }
 })

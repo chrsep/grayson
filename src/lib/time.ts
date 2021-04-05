@@ -1,5 +1,5 @@
-import dayjs from "dayjs"
+import dayjs, { Dayjs } from "dayjs"
 
-export const now = () => {
+export const now = (): Dayjs => {
   return dayjs()
 }

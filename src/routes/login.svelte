@@ -1,8 +1,9 @@
 <script context="module" lang="ts">
+  import type { Load } from "@sveltejs/kit"
+
   export const prerender = true
 
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load ({ session }) {
+  export const load: Load = async ({ session }) => {
     if (session.user !== null) {
       return {
         status: 302,
@@ -15,8 +16,9 @@
 </script>
 
 <script lang="ts">
-  import TextField from "../lib/TextField.svelte"
-  import Button from "../lib/Button.svelte"
+  import TextField from "$lib/TextField.svelte"
+  import Button from "$lib/Button.svelte"
+  import { handleInput } from "$lib/ui"
   import { goto } from "$app/navigation"
 
   let email = ""
@@ -43,7 +45,7 @@
       inputType="email"
       label="E-mail"
       value={email}
-      on:input={(e) => (email = e.target.value)}
+      on:input={handleInput((value) => (email = value))}
     />
 
     <TextField
@@ -51,7 +53,7 @@
       inputType="password"
       label="Password"
       value={password}
-      on:input={(e) => (password = e.target.value)}
+      on:input={handleInput((value) => (password = value))}
     />
 
     <Button on:click={handleLogin} type="button">Masuk</Button>

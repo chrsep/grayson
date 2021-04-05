@@ -11,7 +11,10 @@ interface Credentials {
   password: string
 }
 
-export const authenticate = async ({ email, password }: Credentials) => {
+export const authenticate = async ({
+  email,
+  password
+}: Credentials): Promise<boolean | Credentials> => {
   const user = await db.user.findFirst({
     where: { email }
   })
@@ -24,7 +27,13 @@ export const authenticate = async ({ email, password }: Credentials) => {
   return false
 }
 
-export const createAccount = async (user: { name: string; password: string; email: string }) => {
+interface NewUser {
+  name: string
+  password: string
+  email: string
+}
+
+export const createAccount = async (user: NewUser): Promise<NewUser | boolean> => {
   const password = await argon2.hash(user.password)
   return await db.user.create({
     data: {
@@ -34,7 +43,7 @@ export const createAccount = async (user: { name: string; password: string; emai
   })
 }
 
-export const createSession = async () => {
+export const createSession = async (): Promise<string> => {
   const session = await db.session.create({
     data: {
       expires_at: now().add(7, "day").toISOString()
@@ -44,7 +53,7 @@ export const createSession = async () => {
   return session.id
 }
 
-export const createCookie = (name: string, value: string) => {
+export const createCookie = (name: string, value: string): string => {
   return serialize(name, value, {
     httpOnly: true,
     sameSite: "strict",
@@ -59,7 +68,7 @@ interface JWTToken {
   access_token: string
 }
 
-export const createToken = (payload: JWTToken) => {
+export const createToken = (payload: JWTToken): string => {
   return jwt.sign(payload, VITE_JWT_SECRET as string)
 }
 

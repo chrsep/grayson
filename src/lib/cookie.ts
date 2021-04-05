@@ -20,6 +20,7 @@ const pairSplitRegExp = /; */
  * field-vchar   = VCHAR / obs-text
  * obs-text      = %x80-FF
  */
+// eslint-disable-next-line no-control-regex
 const fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/
 
 /**
@@ -38,6 +39,7 @@ export const parse: typeof Parse = (str, options) => {
     throw new TypeError("argument str must be a string")
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: any = {}
   const opt = options || {}
   const pairs = str.split(pairSplitRegExp)

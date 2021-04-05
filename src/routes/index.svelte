@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ session }) {
+  import type { Load } from "@sveltejs/kit"
+
+  export const load: Load = ({ session }) => {
     return {
       status: 200,
       props: {
