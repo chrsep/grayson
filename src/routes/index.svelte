@@ -23,31 +23,37 @@
 <nav class="border-b">
   <div class="flex p-3 items-center">
 
-    <h1 class="text-center ml-2 flex-shrink-0">Why World!</h1>
+    <h1 class="text-center ml-3 flex-shrink-0a">Grayson</h1>
 
     <div class="px-3 hidden md:block w-full max-w-xl ml-16">
-      <Searchbar label="Cari produk" class="max-w-xl" />
+      <Searchbar label="Cari produk" class="max-w-xl" placeholder="Cari produk" />
     </div>
 
     {#if user}
       <a href="/account" class="ml-auto">
-        <Button>
+        <Button class="h-10">
           <UserIcon class="w-4" />
         </Button>
       </a>
     {:else}
       <a href="/login" class="ml-auto">
-        <Button>Masuk</Button>
+        <Button class="h-10">Masuk</Button>
       </a>
     {/if}
 
 
-    <Button class="ml-3">
+    <Button class="ml-3 h-10">
       <MenuIcon class="w-4" />
     </Button>
   </div>
 
-  <div class="px-3  pb-3 md:hidden max-w-xl">
-    <Searchbar label="Cari produk" />
+  <div class="px-3  pb-2 md:hidden max-w-xl">
+    <Searchbar label="Cari produk" placeholder="Cari produk" />
+  </div>
+
+  <div class="flex px-3">
+    <div class="px-4 py-2 border-primary border-b-2 text-primary-text font-bold">
+      Semua
+    </div>
   </div>
 </nav>
