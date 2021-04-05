@@ -2,7 +2,9 @@ import argon2 from "argon2/argon2.js"
 import db from "$lib/db"
 import jwt from "jsonwebtoken"
 import { now } from "$lib/time"
-import { serialize } from "$lib/cookie"
+import { parse, serialize } from "$lib/cookie"
+
+const { VITE_JWT_SECRET } = import.meta.env
 
 interface Credentials {
   email: string
@@ -32,10 +34,6 @@ export const createAccount = async (user: { name: string; password: string; emai
   })
 }
 
-export const createToken = (payload) => {
-  return jwt.sign(payload, import.meta.env.VITE_JWT_SECRET as string)
-}
-
 export const createSession = async () => {
   const session = await db.session.create({
     data: {
@@ -51,6 +49,24 @@ export const createCookie = (name: string, value: string) => {
     httpOnly: true,
     sameSite: "strict",
     maxAge: 60 * 60 * 24,
-    secure: import.meta.env.PROD
+    secure: import.meta.env.PROD,
+    path: "/"
   })
+}
+
+interface JWTToken {
+  id: string
+  access_token: string
+}
+
+export const createToken = (payload: JWTToken) => {
+  return jwt.sign(payload, VITE_JWT_SECRET as string)
+}
+
+export const parseSession = (cookie: string): JWTToken | false => {
+  const cookies = parse(cookie || "")
+
+  return cookies.session === undefined
+    ? false
+    : (jwt.verify(cookies.session, VITE_JWT_SECRET as string) as JWTToken)
 }
