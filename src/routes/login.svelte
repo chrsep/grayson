@@ -2,7 +2,7 @@
   export const prerender = true
 
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ session }) {
+  export async function load ({ session }) {
     if (session.user !== null) {
       return {
         status: 302,

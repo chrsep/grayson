@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   export let type = "button"
 
-  let clazz
+  let clazz: string
   export { clazz as class }
 </script>
 

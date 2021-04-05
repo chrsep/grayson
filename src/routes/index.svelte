@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ session }) {
     return {
