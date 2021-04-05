@@ -1,6 +1,6 @@
 import argon2 from "argon2/argon2.js"
 import db from "$lib/db"
-import type { User } from "$lib/domain"
+import jwt from "jsonwebtoken"
 
 interface Credentials {
   email: string
@@ -14,7 +14,10 @@ export const authenticate = async ({ email, password }: Credentials) => {
 
   if (!user) return false
 
-  return await argon2.verify(user.password, password)
+  const isValid = await argon2.verify(user.password, password)
+  if (isValid) return user
+
+  return false
 }
 
 export const createAccount = async (user: { name: string; password: string; email: string }) => {
@@ -25,4 +28,8 @@ export const createAccount = async (user: { name: string; password: string; emai
       password
     }
   })
+}
+
+export const createToken = (payload) => {
+  return jwt.sign(payload, import.meta.env.VITE_JWT_SECRET as string)
 }
