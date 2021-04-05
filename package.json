@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.5.1",
+    "dayjs": "^1.10.4",
     "svelte-feather-icons": "^3.3.0"
   },
   "type": "module"
