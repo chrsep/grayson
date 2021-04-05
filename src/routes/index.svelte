@@ -2,6 +2,7 @@
   import Button from "$lib/Button.svelte"
   import { MenuIcon } from "svelte-feather-icons"
 </script>
+
 <nav class="pb-3 border-b">
   <div class="flex p-3 items-center">
     <Button>
@@ -15,7 +16,5 @@
     </a>
   </div>
 
-  <div class="px-5 py-3 m-3 border rounded-full bg-gray-100">
-    Cari produk
-  </div>
+  <div class="px-5 py-3 m-3 border rounded-full bg-gray-100">Cari produk</div>
 </nav>

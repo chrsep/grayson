@@ -28,7 +28,7 @@ module.exports = {
         noExternal: Object.keys(pkg.dependencies || {})
       },
       optimizeDeps: {
-        exclude: ["argon2"],
+        exclude: ["argon2"]
       }
     }
   }
