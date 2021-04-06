@@ -55,5 +55,12 @@
 
   <div class="flex px-3">
     <div class="px-4 py-2 border-primary border-b-2 text-primary-text font-bold">Semua</div>
+
+    {#each tags as tag}
+      <a
+        class="px-4 py-2 border-primary border-b-2 text-primary-text font-bold"
+        href="/{tag.name.toLowerCase()}">{tag.name}</a
+      >
+    {/each}
   </div>
 </nav>

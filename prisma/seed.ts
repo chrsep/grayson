@@ -1,18 +1,28 @@
 import Prisma from "@prisma/client"
+import slugify from "slugify"
 
 const prisma = new Prisma.PrismaClient()
 
 async function main() {
   await prisma.tag.create({
-    data: { name: "Makanan" }
+    data: {
+      slug: slugify("Makanan"),
+      name: "Makanan"
+    }
   })
 
   await prisma.tag.create({
-    data: { name: "Pakaian" }
+    data: {
+      slug: slugify("Pakaian"),
+      name: "Pakaian"
+    }
   })
 
   await prisma.tag.create({
-    data: { name: "Karya Seni" }
+    data: {
+      slug: slugify("Karya Seni"),
+      name: "Karya Seni"
+    }
   })
 }
 

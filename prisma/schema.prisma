@@ -37,7 +37,7 @@ model Product {
 }
 
 model Tag {
-  id       String    @id @default(cuid())
+  slug     String    @id
   name     String    @default("")
   products Product[]
 }
