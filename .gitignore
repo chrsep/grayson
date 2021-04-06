@@ -8,3 +8,4 @@ node_modules
 .idea/dataSources.xml
 
 .vercel
+test-results
