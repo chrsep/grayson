@@ -2,7 +2,7 @@
   import TagSelector from "./TagSelector.svelte"
   import Searchbar from "./Searchbar.svelte"
   import Button from "./Button.svelte"
-  import { SettingsIcon } from "svelte-feather-icons/src"
+  import { SettingsIcon, ShoppingCartIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "./domain"
 
   export let user: User
@@ -17,14 +17,18 @@
       <Searchbar class="max-w-xl" placeholder="Cari produk" />
     </div>
 
+    <Button class="h-10 ml-auto">
+      <ShoppingCartIcon class="w-4" />
+    </Button>
+
     {#if user}
-      <a href="/settings/store" class="ml-auto">
-        <Button class="h-10">
+      <a href="/settings/store">
+        <Button class="h-10 ml-3">
           <SettingsIcon class="w-4" />
         </Button>
       </a>
     {:else}
-      <a href="/login" class="ml-auto">
+      <a href="/login" class="ml-3">
         <Button class="h-10">Masuk</Button>
       </a>
     {/if}

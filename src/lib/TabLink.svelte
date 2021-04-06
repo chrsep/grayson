@@ -8,7 +8,7 @@
   $: isActive = $page.path === href
 </script>
 
-<a class:active={isActive} class="px-4 py-2 border-primary text-sm flex-shrink-0" {href}>
+<a class:active={isActive} class="px-3 py-2 border-primary text-sm flex-shrink-0" {href}>
   {text}
 </a>
 
