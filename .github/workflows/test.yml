@@ -19,8 +19,7 @@ jobs:
         with:
           path: |
             ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}-v1
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -29,7 +28,6 @@ jobs:
         with:
           node-version: 15
       - run: npm install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run build
 
   lint:
@@ -41,8 +39,7 @@ jobs:
         with:
           path: |
             ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}-v1
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -51,7 +48,6 @@ jobs:
         with:
           node-version: 15
       - run: npm install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run lint
 
   check:
@@ -63,8 +59,7 @@ jobs:
         with:
           path: |
             ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}-v1
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-npm-
       - name: Use Node.js 15
@@ -72,6 +67,47 @@ jobs:
         with:
           node-version: 15
       - run: npm install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run build
       - run: npm run check
+
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        id: npm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      - name: Use Node.js 15
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - run: npm install
+      - run: npm run build
+      - run: npm run prisma:migrate-prod
+      - run: npm run start &
+      - run: npm run test
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: e2e-screenshots
+          path: test-results

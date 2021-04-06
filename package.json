@@ -13,9 +13,12 @@
     "prisma:migrate-dev": "prisma migrate dev",
     "check": "svelte-check",
     "prepare": "husky install",
-    "pretty-quick": "pretty-quick --staged"
+    "pretty-quick": "pretty-quick --staged",
+    "test": "npx folio --param browserName=chromium --param screenshotOnFailure",
+    "test:debug": "PWDEBUG=1 npx folio --param browserName=chromium --param screenshotOnFailure --timeout 0"
   },
   "devDependencies": {
+    "@playwright/test": "^0.1100.0",
     "@prisma/client": "2.20.1",
     "@sveltejs/adapter-node": "1.0.0-next.12",
     "@sveltejs/kit": "1.0.0-next.71",
@@ -36,6 +39,7 @@
     "husky": "^6.0.0",
     "jsonwebtoken": "8.5.1",
     "pino": "^6.11.2",
+    "playwright": "^1.10.0",
     "postcss": "8.2.9",
     "postcss-load-config": "3.0.1",
     "prettier": "2.2.1",

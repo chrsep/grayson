@@ -8,7 +8,15 @@
   export { clazz as class }
 </script>
 
-<label class="{clazz} flex items-center w-full rounded-full border bg-gray-100 ring-1 ring-transparent ring-offset-0 focus-within:ring-primary">
+<label
+  class="{clazz} flex items-center w-full rounded-full border bg-gray-100 ring-1 ring-transparent ring-offset-0 focus-within:ring-primary"
+>
   <SearchIcon size="20" class="ml-3" />
-  <input type="text" {value} on:input class="border-none !ring-0 rounded-full bg-transparent w-full" placeholder={placeholder}/>
+  <input
+    type="text"
+    {value}
+    on:input
+    class="border-none !ring-0 rounded-full bg-transparent w-full"
+    {placeholder}
+  />
 </label>
