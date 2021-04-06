@@ -19,18 +19,23 @@
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
   import { handleInput } from "$lib/ui"
-  import { goto } from "$app/navigation"
 
   let email = ""
   let password = ""
+  let error = false
 
   const handleLogin = async () => {
+    error = false
     const result = await fetch("/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password })
     })
 
-    if (result.ok) goto("/")
+    if (result.ok) {
+      window.location.href = "/"
+    } else {
+      error = true
+    }
   }
 </script>
 
@@ -57,6 +62,13 @@
     />
 
     <Button on:click={handleLogin} type="button">Masuk</Button>
+
+    <div
+      class:opacity-0={!error}
+      class="text-center my-4 py-2 block font-bold bg-yellow-300 border border-yellow-500 text-sm rounded transition-opacity duration-100"
+    >
+      Yo, password nya salah
+    </div>
 
     <div class="text-center my-6">
       Belum punya akun? <a sveltekit:prefetch href="/signup" class="font-bold">Daftar sekarang</a>

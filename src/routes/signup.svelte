@@ -18,12 +18,12 @@
 <script lang="ts">
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { goto } from "$app/navigation"
   import { handleInput } from "$lib/ui"
 
   let name = ""
   let email = ""
   let password = ""
+  let error = ""
 
   const handleSignUp = async () => {
     const result = await fetch("/auth/signup", {
@@ -35,7 +35,12 @@
       })
     })
 
-    if (result.ok) goto("/")
+    if (result.ok) {
+      window.location.href = "/"
+    } else {
+      const { message } = await result.json()
+      error = message
+    }
   }
 </script>
 
@@ -70,6 +75,13 @@
     />
 
     <Button on:click={handleSignUp}>Daftar</Button>
+
+    <div
+      class:opacity-0={!error}
+      class="text-center my-4 py-2 block font-bold bg-yellow-300 border border-yellow-500 text-sm rounded transition-opacity duration-100"
+    >
+      Hmm, Ada yang kurang sepertinya....
+    </div>
 
     <div class="text-center my-6">
       Sudah punya akun? <a sveltekit:prefetch href="/login" class="font-bold">Masuk</a>

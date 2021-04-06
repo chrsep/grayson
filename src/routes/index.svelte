@@ -17,7 +17,7 @@
 
 <script lang="ts">
   import Button from "$lib/Button.svelte"
-  import { UserIcon, MenuIcon } from "svelte-feather-icons/src"
+  import { UserIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "$lib/domain"
   import Searchbar from "../lib/Searchbar.svelte"
   import SEO from "../lib/SEO.svelte"
