@@ -32,7 +32,7 @@ export const post: RequestHandler = async (req) => {
     if (e.code === "P2002") {
       return badRequest("Email is already registered")
     }
-    logger.log(e)
+    logger.warn(e)
     return badRequest(e.message)
   }
 

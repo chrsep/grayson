@@ -30,7 +30,7 @@ export const post: RequestHandler = async (req) => {
 
     return unauthorized("Wrong password")
   } catch (e) {
-    logger.log(e)
+    logger.warn(e)
     return badRequest(e.message)
   }
 }

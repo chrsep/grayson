@@ -16,14 +16,13 @@
 </script>
 
 <script lang="ts">
-  import SEO from "../lib/SEO.svelte"
-  import Navbar from "../lib/Navbar.svelte"
-  import type { Tag, User } from "../lib/domain"
+  import type { Tag, User } from "$lib/domain"
+  import Navbar from "$lib/Navbar.svelte"
 
   export let user: User
   export let tags: Tag[]
 </script>
 
-<SEO title="Index " />
-
 <Navbar {user} {tags} />
+
+<slot />
