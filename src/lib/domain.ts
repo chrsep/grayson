@@ -24,3 +24,7 @@ export interface Image {
   id: string
   key: string
 }
+
+export interface Tag {
+  name: string
+}

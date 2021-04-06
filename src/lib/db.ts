@@ -1,14 +1,18 @@
-import type { PrismaClient } from "@prisma/client/index.js"
-import * as prisma from "@prisma/client/index.js" // it seems to not like this
+import type { PrismaClient, Tag } from "@prisma/client/index.js"
+import * as prisma from "@prisma/client/index.js"
 
 let db: PrismaClient
 if (prisma.PrismaClient) {
   db = new prisma.PrismaClient()
 } else {
-  // NOTE: sveltekit workaround
+  // NOTE: sveltest workaround
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   db = new prisma.default.PrismaClient()
+}
+
+export const findAllTags = async (): Promise<Tag[]> => {
+  return await db.tag.findMany()
 }
 
 export default db
