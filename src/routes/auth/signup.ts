@@ -2,6 +2,7 @@ import type { RequestHandler } from "@sveltejs/kit"
 import { object, string } from "yup"
 import { createAccount, createCookie, createSession, createToken } from "$lib/auth"
 import { badRequest, unauthorized } from "$lib/rest"
+import logger from "$lib/logger"
 
 const SignUp = object({
   name: string().required(),
@@ -31,7 +32,7 @@ export const post: RequestHandler = async (req) => {
     if (e.code === "P2002") {
       return badRequest("Email is already registered")
     }
-    console.log(JSON.stringify(e))
+    logger.log(e)
     return badRequest(e.message)
   }
 

@@ -2,6 +2,7 @@ import { authenticate, createCookie, createSession, createToken } from "$lib/aut
 import type { RequestHandler } from "@sveltejs/kit"
 import { badRequest, unauthorized } from "$lib/rest"
 import { object, string } from "yup"
+import logger from "$lib/logger"
 
 const Login = object({
   email: string().email().required(),
@@ -29,7 +30,7 @@ export const post: RequestHandler = async (req) => {
 
     return unauthorized("Wrong password")
   } catch (e) {
-    console.log(JSON.stringify(e))
+    logger.log(e)
     return badRequest(e.message)
   }
 }
