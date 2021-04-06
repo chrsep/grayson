@@ -16,9 +16,12 @@
   import { UserIcon, MenuIcon } from "svelte-feather-icons/src"
   import type { User } from "$lib/domain"
   import Searchbar from "../lib/Searchbar.svelte"
+  import SEO from "../lib/SEO.svelte"
 
   export let user: User
 </script>
+
+<SEO title="Index " />
 
 <nav class="border-b">
   <div class="flex p-3 items-center">

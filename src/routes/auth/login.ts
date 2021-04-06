@@ -19,7 +19,7 @@ export const post: RequestHandler = async (req) => {
       const access_token = await createSession()
       const token = createToken({ id: user.id, access_token })
       const sessionCookie = createCookie("session", token)
-     
+
       return {
         status: 200,
         headers: { "Set-Cookie": sessionCookie },
@@ -29,6 +29,7 @@ export const post: RequestHandler = async (req) => {
 
     return unauthorized("Wrong password")
   } catch (e) {
+    console.log(JSON.stringify(e))
     return badRequest(e.message)
   }
 }

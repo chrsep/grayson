@@ -31,6 +31,7 @@ export const post: RequestHandler = async (req) => {
     if (e.code === "P2002") {
       return badRequest("Email is already registered")
     }
+    console.log(JSON.stringify(e))
     return badRequest(e.message)
   }
 
