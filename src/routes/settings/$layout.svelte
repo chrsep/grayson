@@ -8,7 +8,7 @@
   <div class="max-w-7xl mx-auto w-full flex items-center py-2">
     <a class="p-3 block" href="/"> Grayson </a>
 
-    <Button class="h-10 ml-auto">
+    <Button class="h-10 ml-auto mr-4">
       <ShoppingCartIcon class="w-4" />
     </Button>
   </div>

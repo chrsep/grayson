@@ -61,7 +61,7 @@
       on:input={handleInput((value) => (password = value))}
     />
 
-    <Button on:click={handleLogin} type="button">Masuk</Button>
+    <Button primary on:click={handleLogin} type="button">Masuk</Button>
 
     <div
       class:opacity-0={!error}

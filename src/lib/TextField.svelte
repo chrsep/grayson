@@ -9,5 +9,10 @@
 
 <label class="{clazz} flex flex-col w-full">
   {label}
-  <input type={inputType} {value} on:input class="rounded border border-gray-200 w-full" />
+  <input
+    type={inputType}
+    {value}
+    on:input
+    class="rounded border border-gray-300 w-full bg-dark-surface"
+  />
 </label>

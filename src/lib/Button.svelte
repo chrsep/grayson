@@ -6,7 +6,12 @@
   export { clazz as class }
 </script>
 
-<button class:primary class="{clazz} rounded-lg border px-3 py-2" on:click {type}>
+<button
+  class:primary
+  class="{clazz} rounded-lg border border-gray-300 px-3 py-2 bg-white"
+  on:click
+  {type}
+>
   <slot />
 </button>
 
