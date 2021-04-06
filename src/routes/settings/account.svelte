@@ -25,7 +25,7 @@
 </script>
 
 <div class="max-w-7xl mx-auto pt-16 px-3 flex">
-  <div class="w-full max-w-sm px-3">
+  <div class="w-full max-w-sm px-3 hidden md:block">
     <h2 class="font-black">Data Diri</h2>
   </div>
 
@@ -38,7 +38,7 @@
     </div>
 
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center">
-      <p class="opacity-70">Nama anda akan terlihat di listing produk anda.</p>
+      <p class="opacity-70 leading-tight">Nama anda akan terlihat di listing produk anda.</p>
       <Button primary class="ml-auto">Simpan</Button>
     </div>
   </div>
