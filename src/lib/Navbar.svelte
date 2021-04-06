@@ -2,7 +2,7 @@
   import TagSelector from "./TagSelector.svelte"
   import Searchbar from "./Searchbar.svelte"
   import Button from "./Button.svelte"
-  import { UserIcon } from "svelte-feather-icons/src"
+  import { SettingsIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "./domain"
 
   export let user: User
@@ -18,9 +18,9 @@
     </div>
 
     {#if user}
-      <a href="/account" class="ml-auto">
+      <a href="/settings/account" class="ml-auto">
         <Button class="h-10">
-          <UserIcon class="w-4" />
+          <SettingsIcon class="w-4" />
         </Button>
       </a>
     {:else}

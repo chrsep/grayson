@@ -19,7 +19,9 @@ module.exports = {
     extend: {
       colors: {
         primary: "blue",
-        "primary-text": "blue"
+        "primary-text": "blue",
+
+        danger: "red"
       }
     }
   },
