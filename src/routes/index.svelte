@@ -1,11 +1,15 @@
 <script context="module" lang="ts">
   import type { Load } from "@sveltejs/kit"
 
-  export const load: Load = async ({ session }) => {
+  export const load: Load = async ({ session, fetch }) => {
+    const url = `/data/tags.json`
+    const tags = await fetch(url)
+
     return {
       status: 200,
       props: {
-        user: session.user
+        user: session.user,
+        tags: await tags.json()
       }
     }
   }
@@ -14,11 +18,12 @@
 <script lang="ts">
   import Button from "$lib/Button.svelte"
   import { UserIcon, MenuIcon } from "svelte-feather-icons/src"
-  import type { User } from "$lib/domain"
+  import type { Tag, User } from "$lib/domain"
   import Searchbar from "../lib/Searchbar.svelte"
   import SEO from "../lib/SEO.svelte"
 
   export let user: User
+  export let tags: Tag[]
 </script>
 
 <SEO title="Index " />
@@ -42,10 +47,6 @@
         <Button class="h-10">Masuk</Button>
       </a>
     {/if}
-
-    <Button class="ml-3 h-10">
-      <MenuIcon class="w-4" />
-    </Button>
   </div>
 
   <div class="px-3  pb-2 md:hidden max-w-xl">

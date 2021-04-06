@@ -3,8 +3,16 @@ import Prisma from "@prisma/client"
 const prisma = new Prisma.PrismaClient()
 
 async function main() {
-  prisma.tag.create({
-    data: [{ name: "Makanan" }, { name: "Pakaian" }, { name: "Karya Seni" }]
+  await prisma.tag.create({
+    data: { name: "Makanan" }
+  })
+
+  await prisma.tag.create({
+    data: { name: "Pakaian" }
+  })
+
+  await prisma.tag.create({
+    data: { name: "Karya Seni" }
   })
 }
 
