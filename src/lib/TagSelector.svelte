@@ -5,7 +5,7 @@
 
   export let tags: Tag[]
 
-  const isOnRoot = $page.path === "/"
+  $: isOnRoot = $page.path === "/"
 </script>
 
 <div class="flex px-3 overflow-auto">
@@ -18,6 +18,6 @@
 
 <style>
   .active {
-    @apply font-bold text-primary-text border-b-2;
+    @apply text-primary-text border-b-2;
   }
 </style>

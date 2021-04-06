@@ -4,7 +4,7 @@
 
   export let tag: Tag
 
-  const isActive = $page.path === "/tags/" + tag.slug
+  $: isActive = $page.path === "/tags/" + tag.slug
 </script>
 
 <a
@@ -17,6 +17,6 @@
 
 <style>
   .active {
-    @apply font-bold text-primary;
+    @apply text-primary border-b-2;
   }
 </style>
