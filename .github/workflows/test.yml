@@ -19,8 +19,7 @@ jobs:
         with:
           path: |
             ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}-v1
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -29,7 +28,6 @@ jobs:
         with:
           node-version: 15
       - run: npm install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run build
 
   lint:
@@ -41,8 +39,7 @@ jobs:
         with:
           path: |
             ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}-v1
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -51,7 +48,6 @@ jobs:
         with:
           node-version: 15
       - run: npm install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run lint
 
   check:
@@ -63,8 +59,7 @@ jobs:
         with:
           path: |
             ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}-v1
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-npm-
       - name: Use Node.js 15
@@ -72,6 +67,5 @@ jobs:
         with:
           node-version: 15
       - run: npm install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run build
       - run: npm run check
