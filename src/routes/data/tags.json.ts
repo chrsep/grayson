@@ -6,8 +6,6 @@ export const get: RequestHandler = async () => {
   const tags: Tag[] = await findAllTags()
 
   return {
-    body: tags.map((tag) => ({
-      name: tag
-    }))
+    body: tags
   }
 }

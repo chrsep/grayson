@@ -6,21 +6,21 @@ const prisma = new Prisma.PrismaClient()
 async function main() {
   await prisma.tag.create({
     data: {
-      slug: slugify("Makanan"),
+      slug: slugify("Makanan", { lower: true }),
       name: "Makanan"
     }
   })
 
   await prisma.tag.create({
     data: {
-      slug: slugify("Pakaian"),
+      slug: slugify("Pakaian", { lower: true }),
       name: "Pakaian"
     }
   })
 
   await prisma.tag.create({
     data: {
-      slug: slugify("Karya Seni"),
+      slug: slugify("Karya Seni", { lower: true }),
       name: "Karya Seni"
     }
   })
