@@ -1,17 +1,23 @@
 <script lang="ts">
-  import type { Tag } from "./domain"
+  import { page } from "$app/stores"
+  import type { Tag } from "$lib/domain"
+  import TagLinks from "./TagLinks.svelte"
 
   export let tags: Tag[]
+
+  const isOnRoot = $page.path === "/"
 </script>
 
 <div class="flex px-3 overflow-auto">
-  <a class="px-4 py-2 border-primary border-b-2 text-primary-text font-bold text-sm" href="/"
-    >Semua</a
-  >
+  <a class:active={isOnRoot} class="px-4 py-2 border-primary text-sm" href="/"> Semua </a>
 
   {#each tags as tag}
-    <a class="px-4 py-2 border-primary text-sm flex-shrink-0" href="/tags/{tag.slug}"
-      >{tag.name}
-    </a>
+    <TagLinks {tag} />
   {/each}
 </div>
+
+<style>
+  .active {
+    @apply font-bold text-primary-text border-b-2;
+  }
+</style>
