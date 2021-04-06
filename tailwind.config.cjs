@@ -19,7 +19,10 @@ module.exports = {
     extend: {
       colors: {
         primary: "blue",
+        "on-primary": "white",
         "primary-text": "blue",
+
+        "dark-surface": "#fafafa",
 
         danger: "red"
       }
