@@ -2,5 +2,6 @@
   "automerge": true,
   "extends": ["config:base"],
   "stabilityDays": 5,
-  "prCreation": "not-pending"
+  "prCreation": "not-pending",
+  "dependencyDashboard": true
 }
