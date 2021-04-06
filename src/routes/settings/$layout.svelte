@@ -1,3 +1,7 @@
+<script lang="ts">
+  import TabLink from "$lib/TabLink.svelte"
+</script>
+
 <nav class="border-b">
   <div class="max-w-7xl mx-auto w-full flex items-center">
     <a class="p-3 block" href="/"> Grayson </a>
@@ -8,8 +12,8 @@
   </div>
 
   <div class="flex max-w-7xl mx-auto w-full text-sm px-3 pt-2">
-    <div class="py-2 px-3 border-b-2 border-primary text-primary-text">Toko</div>
-    <div class="py-2 px-3">Akun</div>
+    <TabLink href="/settings/store" text="Toko" />
+    <TabLink href="/settings/account" text="Akun" />
   </div>
 </nav>
 

@@ -18,7 +18,7 @@
     </div>
 
     {#if user}
-      <a href="/settings/account" class="ml-auto">
+      <a href="/settings/store" class="ml-auto">
         <Button class="h-10">
           <SettingsIcon class="w-4" />
         </Button>
