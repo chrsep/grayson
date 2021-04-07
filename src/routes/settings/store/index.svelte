@@ -6,6 +6,7 @@
   <div class="p-3 pt-8 max-w-sm md:max-w-xs mx-auto md:mx-0">
     <a
       class="block border border-gray-300 aspect-w-16 aspect-h-9 rounded-lg cursor-pointer hover:border-primary"
+      href="/settings/store/new"
     >
       <div class="flex items-center justify-center">
         <div>

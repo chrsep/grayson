@@ -4,7 +4,7 @@
   export let text: string
   export let href: string
 
-  $: isActive = $page.path === href
+  $: isActive = $page.path.includes(href)
 </script>
 
 <a class:active={isActive} class="px-3 py-2 border-primary text-sm flex-shrink-0" {href}>
