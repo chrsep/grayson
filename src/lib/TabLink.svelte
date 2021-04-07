@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from "$app/stores"
-  import type { Tag } from "$lib/domain"
 
   export let text: string
   export let href: string

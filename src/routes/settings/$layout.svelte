@@ -4,10 +4,10 @@
 </script>
 
 <nav class="border-b">
-  <div class="max-w-7xl mx-auto w-full flex items-center py-2">
-    <a class="p-3 block" href="/"> Grayson </a>
+  <div class="max-w-7xl mx-auto w-full flex items-center p-3">
+    <a class="block" href="/"> Grayson </a>
 
-    <CartButton buttonClass="mr-4" />
+    <CartButton />
   </div>
 
   <div class="flex max-w-7xl mx-auto w-full p-3">

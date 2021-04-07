@@ -33,7 +33,7 @@
       title="Nama Lengkap"
       description="Ubah nama lengkap anda disini."
       hint="Nama anda akan terlihat di listing produk anda."
-      onInput={handleInput((value) => (name = value))}
+      on:input={handleInput((value) => (name = value))}
       value={name}
     />
 
@@ -41,9 +41,9 @@
       title="Alamat Email"
       description="Alamat email akan anda gunakan untuk komunikasi dan login."
       hint="Alamat email anda akan dapat dilihat pengguna lain."
-      onInput={handleInput((value) => (email = value))}
+      on:input={handleInput((value) => (email = value))}
       value={email}
-      type="email"
+      inputType="email"
     />
   </div>
 </div>

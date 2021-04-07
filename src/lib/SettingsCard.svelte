@@ -6,10 +6,9 @@
   export let description = ""
   export let hint = ""
 
-  export let onInput: (value: string) => void
   export let value: string
   export let onSave: () => void
-  export let type = "text"
+  export let inputType: "text" | "email" | "password" = "text"
 
   let clazz: string
   export { clazz as class }
@@ -20,7 +19,7 @@
   <p class="mb-3 px-6 ">{description}</p>
 
   <div class="max-w-lg">
-    <TextField {type} class="px-6" {value} {onInput} />
+    <TextField {inputType} class="px-6" {value} on:input />
   </div>
 
   <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center">
