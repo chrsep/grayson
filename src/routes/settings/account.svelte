@@ -14,32 +14,37 @@
 </script>
 
 <script lang="ts">
-  import TextField from "$lib/TextField.svelte"
-  import Button from "$lib/Button.svelte"
   import { handleInput } from "$lib/ui"
   import type { User } from "$lib/domain"
+  import SettingsCard from "../../lib/SettingsCard.svelte"
 
   export let user: User
 
   let name = user.name
+  let email = user.email
 </script>
 
 <div class="max-w-7xl mx-auto pt-16 px-3 flex">
-  <div class="w-full max-w-sm px-3 hidden md:block">
-    <h2 class="font-black">Data Diri</h2>
+  <div class="w-full max-w-sm pl-3 pr-16 hidden md:block">
+    <h2 class="font-black mb-3">Data Diri</h2>
+    <p>Ubah data diri anda menggunakan form disamping.</p>
   </div>
 
-  <div class="border rounded-lg w-full">
-    <h2 class="text-xl font-black mb-3 px-6 pt-6">Nama Anda</h2>
-    <p class="mb-3 px-6 ">Masukan nama lengkap anda disini.</p>
+  <div class="w-full">
+    <SettingsCard
+      title="Nama Lengkap"
+      description="Ubah nama lengkap anda disini."
+      hint="Nama anda akan terlihat di listing produk anda."
+      onInput={handleInput((value) => (name = value))}
+      value={name}
+    />
 
-    <div class="max-w-lg">
-      <TextField class="px-6 " value={name} onInput={handleInput((value) => (name = value))} />
-    </div>
-
-    <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center">
-      <p class="opacity-70 leading-tight">Nama anda akan terlihat di listing produk anda.</p>
-      <Button primary class="ml-auto">Simpan</Button>
-    </div>
+    <SettingsCard
+      title="Alamat Email"
+      description="Alamat email akan anda gunakan untuk komunikasi dan login."
+      hint="Alamat email anda akan dapat dilihat pengguna lain."
+      onInput={handleInput((value) => (email = value))}
+      value={email}
+    />
   </div>
 </div>
