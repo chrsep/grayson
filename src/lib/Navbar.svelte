@@ -4,6 +4,7 @@
   import Button from "./Button.svelte"
   import { SettingsIcon, ShoppingCartIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "./domain"
+  import CartButton from "./CartButton.svelte"
 
   export let user: User
   export let tags: Tag[]
@@ -17,9 +18,7 @@
       <Searchbar class="max-w-xl" placeholder="Cari produk" />
     </div>
 
-    <Button class="h-10 ml-auto">
-      <ShoppingCartIcon class="w-4" />
-    </Button>
+    <CartButton />
 
     {#if user}
       <a href="/settings/store">
