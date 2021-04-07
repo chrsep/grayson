@@ -2,8 +2,9 @@
   import TagSelector from "./TagSelector.svelte"
   import Searchbar from "./Searchbar.svelte"
   import Button from "./Button.svelte"
-  import { UserIcon } from "svelte-feather-icons/src"
+  import { SettingsIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "./domain"
+  import CartButton from "./CartButton.svelte"
 
   export let user: User
   export let tags: Tag[]
@@ -11,20 +12,22 @@
 
 <nav class="border-b">
   <div class="flex p-3 items-center">
-    <h1 class="text-center ml-3 flex-shrink-0a">Grayson</h1>
+    <h1 class="text-center flex-shrink-0a">Grayson</h1>
 
     <div class="px-3 hidden md:block w-full max-w-xl ml-16">
       <Searchbar class="max-w-xl" placeholder="Cari produk" />
     </div>
 
+    <CartButton />
+
     {#if user}
-      <a href="/account" class="ml-auto">
-        <Button class="h-10">
-          <UserIcon class="w-4" />
+      <a href="/settings/store">
+        <Button class="h-10 ml-3">
+          <SettingsIcon class="w-4" />
         </Button>
       </a>
     {:else}
-      <a href="/login" class="ml-auto">
+      <a href="/login" class="ml-3">
         <Button class="h-10">Masuk</Button>
       </a>
     {/if}
