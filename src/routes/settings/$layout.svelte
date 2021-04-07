@@ -51,7 +51,7 @@
     <h1 class="text-3xl font-black">Pengaturan</h1>
   </div>
 
-  <div class="flex max-w-7xl mx-auto w-full text-sm px-1">
+  <div class="flex max-w-7xl mx-auto w-full text-sm px-3">
     <TabLink href="/settings/store" text="Toko" />
     <TabLink href="/settings/account" text="Akun" />
   </div>
