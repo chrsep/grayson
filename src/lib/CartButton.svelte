@@ -24,7 +24,7 @@
       <XIcon size="24" />
     </Button>
 
-    <h1 class="ml-4 text-2xl font-black">Your Cart</h1>
+    <h1 class="ml-4 text-2xl font-black">Belanjaan-mu</h1>
   </div>
 </div>
 

@@ -16,13 +16,13 @@
 
 <div class="{clazz} border rounded-lg w-full mb-8">
   <h2 class="text-xl font-black mb-3 px-6 pt-6">{title}</h2>
-  <p class="mb-3 px-6 ">{description}</p>
+  <p class="mb-3 px-6 opacity-70">{description}</p>
 
   <div class="max-w-lg">
     <TextField {inputType} class="px-6" {value} on:input />
   </div>
 
-  <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center">
+  <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
     <p class="opacity-70 leading-tight pr-3 text-sm">{hint}</p>
     <Button primary class="ml-auto text-sm" on:click={onSave}>Simpan</Button>
   </div>
