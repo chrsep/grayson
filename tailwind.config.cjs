@@ -22,12 +22,17 @@ module.exports = {
         xl: "0.75rem"
       },
       colors: {
-        primary: "blue",
+        "primary-light": "#3EECFF",
+        primary: "#0e5ad9",
         "on-primary": "white",
-        "primary-text": "blue",
+        "primary-text": "#0c50b6",
+
+        secondary: "#3FFFB2",
 
         surface: "white",
         "dark-surface": "#fafafa",
+
+        black: "#232529",
 
         danger: "red"
       }
