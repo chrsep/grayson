@@ -45,6 +45,7 @@
       hint="Alamat email anda akan dapat dilihat pengguna lain."
       onInput={handleInput((value) => (email = value))}
       value={email}
+      type="email"
     />
   </div>
 </div>
