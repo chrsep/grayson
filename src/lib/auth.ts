@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 import { now } from "$lib/time"
 import { parse, serialize } from "$lib/cookie"
 import type { User } from "$lib/domain"
+import type { CookieSerializeOptions } from "cookie"
 
 const { VITE_JWT_SECRET } = import.meta.env
 
@@ -57,13 +58,22 @@ export const createSession = async (): Promise<string> => {
 }
 
 export const createCookie = (name: string, value: string): string => {
-  return serialize(name, value, {
+  const cookieOptions: CookieSerializeOptions = {
     httpOnly: true,
-    sameSite: "strict",
     maxAge: 60 * 60 * 24,
-    secure: import.meta.env.PROD,
-    path: "/"
-  })
+    path: "/",
+    sameSite: "strict",
+    secure: true
+  }
+
+  // disable protections for local dev
+  if (import.meta.env.DEV) {
+    cookieOptions.sameSite = "lax"
+    cookieOptions.secure = false
+    cookieOptions.domain = import.meta.env.VITE_DEV_DOMAIN as string
+  }
+
+  return serialize(name, value, cookieOptions)
 }
 
 interface JWTToken {
