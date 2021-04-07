@@ -18,6 +18,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      borderRadius: {
+        xl: "0.75rem"
+      },
       colors: {
         primary: "blue",
         "on-primary": "white",

@@ -3,10 +3,10 @@ import db from "$lib/db"
 import { parseSession } from "$lib/auth"
 
 export const getContext: GetContext = async ({ headers }) => {
-  const session = parseSession(headers.cookie)
-  if (!session) return {}
-
   try {
+    const session = parseSession(headers.cookie)
+    if (!session) return {}
+
     const exists = db.session.findFirst({ where: { id: session.access_token } })
     if (exists === null) return {}
 

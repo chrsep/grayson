@@ -23,7 +23,7 @@
   </div>
 
   <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center">
-    <p class="opacity-70 leading-tight pr-3">{hint}</p>
-    <Button primary class="ml-auto" on:click={onSave}>Simpan</Button>
+    <p class="opacity-70 leading-tight pr-3 text-sm">{hint}</p>
+    <Button primary class="ml-auto text-sm" on:click={onSave}>Simpan</Button>
   </div>
 </div>
