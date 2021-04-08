@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from "$app/navigation"
   import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons/src"
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
@@ -9,12 +10,12 @@
   let phone = ""
 
   const handleSave = async () => {
-    const result = await fetch("/api/stores", {
+    const result = await fetch("/api/me/stores", {
       method: "POST",
       body: JSON.stringify({ name, description, address, phone })
     })
 
-    console.log(result)
+    if (result.ok) goto("/settings/store")
   }
 </script>
 

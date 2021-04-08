@@ -41,3 +41,29 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
     body: store
   }
 }
+
+export const get: RequestHandler<Context, string> = async ({ context }) => {
+  if (!context.user) {
+    return {
+      status: 400,
+      body: {
+        message: "you don't have permission to access this api"
+      }
+    }
+  }
+
+  const stores = await db.store.findMany({
+    where: {
+      user: {
+        some: {
+          email: context.user.email
+        }
+      }
+    }
+  })
+
+  return {
+    status: 200,
+    body: stores
+  }
+}
