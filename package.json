@@ -12,6 +12,7 @@
     "prisma:migrate-prod": "prisma migrate deploy",
     "prisma:migrate-dev": "prisma migrate dev",
     "prisma:seed": "prisma db seed --preview-feature",
+    "prisma:reset": "prisma migrate reset",
     "check": "svelte-check",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged",
