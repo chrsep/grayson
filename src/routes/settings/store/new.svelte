@@ -30,7 +30,7 @@
 </div>
 
 <div class="max-w-7xl mx-auto px-3 md:flex block">
-  <div class="w-full max-w-sm pl-2 pr-16 mb-8 md:pt-7">
+  <div class="w-full max-w-sm pl-2 pr-16 mb-8 pt-7">
     <h2 class="font-black mb-3">Buat Toko Baru</h2>
     <p class="opacity-70">
       Buat toko untuk memulai menunjukan produk/jasa yang anda punya ke jemaat lain.
