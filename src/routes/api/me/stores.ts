@@ -48,10 +48,8 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
 export const get: RequestHandler<Context, string> = async ({ context }) => {
   if (!context.user) {
     return {
-      status: 400,
-      body: {
-        message: "you don't have permission to access this api"
-      }
+      status: 401,
+      body: []
     }
   }
 

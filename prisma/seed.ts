@@ -42,7 +42,7 @@ async function main() {
       name: companyName,
       address: "Stark HQ, Stark Road, Starky Stark",
       phone: "62 2938 4899",
-      slug: slugify("Stark Industries" + "-" + nanoid(5)),
+      slug: slugify("Stark Industries" + "-" + nanoid(5), { lower: true }),
       user: {
         connect: {
           email: user.email

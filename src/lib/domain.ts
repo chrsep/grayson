@@ -43,5 +43,5 @@ export interface Context {
 }
 
 export const generateUniqueSlug = (value: string): string => {
-  return slugify(value + "-" + nanoid(4), { lower: true })
+  return slugify(value + "-" + nanoid(5), { lower: true })
 }
