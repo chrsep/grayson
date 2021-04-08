@@ -3,7 +3,19 @@
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
 
-  const handleSave = () => {}
+  let name = ""
+  let description = ""
+  let address = ""
+  let phone = ""
+
+  const handleSave = async () => {
+    const result = await fetch("/api/stores", {
+      method: "POST",
+      body: JSON.stringify({ name, description, address, phone })
+    })
+
+    console.log(result)
+  }
 </script>
 
 <div class="max-w-7xl mx-auto">
@@ -32,9 +44,10 @@
     </p>
 
     <div class="px-6 max-w-lg">
-      <TextField label="Nama toko" class="mb-3" />
-      <TextField label="Alamat" class="mb-3" />
-      <TextField label="No. Telpon" class="mb-6" />
+      <TextField label="Nama toko" class="mb-3" bind:value={name} />
+      <TextField label="Deskripsi" class="mb-3" bind:value={description} />
+      <TextField label="Alamat" class="mb-3" bind:value={address} />
+      <TextField label="No. Telpon" class="mb-6" bind:value={phone} />
     </div>
 
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
