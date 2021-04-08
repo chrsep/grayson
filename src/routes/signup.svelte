@@ -24,7 +24,8 @@
   let password = ""
   let error = ""
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault()
     const result = await fetch("/auth/signup", {
       method: "POST",
       body: JSON.stringify({
@@ -49,13 +50,12 @@
   <div class="flex flex-col justify-center max-w-xs w-full mx-auto">
     <h1 class="text-center mb-3">Selamat Datang</h1>
 
-    <TextField class="mb-3" type="text" label="Nama Lengkap" bind:value={name} />
-
-    <TextField class="mb-3" type="email" label="E-mail" bind:value={email} />
-
-    <TextField class="mb-3" type="password" label="Password" bind:value={password} />
-
-    <Button primary on:click={handleSignUp}>Daftar</Button>
+    <form on:submit={handleSignUp}>
+      <TextField required class="mb-3" type="text" label="Nama Lengkap" bind:value={name} />
+      <TextField required class="mb-3" type="email" label="E-mail" bind:value={email} />
+      <TextField required class="mb-3" type="password" label="Password" bind:value={password} />
+      <Button type="submit" primary class="w-full">Daftar</Button>
+    </form>
 
     <div
       class:opacity-0={!error}
