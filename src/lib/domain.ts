@@ -29,3 +29,10 @@ export interface Tag {
   slug: string
   name: string
 }
+
+export interface Context {
+  user?: {
+    name: string
+    email: string
+  }
+}
