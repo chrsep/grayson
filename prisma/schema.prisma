@@ -42,7 +42,7 @@ model Product {
 
 model Tag {
   slug     String    @id
-  name     String    @default("")
+  name     String    @unique @default("")
   products Product[]
 }
 
