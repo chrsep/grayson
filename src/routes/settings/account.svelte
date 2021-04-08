@@ -12,7 +12,6 @@
 </script>
 
 <script lang="ts">
-  import { handleInput } from "$lib/ui"
   import type { User } from "$lib/domain"
   import SettingsCard from "../../lib/SettingsCard.svelte"
 
@@ -33,17 +32,15 @@
       title="Nama Lengkap"
       description="Ubah nama lengkap anda disini."
       hint="Nama anda akan terlihat di listing produk anda."
-      on:input={handleInput((value) => (name = value))}
-      value={name}
+      bind:value={name}
     />
 
     <SettingsCard
       title="Alamat Email"
       description="Alamat email akan anda gunakan untuk komunikasi dan login."
       hint="Alamat email anda akan dapat dilihat pengguna lain."
-      on:input={handleInput((value) => (email = value))}
-      value={email}
-      inputType="email"
+      bind:value={email}
+      type="email"
     />
   </div>
 </div>

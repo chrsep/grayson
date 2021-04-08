@@ -8,7 +8,7 @@
 
   export let value: string
   export let onSave: () => void
-  export let inputType: "text" | "email" | "password" = "text"
+  export let type: "text" | "email" | "password" = "text"
 
   let clazz: string
   export { clazz as class }
@@ -19,7 +19,7 @@
   <p class="mb-3 px-6 opacity-70">{description}</p>
 
   <div class="max-w-lg">
-    <TextField {inputType} class="px-6" {value} on:input />
+    <TextField {type} class="px-6" bind:value />
   </div>
 
   <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">

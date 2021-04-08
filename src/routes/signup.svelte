@@ -18,7 +18,6 @@
 <script lang="ts">
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { handleInput } from "$lib/ui"
 
   let name = ""
   let email = ""
