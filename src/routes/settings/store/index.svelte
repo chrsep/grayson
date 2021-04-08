@@ -36,8 +36,8 @@
 <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start flex-wrap pt-8">
   {#each stores as store}
     <StoreCard href="/settings/store/{store.slug}">
-      <div class="flex flex-col items-center justify-center">
-        {store.name}
+      <div class="flex items-end">
+        <h1 class="block mx-6 mb-4 text-2xl font-black">{store.name}</h1>
       </div>
     </StoreCard>
   {/each}
