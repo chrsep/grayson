@@ -9,7 +9,7 @@
   let address = ""
   let phone = ""
 
-  const handleSave = async (e) => {
+  const handleSave = async (e: any) => {
     e.preventDefault()
     const result = await fetch("/api/me/stores", {
       method: "POST",

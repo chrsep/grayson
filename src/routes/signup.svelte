@@ -24,7 +24,7 @@
   let password = ""
   let error = ""
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e: any) => {
     e.preventDefault()
     const result = await fetch("/auth/signup", {
       method: "POST",

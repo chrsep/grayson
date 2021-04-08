@@ -23,7 +23,7 @@
   let password = ""
   let error = false
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault()
     error = false
     const result = await fetch("/auth/login", {
@@ -46,7 +46,7 @@
     <h1 class="text-center mb-3">Selamat Datang</h1>
 
     <form on:submit={handleLogin}>
-      <TextField require type="email" class="mb-3" label="E-mail" bind:value={email} />
+      <TextField required type="email" class="mb-3" label="E-mail" bind:value={email} />
       <TextField required type="password" class="mb-3" label="Password" bind:value={password} />
       <Button type="submit" primary class="w-full">Masuk</Button>
     </form>
