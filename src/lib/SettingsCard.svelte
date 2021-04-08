@@ -10,7 +10,7 @@
   export let onSave: () => void
   export let type: "text" | "email" | "password" = "text"
 
-  let clazz: string
+  let clazz = ""
   export { clazz as class }
 </script>
 
