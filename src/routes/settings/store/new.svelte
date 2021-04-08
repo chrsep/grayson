@@ -9,7 +9,8 @@
   let address = ""
   let phone = ""
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault()
     const result = await fetch("/api/me/stores", {
       method: "POST",
       body: JSON.stringify({ name, description, address, phone })
@@ -37,7 +38,7 @@
     </p>
   </div>
 
-  <div class="w-full border rounded-lg pt-6">
+  <form class="w-full border rounded-lg pt-6" on:submit={handleSave}>
     <h2 class="text-xl font-black mb-3 px-6">Data Toko</h2>
 
     <p class="mb-6 px-6 opacity-70">
@@ -45,17 +46,17 @@
     </p>
 
     <div class="px-6 max-w-lg">
-      <TextField label="Nama toko" class="mb-3" bind:value={name} />
+      <TextField required label="Nama toko" class="mb-3" bind:value={name} />
+      <TextField required label="Alamat" class="mb-3" bind:value={address} />
+      <TextField required label="No. Telpon" class="mb-6" bind:value={phone} />
       <TextField label="Deskripsi" class="mb-3" bind:value={description} />
-      <TextField label="Alamat" class="mb-3" bind:value={address} />
-      <TextField label="No. Telpon" class="mb-6" bind:value={phone} />
     </div>
 
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
-      <Button primary class="ml-auto text-sm" on:click={handleSave}>
+      <Button type="submit" primary class="ml-auto text-sm">
         Lanjut
         <ChevronRightIcon size="20" class="ml-2" />
       </Button>
     </div>
-  </div>
+  </form>
 </div>
