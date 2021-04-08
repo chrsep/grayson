@@ -2,6 +2,8 @@ import db from "$lib/db"
 import type { Context } from "$lib/domain"
 import type { RequestHandler } from "@sveltejs/kit"
 import { string, object } from "yup"
+import slugify from "slugify"
+import { generateUniqueSlug } from "$lib/domain"
 
 const PostBody = object({
   name: string().required(),
@@ -28,6 +30,7 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
       address,
       phone,
       description,
+      slug: generateUniqueSlug(name),
       user: {
         connect: {
           email: context.user.email

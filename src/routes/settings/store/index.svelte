@@ -18,7 +18,7 @@
   import type { Store } from "$lib/domain"
   import StoreCard from "../../../lib/StoreCard.svelte"
 
-  export let stores: Store
+  export let stores: Store[]
 </script>
 
 <!--<div class="max-w-7xl mx-auto flex">-->

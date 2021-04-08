@@ -1,3 +1,6 @@
+import slugify from "slugify"
+import { nanoid } from "nanoid"
+
 export interface User {
   id: string
   name: string
@@ -10,6 +13,8 @@ export interface Store {
   name: string
   address: string
   phone: string
+  slug: string
+
   products: Product[]
 }
 
@@ -35,4 +40,8 @@ export interface Context {
     name: string
     email: string
   }
+}
+
+export const generateUniqueSlug = (value: string) => {
+  return slugify(value, { lower: true }) + "-" + nanoid()
 }
