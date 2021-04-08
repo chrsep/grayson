@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let inputType: "text" | "email" | "password" = "text"
+  import { handleInput } from "$lib/ui"
+
+  export let type: "text" | "email" | "password" = "text"
   export let value = ""
   export let label = ""
 
@@ -10,9 +12,9 @@
 <label class="{clazz} flex flex-col w-full">
   {label}
   <input
-    type={inputType}
+    {type}
     {value}
-    on:input
+    on:input={handleInput((newValue) => (value = newValue))}
     class="rounded border border-gray-300 w-full bg-dark-surface"
   />
 </label>

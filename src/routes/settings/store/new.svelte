@@ -2,6 +2,8 @@
   import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons/src"
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
+
+  const handleSave = () => {}
 </script>
 
 <div class="max-w-7xl mx-auto">
@@ -36,7 +38,7 @@
     </div>
 
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
-      <Button primary class="ml-auto text-sm">
+      <Button primary class="ml-auto text-sm" on:click={handleSave}>
         Lanjut
         <ChevronRightIcon size="20" class="ml-2" />
       </Button>

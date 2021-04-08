@@ -18,7 +18,6 @@
 <script lang="ts">
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { handleInput } from "$lib/ui"
 
   let email = ""
   let password = ""
@@ -45,21 +44,8 @@
   <div class="flex flex-col justify-center max-w-xs w-full mx-auto">
     <h1 class="text-center mb-3">Selamat Datang</h1>
 
-    <TextField
-      class="mb-3"
-      inputType="email"
-      label="E-mail"
-      value={email}
-      on:input={handleInput((value) => (email = value))}
-    />
-
-    <TextField
-      class="mb-3"
-      inputType="password"
-      label="Password"
-      value={password}
-      on:input={handleInput((value) => (password = value))}
-    />
+    <TextField type="email" class="mb-3" label="E-mail" bind:value={email} />
+    <TextField type="password" class="mb-3" label="Password" bind:value={password} />
 
     <Button primary on:click={handleLogin} type="button">Masuk</Button>
 
