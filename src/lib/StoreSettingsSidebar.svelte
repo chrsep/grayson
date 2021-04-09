@@ -6,7 +6,7 @@
   $: productActive =
     $page.path === `/settings/stores/${storeSlug}` ||
     $page.path === `/settings/stores/${storeSlug}/products`
-  $: profileActive = $page.path === `/settings/stores/${storeSlug}/profil`
+  $: profileActive = $page.path === `/settings/stores/${storeSlug}/profile`
 </script>
 
 <div class="w-full max-w-xs pl-2 pr-16 hidden sm:block">
@@ -20,7 +20,7 @@
   <a
     class:active={profileActive}
     class="block mb-2 opacity-70 hover:opacity-100"
-    href="/settings/stores/{storeSlug}/profil"
+    href="/settings/stores/{storeSlug}/profile"
   >
     Profil Toko
   </a>
