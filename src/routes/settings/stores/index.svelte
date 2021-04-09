@@ -29,9 +29,12 @@
   import { PlusIcon } from "svelte-feather-icons/src"
   import type { Store } from "$lib/domain"
   import StoreCard from "../../../lib/StoreCard.svelte"
+  import SEO from "$lib/SEO.svelte"
 
   export let stores: Store[]
 </script>
+
+<SEO title="Semua Toko" />
 
 <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start flex-wrap pt-8">
   {#each stores as store}

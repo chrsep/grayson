@@ -20,6 +20,7 @@
   import StoreSettingsSidebar from "../../../../lib/StoreSettingsSidebar.svelte"
   import SettingsBreadcrumbs from "../../../../lib/SettingsBreadcrumbs.svelte"
   import SettingsCard from "../../../../lib/SettingsCard.svelte"
+  import SEO from "../../../../lib/SEO.svelte"
 
   export let store: Store
 
@@ -36,6 +37,8 @@
     })
   }
 </script>
+
+<SEO title="Profil Toko" />
 
 <SettingsBreadcrumbs
   class="hidden sm:block"

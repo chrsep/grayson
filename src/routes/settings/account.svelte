@@ -14,12 +14,15 @@
 <script lang="ts">
   import type { User } from "$lib/domain"
   import SettingsCard from "../../lib/SettingsCard.svelte"
+  import SEO from "$lib/SEO.svelte"
 
   export let user: User
 
   let name = user.name
   let email = user.email
 </script>
+
+<SEO title="Akun" />
 
 <div class="max-w-7xl mx-auto pt-16 px-3 flex">
   <div class="w-full max-w-sm pl-2 pr-16 pt-7 hidden md:block">
