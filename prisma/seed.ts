@@ -45,7 +45,12 @@ async function main() {
       slug: slugify("Stark Industries" + "-" + nanoid(5), { lower: true }),
       user: {
         connect: {
-          email: user.email
+          id: user.id
+        }
+      },
+      owner: {
+        connect: {
+          id: user.id
         }
       }
     }

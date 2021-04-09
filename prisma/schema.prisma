@@ -16,6 +16,7 @@ model User {
   password String
   name     String  @default("")
   stores   Store[]
+  Store    Store[] @relation("owner")
 }
 
 model Store {
@@ -25,6 +26,8 @@ model Store {
   address     String @default("")
   phone       String @default("")
   slug        String @default("")
+  owner       User   @relation("owner", fields: [ownerId], references: [id])
+  ownerId     String
 
   user     User[]
   products Product[]
