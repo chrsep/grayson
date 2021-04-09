@@ -25,7 +25,7 @@ model Store {
   description String @default("")
   address     String @default("")
   phone       String @default("")
-  slug        String @default("")
+  slug        String @unique @default("")
   owner       User   @relation("owner", fields: [ownerId], references: [id])
   ownerId     String
 

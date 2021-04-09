@@ -15,6 +15,7 @@
 </script>
 
 <script lang="ts">
+  import { page } from "$app/stores"
   import type { Store } from "$lib/domain"
   import StoreSettingsSidebar from "../../../../lib/StoreSettingsSidebar.svelte"
   import SettingsBreadcrumbs from "../../../../lib/SettingsBreadcrumbs.svelte"
@@ -26,6 +27,14 @@
   let address = store.address
   let phone = store.phone
   let description = store.description
+
+  const handleSave = async (store: Partial<Store>) => {
+    await fetch(`/api/stores/${$page.params.slug}`, {
+      method: "PATCH",
+      body: JSON.stringify(store),
+      credentials: "include"
+    })
+  }
 </script>
 
 <SettingsBreadcrumbs
@@ -44,24 +53,40 @@
   <StoreSettingsSidebar storeSlug={store.slug} />
 
   <div class="w-full">
-    <SettingsCard title="Nama Toko" bind:value={name} description="Ubah nama toko anda" />
+    <SettingsCard
+      title="Nama Toko"
+      bind:value={name}
+      description="Ubah nama toko anda"
+      onSave={() => {
+        handleSave({ name })
+      }}
+    />
 
     <SettingsCard
       title="Deskripsi"
       bind:value={description}
       description="Beri sedikit cerita tentang toko anda"
+      onSave={() => {
+        handleSave({ description })
+      }}
     />
 
     <SettingsCard
       title="Alamat"
       bind:value={address}
       description="Alamat yang jemaat lain bisa gunakan untuk menemukan toko anda."
+      onSave={() => {
+        handleSave({ address })
+      }}
     />
 
     <SettingsCard
       title="Nomor Telefon"
       bind:value={phone}
       description="Nomor telfon yang jemmat lain bisa gunakan untuk menghubungi toko anda."
+      onSave={() => {
+        handleSave({ phone })
+      }}
     />
   </div>
 </div>
