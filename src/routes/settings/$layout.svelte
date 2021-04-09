@@ -23,7 +23,7 @@
   import CartButton from "$lib/CartButton.svelte"
   import type { User } from "$lib/domain"
   import Button from "$lib/Button.svelte"
-  import { SettingsIcon } from "svelte-feather-icons/src"
+  import { UserIcon } from "svelte-feather-icons/src"
 
   export let user: User
 </script>
@@ -37,7 +37,7 @@
     {#if user}
       <a href="/settings/stores">
         <Button class="h-10 ml-3">
-          <SettingsIcon class="w-4" />
+          <UserIcon class="w-4" />
         </Button>
       </a>
     {:else}

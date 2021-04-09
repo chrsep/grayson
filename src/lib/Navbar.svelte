@@ -2,7 +2,7 @@
   import TagSelector from "./TagSelector.svelte"
   import Searchbar from "./Searchbar.svelte"
   import Button from "./Button.svelte"
-  import { SettingsIcon } from "svelte-feather-icons/src"
+  import { UserIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "./domain"
   import CartButton from "./CartButton.svelte"
 
@@ -23,7 +23,7 @@
     {#if user}
       <a href="/settings/stores">
         <Button class="h-10 ml-3">
-          <SettingsIcon class="w-4" />
+          <UserIcon class="w-4" />
         </Button>
       </a>
     {:else}
