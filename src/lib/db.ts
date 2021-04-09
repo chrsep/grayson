@@ -19,4 +19,17 @@ export const findStoreBySlug = async (slug: string): Promise<Store> => {
   return await db.store.findFirst({ where: { slug } })
 }
 
+export const findStoreBySlugAndUserEmail = async (slug: string, email: string): Promise<Store> => {
+  return await db.store.findFirst({
+    where: {
+      slug,
+      owner: { email }
+    }
+  })
+}
+
+export const updateStoreBySlug = async (slug: string, data: Partial<Store>): Promise<Store> => {
+  return await db.store.update({ where: { slug }, data })
+}
+
 export default db

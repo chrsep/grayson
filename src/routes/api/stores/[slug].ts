@@ -1,8 +1,9 @@
 import type { RequestHandler } from "@sveltejs/kit"
 import type { Context } from "$lib/domain"
 import { object, string } from "yup"
-import db from "$lib/db"
+import db, { findStoreBySlugAndUserEmail, updateStoreBySlug } from "$lib/db"
 import { badRequest, unauthorized } from "$lib/rest"
+import { isEmpty, isNil } from "lodash-es"
 
 const PatchBody = object({
   name: string().optional(),
@@ -16,20 +17,17 @@ export const patch: RequestHandler<Context, string> = async ({ params, context, 
   const { user } = context
   if (!user) return unauthorized()
 
-  const oldStore = await db.store.findFirst({
-    where: { slug, owner: { email: user.email } }
-  })
-  if (oldStore === null) return unauthorized()
+  const oldStore = findStoreBySlugAndUserEmail(slug, user.email)
+  if (isNil(oldStore)) {
+    return unauthorized()
+  }
 
   const newStore = await PatchBody.validate(await JSON.parse(body))
-  if (!newStore.name && !newStore.address && !newStore.phone && !newStore.description) {
+  if (isEmpty(newStore)) {
     return badRequest("at least put something in your request")
   }
 
-  const store = await db.store.update({
-    where: { slug },
-    data: { ...oldStore, ...newStore }
-  })
+  const store = await updateStoreBySlug(slug, { ...oldStore, ...newStore })
 
   return { status: 200, body: store }
 }
