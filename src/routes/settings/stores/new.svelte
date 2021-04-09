@@ -16,14 +16,14 @@
       body: JSON.stringify({ name, description, address, phone })
     })
 
-    if (result.ok) goto("/settings/store")
+    if (result.ok) goto("/settings/stores")
   }
 </script>
 
 <div class="max-w-7xl mx-auto">
   <a
     class="flex px-3 py-6 text-sm items-center opacity-60 hover:opacity-100"
-    href="/settings/store"
+    href="/settings/stores"
   >
     <ChevronLeftIcon size="24" />
     <p class="ml-3">Semua Toko / Toko Baru</p>

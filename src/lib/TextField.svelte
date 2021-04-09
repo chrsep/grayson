@@ -3,6 +3,7 @@
   export let value = ""
   export let label = ""
   export let required = false
+  export let placeholder = ""
 
   let clazz: string
   export { clazz as class }
@@ -20,6 +21,7 @@
     on:input={handleInput}
     on:keypress
     {required}
+    {placeholder}
     class="rounded border border-gray-300 w-full bg-dark-surface"
   />
 </label>

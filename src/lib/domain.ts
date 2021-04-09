@@ -5,7 +5,6 @@ export interface User {
   id: string
   name: string
   email: string
-  stores: Store[]
 }
 
 export interface Store {
@@ -14,13 +13,11 @@ export interface Store {
   address: string
   phone: string
   slug: string
-
-  products: Product[]
+  description: string
 }
 
 export interface Product {
   id: string
-  images: Image[]
   name: string
   price: number
 }

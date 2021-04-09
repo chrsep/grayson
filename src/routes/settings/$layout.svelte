@@ -35,7 +35,7 @@
     <CartButton />
 
     {#if user}
-      <a href="/settings/store">
+      <a href="/settings/stores">
         <Button class="h-10 ml-3">
           <SettingsIcon class="w-4" />
         </Button>
@@ -52,7 +52,7 @@
   </div>
 
   <div class="flex max-w-7xl mx-auto w-full text-sm px-3">
-    <TabLink href="/settings/store" text="Toko" />
+    <TabLink href="/settings/stores" text="Toko" />
     <TabLink href="/settings/account" text="Akun" />
   </div>
 </nav>
