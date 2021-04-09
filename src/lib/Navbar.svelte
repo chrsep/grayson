@@ -21,7 +21,7 @@
     <CartButton />
 
     {#if user}
-      <a href="/settings/store">
+      <a href="/settings/stores">
         <Button class="h-10 ml-3">
           <SettingsIcon class="w-4" />
         </Button>

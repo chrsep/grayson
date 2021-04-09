@@ -34,6 +34,11 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
         connect: {
           email: context.user.email
         }
+      },
+      owner: {
+        connect: {
+          email: context.user.email
+        }
       }
     }
   })

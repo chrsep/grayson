@@ -35,14 +35,14 @@
 
 <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start flex-wrap pt-8">
   {#each stores as store}
-    <StoreCard href="/settings/store/{store.slug}">
+    <StoreCard href="/settings/stores/{store.slug}">
       <div class="flex items-end">
         <h1 class="block mx-6 mb-4 text-2xl font-black">{store.name}</h1>
       </div>
     </StoreCard>
   {/each}
 
-  <StoreCard class="border-dashed border-2 border-gray-300" href="/settings/store/new">
+  <StoreCard class="border-dashed border-2 border-gray-300" href="/settings/stores/new">
     <div class="flex flex-col items-center justify-center">
       <PlusIcon size="32" class="mb-2" />
       <p>Buat toko baru</p>

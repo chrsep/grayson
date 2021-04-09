@@ -1,4 +1,4 @@
-import type { PrismaClient, Tag } from "@prisma/client/index.js"
+import type { PrismaClient, Tag, Store } from "@prisma/client/index.js"
 import * as prisma from "@prisma/client/index.js"
 
 let db: PrismaClient
@@ -13,6 +13,10 @@ if (prisma.PrismaClient) {
 
 export const findAllTags = async (): Promise<Tag[]> => {
   return await db.tag.findMany()
+}
+
+export const findStoreBySlug = async (slug: string): Promise<Store> => {
+  return await db.store.findFirst({ where: { slug } })
 }
 
 export default db
