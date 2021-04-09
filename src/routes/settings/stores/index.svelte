@@ -42,7 +42,7 @@
     </StoreCard>
   {/each}
 
-  <StoreCard class="border-dashed border-2 border-gray-300" href="/settings/store/new">
+  <StoreCard class="border-dashed border-2 border-gray-300" href="/settings/stores/new">
     <div class="flex flex-col items-center justify-center">
       <PlusIcon size="32" class="mb-2" />
       <p>Buat toko baru</p>
