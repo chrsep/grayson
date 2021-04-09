@@ -30,11 +30,13 @@
   let description = store.description
 
   const handleSave = async (store: Partial<Store>) => {
-    await fetch(`/api/stores/${$page.params.slug}`, {
+    const { ok } = await fetch(`/api/stores/${$page.params.slug}`, {
       method: "PATCH",
       body: JSON.stringify(store),
       credentials: "include"
     })
+
+    if (ok) window.location.reload()
   }
 </script>
 
