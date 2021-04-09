@@ -16,14 +16,21 @@ model User {
   password String
   name     String  @default("")
   stores   Store[]
+  Store    Store[] @relation("owner")
 }
 
 model Store {
-  id          String    @id @default(cuid())
-  name        String    @default("")
-  description String    @default("")
-  user        User[]
-  products    Product[]
+  id          String @id @default(cuid())
+  name        String @default("")
+  description String @default("")
+  address     String @default("")
+  phone       String @default("")
+  slug        String @default("")
+  owner       User   @relation("owner", fields: [ownerId], references: [id])
+  ownerId     String
+
+  user     User[]
+  products Product[]
 }
 
 model Product {
@@ -38,7 +45,7 @@ model Product {
 
 model Tag {
   slug     String    @id
-  name     String    @default("")
+  name     String    @unique @default("")
   products Product[]
 }
 

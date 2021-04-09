@@ -1,17 +1,18 @@
 import type { GetContext, GetSession } from "@sveltejs/kit"
 import db from "$lib/db"
 import { parseSession } from "$lib/auth"
+import type { Context } from "$lib/domain"
 
-export const getContext: GetContext = async ({ headers }) => {
+export const getContext: GetContext<Promise<Context>> = async ({ headers }) => {
   try {
     const session = parseSession(headers.cookie)
-    if (!session) return {}
+    if (!session) return
 
     const exists = db.session.findFirst({ where: { id: session.access_token } })
-    if (exists === null) return {}
+    if (exists === null) return
 
     const user = await db.user.findFirst({ where: { id: session.id } })
-    if (user === null) return {}
+    if (user === null) return
 
     return {
       user: {
@@ -24,12 +25,12 @@ export const getContext: GetContext = async ({ headers }) => {
   }
 }
 
-export const getSession: GetSession = ({ context }) => {
+export const getSession: GetSession<Context> = ({ context }) => {
   if (context.user) {
     return {
       user: {
-        name: context.user?.name,
-        email: context.user?.email
+        name: context.user.name,
+        email: context.user.email
       }
     }
   }

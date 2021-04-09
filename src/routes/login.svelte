@@ -18,13 +18,13 @@
 <script lang="ts">
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { handleInput } from "$lib/ui"
 
   let email = ""
   let password = ""
   let error = false
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: any) => {
+    e.preventDefault()
     error = false
     const result = await fetch("/auth/login", {
       method: "POST",
@@ -45,23 +45,11 @@
   <div class="flex flex-col justify-center max-w-xs w-full mx-auto">
     <h1 class="text-center mb-3">Selamat Datang</h1>
 
-    <TextField
-      class="mb-3"
-      inputType="email"
-      label="E-mail"
-      value={email}
-      on:input={handleInput((value) => (email = value))}
-    />
-
-    <TextField
-      class="mb-3"
-      inputType="password"
-      label="Password"
-      value={password}
-      on:input={handleInput((value) => (password = value))}
-    />
-
-    <Button primary on:click={handleLogin} type="button">Masuk</Button>
+    <form on:submit={handleLogin}>
+      <TextField required type="email" class="mb-3" label="E-mail" bind:value={email} />
+      <TextField required type="password" class="mb-3" label="Password" bind:value={password} />
+      <Button type="submit" primary class="w-full">Masuk</Button>
+    </form>
 
     <div
       class:opacity-0={!error}

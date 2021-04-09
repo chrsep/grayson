@@ -18,14 +18,14 @@
 <script lang="ts">
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { handleInput } from "$lib/ui"
 
   let name = ""
   let email = ""
   let password = ""
   let error = ""
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e: any) => {
+    e.preventDefault()
     const result = await fetch("/auth/signup", {
       method: "POST",
       body: JSON.stringify({
@@ -50,31 +50,12 @@
   <div class="flex flex-col justify-center max-w-xs w-full mx-auto">
     <h1 class="text-center mb-3">Selamat Datang</h1>
 
-    <TextField
-      class="mb-3"
-      inputType="text"
-      label="Nama Lengkap"
-      value={name}
-      on:input={handleInput((value) => (name = value))}
-    />
-
-    <TextField
-      class="mb-3"
-      inputType="email"
-      label="E-mail"
-      value={email}
-      on:input={handleInput((value) => (email = value))}
-    />
-
-    <TextField
-      class="mb-3"
-      inputType="password"
-      label="Password"
-      value={password}
-      on:input={handleInput((value) => (password = value))}
-    />
-
-    <Button primary on:click={handleSignUp}>Daftar</Button>
+    <form on:submit={handleSignUp}>
+      <TextField required class="mb-3" type="text" label="Nama Lengkap" bind:value={name} />
+      <TextField required class="mb-3" type="email" label="E-mail" bind:value={email} />
+      <TextField required class="mb-3" type="password" label="Password" bind:value={password} />
+      <Button type="submit" primary class="w-full">Daftar</Button>
+    </form>
 
     <div
       class:opacity-0={!error}
