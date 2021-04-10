@@ -16,6 +16,7 @@ export const getContext: GetContext<Promise<Context>> = async ({ headers }) => {
 
     return {
       user: {
+        id: user.id,
         name: user.name,
         email: user.email
       }

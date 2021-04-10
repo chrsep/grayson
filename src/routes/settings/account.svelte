@@ -12,6 +12,7 @@
 </script>
 
 <script lang="ts">
+  import { page } from "$app/stores"
   import type { User } from "$lib/domain"
   import SettingsCard from "../../lib/SettingsCard.svelte"
   import SEO from "$lib/SEO.svelte"
@@ -20,6 +21,16 @@
 
   let name = user.name
   let email = user.email
+
+  const handleSave = async (store: Partial<User>) => {
+    const { ok } = await fetch(`/api/me`, {
+      method: "PATCH",
+      body: JSON.stringify(store),
+      credentials: "include"
+    })
+
+    if (ok) window.location.reload()
+  }
 </script>
 
 <SEO title="Akun" />
@@ -36,6 +47,9 @@
       description="Ubah nama lengkap anda disini."
       hint="Nama anda akan terlihat di listing produk anda."
       bind:value={name}
+      onSave={() => {
+        handleSave({ name })
+      }}
     />
 
     <SettingsCard
@@ -44,6 +58,9 @@
       hint="Alamat email anda akan dapat dilihat pengguna lain."
       bind:value={email}
       type="email"
+      onSave={() => {
+        handleSave({ email })
+      }}
     />
   </div>
 </div>

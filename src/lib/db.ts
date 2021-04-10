@@ -46,4 +46,11 @@ export const findUserById = async (id: string): Promise<User> => {
   })
 }
 
+export const updateUserById = async (id: string, user: Partial<User>): Promise<User> => {
+  return await db.user.update({
+    where: { id },
+    data: user
+  })
+}
+
 export default db

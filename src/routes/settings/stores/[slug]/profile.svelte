@@ -45,13 +45,13 @@
 <SettingsBreadcrumbs
   class="hidden sm:block"
   href="/settings/stores"
-  text="Semuat Toko / {store.name} / Profil"
+  text="Semua Toko / {store.name} / Profil"
 />
 
 <SettingsBreadcrumbs
   class="sm:hidden"
   href="/settings/stores/{store.slug}"
-  text="Semuat Toko / {store.name} / Profil"
+  text="Semua Toko / {store.name} / Profil"
 />
 
 <div class="max-w-7xl mx-auto px-3 flex pt-8">

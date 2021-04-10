@@ -28,6 +28,8 @@ export const patch: RequestHandler<Context, string> = async ({ params, context, 
   }
 
   const store = await updateStoreBySlug(slug, { ...oldStore, ...newStore })
-
-  return { status: 200, body: store }
+  return {
+    status: 200,
+    body: store
+  }
 }
