@@ -17,10 +17,10 @@
 </script>
 
 <script lang="ts">
-  import SEO from "../lib/SEO.svelte"
-  import Navbar from "../lib/Navbar.svelte"
+  import SEO from "$lib/SEO.svelte"
+  import Navbar from "$lib/Navbar.svelte"
   import type { Tag, User, Product } from "../lib/domain"
-  import { formatCurrency } from "../lib/domain"
+  import { formatCurrency } from "$lib/domain"
 
   export let user: User
   export let tags: Tag[]
