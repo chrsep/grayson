@@ -3,6 +3,7 @@
   import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons/src"
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
+  import SEO from "$lib/SEO.svelte"
 
   let name = ""
   let description = ""
@@ -19,6 +20,8 @@
     if (result.ok) goto("/settings/stores")
   }
 </script>
+
+<SEO title="Toko Baru" />
 
 <div class="max-w-7xl mx-auto">
   <a

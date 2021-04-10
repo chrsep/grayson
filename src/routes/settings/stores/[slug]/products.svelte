@@ -19,9 +19,12 @@
   import StoreSettingsSidebar from "$lib/StoreSettingsSidebar.svelte"
   import SettingsBreadcrumbs from "$lib/SettingsBreadcrumbs.svelte"
   import ManageProducts from "$lib/ManageProducts.svelte"
+  import SEO from "$lib/SEO.svelte"
 
   export let store: Store
 </script>
+
+<SEO title="Produk Toko" />
 
 <SettingsBreadcrumbs
   class="hidden sm:block"

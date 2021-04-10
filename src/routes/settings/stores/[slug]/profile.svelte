@@ -20,6 +20,7 @@
   import StoreSettingsSidebar from "../../../../lib/StoreSettingsSidebar.svelte"
   import SettingsBreadcrumbs from "../../../../lib/SettingsBreadcrumbs.svelte"
   import SettingsCard from "../../../../lib/SettingsCard.svelte"
+  import SEO from "../../../../lib/SEO.svelte"
 
   export let store: Store
 
@@ -29,13 +30,17 @@
   let description = store.description
 
   const handleSave = async (store: Partial<Store>) => {
-    await fetch(`/api/stores/${$page.params.slug}`, {
+    const { ok } = await fetch(`/api/stores/${$page.params.slug}`, {
       method: "PATCH",
       body: JSON.stringify(store),
       credentials: "include"
     })
+
+    if (ok) window.location.reload()
   }
 </script>
+
+<SEO title="Profil Toko" />
 
 <SettingsBreadcrumbs
   class="hidden sm:block"

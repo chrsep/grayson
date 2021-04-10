@@ -19,9 +19,12 @@
   import StoreSettingsSidebar from "$lib/StoreSettingsSidebar.svelte"
   import SettingsBreadcrumbs from "$lib/SettingsBreadcrumbs.svelte"
   import ManageProducts from "../../../../lib/ManageProducts.svelte"
+  import SEO from "$lib/SEO.svelte"
 
   export let store: Store
 </script>
+
+<SEO title={store.name} />
 
 <SettingsBreadcrumbs href="/settings/stores" text="Semuat Toko / {store.name}" />
 
