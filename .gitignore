@@ -11,4 +11,5 @@ node_modules
 build
 
 .vercel
-test-results
+cypress/videos
+cypress/snapshots
