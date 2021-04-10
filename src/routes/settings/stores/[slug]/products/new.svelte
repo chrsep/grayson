@@ -16,9 +16,7 @@
 
 <script lang="ts">
   import type { Store } from "$lib/domain"
-  import StoreSettingsSidebar from "$lib/StoreSettingsSidebar.svelte"
   import SettingsBreadcrumbs from "$lib/SettingsBreadcrumbs.svelte"
-  import ManageProducts from "$lib/ManageProducts.svelte"
   import SEO from "$lib/SEO.svelte"
 
   export let store: Store
@@ -27,21 +25,6 @@
 <SEO title="Produk Toko" />
 
 <SettingsBreadcrumbs
-  class="hidden sm:block"
-  href="/settings/stores"
-  text="Semuat Toko / {store.name} / Produk"
+  href="/settings/stores/{store.slug}/products"
+  text="Semua Toko / {store.name} / Produk / Buat Baru"
 />
-
-<SettingsBreadcrumbs
-  class="sm:hidden"
-  href="/settings/stores/{store.slug}"
-  text="Semuat Toko / {store.name} / Produk"
-/>
-
-<div class="max-w-7xl mx-auto flex pt-8">
-  <div class="sm:px-3 hidden sm:block flex-shrink-0 max-w-xs w-full">
-    <StoreSettingsSidebar storeSlug={store.slug} />
-  </div>
-
-  <ManageProducts />
-</div>

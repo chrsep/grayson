@@ -20,6 +20,16 @@
 
   let name = user.name
   let email = user.email
+
+  const handleSave = async (store: Partial<User>) => {
+    const { ok } = await fetch(`/api/me`, {
+      method: "PATCH",
+      body: JSON.stringify(store),
+      credentials: "include"
+    })
+
+    if (ok) window.location.reload()
+  }
 </script>
 
 <SEO title="Akun" />
@@ -27,7 +37,7 @@
 <div class="max-w-7xl mx-auto pt-16 px-3 flex">
   <div class="w-full max-w-sm pl-2 pr-16 pt-7 hidden md:block">
     <h2 class="font-black mb-3">Data Diri</h2>
-    <p>Ubah data diri anda menggunakan form disamping.</p>
+    <p class="opacity-60">Ubah data diri anda menggunakan form disamping.</p>
   </div>
 
   <div class="w-full">
@@ -36,6 +46,9 @@
       description="Ubah nama lengkap anda disini."
       hint="Nama anda akan terlihat di listing produk anda."
       bind:value={name}
+      onSave={() => {
+        handleSave({ name })
+      }}
     />
 
     <SettingsCard
@@ -44,6 +57,9 @@
       hint="Alamat email anda akan dapat dilihat pengguna lain."
       bind:value={email}
       type="email"
+      onSave={() => {
+        handleSave({ email })
+      }}
     />
   </div>
 </div>
