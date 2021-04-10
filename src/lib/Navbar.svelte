@@ -5,6 +5,7 @@
   import { UserIcon } from "svelte-feather-icons/src"
   import type { Tag, User } from "./domain"
   import CartButton from "./CartButton.svelte"
+
   import BgPrimary from "../../static/bg-primary.png?w=300&format=jpg;webp;avif&srcset"
 
   export let user: User

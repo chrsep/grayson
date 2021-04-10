@@ -12,7 +12,6 @@
 </script>
 
 <script lang="ts">
-  import { page } from "$app/stores"
   import type { User } from "$lib/domain"
   import SettingsCard from "../../lib/SettingsCard.svelte"
   import SEO from "$lib/SEO.svelte"
