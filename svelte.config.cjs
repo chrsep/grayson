@@ -1,6 +1,8 @@
 const sveltePreprocess = require("svelte-preprocess")
 const node = require("@sveltejs/adapter-node")
 const pkg = require("./package.json")
+const imagetools = require("vite-imagetools")
+const path = require("path")
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
@@ -24,6 +26,7 @@ module.exports = {
     target: "#svelte",
 
     vite: {
+      plugins: [imagetools({ force: true })],
       ssr: {
         noExternal: Object.keys(pkg.dependencies || {})
       },

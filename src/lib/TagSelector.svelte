@@ -8,7 +8,7 @@
   $: isOnRoot = $page.path === "/"
 </script>
 
-<div class="flex px-3 overflow-auto">
+<div class="flex px-3 overflow-auto relative z-10">
   <a
     class:active={isOnRoot}
     class="px-4 py-2 border-primary text-sm opacity-70 transition-opacity hover:opacity-100"

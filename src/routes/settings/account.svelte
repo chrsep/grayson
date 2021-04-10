@@ -38,7 +38,7 @@
 <div class="max-w-7xl mx-auto pt-16 px-3 flex">
   <div class="w-full max-w-sm pl-2 pr-16 pt-7 hidden md:block">
     <h2 class="font-black mb-3">Data Diri</h2>
-    <p>Ubah data diri anda menggunakan form disamping.</p>
+    <p class="opacity-60">Ubah data diri anda menggunakan form disamping.</p>
   </div>
 
   <div class="w-full">

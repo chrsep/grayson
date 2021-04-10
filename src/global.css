@@ -1,4 +1,9 @@
 /* Write your global styles here, in PostCSS syntax */
 @tailwind base;
 @tailwind components;
+
+body {
+  @apply text-sm;
+}
+
 @tailwind utilities;
