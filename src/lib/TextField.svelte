@@ -22,6 +22,6 @@
     on:keypress
     {required}
     {placeholder}
-    class="rounded border border-gray-300 w-full bg-dark-surface"
+    class="rounded-lg border border-gray-300 w-full bg-dark-surface"
   />
 </label>

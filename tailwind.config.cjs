@@ -1,7 +1,7 @@
 const { tailwindExtractor } = require("tailwindcss/lib/lib/purgeUnusedStyles")
 
 module.exports = {
-  mode: "jit",
+  // mode: "jit",
   purge: {
     content: ["./src/**/*.{html,js,svelte,ts}"],
     options: {
@@ -30,7 +30,7 @@ module.exports = {
         secondary: "#3FFFB2",
 
         surface: "white",
-        "dark-surface": "#fafafa",
+        "dark-surface": "#f8f9fa ",
 
         black: "#232529",
 

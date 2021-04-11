@@ -34,6 +34,7 @@
   <ManageProducts />
 </div>
 
+<!-- Mobile Only Menu -->
 <div class="sm:hidden px-5">
   <div class="w-full">
     <a

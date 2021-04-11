@@ -6,7 +6,7 @@
   import type { Tag, User } from "./domain"
   import CartButton from "./CartButton.svelte"
 
-  import BgPrimary from "../../static/bg-primary.png?w=300&format=jpg;webp;avif&srcset"
+  import BgPrimary from "../../static/bg-secondary.png?w=300&format=jpg;webp;avif&srcset"
 
   export let user: User
   export let tags: Tag[]
