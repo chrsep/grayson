@@ -57,7 +57,7 @@
 
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
       <Button type="submit" primary class="ml-auto text-sm">
-        Lanjut
+        Simpan
         <ChevronRightIcon size="20" class="ml-2" />
       </Button>
     </div>
