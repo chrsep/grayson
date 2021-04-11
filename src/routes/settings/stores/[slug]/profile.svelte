@@ -54,7 +54,7 @@
   text="Semua Toko / {store.name} / Profil"
 />
 
-<div class="max-w-7xl mx-auto px-3 flex pt-8">
+<div class="max-w-7xl mx-auto px-3 flex">
   <StoreSettingsSidebar storeSlug={store.slug} />
 
   <div class="w-full">

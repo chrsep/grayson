@@ -10,17 +10,17 @@
   $: profileActive = $page.path === `/settings/stores/${storeSlug}/profile`
 </script>
 
-<div class="w-full max-w-xs pl-2 pr-32 hidden sm:block">
+<div class="w-full max-w-xs pl-2 pr-32 hidden sm:block pt-6">
   <a
     class:active={productActive}
-    class="flex items-end mb-4 opacity-70 mb-3"
+    class="flex items-end mb-4 opacity-70 mb-3 hover:opacity-100"
     href="/settings/stores/{storeSlug}/products"
   >
     Produk <ChevronRightIcon size="20" class="ml-auto" />
   </a>
   <a
     class:active={profileActive}
-    class="flex items-end mb-4 opacity-70 mb-3"
+    class="flex items-end mb-4 opacity-70 mb-3 hover:opacity-100"
     href="/settings/stores/{storeSlug}/profile"
   >
     Profil Toko <ChevronRightIcon size="20" class="ml-auto" />

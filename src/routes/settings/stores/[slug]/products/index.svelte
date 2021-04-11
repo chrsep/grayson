@@ -38,7 +38,7 @@
   text="Semua Toko / {store.name} / Produk"
 />
 
-<div class="max-w-7xl mx-auto px-0 sm:px-3 sm:pt-8 flex">
+<div class="max-w-7xl mx-auto px-0 sm:px-3 flex">
   <StoreSettingsSidebar storeSlug={store.slug} />
 
   <ManageProducts />

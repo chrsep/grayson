@@ -28,7 +28,7 @@
 
 <SettingsBreadcrumbs href="/settings/stores" text="Semua Toko / {store.name}" />
 
-<div class="max-w-7xl mx-auto px-3 pt-8 hidden sm:flex">
+<div class="max-w-7xl mx-auto px-3 hidden sm:flex">
   <StoreSettingsSidebar storeSlug={store.slug} />
 
   <ManageProducts />
