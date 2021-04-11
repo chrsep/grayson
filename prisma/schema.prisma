@@ -29,7 +29,7 @@ model Store {
   owner       User   @relation("owner", fields: [ownerId], references: [id])
   ownerId     String
 
-  user     User[]
+  users    User[]
   products Product[]
 }
 
@@ -38,8 +38,10 @@ model Product {
   name        String @default("")
   description String @default("")
   tags        Tag[]
+  slug        String @unique
+  price       Int    @default(0)
 
-  Store   Store  @relation(fields: [storeId], references: [id])
+  store   Store  @relation(fields: [storeId], references: [id])
   storeId String
 }
 

@@ -2,13 +2,15 @@
   import type { Load } from "@sveltejs/kit"
 
   export const load: Load = async ({ page, fetch }) => {
-    const url = `/data/stores/${page.params.slug}`
+    const url = `/data/stores/${page.params.slug}.json`
     const store = await fetch(url)
+    const products = await fetch(`/data/stores/${page.params.slug}/products.json`)
 
     return {
       status: 200,
       props: {
-        store: await store.json()
+        store: await store.json(),
+        products: await products.json()
       }
     }
   }
@@ -20,18 +22,20 @@
   import SettingsBreadcrumbs from "$lib/SettingsBreadcrumbs.svelte"
   import ManageProducts from "../../../../lib/ManageProducts.svelte"
   import SEO from "$lib/SEO.svelte"
+  import type { Product } from "$lib/domain"
 
   export let store: Store
+  export let products: Product[]
 </script>
 
 <SEO title={store.name} />
 
 <SettingsBreadcrumbs href="/settings/stores" text="Semua Toko / {store.name}" />
 
-<div class="max-w-7xl mx-auto px-3 pt-8 hidden sm:flex">
+<div class="max-w-7xl mx-auto px-3 hidden sm:flex">
   <StoreSettingsSidebar storeSlug={store.slug} />
 
-  <ManageProducts />
+  <ManageProducts {products} />
 </div>
 
 <!-- Mobile Only Menu -->
@@ -45,7 +49,7 @@
     </a>
     <a
       class="block font-black border-b w-full text-xl py-4"
-      href="/settings/stores/{store.slug}/profil"
+      href="/settings/stores/{store.slug}/profile"
     >
       Profil Toko
     </a>

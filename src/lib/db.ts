@@ -1,5 +1,6 @@
-import type { PrismaClient, Tag, Store, Session, User } from "@prisma/client/index.js"
+import type { PrismaClient, Tag, Store, Session, User, Product } from "@prisma/client/index.js"
 import * as prisma from "@prisma/client/index.js"
+import { generateUniqueSlug } from "$lib/domain"
 
 let db: PrismaClient
 if (prisma.PrismaClient) {
@@ -50,6 +51,55 @@ export const updateUserById = async (id: string, user: Partial<User>): Promise<U
   return await db.user.update({
     where: { id },
     data: user
+  })
+}
+
+export const insertProductToStore = async (
+  product: {
+    name: string
+    description: string
+    price: number
+    tags: string[]
+  },
+  storeSlug: string
+): Promise<Product> => {
+  return await db.product.create({
+    data: {
+      ...product,
+      slug: generateUniqueSlug(product.name),
+      store: {
+        connect: { slug: storeSlug }
+      },
+      tags: {
+        connect: product.tags.map((tag) => {
+          return { slug: tag }
+        })
+      }
+    }
+  })
+}
+
+export const findStoreProductByStoreSlug = async (
+  slug: string
+): Promise<Array<Product & { tags: Tag[] }>> => {
+  return await db.product.findMany({
+    where: {
+      store: { slug }
+    },
+    include: {
+      tags: true
+    }
+  })
+}
+
+export const findAllProducts = async (): Promise<
+  Array<Product & { tags: Tag[]; store: Store }>
+> => {
+  return db.product.findMany({
+    include: {
+      tags: true,
+      store: true
+    }
   })
 }
 
