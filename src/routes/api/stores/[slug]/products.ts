@@ -1,4 +1,4 @@
-import { number, object, string } from "yup"
+import { array, number, object, string } from "yup"
 import type { RequestHandler } from "@sveltejs/kit"
 import type { Context } from "$lib/domain"
 import { insertProductToStore } from "$lib/db"
@@ -8,7 +8,8 @@ import { badRequest, unauthorized } from "$lib/rest"
 const PostBody = object({
   name: string().required(),
   description: string().optional(),
-  price: number().required()
+  price: number().required(),
+  tags: array(string())
 })
 
 export const post: RequestHandler<Context, string> = async ({ context, body, params }) => {

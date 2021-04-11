@@ -59,6 +59,7 @@ export const insertProductToStore = async (
     name: string
     description: string
     price: number
+    tags: string[]
   },
   storeSlug: string
 ): Promise<Product> => {
@@ -68,15 +69,25 @@ export const insertProductToStore = async (
       slug: generateUniqueSlug(product.name),
       store: {
         connect: { slug: storeSlug }
+      },
+      tags: {
+        connect: product.tags.map((tag) => {
+          return { slug: tag }
+        })
       }
     }
   })
 }
 
-export const findStoreProductByStoreSlug = async (slug: string): Promise<Product[]> => {
+export const findStoreProductByStoreSlug = async (
+  slug: string
+): Promise<Array<Product & { tags: Tag[] }>> => {
   return await db.product.findMany({
     where: {
       store: { slug }
+    },
+    include: {
+      tags: true
     }
   })
 }

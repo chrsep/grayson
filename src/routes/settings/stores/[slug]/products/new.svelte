@@ -35,7 +35,7 @@
     e.preventDefault()
     const result = await fetch(`/api/stores/${$page.params.slug}/products`, {
       method: "POST",
-      body: JSON.stringify({ name, description, price, tags })
+      body: JSON.stringify({ name, description, price, tags: [tags] })
     })
 
     if (result.ok) goto(`/settings/stores/${$page.params.slug}/products`)

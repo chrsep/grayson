@@ -4,7 +4,10 @@
   import Button from "$lib/Button.svelte"
   import { PlusIcon } from "svelte-feather-icons/src"
   import ProductIllustration from "./illustrations/ProductIllustration.svelte"
+  import type { Product } from "$lib/domain"
+  import { formatCurrency } from "./domain"
 
+  export let products: Product[]
   let newProduct = `/settings/stores/${$page.params.slug}/products/new`
 </script>
 
@@ -19,16 +22,45 @@
     </a>
   </div>
 
-  <div class="flex">
-    <div class="mx-auto w-3/4 my-8 md:my-20 md:w-1/3">
-      <ProductIllustration class="mb-8" />
-      <h3 class="text-center font-black text-2xl opacity-70 mb-4">Buat produk pertama anda</h3>
-      <a href={newProduct}>
-        <Button primary class="mx-auto">
-          <PlusIcon size="24" class="mr-2" />
-          Tambah produk
-        </Button>
-      </a>
+  {#if products.length === 0}
+    <div class="flex">
+      <div class="mx-auto w-3/4 my-8 md:my-20 md:w-1/3">
+        <ProductIllustration class="mb-8" />
+        <h3 class="text-center font-black text-2xl opacity-70 mb-4">Buat produk pertama anda</h3>
+        <a href={newProduct}>
+          <Button primary class="mx-auto">
+            <PlusIcon size="24" class="mr-2" />
+            Tambah produk
+          </Button>
+        </a>
+      </div>
     </div>
-  </div>
+  {:else}
+    <div>
+      <div class="flex border-b w-full items-center opacity-60">
+        <div class="w-0 w-14 m-4" />
+        <div class="w-2/4 mr-3">Nama</div>
+        <div class="w-2/4 sm:w-1/4">Harga</div>
+        <div class="w-1/4 hidden sm:block">Tag</div>
+      </div>
+      <div>
+        {#each products as product}
+          <div class="flex border-b w-full items-center">
+            <div class="w-14 m-4">
+              <div class="aspect-w-4 aspect-h-3 bg-black rounded-lg" />
+            </div>
+            <div class="w-2/4 truncate mr-3">{product.name}</div>
+            <div class="w-2/4 sm:w-1/4">
+              {formatCurrency(product.price)}
+            </div>
+            <div class="w-1/4 hidden sm:block">
+              {#each product.tags as tag}
+                <div>{tag.name}</div>
+              {/each}
+            </div>
+          </div>
+        {/each}
+      </div>
+    </div>
+  {/if}
 </div>
