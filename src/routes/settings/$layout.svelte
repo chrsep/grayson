@@ -21,10 +21,7 @@
 <script lang="ts">
   import TabLink from "$lib/TabLink.svelte"
   import CartButton from "$lib/CartButton.svelte"
-  import type { User } from "$lib/domain"
   import BgPrimary from "../../../static/bg-secondary.png?w=300;500;800&format=jpg;webp;avif&srcset"
-
-  export let user: User
 </script>
 
 <nav class="border-b relative">

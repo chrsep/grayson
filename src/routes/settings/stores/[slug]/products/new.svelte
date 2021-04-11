@@ -1,19 +1,3 @@
-<script context="module" lang="ts">
-  import type { Load } from "@sveltejs/kit"
-
-  export const load: Load = async ({ page, fetch }) => {
-    const url = `/data/stores/${page.params.slug}`
-    const store = await fetch(url)
-
-    return {
-      status: 200,
-      props: {
-        store: await store.json()
-      }
-    }
-  }
-</script>
-
 <script lang="ts">
   import { page } from "$app/stores"
   import type { Store } from "$lib/domain"
@@ -32,12 +16,12 @@
 
   const handleSave = async (e: any) => {
     e.preventDefault()
-    const result = await fetch(`/api/stores/${page.params.slug}`, {
+    const result = await fetch(`/api/stores/${$page.params.slug}/products`, {
       method: "POST",
-      body: JSON.stringify({ name, description, phone: price })
+      body: JSON.stringify({ name, description, price })
     })
 
-    if (result.ok) goto(`/settings/stores/${page.params.slug}/products`)
+    if (result.ok) goto(`/settings/stores/${$page.params.slug}/products`)
   }
 </script>
 

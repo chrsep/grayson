@@ -4,9 +4,6 @@
 
   export let storeSlug: string
 
-  let clazz = ""
-  export { clazz as class }
-
   $: productActive =
     $page.path === `/settings/stores/${storeSlug}` ||
     $page.path === `/settings/stores/${storeSlug}/products`

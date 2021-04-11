@@ -2,7 +2,7 @@
   import type { Load } from "@sveltejs/kit"
 
   export const load: Load = async ({ page, fetch }) => {
-    const url = `/data/stores/${page.params.slug}`
+    const url = `/data/stores/${page.params.slug}.json`
     const store = await fetch(url)
 
     return {

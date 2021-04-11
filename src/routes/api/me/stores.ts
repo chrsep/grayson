@@ -30,7 +30,7 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
       phone,
       description,
       slug: generateUniqueSlug(name),
-      user: {
+      users: {
         connect: {
           email: context.user.email
         }
@@ -59,7 +59,7 @@ export const get: RequestHandler<Context, string> = async ({ context }) => {
 
   const stores = await db.store.findMany({
     where: {
-      user: {
+      users: {
         some: {
           email: context.user.email
         }

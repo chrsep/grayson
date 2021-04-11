@@ -73,4 +73,12 @@ export const insertProductToStore = async (
   })
 }
 
+export const findStoreProductByStoreSlug = async (slug: string): Promise<Product[]> => {
+  return await db.product.findMany({
+    where: {
+      store: { slug }
+    }
+  })
+}
+
 export default db

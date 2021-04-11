@@ -2,7 +2,7 @@
   import type { Load } from "@sveltejs/kit"
 
   export const load: Load = async ({ page, fetch }) => {
-    const url = `/data/stores/${page.params.slug}`
+    const url = `/data/stores/${page.params.slug}.json`
     const store = await fetch(url)
 
     return {
@@ -45,7 +45,7 @@
     </a>
     <a
       class="block font-black border-b w-full text-xl py-4"
-      href="/settings/stores/{store.slug}/profil"
+      href="/settings/stores/{store.slug}/profile"
     >
       Profil Toko
     </a>
