@@ -30,7 +30,7 @@ module.exports = {
         secondary: "#3FFFB2",
 
         surface: "white",
-        "dark-surface": "#fafafa",
+        "dark-surface": "#f8f9fa ",
 
         black: "#232529",
 
