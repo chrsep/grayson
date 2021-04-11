@@ -92,4 +92,15 @@ export const findStoreProductByStoreSlug = async (
   })
 }
 
+export const findAllProducts = async (): Promise<
+  Array<Product & { tags: Tag[]; store: Store }>
+> => {
+  return db.product.findMany({
+    include: {
+      tags: true,
+      store: true
+    }
+  })
+}
+
 export default db

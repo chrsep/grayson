@@ -23,6 +23,7 @@ export interface Product {
   price: number
   slug: string
   tags: Array<Tag>
+  store?: Store
 }
 
 export interface Image {
@@ -47,8 +48,11 @@ export const generateUniqueSlug = (value: string): string => {
   return slugify(value + "-" + nanoid(5), { lower: true })
 }
 
-const rupiahFormatter = Intl.NumberFormat("id", { currency: "IDR", style: "currency" })
+const rupiahFormatter = Intl.NumberFormat("id", {
+  currency: "IDR",
+  style: "currency"
+})
 
 export const formatCurrency = (value: number): string => {
-  return rupiahFormatter.format(value)
+  return rupiahFormatter.format(value).replace(/\D00(?=\D*$)/, "")
 }

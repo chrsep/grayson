@@ -3,7 +3,6 @@
 
   export const load: Load = async ({ page, fetch }) => {
     const store = await fetch(`/data/stores/${page.params.slug}.json`)
-
     const products = await fetch(`/data/stores/${page.params.slug}/products.json`)
 
     return {
