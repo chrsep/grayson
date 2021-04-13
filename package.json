@@ -29,7 +29,7 @@
     "@tailwindcss/forms": "0.3.2",
     "@tailwindcss/typography": "0.4.0",
     "@types/node": "14.14.37",
-    "@types/node-fetch": "2.5.9",
+    "@types/node-fetch": "2.5.10",
     "@types/pino": "6.3.6",
     "@types/uuid": "8.3.0",
     "@typescript-eslint/eslint-plugin": "4.21.0",
