@@ -62,7 +62,7 @@
     "tslib": "2.2.0",
     "typescript": "4.2.4",
     "uuid": "8.3.2",
-    "vite": "2.1.5",
+    "vite": "2.2.1",
     "vite-imagetools": "3.4.0",
     "yup": "0.32.9"
   },
