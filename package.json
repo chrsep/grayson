@@ -24,7 +24,7 @@
     "@playwright/test": "0.1101.0",
     "@prisma/client": "2.21.2",
     "@sveltejs/adapter-node": "1.0.0-next.16",
-    "@sveltejs/kit": "1.0.0-next.71",
+    "@sveltejs/kit": "1.0.0-next.84",
     "@tailwindcss/aspect-ratio": "0.2.0",
     "@tailwindcss/forms": "0.3.2",
     "@tailwindcss/typography": "0.4.0",
