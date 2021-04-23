@@ -9,14 +9,14 @@
 </script>
 
 <label
-  class="{clazz} flex items-center w-full rounded-full border bg-gray-100 ring-1 ring-transparent ring-offset-0 focus-within:ring-primary"
+  class="{clazz} relative flex items-center w-full rounded-full border bg-gray-100 ring-1 ring-transparent ring-offset-0 focus-within:ring-primary"
 >
-  <SearchIcon size="20" class="ml-3" />
+  <SearchIcon size="20" class="ml-3 absolute" />
   <input
     type="text"
     {value}
     on:input
-    class="border-none !ring-0 rounded-full bg-transparent w-full"
+    class="border-none ring-0 ring-offset-0 shadow-none rounded-full bg-transparent w-full pl-12"
     {placeholder}
   />
 </label>
