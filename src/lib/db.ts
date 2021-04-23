@@ -103,4 +103,21 @@ export const findAllProducts = async (): Promise<
   })
 }
 
+export const findProductById = async (
+  slug: string
+): Promise<Product & { tags: Tag[]; store: Store }> => {
+  return db.product.findUnique({
+    where: { slug },
+    include: {
+      tags: true,
+      store: {
+        include: {
+          owner: true,
+          products: true
+        }
+      }
+    }
+  })
+}
+
 export default db

@@ -33,12 +33,13 @@
 
 <div class="flex flex-wrap">
   {#each products as product}
-    <div class="p-2 w-1/2 sm:w-1/4 md:w-1/6 ">
+    <a href="/products/{product.slug}" class="p-2 w-1/2 sm:w-1/4 md:w-1/6 ">
       <div class="overflow-hidden border rounded-lg">
         <div class="aspect-w-4 aspect-h-3 bg-black " />
         <div class="text-sm m-2 mb-0">{product.name}</div>
-        <div class="opacity-80 m-2 text-sm">{formatCurrency(product.price)}</div>
+        <div class="opacity-70 m-2 mb-0 text-sm">{formatCurrency(product.price)}</div>
+        <div class="text-sm m-2 opacity-70">{product.store.name}</div>
       </div>
-    </div>
+    </a>
   {/each}
 </div>

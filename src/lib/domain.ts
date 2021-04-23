@@ -24,6 +24,7 @@ export interface Product {
   slug: string
   tags: Array<Tag>
   store?: Store
+  owner?: User
 }
 
 export interface Image {
