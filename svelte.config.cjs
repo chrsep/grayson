@@ -1,8 +1,7 @@
 const sveltePreprocess = require("svelte-preprocess")
 const node = require("@sveltejs/adapter-node")
 const pkg = require("./package.json")
-const imagetools = require("vite-imagetools")
-const path = require("path")
+const { imagetools } = require("vite-imagetools")
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
