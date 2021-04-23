@@ -23,6 +23,7 @@
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
   import { ChevronRightIcon } from "svelte-feather-icons/src"
+  import NumberField from "../../../../../lib/NumberField.svelte"
 
   export let store: Store
 
@@ -65,7 +66,7 @@
     <div class="px-6 max-w-lg">
       <TextField required label="Nama Produk" class="mb-3" bind:value={name} />
       <TextField required label="Deskripsi" class="mb-3" bind:value={description} />
-      <TextField required label="Harga" class="mb-6" bind:value={price} />
+      <NumberField min="0" required label="Harga" class="mb-6" bind:value={price} />
       <TextField required label="Tags" class="mb-6" bind:value={tags} />
     </div>
 
