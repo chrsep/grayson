@@ -23,7 +23,7 @@
   "devDependencies": {
     "@playwright/test": "0.1102.0",
     "@prisma/client": "2.21.2",
-    "@sveltejs/adapter-node": "1.0.0-next.16",
+    "@sveltejs/adapter-node": "1.0.0-next.17",
     "@sveltejs/kit": "1.0.0-next.84",
     "@tailwindcss/aspect-ratio": "0.2.0",
     "@tailwindcss/forms": "0.3.2",
