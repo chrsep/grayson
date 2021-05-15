@@ -18,7 +18,8 @@
     "pretty-quick": "pretty-quick --staged",
     "test": "npx folio --param browserName=chromium --param screenshotOnFailure",
     "test:debug": "PWDEBUG=1 npx folio --param browserName=chromium --param screenshotOnFailure --timeout 0",
-    "ts-node": "node --loader ts-node/esm "
+    "ts-node": "node --loader ts-node/esm",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@playwright/test": "0.1110.0",
