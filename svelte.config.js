@@ -1,10 +1,9 @@
-const sveltePreprocess = require("svelte-preprocess")
-const node = require("@sveltejs/adapter-node")
-const pkg = require("./package.json")
-const { imagetools } = require("vite-imagetools")
+import sveltePreprocess from "svelte-preprocess"
+import node from "@sveltejs/adapter-node"
+import { imagetools } from "vite-imagetools"
 
 /** @type {import('@sveltejs/kit').Config} */
-module.exports = {
+export default {
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors
   preprocess: [
@@ -26,9 +25,9 @@ module.exports = {
 
     vite: {
       plugins: [imagetools({ force: true })],
-      ssr: {
-        noExternal: Object.keys(pkg.dependencies || {})
-      },
+      // ssr: {
+      //   noExternal: Object.keys(pkg.dependencies || {})
+      // },
       optimizeDeps: {
         exclude: ["argon2"]
       }
