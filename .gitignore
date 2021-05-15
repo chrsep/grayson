@@ -12,13 +12,3 @@ build
 
 .vercel
 test-results
-
-# Yarn
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
-yarn-error.log

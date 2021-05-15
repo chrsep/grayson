@@ -1,12 +1,1 @@
 .env*
-node_modules
-
-.yarn/*
-!.yarn/cache
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
-yarn-error.log
