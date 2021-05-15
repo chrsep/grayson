@@ -12,6 +12,8 @@ COPY prisma prisma
 RUN ls -al
 RUN yarn
 
+COPY postcss.config.cjs .
+COPY tailwind.config.cjs .
 COPY svelte.config.js .
 COPY tsconfig.json .
 COPY src src
