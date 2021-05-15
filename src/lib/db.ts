@@ -92,13 +92,31 @@ export const findStoreProductByStoreSlug = async (
   })
 }
 
-export const findAllProducts = async (): Promise<
-  Array<Product & { tags: Tag[]; store: Store }>
-> => {
+export const findAllProducts = async (
+  tags = ""
+): Promise<Array<Product & { tags: Tag[]; store: Store }>> => {
   return db.product.findMany({
+    where: tags ? { tags: { some: { slug: tags } } } : undefined,
     include: {
       tags: true,
       store: true
+    }
+  })
+}
+
+export const findProductById = async (
+  slug: string
+): Promise<Product & { tags: Tag[]; store: Store }> => {
+  return db.product.findUnique({
+    where: { slug },
+    include: {
+      tags: true,
+      store: {
+        include: {
+          owner: true,
+          products: true
+        }
+      }
     }
   })
 }

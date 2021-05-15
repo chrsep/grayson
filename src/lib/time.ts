@@ -1,5 +1,5 @@
-import dayjs from "dayjs/esm"
-import type { Dayjs } from "dayjs/esm"
+import dayjs from "dayjs"
+import type { Dayjs } from "dayjs"
 
 export const now = (): Dayjs => {
   return dayjs()

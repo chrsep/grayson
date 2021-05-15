@@ -8,7 +8,7 @@
 
 <button
   class:primary
-  class="{clazz} rounded-lg border border-gray-300 px-3 py-2 bg-white flex items-center justify-center"
+  class="{clazz} rounded-lg border border-gray-300 px-3 py-2 bg-white flex items-center justify-center flex-shrink-0"
   on:click
   {type}
 >
