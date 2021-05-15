@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16-alpine as builder
 
 WORKDIR /usr/src
 
@@ -20,5 +20,11 @@ COPY src src
 COPY static static
 
 RUN yarn build
+
+FROM node:16-alpine
+WORKDIR /usr/src
+COPY --from=builder /usr/src/build build
+COPY --from=builder /usr/src/node_modules node_modules
+COPY --from=builder /usr/src/package.json .
 
 ENTRYPOINT ["node", "build"]
