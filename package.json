@@ -16,8 +16,8 @@
     "check": "svelte-check",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged",
-    "test": "npx folio --param browserName=chromium --param screenshotOnFailure",
-    "test:debug": "PWDEBUG=1 npx folio --param browserName=chromium --param screenshotOnFailure --timeout 0",
+    "test": "pnpx folio --param browserName=chromium --param screenshotOnFailure",
+    "test:debug": "PWDEBUG=1 pnpx folio --param browserName=chromium --param screenshotOnFailure --timeout 0",
     "ts-node": "node --loader ts-node/esm",
     "postinstall": "prisma generate"
   },
