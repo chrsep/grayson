@@ -13,3 +13,4 @@ build
 .vercel
 cypress/videos
 cypress/snapshots
+cypress/screenshots

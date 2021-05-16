@@ -16,8 +16,8 @@
     "check": "svelte-check",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged",
-    "test": "pnpx folio --param browserName=chromium --param screenshotOnFailure",
-    "test:debug": "PWDEBUG=1 pnpx folio --param browserName=chromium --param screenshotOnFailure --timeout 0",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
     "test:wait-on": "npx wait-on http://localhost:3000",
     "ts-node": "node --loader ts-node/esm",
     "postinstall": "prisma generate"
@@ -39,6 +39,7 @@
     "argon2": "0.27.2",
     "autoprefixer": "10.2.5",
     "cssnano": "5.0.2",
+    "cypress": "^7.3.0",
     "eslint": "7.26.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-svelte3": "3.2.0",
