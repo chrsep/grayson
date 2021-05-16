@@ -70,7 +70,7 @@ export const createCookie = (name: string, value: string): string => {
   if (import.meta.env.DEV) {
     cookieOptions.sameSite = "lax"
     cookieOptions.secure = false
-    cookieOptions.domain = import.meta.env.VITE_DEV_DOMAIN as string
+    // cookieOptions.domain = import.meta.env.VITE_DEV_DOMAIN as string
   }
 
   return serialize(name, value, cookieOptions)

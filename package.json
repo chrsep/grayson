@@ -16,12 +16,14 @@
     "check": "svelte-check",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged",
-    "test": "pnpx folio --param browserName=chromium --param screenshotOnFailure",
-    "test:debug": "PWDEBUG=1 pnpx folio --param browserName=chromium --param screenshotOnFailure --timeout 0",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test:wait-on": "npx wait-on http://localhost:3000",
     "ts-node": "node --loader ts-node/esm",
     "postinstall": "prisma generate"
   },
   "devDependencies": {
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.0",
     "@playwright/test": "0.1110.0",
     "@prisma/client": "2.22.1",
     "@sveltejs/adapter-node": "1.0.0-next.20",
@@ -38,6 +40,8 @@
     "argon2": "0.27.2",
     "autoprefixer": "10.2.5",
     "cssnano": "5.0.2",
+    "cypress": "^7.3.0",
+    "esbuild": "^0.11.22",
     "eslint": "7.26.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-svelte3": "3.2.0",
@@ -65,6 +69,7 @@
     "uuid": "8.3.2",
     "vite": "2.3.2",
     "vite-imagetools": "3.6.7",
+    "wait-on": "^5.3.0",
     "yup": "0.32.9"
   },
   "dependencies": {
