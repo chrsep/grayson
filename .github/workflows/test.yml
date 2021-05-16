@@ -18,7 +18,7 @@ jobs:
         id: pnpm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
         with:
           path: |
-            ~/.pnpm
+            ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-pnpm-
@@ -39,7 +39,7 @@ jobs:
         id: pnpm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
         with:
           path: |
-            ~/.pnpm
+            ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.json') }}-v1
           restore-keys: |
             ${{ runner.os }}-pnpm-
@@ -95,7 +95,7 @@ jobs:
 #        id: pnpm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
 #        with:
 #          path: |
-#            ~/.pnpm
+#            ~/.pnpm-store
 #          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.json') }}-v1
 #          restore-keys: |
 #            ${{ runner.os }}-pnpm-

@@ -1,4 +1,4 @@
-FROM node:16-alpine as builder
+FROM node:14 as builder
 
 WORKDIR /usr/src
 
@@ -9,7 +9,7 @@ COPY prisma prisma
 
 RUN ls -al
 RUN npm i -g pnpm
-RUN pnpm i
+RUN pnpm i --prod
 
 COPY postcss.config.cjs .
 COPY tailwind.config.cjs .
@@ -18,9 +18,9 @@ COPY tsconfig.json .
 COPY src src
 COPY static static
 
-RUN yarn build
+RUN pnpm run build
 
-FROM node:16-alpine
+FROM gcr.io/distroless/nodejs:14
 WORKDIR /usr/src
 COPY --from=builder /usr/src/build build
 COPY --from=builder /usr/src/node_modules node_modules
