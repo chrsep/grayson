@@ -1,6 +1,7 @@
 import type { PrismaClient, Tag, Store, Session, User, Product } from "@prisma/client/index.js"
 import * as prisma from "@prisma/client/index.js"
 import { generateUniqueSlug } from "$lib/domain"
+import { now } from "$lib/time"
 
 let db: PrismaClient
 if (prisma.PrismaClient) {
@@ -33,6 +34,23 @@ export const findStoreBySlugAndUserEmail = async (slug: string, email: string): 
 
 export const updateStoreBySlug = async (slug: string, data: Partial<Store>): Promise<Store> => {
   return await db.store.update({ where: { slug }, data })
+}
+
+export const findSessionByAccessToken = async (token: string) => {
+  return await db.session.findFirst({
+    where: { id: token },
+    include: { user: true }
+  })
+}
+
+export const insertSession = async (userId: string) => {
+  const session = await db.session.create({
+    data: {
+      userId: userId,
+      expires_at: now().add(7, "day").toISOString()
+    }
+  })
+  return session.id
 }
 
 export const findUserById = async (id: string): Promise<User> => {

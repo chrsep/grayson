@@ -6,7 +6,6 @@ dependencies:
   "@tailwindcss/forms": 0.3.2_tailwindcss@2.1.2
   "@tailwindcss/typography": 0.4.0_tailwindcss@2.1.2
   "@types/cookie": 0.4.0
-  "@types/ioredis": 4.26.3
   "@types/lodash-es": 4.17.4
   "@types/node": 15.3.0
   "@types/node-fetch": 2.5.10
@@ -17,7 +16,6 @@ dependencies:
   cssnano: 5.0.2_postcss@8.2.15
   dayjs: 1.10.4
   husky: 6.0.0
-  ioredis: 4.27.2
   lodash-es: 4.17.21
   nanoid: 3.1.23
   pino: 6.11.3
@@ -359,12 +357,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-TNR5SjCg8sSfU4bdXsPJlpLXOH4YGBCVggvdZnttD2SMiONSxfJm231Nxn1VaQWWF2Twl4Wr2KC1hYaNd4M5Zw==
-  /@types/ioredis/4.26.3:
-    dependencies:
-      "@types/node": 15.3.0
-    dev: false
-    resolution:
-      integrity: sha512-2YiIUTo/MCZidXXfHAIoh2DUlGEG7zYFMfz0VXzTpI5934/wBCT5a/pR24lHCKk9WQNIlYauIFxQHcAF93w1FA==
   /@types/json-schema/7.0.7:
     dev: true
     resolution:
@@ -1033,12 +1025,6 @@ packages:
       node: ">=0.10.0"
     resolution:
       integrity: sha1-nxXPuwcFAFNpIWxiasfQWrkN1XQ=
-  /cluster-key-slot/1.1.0:
-    dev: false
-    engines:
-      node: ">=0.10.0"
-    resolution:
-      integrity: sha512-2Nii8p3RwAPiFwsnZvukotvow2rIHM+yQ6ZcBXGHdniadkYGZYiGmkHJIbZPIV9nfv7m/U1IPMVVcAhoWFeklw==
   /code-point-at/1.1.0:
     engines:
       node: ">=0.10.0"
@@ -1435,12 +1421,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
-  /denque/1.5.0:
-    dev: false
-    engines:
-      node: ">=0.10"
-    resolution:
-      integrity: sha512-CYiCSgIF1p6EUByQPlGkKnP1M9g0ZV3qMIrqMqZqdwazygIA/YP2vrbcyl1h/WppKJTdl1F85cXIle+394iDAQ==
   /detect-indent/6.0.0:
     engines:
       node: ">=8"
@@ -2278,23 +2258,6 @@ packages:
       node: ">=10"
     resolution:
       integrity: sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==
-  /ioredis/4.27.2:
-    dependencies:
-      cluster-key-slot: 1.1.0
-      debug: 4.3.1
-      denque: 1.5.0
-      lodash.defaults: 4.2.0
-      lodash.flatten: 4.4.0
-      p-map: 2.1.0
-      redis-commands: 1.7.0
-      redis-errors: 1.2.0
-      redis-parser: 3.0.0
-      standard-as-callback: 2.1.0
-    dev: false
-    engines:
-      node: ">=6"
-    resolution:
-      integrity: sha512-7OpYymIthonkC2Jne5uGWXswdhlua1S1rWGAERaotn0hGJWTSURvxdHA9G6wNbT/qKCloCja/FHsfKXW8lpTmg==
   /is-absolute-url/3.0.3:
     dev: false
     engines:
@@ -2623,14 +2586,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
-  /lodash.defaults/4.2.0:
-    dev: false
-    resolution:
-      integrity: sha1-0JF4cW/+pN3p5ft7N/bwgCJ0WAw=
-  /lodash.flatten/4.4.0:
-    dev: false
-    resolution:
-      integrity: sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
   /lodash.isplainobject/4.0.6:
     dev: false
     resolution:
@@ -3040,6 +2995,7 @@ packages:
     resolution:
       integrity: sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==
   /p-map/2.1.0:
+    dev: true
     engines:
       node: ">=6"
     resolution:
@@ -3747,24 +3703,6 @@ packages:
       node: ">=8.10.0"
     resolution:
       integrity: sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
-  /redis-commands/1.7.0:
-    dev: false
-    resolution:
-      integrity: sha512-nJWqw3bTFy21hX/CPKHth6sfhZbdiHP6bTawSgQBlKOVRG7EZkfHbbHwQJnrE4vsQf0CMNE+3gJ4Fmm16vdVlQ==
-  /redis-errors/1.2.0:
-    dev: false
-    engines:
-      node: ">=4"
-    resolution:
-      integrity: sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
-  /redis-parser/3.0.0:
-    dependencies:
-      redis-errors: 1.2.0
-    dev: false
-    engines:
-      node: ">=4"
-    resolution:
-      integrity: sha1-tm2CjNyv5rS4pCin3vTGvKwxyLQ=
   /reduce-css-calc/2.1.8:
     dependencies:
       css-unit-converter: 1.1.2
@@ -4055,10 +3993,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==
-  /standard-as-callback/2.1.0:
-    dev: false
-    resolution:
-      integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==
   /string-width/1.0.2:
     dependencies:
       code-point-at: 1.1.0
@@ -4684,7 +4618,6 @@ specifiers:
   "@tailwindcss/typography": 0.4.0
   "@types/cookie": 0.4.0
   "@types/faker": ^5.5.5
-  "@types/ioredis": ^4.26.3
   "@types/lodash-es": 4.17.4
   "@types/node": 15.3.0
   "@types/node-fetch": 2.5.10
@@ -4703,7 +4636,6 @@ specifiers:
   eslint-plugin-svelte3: 3.2.0
   faker: ^5.5.3
   husky: 6.0.0
-  ioredis: ^4.27.2
   lodash-es: 4.17.21
   nanoid: 3.1.23
   pino: 6.11.3

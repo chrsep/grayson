@@ -1,8 +1,7 @@
 import argon2 from "argon2/argon2.js"
-import db from "$lib/db"
+import db, { insertSession } from "$lib/db"
 import { serialize } from "$lib/cookie"
 import type { CookieSerializeOptions } from "cookie"
-import { createSession } from "$lib/redis"
 import type { EndpointOutput } from "@sveltejs/kit"
 import { badRequest, unauthorized } from "$lib/rest"
 
@@ -54,7 +53,7 @@ export const createCookie = (name: string, value: string): string => {
 }
 
 const session = async (userId: string) => {
-  const token = await createSession(userId)
+  const token = await insertSession(userId)
   const cookie = createCookie("session", token)
   return {
     status: 200,

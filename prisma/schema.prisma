@@ -11,12 +11,13 @@ generator client {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  email    String  @unique
+  id       String    @id @default(cuid())
+  email    String    @unique
   password String
-  name     String  @default("")
+  name     String    @default("")
   stores   Store[]
-  Store    Store[] @relation("owner")
+  Store    Store[]   @relation("owner")
+  Session  Session[]
 }
 
 model Store {
@@ -52,7 +53,11 @@ model Tag {
 }
 
 model Session {
-  id         String   @id @default(cuid())
+  id String @id @default(cuid())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
   created_at DateTime @default(now())
   expires_at DateTime
 }
