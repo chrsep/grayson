@@ -1,6 +1,6 @@
-import { authenticate, createCookie, createSession } from "$lib/auth"
+import { authenticate } from "$lib/auth"
 import type { RequestHandler } from "@sveltejs/kit"
-import { badRequest, unauthorized } from "$lib/rest"
+import { badRequest } from "$lib/rest"
 import { object, string } from "yup"
 import logger from "$lib/logger"
 
@@ -14,20 +14,7 @@ export const post: RequestHandler = async (req) => {
 
   try {
     const credentials = await Login.validate(parsedBody)
-    const user = await authenticate(credentials)
-
-    if (user !== null) {
-      const token = await createSession(user.id)
-      const sessionCookie = createCookie("session", token)
-
-      return {
-        status: 200,
-        headers: { "Set-Cookie": sessionCookie },
-        body: { message: "success" }
-      }
-    }
-
-    return unauthorized("Wrong password")
+    return await authenticate(credentials)
   } catch (e) {
     logger.warn(e)
     return badRequest(e.message)

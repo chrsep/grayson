@@ -1,47 +1,38 @@
 import argon2 from "argon2/argon2.js"
 import db from "$lib/db"
 import { serialize } from "$lib/cookie"
-import type { User } from "$lib/domain"
 import type { CookieSerializeOptions } from "cookie"
-import { nanoid } from "nanoid"
-import { redis } from "$lib/redis"
+import { createSession } from "$lib/redis"
+import type { EndpointOutput } from "@sveltejs/kit"
+import { badRequest, unauthorized } from "$lib/rest"
 
 interface Credentials {
   email: string
   password: string
 }
 
-export const authenticate = async ({
-  email,
-  password
-}: Credentials): Promise<null | Omit<User, "stores">> => {
+export const authenticate = async ({ email, password }: Credentials): Promise<EndpointOutput> => {
   const user = await db.user.findFirst({ where: { email } })
-  if (!user) return null
+  if (!user) return unauthorized()
 
-  if (await argon2.verify(user.password, password)) return user
-  return null
+  if (await argon2.verify(user.password, password)) {
+    return session(user.id)
+  }
+
+  return unauthorized()
 }
 
 export const register = async (user: {
   name: string
   password: string
   email: string
-}): Promise<string | null> => {
+}): Promise<EndpointOutput> => {
   const password = await argon2.hash(user.password)
   const result = await db.user.create({
     data: { ...user, password }
   })
 
-  if (result !== null) return result.id
-  return null
-}
-
-export const createSession = async (userId: string): Promise<string> => {
-  const session = nanoid(16)
-  const ok = await redis.set(session, userId)
-  if (!ok) throw Error("failed to save session")
-
-  return session
+  return result.id !== null ? session(result.id) : badRequest()
 }
 
 export const createCookie = (name: string, value: string): string => {
@@ -60,4 +51,14 @@ export const createCookie = (name: string, value: string): string => {
   }
 
   return serialize(name, value, cookieOptions)
+}
+
+const session = async (userId: string) => {
+  const token = await createSession(userId)
+  const cookie = createCookie("session", token)
+  return {
+    status: 200,
+    headers: { "Set-Cookie": cookie },
+    body: { message: "success" }
+  }
 }

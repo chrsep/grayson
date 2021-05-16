@@ -1,7 +1,7 @@
 import type { RequestHandler } from "@sveltejs/kit"
 import { object, string } from "yup"
-import { register, createCookie, createSession } from "$lib/auth"
-import { badRequest, unauthorized } from "$lib/rest"
+import { register } from "$lib/auth"
+import { badRequest } from "$lib/rest"
 import logger from "$lib/logger"
 
 const SignUp = object({
@@ -15,16 +15,7 @@ export const post: RequestHandler = async (req) => {
   const user = await SignUp.validate(parsedBody)
 
   try {
-    const id = await register(user)
-    if (id !== null) {
-      const token = await createSession(id)
-      const cookie = createCookie("session", token)
-      return {
-        status: 200,
-        headers: { "Set-Cookie": cookie },
-        body: { message: "success" }
-      }
-    }
+    return await register(user)
   } catch (e) {
     if (e.code === "P2002") {
       return badRequest("Email is already registered")
@@ -32,6 +23,4 @@ export const post: RequestHandler = async (req) => {
     logger.warn(e)
     return badRequest(e.message)
   }
-
-  return unauthorized("Wrong password")
 }

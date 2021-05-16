@@ -1,5 +1,5 @@
-describe("test authentication", function () {
-  it("should be able ton login", function () {
+describe("test login", function () {
+  it("should be able to login", function () {
     cy.visit("/")
     cy.contains("Masuk").click()
     cy.contains("E-mail").click().type("hi@chrsep.dev")
