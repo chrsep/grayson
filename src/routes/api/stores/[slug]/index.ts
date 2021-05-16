@@ -1,7 +1,7 @@
 import type { RequestHandler } from "@sveltejs/kit"
-import type { Context } from "$lib/domain"
+import type { Locals } from "$lib/domain"
 import { object, string } from "yup"
-import db, { findStoreBySlugAndUserEmail, updateStoreBySlug } from "$lib/db"
+import { findStoreBySlugAndUserEmail, updateStoreBySlug } from "$lib/db"
 import { badRequest, unauthorized } from "$lib/rest"
 import { isEmpty, isNil } from "lodash-es"
 
@@ -12,9 +12,9 @@ const PatchBody = object({
   phone: string().optional()
 })
 
-export const patch: RequestHandler<Context, string> = async ({ params, context, body }) => {
+export const patch: RequestHandler<Locals, string> = async ({ params, locals, body }) => {
   const { slug } = params
-  const { user } = context
+  const { user } = locals
   if (!user) return unauthorized()
 
   const oldStore = findStoreBySlugAndUserEmail(slug, user.email)

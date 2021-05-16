@@ -27,7 +27,7 @@
   </a>
 </div>
 
-<style>
+<style lang="postcss">
   .active {
     @apply font-black opacity-100;
   }

@@ -4,7 +4,6 @@
   export const load: Load = async ({ session, fetch, page }) => {
     const product = await fetch(`/data/products/${page.params.slug}.json`)
     const tags = await fetch(`/data/tags.json`)
-    const products = await fetch(`/data/products.json`)
 
     return {
       props: {
@@ -28,7 +27,7 @@
   export let user: User
   export let tags: Tag[]
 
-  let qty = 1
+  let qty = "1"
 </script>
 
 <Navbar {user} {tags} />

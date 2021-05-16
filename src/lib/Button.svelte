@@ -15,7 +15,7 @@
   <slot />
 </button>
 
-<style>
+<style lang="postcss">
   .primary {
     @apply text-on-primary bg-primary border-blue-700;
   }

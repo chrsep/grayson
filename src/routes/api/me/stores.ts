@@ -1,5 +1,5 @@
 import db from "$lib/db"
-import type { Context } from "$lib/domain"
+import type { Locals } from "$lib/domain"
 import type { RequestHandler } from "@sveltejs/kit"
 import { string, object } from "yup"
 import { generateUniqueSlug } from "$lib/domain"
@@ -11,8 +11,8 @@ const PostBody = object({
   phone: string().required()
 })
 
-export const post: RequestHandler<Context, string> = async ({ context, body }) => {
-  if (!context.user) {
+export const post: RequestHandler<Locals, string> = async ({ locals, body }) => {
+  if (!locals.user) {
     return {
       status: 400,
       body: {
@@ -32,12 +32,12 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
       slug: generateUniqueSlug(name),
       users: {
         connect: {
-          email: context.user.email
+          email: locals.user.email
         }
       },
       owner: {
         connect: {
-          email: context.user.email
+          email: locals.user.email
         }
       }
     }
@@ -49,8 +49,8 @@ export const post: RequestHandler<Context, string> = async ({ context, body }) =
   }
 }
 
-export const get: RequestHandler<Context, string> = async ({ context }) => {
-  if (!context.user) {
+export const get: RequestHandler<Locals, string> = async ({ locals }) => {
+  if (!locals.user) {
     return {
       status: 401,
       body: []
@@ -61,7 +61,7 @@ export const get: RequestHandler<Context, string> = async ({ context }) => {
     where: {
       users: {
         some: {
-          email: context.user.email
+          email: locals.user.email
         }
       }
     }

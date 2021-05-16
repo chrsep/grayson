@@ -19,7 +19,7 @@
   {text}
 </a>
 
-<style>
+<style lang="postcss">
   .active {
     @apply text-primary border-b-2 opacity-100;
   }

@@ -1,15 +1,12 @@
 <script context="module" lang="ts">
   import type { Load } from "@sveltejs/kit"
 
-  export const load: Load = async ({ session, fetch, page }) => {
-    const tags = await fetch(`/data/tags.json`)
+  export const load: Load = async ({ fetch, page }) => {
     const products = await fetch(`/data/products.json?tags=${page.params.slug}`)
 
     return {
       status: 200,
       props: {
-        user: session.user,
-        tags: await tags.json(),
         products: await products.json()
       }
     }
@@ -18,11 +15,11 @@
 
 <script lang="ts">
   import SEO from "$lib/SEO.svelte"
-  import type { Tag, User, Product } from "$lib/domain"
+  import type {  Product } from "$lib/domain"
   import { formatCurrency } from "$lib/domain"
 
-  export let user: User
-  export let tags: Tag[]
+  // export let user: User
+  // export let tags: Tag[]
   export let products: Product[]
 </script>
 

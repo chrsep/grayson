@@ -1,5 +1,5 @@
 import type { RequestHandler } from "@sveltejs/kit"
-import type { Context } from "$lib/domain"
+import type { Locals } from "$lib/domain"
 import { object, string } from "yup"
 import { findUserById, updateUserById } from "$lib/db"
 import { badRequest, unauthorized } from "$lib/rest"
@@ -10,16 +10,16 @@ const PatchBody = object({
   email: string().optional()
 })
 
-export const patch: RequestHandler<Context, string> = async ({ context, body }) => {
-  if (!context.user) return unauthorized()
+export const patch: RequestHandler<Locals, string> = async ({ locals, body }) => {
+  if (!locals.user) return unauthorized()
 
   const payload = await PatchBody.validate(await JSON.parse(body))
   if (isEmpty(payload)) {
     return badRequest("at least put something in your request")
   }
 
-  const oldUser = findUserById(context.user.id)
-  const newUser = await updateUserById(context.user.id, { ...oldUser, ...payload })
+  const oldUser = findUserById(locals.user.id)
+  const newUser = await updateUserById(locals.user.id, { ...oldUser, ...payload })
 
   return {
     status: 200,

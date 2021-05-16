@@ -14,6 +14,7 @@ export interface Store {
   phone: string
   slug: string
   description: string
+  owner?: User
 }
 
 export interface Product {
@@ -37,7 +38,7 @@ export interface Tag {
   name: string
 }
 
-export interface Context {
+export interface Locals {
   user?: {
     id: string
     name: string

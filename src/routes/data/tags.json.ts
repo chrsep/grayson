@@ -6,6 +6,6 @@ export const get: RequestHandler = async () => {
   const tags: Tag[] = await findAllTags()
 
   return {
-    body: tags
+    body: JSON.stringify(tags)
   }
 }

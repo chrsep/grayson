@@ -28,7 +28,7 @@
   import NumberField from "../../../../../lib/NumberField.svelte"
 
   export let store: Store
-  export let tags: Tag
+  export let tags: Tag[]
 
   let name = ""
   let description = ""

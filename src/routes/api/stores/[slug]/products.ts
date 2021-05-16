@@ -1,6 +1,6 @@
 import { array, number, object, string } from "yup"
 import type { RequestHandler } from "@sveltejs/kit"
-import type { Context } from "$lib/domain"
+import type { Locals } from "$lib/domain"
 import { insertProductToStore } from "$lib/db"
 import logger from "$lib/logger"
 import { badRequest, unauthorized } from "$lib/rest"
@@ -12,9 +12,9 @@ const PostBody = object({
   tags: array(string())
 })
 
-export const post: RequestHandler<Context, string> = async ({ context, body, params }) => {
+export const post: RequestHandler<Locals, string> = async ({ locals, body, params }) => {
   const { slug } = params
-  if (!context.user) {
+  if (!locals.user) {
     return unauthorized("you have no power here.")
   }
 

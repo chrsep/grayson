@@ -22,7 +22,7 @@
   {/each}
 </div>
 
-<style>
+<style lang="postcss">
   .active {
     @apply text-primary-text border-b-2 opacity-100;
   }
