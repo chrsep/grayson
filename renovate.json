@@ -3,6 +3,5 @@
   "extends": ["config:base"],
   "stabilityDays": 5,
   "prCreation": "not-pending",
-  "dependencyDashboard": true,
-  "baseBranches": ["develop"]
+  "dependencyDashboard": true
 }
