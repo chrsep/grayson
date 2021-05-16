@@ -35,12 +35,6 @@ export const updateStoreBySlug = async (slug: string, data: Partial<Store>): Pro
   return await db.store.update({ where: { slug }, data })
 }
 
-export const findSessionByAccessToken = async (token: string): Promise<Session> => {
-  return await db.session.findFirst({
-    where: { id: token }
-  })
-}
-
 export const findUserById = async (id: string): Promise<User> => {
   return await db.user.findFirst({
     where: { id }

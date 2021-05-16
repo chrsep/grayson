@@ -1,6 +1,6 @@
 import type { RequestHandler } from "@sveltejs/kit"
 import { object, string } from "yup"
-import { createAccount, createCookie, createSession, createToken } from "$lib/auth"
+import { register, createCookie, createSession } from "$lib/auth"
 import { badRequest, unauthorized } from "$lib/rest"
 import logger from "$lib/logger"
 
@@ -12,19 +12,16 @@ const SignUp = object({
 
 export const post: RequestHandler = async (req) => {
   const parsedBody = await JSON.parse(req?.body + "")
+  const user = await SignUp.validate(parsedBody)
 
   try {
-    const user = await SignUp.validate(parsedBody)
-
-    const id = await createAccount(user)
-
+    const id = await register(user)
     if (id !== null) {
-      const access_token = await createSession()
-      const token = createToken({ id, access_token })
-      const sessionCookie = createCookie("session", token)
+      const token = await createSession(id)
+      const cookie = createCookie("session", token)
       return {
         status: 200,
-        headers: { "Set-Cookie": sessionCookie },
+        headers: { "Set-Cookie": cookie },
         body: { message: "success" }
       }
     }

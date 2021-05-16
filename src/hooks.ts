@@ -1,10 +1,8 @@
 import type { GetSession, Handle } from "@sveltejs/kit"
-import { findSessionByAccessToken, findUserById } from "$lib/db"
-import { parseSession } from "$lib/auth"
+import { findUserById } from "$lib/db"
 import type { Locals } from "$lib/domain"
-import type { ServerRequest } from "@sveltejs/kit/types/endpoint"
-import type { ServerResponse } from "@sveltejs/kit/types/hooks"
-import { unauthorized } from "$lib/rest"
+import { parse } from "$lib/cookie"
+import { findSessionByAccessToken } from "$lib/redis"
 
 export const getSession: GetSession<Locals> = ({ locals: { user } }) => {
   return {
@@ -13,25 +11,14 @@ export const getSession: GetSession<Locals> = ({ locals: { user } }) => {
 }
 
 export const handle: Handle = async ({ request, render }) => {
-  if (request.path.startsWith("/api")) {
-    return handleApiRequest(request, render)
-  } else {
-    return render(request)
-  }
-}
+  const cookie = parse(request.headers.cookie ?? "")
+  if (!cookie.session) return render(request)
 
-const handleApiRequest = async (
-  request: ServerRequest,
-  render: (request: ServerRequest) => ServerResponse | Promise<ServerResponse>
-): Promise<ServerResponse> => {
-  const session = parseSession(request.headers.cookie)
-  if (!session) return unauthorized()
+  const userId = await findSessionByAccessToken(cookie.session)
+  if (userId === null) return render(request)
 
-  const exists = await findSessionByAccessToken(session.access_token)
-  if (exists === null) return unauthorized()
-
-  const user = await findUserById(session.id)
-  if (user === null) return unauthorized()
+  const user = await findUserById(userId)
+  if (user === null) return render(request)
 
   request.locals = {
     user: {
@@ -40,6 +27,5 @@ const handleApiRequest = async (
       email: user.email
     }
   }
-
   return render(request)
 }

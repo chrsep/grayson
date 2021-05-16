@@ -1,4 +1,4 @@
-import { authenticate, createCookie, createSession, createToken } from "$lib/auth"
+import { authenticate, createCookie, createSession } from "$lib/auth"
 import type { RequestHandler } from "@sveltejs/kit"
 import { badRequest, unauthorized } from "$lib/rest"
 import { object, string } from "yup"
@@ -17,8 +17,7 @@ export const post: RequestHandler = async (req) => {
     const user = await authenticate(credentials)
 
     if (user !== null) {
-      const access_token = await createSession()
-      const token = createToken({ id: user.id, access_token })
+      const token = await createSession(user.id)
       const sessionCookie = createCookie("session", token)
 
       return {
