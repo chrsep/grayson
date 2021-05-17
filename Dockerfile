@@ -29,5 +29,6 @@ WORKDIR /usr/src
 COPY --from=builder /usr/src/build build
 COPY --from=builder /usr/src/node_modules node_modules
 COPY --from=builder /usr/src/package.json .
+COPY scripts/run.sh run.sh
 
-ENTRYPOINT ["node", "build"]
+ENTRYPOINT ["./run.sh"]
