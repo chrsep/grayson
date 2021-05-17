@@ -1,4 +1,4 @@
-FROM node:14 as builder
+FROM node:16 as builder
 RUN npm i -g pnpm
 
 WORKDIR /usr/src
@@ -24,11 +24,12 @@ COPY src src
 COPY static static
 RUN pnpm run build
 
-FROM gcr.io/distroless/nodejs:14
+FROM node:16
 WORKDIR /usr/src
+
 COPY --from=builder /usr/src/build build
 COPY --from=builder /usr/src/node_modules node_modules
 COPY --from=builder /usr/src/package.json .
-COPY scripts/run.sh run.sh
+COPY --from=builder /usr/src/prisma prisma
 
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["npm", "run", "start"]

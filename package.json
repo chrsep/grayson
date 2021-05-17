@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
-    "start": "svelte-kit start --host",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",
     "prisma:studio": "prisma studio",
@@ -20,7 +19,8 @@
     "cy:open": "cypress open",
     "test:wait-on": "npx wait-on http://localhost:3000",
     "ts-node": "node --loader ts-node/esm",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "start": "prisma migrate deploy && node build"
   },
   "devDependencies": {
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.0",
