@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { SearchIcon } from "svelte-feather-icons/src"
-
   export let value = ""
   export let placeholder = ""
 
@@ -11,7 +9,7 @@
 <label
   class="{clazz} relative flex items-center w-full rounded-full border bg-gray-100 ring-1 ring-transparent ring-offset-0 focus-within:ring-primary"
 >
-  <SearchIcon size="20" class="ml-3 absolute" />
+  <img src="/icons/search.svg"  width="20" height="20" class="ml-3 absolute" alt="" />
   <input
     type="text"
     {value}

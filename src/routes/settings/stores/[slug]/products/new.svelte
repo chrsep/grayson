@@ -24,7 +24,6 @@
   import SEO from "$lib/SEO.svelte"
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { ChevronRightIcon } from "svelte-feather-icons/src"
   import NumberField from "../../../../../lib/NumberField.svelte"
 
   export let store: Store
@@ -85,7 +84,7 @@
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
       <Button type="submit" primary class="ml-auto text-sm">
         Simpan
-        <ChevronRightIcon size="20" class="ml-2" />
+        <img src="/icons/chevron-right.svg" class="ml-2 w-3" alt="" />
       </Button>
     </div>
   </form>

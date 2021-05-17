@@ -13,6 +13,7 @@ dependencies:
   "@types/uuid": 8.3.0
   argon2: 0.27.2
   autoprefixer: 10.2.5_postcss@8.2.15
+  cloudinary: 1.25.1
   cssnano: 5.0.2_postcss@8.2.15
   dayjs: 1.10.4
   husky: 6.0.0
@@ -25,7 +26,6 @@ dependencies:
   rollup: 2.47.0
   slugify: 1.5.3
   svelte: 3.38.2
-  svelte-feather-icons: 3.3.0
   svelte-preprocess: 4.7.3_5944bffd99aeae72e0daf7602e6be64e
   tailwindcss: 2.1.2_797cfc3ceddb49f111b184f6879a433f
   ts-node: 9.1.1_typescript@4.2.4
@@ -1025,6 +1025,25 @@ packages:
       node: ">=0.10.0"
     resolution:
       integrity: sha1-nxXPuwcFAFNpIWxiasfQWrkN1XQ=
+  /cloudinary-core/2.11.4_lodash@4.17.21:
+    dependencies:
+      lodash: 4.17.21
+    dev: false
+    peerDependencies:
+      lodash: ">=4.0"
+    resolution:
+      integrity: sha512-F1BZczD6f5mB73D0c8gl/iuacVQQO+UhckNZxeeS9ZIVeIHbsfqwWiAZMQmIvEb7Wti/9MLU0xVwaWOak2THHA==
+  /cloudinary/1.25.1:
+    dependencies:
+      cloudinary-core: 2.11.4_lodash@4.17.21
+      core-js: 3.6.5
+      lodash: 4.17.21
+      q: 1.5.1
+    dev: false
+    engines:
+      node: ">=0.6"
+    resolution:
+      integrity: sha512-8iyMyOrRhRudJabdNc34GU/Vnr/ltDRq8gmkwQ4NpuJ1lD5Qw88DJGBNeODZnGSNXIPTLln708gsADVKe0AQMw==
   /code-point-at/1.1.0:
     engines:
       node: ">=0.10.0"
@@ -1122,6 +1141,11 @@ packages:
     dev: false
     resolution:
       integrity: sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=
+  /core-js/3.6.5:
+    dev: false
+    requiresBuild: true
+    resolution:
+      integrity: sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
   /core-util-is/1.0.2:
     resolution:
       integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
@@ -3636,6 +3660,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-hRSLN9mguJ2lzlIQtW4qmPS2kh6oMnA9RxdIYK8sz18QYqd6ePp4GNDl18oWHA1f2v2NEQIh51CO8s/E3YGckQ==
+  /q/1.5.1:
+    dev: false
+    engines:
+      node: ">=0.6.0"
+      teleport: ">=0.2.0"
+    resolution:
+      integrity: sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
   /qs/6.5.2:
     dev: true
     engines:
@@ -4139,10 +4170,6 @@ packages:
       svelte: ^3.24.0
     resolution:
       integrity: sha512-0rnBT2uqgYQeVsLJYZqAjkZn0k2TiphbOv7p602QmRMPT5VqFrkAaomZm5l4K3coxGSJlC0tDEVCKCQJ6i2jqw==
-  /svelte-feather-icons/3.3.0:
-    dev: false
-    resolution:
-      integrity: sha512-9zlgrWK34YXDjvYgvjHG0HFhol5FrapK0VEiZEUN0m2iUpifqMefLojBhAxB+zSh7lK3TohvIJBoqhFTZtgljA==
   /svelte-hmr/0.14.3_svelte@3.38.2:
     dependencies:
       svelte: 3.38.2
@@ -4627,6 +4654,7 @@ specifiers:
   "@typescript-eslint/parser": 4.23.0
   argon2: 0.27.2
   autoprefixer: 10.2.5
+  cloudinary: ^1.25.1
   cssnano: 5.0.2
   cypress: ^7.3.0
   dayjs: 1.10.4
@@ -4650,7 +4678,6 @@ specifiers:
   slugify: 1.5.3
   svelte: 3.38.2
   svelte-check: 1.5.4
-  svelte-feather-icons: 3.3.0
   svelte-preprocess: 4.7.3
   tailwindcss: 2.1.2
   ts-node: 9.1.1

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { goto } from "$app/navigation"
-  import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons/src"
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
   import SEO from "$lib/SEO.svelte"
@@ -28,7 +27,7 @@
     class="flex px-3 py-6 text-sm items-center opacity-60 hover:opacity-100"
     href="/settings/stores"
   >
-    <ChevronLeftIcon size="24" />
+    <img src="/icons/chevron-left.svg" size="24" alt=""/>
     <p class="ml-3">Semua Toko / Toko Baru</p>
   </a>
 </div>
@@ -58,7 +57,7 @@
     <div class="px-6 py-2 mt-8 bg-dark-surface border-t flex items-center rounded-b-lg">
       <Button type="submit" primary class="ml-auto text-sm">
         Simpan
-        <ChevronRightIcon size="20" class="ml-2" />
+        <img src="/icons/chevron-right.svg" width="24px" height="24px" class="ml-2" alt=""/>
       </Button>
     </div>
   </form>

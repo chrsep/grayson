@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { ChevronLeftIcon } from "svelte-feather-icons/src"
-
   export let href: string
   export let text: string
 
@@ -10,7 +8,7 @@
 
 <div class={clazz}>
   <a class="flex px-3 py-6 text-sm items-center opacity-60 hover:opacity-100" {href}>
-    <ChevronLeftIcon size="24" />
+    <img src="/icons/chevron-left.svg" class="w-4" alt="" />
     <p class="ml-3">
       {text}
     </p>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from "$app/stores"
-  import { ChevronRightIcon } from "svelte-feather-icons/src"
 
   export let storeSlug: string
 
@@ -16,19 +15,20 @@
     class="flex items-end mb-4 opacity-70 mb-3 hover:opacity-100"
     href="/settings/stores/{storeSlug}/products"
   >
-    Produk <ChevronRightIcon size="20" class="ml-auto" />
+    Produk <img src="/icons/chevron-right.svg" class="ml-auto w-3" alt="" />
   </a>
   <a
     class:active={profileActive}
     class="flex items-end mb-4 opacity-70 mb-3 hover:opacity-100"
     href="/settings/stores/{storeSlug}/profile"
   >
-    Profil Toko <ChevronRightIcon size="20" class="ml-auto" />
+    Profil Toko
+    <img src="/icons/chevron-right.svg" class="ml-auto w-3" alt="" />
   </a>
 </div>
 
 <style lang="postcss">
-  .active {
-    @apply font-black opacity-100;
-  }
+    .active {
+        @apply font-black opacity-100;
+    }
 </style>

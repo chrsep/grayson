@@ -2,7 +2,6 @@
   import { page } from "$app/stores"
   import TextField from "$lib/TextField.svelte"
   import Button from "$lib/Button.svelte"
-  import { PlusIcon } from "svelte-feather-icons/src"
   import ProductIllustration from "./illustrations/ProductIllustration.svelte"
   import type { Product } from "$lib/domain"
   import { formatCurrency } from "./domain"
@@ -16,7 +15,7 @@
     <TextField placeholder="Cari produk" />
     <a href={newProduct}>
       <Button class="flex-shrink-0 ml-3">
-        <PlusIcon size="24" class="mr-2" />
+        <img src="/icons/plus.svg" class="mr-2 w-4" alt="" />
         Produk
       </Button>
     </a>
@@ -29,7 +28,7 @@
         <h3 class="text-center font-black text-2xl opacity-70 mb-4">Buat produk pertama anda</h3>
         <a href={newProduct}>
           <Button primary class="mx-auto">
-            <PlusIcon size="24" class="mr-2" />
+            <img src="/icons/plus.svg" class="mr-2 w-4" alt="" />
             Tambah produk
           </Button>
         </a>

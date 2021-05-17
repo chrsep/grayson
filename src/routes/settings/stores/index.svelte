@@ -26,7 +26,6 @@
 </script>
 
 <script lang="ts">
-  import { PlusIcon } from "svelte-feather-icons/src"
   import type { Store } from "$lib/domain"
   import StoreCard from "../../../lib/StoreCard.svelte"
   import SEO from "$lib/SEO.svelte"
@@ -47,7 +46,7 @@
 
   <StoreCard class="border-dashed border-2 border-gray-300" href="/settings/stores/new">
     <div class="flex flex-col items-center justify-center">
-      <PlusIcon size="32" class="mb-2" />
+      <img src="/icons/plus.svg" width="32" height="32" class="mb-2" alt=""/>
       <p>Buat toko baru</p>
     </div>
   </StoreCard>

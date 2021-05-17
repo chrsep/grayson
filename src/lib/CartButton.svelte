@@ -1,6 +1,5 @@
 <script>
   import Button from "$lib/Button.svelte"
-  import { XIcon, ShoppingCartIcon } from "svelte-feather-icons/src"
 
   $: active = false
 
@@ -10,7 +9,7 @@
 </script>
 
 <Button class="{buttonClass} h-10 ml-auto" on:click={toggleActive}>
-  <ShoppingCartIcon class="w-4" />
+  <img src="/icons/shopping-cart.svg" class="w-4"  alt=""/>
 </Button>
 
 <div
@@ -21,7 +20,7 @@
 >
   <div class="flex items-center">
     <Button class="m-3" on:click={toggleActive}>
-      <XIcon size="24" />
+      <img src="/icons/x.svg" class="w-4" alt=""/>
     </Button>
 
     <h1 class="ml-4 text-2xl font-black">Belanjaan-mu</h1>
