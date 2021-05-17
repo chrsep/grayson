@@ -119,7 +119,7 @@ jobs:
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm run prisma:migrate-prod
-      - run: pnpm run start &
+      - run: pnpm run dev &
       - run: "pnpm run test:wait-on"
       - run: pnpm run cy:run
       - uses: actions/upload-artifact@v2
