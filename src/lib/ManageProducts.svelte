@@ -14,7 +14,7 @@
   <div class="p-3 flex">
     <TextField placeholder="Cari produk" />
     <a href={newProduct}>
-      <Button class="flex-shrink-0 ml-3">
+      <Button class="flex-shrink-0 ml-3 px-6">
         <img src="/icons/plus.svg" class="mr-2 w-4" alt="" />
         Produk
       </Button>
@@ -28,7 +28,7 @@
         <h3 class="text-center font-black text-2xl opacity-70 mb-4">Buat produk pertama anda</h3>
         <a href={newProduct}>
           <Button primary class="mx-auto">
-            <img src="/icons/plus.svg" class="mr-2 w-4" alt="" />
+            <img src="/icons/plus-white.svg" class="mr-2 w-4" alt="" />
             Tambah produk
           </Button>
         </a>
