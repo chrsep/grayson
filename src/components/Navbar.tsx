@@ -1,5 +1,6 @@
-import { FC, Fragment } from "react"
+import React, { FC, Fragment } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
+import Icon from "@components/Icon"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ")
@@ -22,11 +23,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
               {/* Mobile menu button */}
               <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                 <span className="sr-only">Open main menu</span>
-                {open ? (
-                  <img src="/icons/x.svg" className="block h-6 w-6" aria-hidden="true" alt="" />
-                ) : (
-                  <img src="/icons/menu.svg" className="block h-6 w-6" aria-hidden="true" alt="" />
-                )}
+                {open ? <Icon src="/icons/x-light.svg" /> : <Icon src="/icons/menu-light.svg" />}
               </Disclosure.Button>
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
