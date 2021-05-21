@@ -1,4 +1,3 @@
-// next.config.js
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withPreact = require("next-plugin-preact")
 
