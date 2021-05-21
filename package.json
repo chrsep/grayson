@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "prisma:generate": "prisma generate",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint --fix **.{ts,tsx}"
   },
   "dependencies": {
     "@prisma/client": "2.23.0",
