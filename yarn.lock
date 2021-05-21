@@ -103,6 +103,11 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
   integrity sha512-sqKVVVOe5ivCaXDWivIJYVSaEgdQK9ul7a4Kity5Iw7u9+wBAPbX1RMSnLLmp7O4Vzj0WOWwMAJsTL00xwaNug==
 
+"@headlessui/react@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.2.0.tgz#e48652bfce82ddf73d7f331faeb9db6526ee6874"
+  integrity sha512-19DkLz8gDgbi+WvkoTzi9vs0NK9TJf94vbYhMzB4LYJo03Kili0gmvXT9CiKZoxXZ7YAvy/b1U1oQKEnjWrqxw==
+
 "@mapbox/node-pre-gyp@^1.0.1":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.5.tgz#2a0b32fcb416fb3f2250fd24cb2a81421a4f5950"
@@ -209,6 +214,11 @@
   resolved "https://registry.yarnpkg.com/@phc/format/-/format-1.0.0.tgz#b5627003b3216dc4362125b13f48a4daa76680e4"
   integrity sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==
 
+"@preact/compat@^0.0.4", "react-dom@npm:@preact/compat", "react@npm:@preact/compat":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@preact/compat/-/compat-0.0.4.tgz#f329e41caa330199eaf779c9bc9cf9556e3984a0"
+  integrity sha512-NdazvKTisqbua54srMCVGuPwae53SM3u85yxrTymT+eJnScJOIAybDEzyOcAOpJsvo6vnGOiSyxmID7rlGw3nw==
+
 "@prefresh/babel-plugin@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@prefresh/babel-plugin/-/babel-plugin-0.4.1.tgz#c4e843f7c5e56c15f1185979a8559c893ffb4a35"
@@ -219,7 +229,7 @@
   resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-1.3.2.tgz#97f966759b16e5f4c52361972e3c61ccac9ce396"
   integrity sha512-Iv+uI698KDgWsrKpLvOgN3hmAMyvhVgn09mcnhZ98BUNdg/qrxE7tcUf5yFCImkgqED5/Dcn8G5hFy4IikEDvg==
 
-"@prefresh/next@^1.4.0":
+"@prefresh/next@^1.4.6":
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/@prefresh/next/-/next-1.4.6.tgz#1ec73696ba6fd39aaac8db506c506fcd29aa5f31"
   integrity sha512-MyE+3pTrpv1yw/wkEkdCt/5GklCnRkbeKneSyt8tEn3L9YaRm9K88slgZ5b3fp9qnWaSaFk3gmfM8YoIGkkefQ==
@@ -238,6 +248,14 @@
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/@prefresh/webpack/-/webpack-3.2.3.tgz#58b8804e62f28d8eb3959df61b5ff9824b70d057"
   integrity sha512-ZM8WoItC4KvcjRQ9UQG5WrRMYEucIFVwjDZPorliPFkbIzcl0kHTkTlV6j6RhTaZoU8Ehxs7JA0Jid8FXLj3ow==
+  dependencies:
+    "@prefresh/core" "^1.3.1"
+    "@prefresh/utils" "^1.1.0"
+
+"@prefresh/webpack@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@prefresh/webpack/-/webpack-3.3.0.tgz#ee9b485d5a0587dbe8e25b8c6e89a8987b3f8376"
+  integrity sha512-ZBfG4a132weavKLUNPVuiGqBaI79fizaYx3v3zEmydV4on6gBGsI2zFHLh6sAaUkSWyXYCffAolni7k1L2It8w==
   dependencies:
     "@prefresh/core" "^1.3.1"
     "@prefresh/utils" "^1.1.0"
@@ -2859,7 +2877,7 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-next-auth@3.23.2:
+next-auth@^3.23.2:
   version "3.23.2"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.23.2.tgz#48f8e933062b035d2f3afe2016ce19090a30d61c"
   integrity sha512-VsvXugL/6ZdyhZguH9CO01U7fuijxnYyk8zHABKnId0sPLPKVwyzOFaweapAzD927GZUgDWyDp6NoQnqoY8H3w==
@@ -2877,12 +2895,13 @@ next-auth@3.23.2:
     preact-render-to-string "^5.1.14"
     querystring "^0.2.0"
 
-next-plugin-preact@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/next-plugin-preact/-/next-plugin-preact-3.0.4.tgz#1688671f0f6c09951a92eeb7a17fcfba5bf6f08d"
-  integrity sha512-zdzEnZC6kmPiCe/iE4yNA033Ejjsw7dEznyLEwCY1XfPTyeLsNtqKD+Pz1Wno5vNsCg2JbbVHAFzMFLUCiSFMw==
+next-plugin-preact@3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/next-plugin-preact/-/next-plugin-preact-3.0.6.tgz#22d566e8e5d50cb4cfc78360d367df44d6aaf94f"
+  integrity sha512-Ze8c8h0jaCPbG0X9T5jJpSDtrfvU9NLlt+DJWtxOu2fn6qPbNU3s61F1hTcldZb3IbpXkp5iGnhPCdgGZEGrCQ==
   dependencies:
-    "@prefresh/next" "^1.4.0"
+    "@prefresh/next" "^1.4.6"
+    "@prefresh/webpack" "^3.3.0"
     module-alias "^2.0.0"
 
 next@10.2.2:
@@ -3466,14 +3485,14 @@ postcss@8.2.13:
     nanoid "^3.1.22"
     source-map "^0.6.1"
 
-postcss@8.2.15, postcss@^8.1.6, postcss@^8.2.1:
-  version "8.2.15"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.15.tgz#9e66ccf07292817d226fc315cbbf9bc148fbca65"
-  integrity sha512-2zO3b26eJD/8rb106Qu2o7Qgg52ND5HPjcyQiK2B98O388h43A448LCslC0dI2P97wCAQRJsFvwTRcXxTKds+Q==
+postcss@8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.0.tgz#b1a713f6172ca427e3f05ef1303de8b65683325f"
+  integrity sha512-+ogXpdAjWGa+fdYY5BQ96V/6tAo+TdSSIMP5huJBIygdWwKtVoB5JWZ7yUd4xZ8r+8Kvvx4nyg/PQ071H4UtcQ==
   dependencies:
     colorette "^1.2.2"
     nanoid "^3.1.23"
-    source-map "^0.6.1"
+    source-map-js "^0.6.2"
 
 postcss@^6.0.9:
   version "6.0.23"
@@ -3483,6 +3502,15 @@ postcss@^6.0.9:
     chalk "^2.4.1"
     source-map "^0.6.1"
     supports-color "^5.4.0"
+
+postcss@^8.1.6, postcss@^8.2.1:
+  version "8.2.15"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.15.tgz#9e66ccf07292817d226fc315cbbf9bc148fbca65"
+  integrity sha512-2zO3b26eJD/8rb106Qu2o7Qgg52ND5HPjcyQiK2B98O388h43A448LCslC0dI2P97wCAQRJsFvwTRcXxTKds+Q==
+  dependencies:
+    colorette "^1.2.2"
+    nanoid "^3.1.23"
+    source-map "^0.6.1"
 
 preact-render-to-string@5.1.19, preact-render-to-string@^5.1.14:
   version "5.1.19"
@@ -3640,11 +3668,6 @@ raw-body@2.4.1:
     http-errors "1.7.3"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
-
-"react-dom@npm:@preact/compat", "react@npm:@preact/compat":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@preact/compat/-/compat-0.0.4.tgz#f329e41caa330199eaf779c9bc9cf9556e3984a0"
-  integrity sha512-NdazvKTisqbua54srMCVGuPwae53SM3u85yxrTymT+eJnScJOIAybDEzyOcAOpJsvo6vnGOiSyxmID7rlGw3nw==
 
 react-is@16.13.1, react-is@^16.8.1:
   version "16.13.1"
@@ -3959,6 +3982,11 @@ slugify@1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.5.3.tgz#36e009864f5476bfd5db681222643d92339c890d"
   integrity sha512-/HkjRdwPY3yHJReXu38NiusZw2+LLE2SrhkWJtmlPDB1fqFSvioYj62NkPcrKiNCgRLeGcGK7QBvr1iQwybeXw==
+
+source-map-js@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
+  integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
 
 source-map@0.7.3:
   version "0.7.3"
