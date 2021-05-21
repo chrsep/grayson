@@ -173,7 +173,7 @@ const UserProfile = () => {
               >
                 <Menu.Item>
                   {({ active }) => (
-                    <Link href="/profile">
+                    <Link href="/auth/signin">
                       <a
                         className={classNames(
                           active ? "bg-gray-100" : "",
@@ -187,15 +187,17 @@ const UserProfile = () => {
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-purple-700 font-bold"
-                      )}
-                    >
-                      Daftar
-                    </a>
+                    <Link href="/auth/signup">
+                      <a
+                        href="#"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-purple-700 font-bold"
+                        )}
+                      >
+                        Daftar
+                      </a>
+                    </Link>
                   )}
                 </Menu.Item>
               </Menu.Items>

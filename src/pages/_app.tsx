@@ -21,10 +21,11 @@ function useGetNavigation() {
 
 function Grayson({ Component, pageProps }: AppProps) {
   const navigation = useGetNavigation()
+  const router = useRouter()
 
   return (
     <Provider session={pageProps.session}>
-      <Navbar navigation={navigation} />
+      {!router.asPath.startsWith("/auth") && <Navbar navigation={navigation} />}
       <Component {...pageProps} />
     </Provider>
   )
