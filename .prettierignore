@@ -1,4 +1,2 @@
-.svelte/**
-static/**
-build/**
+.next/**
 node_modules/**

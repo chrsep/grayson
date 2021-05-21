@@ -1,28 +1,24 @@
 FROM node:16 as builder
-RUN npm i -g pnpm
 
 WORKDIR /usr/src
 
 # Install dependencies
-COPY .npmrc .
-COPY pnpm-lock.yaml .
+COPY yarn.lock .
 COPY package.json .
-RUN pnpm i --prod
+RUN yarn
 
 # Copy config files
 COPY postcss.config.cjs .
 COPY tailwind.config.cjs .
-COPY svelte.config.js .
 COPY tsconfig.json .
 
 # Build prisma
 COPY prisma prisma
-RUN pnpm run prisma:generate
+RUN yarn run prisma:generate
 
-# Build sveltekit
-COPY src src
-COPY static static
-RUN pnpm run build
+# Build next
+COPY . .
+RUN yarn run build
 
 FROM node:16
 WORKDIR /usr/src
