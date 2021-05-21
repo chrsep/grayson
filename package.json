@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "prisma migrate deploy && next start",
     "prisma:generate": "prisma generate",
     "prepare": "husky install",
     "lint": "eslint --fix **.{ts,tsx}"
