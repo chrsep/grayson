@@ -8,7 +8,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="text-white">asdfasdfsatrest</main>
+      <main>sdaf</main>
 
       <footer />
     </div>
