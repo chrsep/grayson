@@ -28,18 +28,11 @@ model Product {
   id          String @id @default(cuid())
   name        String @default("")
   description String @default("")
-  tags        Tag[]
   slug        String @unique
   price       Int    @default(0)
 
   store   Store  @relation(fields: [storeId], references: [id])
   storeId String
-}
-
-model Tag {
-  slug     String    @id
-  name     String    @unique @default("")
-  products Product[]
 }
 
 model Account {
