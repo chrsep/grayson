@@ -105,17 +105,6 @@ const SignIn = () => (
                 value=""
               />
 
-              <TextField
-                id="password"
-                containerClassName="space-y-1"
-                label="Password"
-                autocomplete="password"
-                name="password"
-                type="password"
-                onChange={() => {}}
-                value=""
-              />
-
               <div className="flex items-center justify-between">
                 <Checkbox
                   id="remember_me"

@@ -5,10 +5,8 @@ import Link from "next/link"
 import { useSession } from "next-auth/client"
 import LogoFull from "@components/LogoFull"
 import LogoStandalone from "@components/LogoStandalone"
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ")
-}
+import Button from "@components/Button"
+import { classNames } from "@lib/ui"
 
 interface Props {
   navigation: Array<{
@@ -90,24 +88,30 @@ const Navbar: FC<Props> = ({ navigation }) => (
 const UserProfile = () => {
   const [session, loading] = useSession()
 
-  const isLoggedIn = !loading && session
-  const profileImage = isLoggedIn
-    ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-    : "/icons/user-circle-light.svg"
+  if (loading) {
+    return <div />
+  }
+
+  if (!loading || !session) {
+    return (
+      <Link href="/auth/signin">
+        <Button>Masuk</Button>
+      </Link>
+    )
+  }
 
   return (
     <Menu as="div" className="ml-3 relative">
       {({ open }) => (
         <>
           <div>
-            <Menu.Button
-              className={classNames(
-                "bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white",
-                !isLoggedIn && "opacity-90"
-              )}
-            >
+            <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span className="sr-only">Open user menu</span>
-              <img className="h-8 w-8 rounded-full" src={profileImage} alt="" />
+              <img
+                className="h-8 w-8 rounded-full"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt=""
+              />
             </Menu.Button>
           </div>
           <Transition
@@ -120,88 +124,51 @@ const UserProfile = () => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            {isLoggedIn ? (
-              <Menu.Items
-                static
-                className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link href="/profile">
-                      <a
-                        className={classNames(
-                          active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
-                        )}
-                      >
-                        Your Profile
-                      </a>
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
+            <Menu.Items
+              static
+              className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            >
+              <Menu.Item>
+                {({ active }) => (
+                  <Link href="/profile">
                     <a
-                      href="#"
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
                       )}
                     >
-                      Settings
+                      Your Profile
                     </a>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <a
-                      href="/api/auth/signout"
-                      className={classNames(
-                        active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-gray-700"
-                      )}
-                    >
-                      Sign out
-                    </a>
-                  )}
-                </Menu.Item>
-              </Menu.Items>
-            ) : (
-              <Menu.Items
-                static
-                className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link href="/auth/signin">
-                      <a
-                        className={classNames(
-                          active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
-                        )}
-                      >
-                        Masuk
-                      </a>
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link href="/auth/signup">
-                      <a
-                        href="#"
-                        className={classNames(
-                          active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-purple-700 font-bold"
-                        )}
-                      >
-                        Daftar
-                      </a>
-                    </Link>
-                  )}
-                </Menu.Item>
-              </Menu.Items>
-            )}
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <a
+                    href="#"
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "block px-4 py-2 text-sm text-gray-700"
+                    )}
+                  >
+                    Settings
+                  </a>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <a
+                    href="/api/auth/signout"
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "block px-4 py-2 text-sm text-gray-700"
+                    )}
+                  >
+                    Sign out
+                  </a>
+                )}
+              </Menu.Item>
+            </Menu.Items>
           </Transition>
         </>
       )}
