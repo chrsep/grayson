@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "prisma migrate deploy && next build",
     "start": "prisma migrate deploy && next start",
     "prisma:generate": "prisma generate",
     "prepare": "husky install",
