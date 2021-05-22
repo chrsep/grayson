@@ -1,17 +1,14 @@
 import Prisma from "@prisma/client"
 import slugify from "slugify"
-import argon2 from "argon2"
 import { nanoid } from "nanoid"
 
 const prisma = new Prisma.PrismaClient()
 
 async function main() {
-  const password = await argon2.hash("test")
   const user = await prisma.user.create({
     data: {
       name: "Chris",
-      email: "hi@chrsep.dev",
-      password
+      email: "hi@chrsep.dev"
     }
   })
 
