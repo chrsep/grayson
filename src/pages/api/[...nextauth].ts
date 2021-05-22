@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
+import Adapters from "next-auth/adapters"
 import Providers from "next-auth/providers"
+import db from "../../lib/db"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -41,6 +43,7 @@ export default NextAuth({
       clientSecret: process.env.TWITTER_SECRET
     })
   ],
+  adapter: Adapters.Prisma.Adapter({ prisma: db }),
   database: process.env.DATABASE_URL,
 
   // The secret should be set to a reasonably long random string.
