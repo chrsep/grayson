@@ -12,14 +12,14 @@
     "lint": "eslint --fix **.{ts,tsx}"
   },
   "dependencies": {
-    "@headlessui/react": "^1.2.0",
-    "@preact/compat": "^0.0.4",
+    "@headlessui/react": "1.2.0",
+    "@preact/compat": "0.0.4",
     "@prisma/client": "2.23.0",
     "@types/react": "17.0.6",
     "argon2": "0.27.2",
     "nanoid": "3.1.23",
     "next": "10.2.2",
-    "next-auth": "^3.23.2",
+    "next-auth": "3.23.2",
     "next-plugin-preact": "3.0.6",
     "preact": "10.5.13",
     "preact-render-to-string": "5.1.19",
