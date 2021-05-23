@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import Adapters from "next-auth/adapters"
 import Providers from "next-auth/providers"
-import db from "../../lib/db"
+import db from "@lib/db"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
