@@ -9,7 +9,14 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
     Providers.Email({
-      server: process.env.EMAIL_SERVER,
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: parseInt(process.env.EMAIL_SERVER_PORT, 10),
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
+      },
       from: process.env.EMAIL_FROM
     }),
     Providers.Apple({
@@ -21,18 +28,9 @@ export default NextAuth({
         keyId: process.env.APPLE_KEY_ID
       }
     }),
-    Providers.Auth0({
-      clientId: process.env.AUTH0_ID,
-      clientSecret: process.env.AUTH0_SECRET,
-      domain: process.env.AUTH0_DOMAIN
-    }),
     Providers.Facebook({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET
-    }),
-    Providers.GitHub({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET
     }),
     Providers.Google({
       clientId: process.env.GOOGLE_ID,
