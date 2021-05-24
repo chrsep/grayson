@@ -8,8 +8,6 @@ import { useState } from "react"
 import { signIn } from "next-auth/client"
 
 const SignIn = () => {
-  const [email, setEmail] = useState("")
-
   return (
     <div className="min-h-screen bg-white flex">
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -63,44 +61,7 @@ const SignIn = () => {
             {/*  </div> */}
             {/* </div> */}
 
-            <div className="mt-6">
-              <form
-                action="#"
-                method="POST"
-                className="space-y-6"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  signIn("email", { email })
-                }}
-              >
-                <TextField
-                  id="email"
-                  label="Alamat email"
-                  autocomplete="email"
-                  name="email"
-                  type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  value={email}
-                />
-
-                <div className="flex items-center justify-between">
-                  <Checkbox
-                    id="remember_me"
-                    name="remember_me"
-                    label="Ingat saya"
-                    onChange={() => {}}
-                    checked={false}
-                  />
-                </div>
-
-                <Button type="submit">Masuk</Button>
-
-                <div className="text-sm text-center">
-                  Belum punya akun? <Link href="/auth/signup">Daftar sekarang</Link>
-                </div>
-              </form>
-            </div>
+            <EmailLogin />
           </div>
         </div>
       </div>
@@ -114,6 +75,63 @@ const SignIn = () => {
           objectFit="cover"
         />
       </div>
+    </div>
+  )
+}
+
+const EmailLogin = () => {
+  const [email, setEmail] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  return (
+    <div className="mt-6">
+      <form
+        action="#"
+        method="POST"
+        className="space-y-6"
+        onSubmit={async (e) => {
+          e.preventDefault()
+          setLoading(true)
+          await signIn("email", { email, redirect: false })
+          setLoading(false)
+        }}
+      >
+        <TextField
+          id="email"
+          label="Alamat email"
+          autocomplete="email"
+          name="email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          value={email}
+        />
+
+        <div className="flex items-center justify-between">
+          <Checkbox
+            id="remember_me"
+            name="remember_me"
+            label="Ingat saya"
+            onChange={() => {}}
+            checked={false}
+          />
+        </div>
+
+        <Button type="submit" className="flex items-center">
+          <img
+            src="/icons/spinner.svg"
+            className={`${
+              loading ? "w-4 h-4" : "w-0 h-0 "
+            } mr-2 animate-spin transition-all ease-in-out`}
+            alt=""
+          />
+          Masuk
+        </Button>
+
+        <div className="text-sm text-center">
+          Belum punya akun? <Link href="/auth/signup">Daftar sekarang</Link>
+        </div>
+      </form>
     </div>
   )
 }
