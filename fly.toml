@@ -1,6 +1,6 @@
-# fly.toml file generated for aged-field-8615 on 2021-05-15T18:30:58+07:00
+# fly.toml file generated for grayson on 2021-05-24T16:08:59+07:00
 
-app = "aged-field-8615"
+app = "grayson"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
