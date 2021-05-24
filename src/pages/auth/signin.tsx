@@ -27,46 +27,29 @@ const SignIn = () => {
                 <p className="text-sm font-medium text-gray-700">Masuk dengan</p>
 
                 <div className="mt-1 grid grid-cols-3 gap-3">
-                  <div>
-                    <a
-                      href="#"
-                      className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 flex"
-                    >
-                      <span className="sr-only">Masuk dengan facebook</span>
-                      <img
-                        src="/icons/brand-facebook.svg"
-                        className="opacity-40 mr-2"
-                        alt="facebook"
-                      />
-                      Facebook
-                    </a>
-                  </div>
+                  <button
+                    type="button"
+                    className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 flex"
+                    onClick={() => signIn("facebook")}
+                  >
+                    Facebook
+                  </button>
 
-                  <div>
-                    <a
-                      href="#"
-                      className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                    >
-                      <span className="sr-only">Masuk dengan Twitter</span>
-                      <img src="/icons/brand-google.svg" className="opacity-40 mr-2" alt="google" />
-                      Google
-                    </a>
-                  </div>
+                  <button
+                    type="button"
+                    className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    onClick={() => signIn("google")}
+                  >
+                    Google
+                  </button>
 
-                  <div>
-                    <a
-                      href="#"
-                      className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                    >
-                      <span className="sr-only">Masuk dengan GitHub</span>
-                      <img
-                        src="/icons/brand-twitter.svg"
-                        className="opacity-40 mr-2"
-                        alt="twitter"
-                      />
-                      Twitter
-                    </a>
-                  </div>
+                  <button
+                    type="button"
+                    className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    onClick={() => signIn("twitter")}
+                  >
+                    Twitter
+                  </button>
                 </div>
               </div>
 
