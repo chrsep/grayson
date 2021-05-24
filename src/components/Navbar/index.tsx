@@ -2,7 +2,7 @@ import React, { FC, Fragment } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import Icon from "@components/Icon"
 import Link from "next/link"
-import { useSession } from "next-auth/client"
+import { signout, useSession } from "next-auth/client"
 import LogoFull from "@components/LogoFull"
 import LogoStandalone from "@components/LogoStandalone"
 import Button from "@components/Button"
@@ -92,7 +92,7 @@ const UserProfile = () => {
     return <div />
   }
 
-  if (!loading || !session) {
+  if (!session?.user?.email) {
     return (
       <Link href="/auth/signin">
         <Button>Masuk</Button>
@@ -157,15 +157,16 @@ const UserProfile = () => {
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <a
-                    href="/api/auth/signout"
+                  <button
+                    type="button"
+                    onClick={() => signout()}
                     className={classNames(
                       active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-gray-700"
+                      "block px-4 py-2 text-sm text-gray-700 !text-left w-full"
                     )}
                   >
                     Sign out
-                  </a>
+                  </button>
                 )}
               </Menu.Item>
             </Menu.Items>

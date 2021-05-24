@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "tailwindcss/tailwind.css"
 import { AppProps } from "next/app"
-import { Provider } from "next-auth/client"
+import { getSession, Provider } from "next-auth/client"
 import Navbar from "@components/Navbar"
 import { useRouter } from "next/router"
 import categories from "../lib/categories"
@@ -29,6 +29,14 @@ function Grayson({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </Provider>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  return {
+    props: {
+      session: await getSession(ctx)
+    }
+  }
 }
 
 export default Grayson
