@@ -105,9 +105,11 @@ const EmailLogin = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
           value={email}
+          iconSrc="/icons/mail.svg"
+          placeholder="jessica@hey.com"
         />
 
-        <Button type="submit" className="flex items-center">
+        <Button type="submit" className="flex items-center w-full">
           <img
             src="/icons/spinner.svg"
             className={`${
