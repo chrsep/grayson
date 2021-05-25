@@ -92,7 +92,7 @@ const EmailLogin = () => {
         onSubmit={async (e) => {
           e.preventDefault()
           setLoading(true)
-          await signIn("email", { email, redirect: false })
+          await signIn("email", { email })
           setLoading(false)
         }}
       >
@@ -106,16 +106,6 @@ const EmailLogin = () => {
           required
           value={email}
         />
-
-        <div className="flex items-center justify-between">
-          <Checkbox
-            id="remember_me"
-            name="remember_me"
-            label="Ingat saya"
-            onChange={() => {}}
-            checked={false}
-          />
-        </div>
 
         <Button type="submit" className="flex items-center">
           <img
