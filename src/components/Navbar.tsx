@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from "react"
+import React, { FC, Fragment, useState } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import Icon from "@components/Icon"
 import Link from "next/link"
@@ -7,6 +7,7 @@ import LogoFull from "@components/LogoFull"
 import LogoStandalone from "@components/LogoStandalone"
 import Button from "@components/Button"
 import { classNames } from "@lib/ui"
+import CartSlideOver from "@components/CartSlideOver"
 
 interface Props {
   navigation: Array<{
@@ -27,11 +28,11 @@ const Navbar: FC<Props> = ({ navigation }) => (
                 <span className="sr-only">Open main menu</span>
                 {open ? <Icon src="/icons/x-light.svg" /> : <Icon src="/icons/menu-light.svg" />}
               </Disclosure.Button>
+              <LogoStandalone className="block lg:hidden h-8 w-auto ml-4" />
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Link href="/">
                 <a className="flex-shrink-0 flex items-center">
-                  <LogoStandalone className="block lg:hidden h-8 w-auto" />
                   <LogoFull className="hidden lg:block h-8 w-auto" />
                 </a>
               </Link>
@@ -56,6 +57,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <Cart />
               <UserProfile />
             </div>
           </div>
@@ -174,6 +176,19 @@ const UserProfile = () => {
         </>
       )}
     </Menu>
+  )
+}
+
+const Cart = () => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Button variant="icon" className="mr-2" onClick={() => setOpen(!open)}>
+        <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2" alt="keranjang anda" />
+      </Button>
+      <CartSlideOver open={open} setOpen={setOpen} />
+    </>
   )
 }
 
