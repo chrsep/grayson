@@ -187,8 +187,12 @@ const Cart = () => {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <Button variant="icon" className="mr-4" onClick={() => setOpen(!open)}>
-        <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2" alt="keranjang anda" />
+      <Button
+        variant="icon"
+        className="mr-4 opacity-70 hover:opacity-100 transition-opacity"
+        onClick={() => setOpen(!open)}
+      >
+        <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
     </>
