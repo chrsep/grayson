@@ -18,7 +18,7 @@ interface Props {
   }>
 }
 const Navbar: FC<Props> = ({ navigation }) => (
-  <Disclosure as="nav" className="bg-gray-800">
+  <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-30">
     {({ open }) => (
       <>
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -151,17 +151,17 @@ const UserProfile = () => {
                   )}
                 </Menu.Item>
               </Link>
-              <Link href="/me/products">
+              <Link href="/me/stores">
                 <Menu.Item>
                   {({ active }) => (
                     <a
-                      href="/me/products"
+                      href="/me/stores"
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
                       )}
                     >
-                      Produk anda
+                      Toko anda
                     </a>
                   )}
                 </Menu.Item>

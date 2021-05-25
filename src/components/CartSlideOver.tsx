@@ -10,7 +10,7 @@ interface Props {
 
 const Example: FC<Props> = ({ open, setOpen }) => (
   <Transition.Root show={open} as={Fragment}>
-    <Dialog as="div" static className="fixed inset-0 overflow-hidden" open={open} onClose={setOpen}>
+    <Dialog as="div" static className="fixed inset-0 overflow-hidden z-40" open={open} onClose={setOpen}>
       <div className="absolute inset-0 overflow-hidden">
         <Dialog.Overlay className="absolute inset-0" />
 

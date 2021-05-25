@@ -4,7 +4,7 @@ import Divider from "@components/Divider"
 import TextField from "@components/TextField"
 import Textarea from "@components/Textarea"
 
-export default function Home() {
+const Profile = () => {
   return (
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
       <div className="px-4 sm:px-0 mt-2 md:flex md:items-center md:justify-between">
@@ -47,6 +47,19 @@ const PersonalInfoForm = () => (
                 name="name"
                 type="text"
                 containerClassName="max-w-md"
+              />
+
+              <TextField
+                id="email_address"
+                label="Alamat email"
+                value=""
+                onChange={() => {}}
+                autocomplete="email"
+                name="email_address"
+                type="text"
+                containerClassName="col-span-6 sm:col-span-4"
+                iconSrc="/icons/mail.svg"
+                placeholder="jessica@hey.com"
               />
 
               <Textarea
@@ -108,19 +121,6 @@ const ContactForm = () => (
           <div className="shadow overflow-hidden sm:rounded-md">
             <div className="px-4 py-5 bg-white sm:p-6">
               <div className="grid grid-cols-6 gap-6">
-                <TextField
-                  id="email_address"
-                  label="Alamat email"
-                  value=""
-                  onChange={() => {}}
-                  autocomplete="email"
-                  name="email_address"
-                  type="text"
-                  containerClassName="col-span-6 sm:col-span-4"
-                  iconSrc="/icons/mail.svg"
-                  placeholder="jessica@hey.com"
-                />
-
                 <TextField
                   label="Nomor telefon"
                   value=""
@@ -200,3 +200,5 @@ const ContactForm = () => (
     </div>
   </div>
 )
+
+export default Profile

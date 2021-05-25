@@ -21,7 +21,7 @@ const VerifyRequest = () => (
       </div>
 
       <Link href="/auth/signin">
-        <Button>Kembali</Button>
+        <Button className="w-full">Kembali</Button>
       </Link>
     </div>
 
