@@ -8,6 +8,7 @@ import LogoStandalone from "@components/LogoStandalone"
 import Button from "@components/Button"
 import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
+import Image from "next/image"
 
 interface Props {
   navigation: Array<{
@@ -30,9 +31,11 @@ const Navbar: FC<Props> = ({ navigation }) => (
               </Disclosure.Button>
               <LogoStandalone className="block lg:hidden h-8 w-auto ml-4" />
             </div>
+
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Link href="/">
                 <a className="flex-shrink-0 flex items-center">
+                  <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto ml-4" />
                   <LogoFull className="hidden lg:block h-8 w-auto" />
                 </a>
               </Link>
@@ -109,9 +112,11 @@ const UserProfile = () => {
           <div>
             <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span className="sr-only">Open user menu</span>
-              <img
+              <Image
+                width={32}
+                height={32}
                 className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src={session.user.image || "/icons/user-circle-light.svg"}
                 alt=""
               />
             </Menu.Button>
@@ -189,7 +194,7 @@ const Cart = () => {
     <>
       <Button
         variant="icon"
-        className="mr-4 opacity-70 hover:opacity-100 transition-opacity"
+        className="mr-4 opacity-80 hover:opacity-100 transition-opacity"
         onClick={() => setOpen(!open)}
       >
         <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />

@@ -4,17 +4,16 @@ interface Props {
   id: string
   label: string
   value: string
-  onChange: ChangeEventHandler<HTMLInputElement>
+  onChange: ChangeEventHandler<HTMLTextAreaElement>
   name: string
-  type: string
   autocomplete?: string
   containerClassName?: string
   required?: boolean
-  iconSrc?: string
   placeholder?: string
+  rows?: number
 }
 
-const TextField: FC<Props> = ({
+const Textarea: FC<Props> = ({
   containerClassName,
   label,
   id,
@@ -23,9 +22,8 @@ const TextField: FC<Props> = ({
   autocomplete,
   value,
   name,
-  type,
-  iconSrc,
-  placeholder
+  placeholder,
+  rows
 }) => {
   return (
     <div className={`${containerClassName}`}>
@@ -33,32 +31,20 @@ const TextField: FC<Props> = ({
         {label}
       </label>
       <div className="mt-1 rounded-md shadow-sm relative">
-        {iconSrc && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <img
-              src={iconSrc}
-              className="h-5 w-5 text-gray-400 opacity-70"
-              aria-hidden="true"
-              alt=""
-            />
-          </div>
-        )}
-        <input
+        <textarea
           id={id}
           name={name}
-          type={type}
           autoComplete={autocomplete}
           required={required}
           onChange={onChange}
           value={value}
           placeholder={placeholder}
-          className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full ${
-            iconSrc ? "pl-10" : ""
-          } sm:text-sm border-gray-300 rounded-md`}
+          rows={rows}
+          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
         />
       </div>
     </div>
   )
 }
 
-export default TextField
+export default Textarea
