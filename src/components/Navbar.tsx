@@ -91,7 +91,7 @@ const UserProfile = () => {
   const [session, loading] = useSession()
 
   if (loading) {
-    return <div />
+    return <div className="w-[32px] h-[32px]" />
   }
 
   if (!session?.user?.email) {
@@ -103,7 +103,7 @@ const UserProfile = () => {
   }
 
   return (
-    <Menu as="div" className="ml-3 relative">
+    <Menu as="div" className="relative">
       {({ open }) => (
         <>
           <div>
@@ -116,6 +116,7 @@ const UserProfile = () => {
               />
             </Menu.Button>
           </div>
+
           <Transition
             show={open}
             as={Fragment}
@@ -130,33 +131,36 @@ const UserProfile = () => {
               static
               className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
-              <Menu.Item>
-                {({ active }) => (
-                  <Link href="/profile">
+              <Link href="/me/profile">
+                <Menu.Item>
+                  {({ active }) => (
                     <a
+                      href="/me/profile"
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
                       )}
                     >
-                      Your Profile
+                      Profil anda
                     </a>
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-gray-700"
-                    )}
-                  >
-                    Settings
-                  </a>
-                )}
-              </Menu.Item>
+                  )}
+                </Menu.Item>
+              </Link>
+              <Link href="/me/products">
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      href="/me/products"
+                      className={classNames(
+                        active ? "bg-gray-100" : "",
+                        "block px-4 py-2 text-sm text-gray-700"
+                      )}
+                    >
+                      Produk anda
+                    </a>
+                  )}
+                </Menu.Item>
+              </Link>
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -167,7 +171,7 @@ const UserProfile = () => {
                       "block px-4 py-2 text-sm text-gray-700 !text-left w-full"
                     )}
                   >
-                    Sign out
+                    Keluar
                   </button>
                 )}
               </Menu.Item>
@@ -181,10 +185,9 @@ const UserProfile = () => {
 
 const Cart = () => {
   const [open, setOpen] = useState(false)
-
   return (
     <>
-      <Button variant="icon" className="mr-2" onClick={() => setOpen(!open)}>
+      <Button variant="icon" className="mr-4" onClick={() => setOpen(!open)}>
         <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2" alt="keranjang anda" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
