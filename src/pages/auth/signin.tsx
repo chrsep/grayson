@@ -6,6 +6,8 @@ import Button from "@components/Button"
 import Link from "@components/Link"
 import { useState } from "react"
 import { signIn } from "next-auth/client"
+import { useRouter } from "next/router"
+import useEmailSignIn from "@hooks/useSignIn"
 
 const SignIn = () => {
   return (
@@ -81,7 +83,7 @@ const SignIn = () => {
 
 const EmailLogin = () => {
   const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
+  const { loading, signIn } = useEmailSignIn()
 
   return (
     <div className="mt-6">
@@ -91,9 +93,7 @@ const EmailLogin = () => {
         className="space-y-6"
         onSubmit={async (e) => {
           e.preventDefault()
-          setLoading(true)
-          await signIn("email", { email })
-          setLoading(false)
+          await signIn(email)
         }}
       >
         <TextField
