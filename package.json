@@ -54,6 +54,6 @@
     "webpack": "5.37.1"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.{js,ts,ts}": "eslint --cache --fix"
   }
 }
