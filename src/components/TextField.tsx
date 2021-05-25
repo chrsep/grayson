@@ -1,10 +1,10 @@
-import { ChangeEventHandler, FC } from "react"
+import { ChangeEventHandler, forwardRef, ForwardRefRenderFunction } from "react"
 
 interface Props {
   id: string
   label: string
-  value: string
-  onChange: ChangeEventHandler<HTMLInputElement>
+  value?: string
+  onChange?: ChangeEventHandler<HTMLInputElement>
   name: string
   type: string
   autocomplete?: string
@@ -14,19 +14,22 @@ interface Props {
   placeholder?: string
 }
 
-const TextField: FC<Props> = ({
-  containerClassName,
-  label,
-  id,
-  required,
-  onChange,
-  autocomplete,
-  value,
-  name,
-  type,
-  iconSrc,
-  placeholder
-}) => {
+const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
+  {
+    containerClassName,
+    label,
+    id,
+    required,
+    onChange,
+    autocomplete,
+    value,
+    name,
+    type,
+    iconSrc,
+    placeholder
+  },
+  ref
+) => {
   return (
     <div className={`${containerClassName}`}>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
@@ -52,6 +55,7 @@ const TextField: FC<Props> = ({
           onChange={onChange}
           value={value}
           placeholder={placeholder}
+          ref={ref}
           className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full ${
             iconSrc ? "pl-10" : ""
           } sm:text-sm border-gray-300 rounded-md`}
@@ -61,4 +65,4 @@ const TextField: FC<Props> = ({
   )
 }
 
-export default TextField
+export default forwardRef(TextField)

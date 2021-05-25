@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC } from "react"
+import { ChangeEventHandler, FC, forwardRef, ForwardRefRenderFunction } from "react"
 
 interface Props {
   id: string
@@ -13,18 +13,21 @@ interface Props {
   rows?: number
 }
 
-const Textarea: FC<Props> = ({
-  containerClassName,
-  label,
-  id,
-  required,
-  onChange,
-  autocomplete,
-  value,
-  name,
-  placeholder,
-  rows
-}) => {
+const Textarea: ForwardRefRenderFunction<HTMLTextAreaElement, Props> = (
+  {
+    containerClassName,
+    label,
+    id,
+    required,
+    onChange,
+    autocomplete,
+    value,
+    name,
+    placeholder,
+    rows
+  },
+  ref
+) => {
   return (
     <div className={`${containerClassName}`}>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
@@ -40,6 +43,7 @@ const Textarea: FC<Props> = ({
           value={value}
           placeholder={placeholder}
           rows={rows}
+          ref={ref}
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
         />
       </div>
@@ -47,4 +51,4 @@ const Textarea: FC<Props> = ({
   )
 }
 
-export default Textarea
+export default forwardRef(Textarea)

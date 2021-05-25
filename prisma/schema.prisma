@@ -14,11 +14,17 @@ model Store {
   id          String @id @default(cuid())
   name        String @default("")
   description String @default("")
-  address     String @default("")
   phone       String @default("")
-  slug        String @unique @default("")
-  owner       User   @relation("owner", fields: [ownerId], references: [id])
-  ownerId     Int
+  whatsapp    String @default("")
+
+  address  String @default("")
+  city     String @default("")
+  province String @default("")
+  postcode String @default("")
+
+  slug    String @unique @default("")
+  owner   User   @relation("owner", fields: [ownerId], references: [id])
+  ownerId Int
 
   users    User[]
   products Product[]

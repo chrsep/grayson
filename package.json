@@ -17,6 +17,8 @@
     "@prisma/client": "2.23.0",
     "@types/react": "17.0.6",
     "argon2": "0.27.2",
+    "fp-ts": "^2.10.5",
+    "io-ts": "^2.2.16",
     "nanoid": "3.1.23",
     "next": "10.2.2",
     "next-auth": "3.23.2",
@@ -25,9 +27,11 @@
     "preact-render-to-string": "5.1.19",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
+    "react-hook-form": "^7.6.6",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "slugify": "1.5.3",
-    "swr": "^0.5.6"
+    "swr": "^0.5.6",
+    "typanion": "^3.3.1"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "0.2.0",
