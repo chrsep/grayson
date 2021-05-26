@@ -7,9 +7,11 @@ import Button from "@components/Button"
 import Textarea from "@components/Textarea"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
+import { useRouter } from "next/router"
 
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
   const { register, handleSubmit } = useForm<PostStoreBody>()
+  const router = useRouter()
 
   const onSubmit = async (data: PostStoreBody) => {
     const result = await fetch("/api/stores", {
@@ -18,8 +20,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
       body: JSON.stringify(data)
     })
 
-    const savedStore = await result.json()
-    console.log(savedStore)
+    if (result.ok) await router.push("/me/stores")
   }
 
   return (

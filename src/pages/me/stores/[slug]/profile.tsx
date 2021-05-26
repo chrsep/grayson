@@ -4,7 +4,7 @@ import { getSession } from "next-auth/client"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import StoreAdminHeading from "@components/StoreAdminHeading"
 
-const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
+const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   tabs,
   store
@@ -35,8 +35,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
     props: {
       store,
       tabs: [
-        { name: "Produk", href: `/me/stores/${slug}`, current: true },
-        { name: "Profil toko", href: `/me/stores/${slug}/profile`, current: false }
+        { name: "Produk", href: `/me/stores/${slug}`, current: false },
+        { name: "Profil toko", href: `/me/stores/${slug}/profile`, current: true }
       ],
       breadcrumbs: [
         { name: "Toko anda", href: "/me/stores", current: false },
@@ -46,4 +46,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
   }
 }
 
-export default Store
+export default StoreProfile

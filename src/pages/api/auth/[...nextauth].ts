@@ -53,7 +53,7 @@ export default NextAuth({
   // The routes shown here are the default URLs that will be used when a custom
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
-  pages: {
+  breadcrumbs: {
     signIn: "/auth/signin", // Displays signin buttons
     // signOut: "/auth/signout", // Displays form with sign out button
     error: "/auth/error", // Error code passed in query string as ?error=

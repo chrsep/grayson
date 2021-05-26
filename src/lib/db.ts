@@ -42,4 +42,14 @@ export const insertStore = async (
   return result
 }
 
+export const findStoreBySlug = async (slug: string) => {
+  const result = await db.store.findUnique({
+    where: {
+      slug
+    }
+  })
+
+  return result
+}
+
 export default db
