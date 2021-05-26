@@ -56,8 +56,8 @@ export function newProtectedApi(handler: Handler): NextApiHandler {
 type MutationHandler<T extends Any> = (
   body: TypeOf<T>,
   session: Session,
-  res: NextApiResponse,
-  req: NextApiRequest
+  req: NextApiRequest,
+  res: NextApiResponse
 ) => Promise<{
   status: number
   body: unknown
@@ -73,7 +73,7 @@ export function newMutationHandler<T extends Any>(
     const data = JSON.parse(req.body)
 
     if (bodyValidator.is(data)) {
-      const result = await handler(data, session, res, req)
+      const result = await handler(data, session, req, res)
       res.status(result.status).json(result.body)
     } else {
       res.status(400).json({

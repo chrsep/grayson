@@ -53,7 +53,6 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                     <TextField
                       id="name"
                       label="Nama toko*"
-                      autocomplete="full-name"
                       name="name"
                       type="text"
                       containerClassName="col-span-6 sm:col-span-4"

@@ -1,4 +1,4 @@
-import { PrismaClient, Store } from "@prisma/client"
+import { PrismaClient, Product, Store } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
 
@@ -53,6 +53,23 @@ export const findStoreWithProductsBySlug = async (slug: string) => {
     },
     include: {
       products: true
+    }
+  })
+}
+
+export const insertProduct = async (
+  product: Omit<Product, "id" | "storeId" | "slug">,
+  storeSlug: string
+) => {
+  return db.product.create({
+    data: {
+      ...product,
+      slug: `${slugify(product.name)}-${nanoid(3)}`,
+      store: {
+        connect: {
+          slug: storeSlug
+        }
+      }
     }
   })
 }
