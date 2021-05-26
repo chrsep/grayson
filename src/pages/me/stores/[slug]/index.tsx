@@ -1,27 +1,9 @@
 import React from "react"
-import { findStoreBySlug } from "@lib/db"
+import { findStoreWithProductsBySlug } from "@lib/db"
 import { getSession } from "next-auth/client"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import StoreAdminHeading from "@components/StoreAdminHeading"
-import { Product } from "@prisma/client"
 import NextLink from "next/link"
-
-const products: Partial<Product>[] = [
-  {
-    id: "1",
-    name: "Jane Cooper",
-    description: "Regional Paradigm Technician",
-    price: 2000,
-    slug: "jane-cooper"
-  },
-  {
-    id: "1",
-    name: "Cody Fisher",
-    description: "Product Directives Officer",
-    price: 43000,
-    slug: "cody-fisher"
-  }
-]
 
 const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
@@ -50,27 +32,27 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Name
+                      Nama
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Description
+                      Deskripsi
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Price
+                      Harga
                     </th>
                     <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
+                      <span className="sr-only">Ubah</span>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((product, idx) => (
+                  {store.products.map((product, idx) => (
                     <NextLink href={`/me/stores/${store.slug}/products/${product.slug}`}>
                       <tr
                         key={product.id}
@@ -97,6 +79,9 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                   ))}
                 </tbody>
               </table>
+              {store.products.length === 0 && (
+                <div className="w-full text-center p-4 block">Belum ada product terpasang</div>
+              )}
             </div>
           </div>
         </div>
@@ -117,7 +102,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
   }
 
   const { slug } = context.params
-  const store = await findStoreBySlug(slug)
+  const store = await findStoreWithProductsBySlug(slug)
 
   // Pass data to the page via props
   return {
