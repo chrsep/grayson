@@ -5,15 +5,13 @@ import { newMutationHandler, newProtectedApi } from "@lib/rest"
 const PostBody = type({
   name: string,
   description: string,
-  phone: string,
-  price: number,
-  storeSlug: string
+  price: number
 })
 export type PostProductBody = TypeOf<typeof PostBody>
 
 const post = newMutationHandler(PostBody, async (data, session, { query: { slug } }) => {
   if (string.is(slug)) {
-    const store = await insertProduct(data, slug as string)
+    const store = await insertProduct(data, slug)
     return { status: 200, body: store }
   }
 

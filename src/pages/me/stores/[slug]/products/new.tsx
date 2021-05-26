@@ -8,23 +8,30 @@ import TextField from "@components/TextField"
 import Textarea from "@components/Textarea"
 import Button from "@components/Button"
 import { useForm } from "react-hook-form"
-import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
+import { PostProductBody } from "@api/stores/[slug]/products"
+import Pricefield from "@components/Pricefield"
+
+type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
 
 const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
-  breadcrumbs
+  breadcrumbs,
+  store
 }) => {
-  const { register, handleSubmit } = useForm<PostStoreBody>()
+  const { register, handleSubmit } = useForm<FormData>()
   const router = useRouter()
 
-  const onSubmit = async (data: PostStoreBody) => {
-    const result = await fetch("/api/stores", {
+  const onSubmit = async (data: FormData) => {
+    const price = parseInt(data.price, 10)
+    if (typeof price !== "number") return
+
+    const result = await fetch(`/api/stores/${store.slug}/products`, {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify(data)
+      body: JSON.stringify({ ...data, price })
     })
 
-    if (result.ok) await router.push("/me/stores")
+    if (result.ok) await router.push(`/me/stores/${store.slug}`)
   }
 
   return (
@@ -44,7 +51,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">Data produk</h3>
               <p className="mt-1 text-sm text-gray-600">
-                Berikan data kontak toko anda agar pengguna lain dapat menghubungi anda.
+                Isi data produk atau jasa yang ingin anda pasang.
               </p>
             </div>
           </div>
@@ -63,95 +70,24 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                       {...register("name")}
                     />
 
+                    <Pricefield
+                      containerClassName="col-span-6 sm:col-span-2"
+                      {...register("price")}
+                    />
+
                     <Textarea
                       id="description"
                       name="description"
                       rows={3}
-                      label="Tentang toko anda"
-                      onChange={() => {}}
-                      value=""
+                      label="Tentang produk anda"
                       containerClassName="col-span-6"
                       {...register("description")}
-                    />
-
-                    <TextField
-                      label="Nomor telefon"
-                      value=""
-                      onChange={() => {}}
-                      autocomplete="phone"
-                      id="phone_number"
-                      name="phone_number"
-                      type="text"
-                      containerClassName="col-span-6 sm:col-span-4"
-                      placeholder="+62-1234-2322-1999"
-                      iconSrc="/icons/phone.svg"
-                      {...register("phone")}
-                    />
-
-                    <TextField
-                      label="WhatsApp"
-                      value=""
-                      onChange={() => {}}
-                      autocomplete="phone"
-                      id="whatsapp"
-                      name="whatsapp"
-                      type="text"
-                      containerClassName="col-span-6 sm:col-span-4"
-                      iconSrc="/icons/brand-whatsapp.svg"
-                      placeholder="+62-1234-2322-1999"
-                      {...register("whatsapp")}
-                    />
-
-                    <TextField
-                      label="Alamat"
-                      value=""
-                      onChange={() => {}}
-                      containerClassName="col-span-6"
-                      type="text"
-                      name="street_address"
-                      id="street_address"
-                      autocomplete="street-address"
-                      {...register("address")}
-                    />
-
-                    <TextField
-                      label="Kota / Kecamatan"
-                      value=""
-                      onChange={() => {}}
-                      containerClassName="col-span-6 md:col-span-2"
-                      type="text"
-                      name="city"
-                      id="city"
-                      {...register("city")}
-                    />
-
-                    <TextField
-                      label="Provinsi"
-                      value=""
-                      onChange={() => {}}
-                      containerClassName="col-span-3 md:col-span-2"
-                      type="text"
-                      name="province"
-                      id="province"
-                      {...register("province")}
-                    />
-
-                    <TextField
-                      label="Kode Pos"
-                      value=""
-                      onChange={() => {}}
-                      containerClassName="col-span-3 md:col-span-2"
-                      type="text"
-                      name="postal_code"
-                      id="postal_code"
-                      autocomplete="postal-code"
-                      {...register("postcode")}
                     />
                   </div>
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 mr-4">
                     Data yang diperlukan ditandai dengan tanda bintang (*)
                   </p>
                   <Button type="submit" className="ml-auto">

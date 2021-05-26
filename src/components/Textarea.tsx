@@ -3,8 +3,8 @@ import { ChangeEventHandler, FC, forwardRef, ForwardRefRenderFunction } from "re
 interface Props {
   id: string
   label: string
-  value: string
-  onChange: ChangeEventHandler<HTMLTextAreaElement>
+  value?: string
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>
   name: string
   autocomplete?: string
   containerClassName?: string
