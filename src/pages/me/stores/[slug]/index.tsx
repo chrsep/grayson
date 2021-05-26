@@ -18,6 +18,7 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
           name={store.name}
           tabs={tabs}
           actionText="Tambah produk"
+          actionHref={`/me/stores/${store.slug}/products/new`}
         />
       </div>
 
@@ -112,10 +113,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
         { name: "Produk", href: `/me/stores/${slug}`, current: true },
         { name: "Profil toko", href: `/me/stores/${slug}/profile`, current: false }
       ],
-      breadcrumbs: [
-        { name: "Toko anda", href: "/me/stores", current: false },
-        { name: "Stark Industries", href: `/me/stores/${slug}`, current: true }
-      ]
+      breadcrumbs: [{ name: "Toko anda", href: "/me/stores", current: false }]
     }
   }
 }

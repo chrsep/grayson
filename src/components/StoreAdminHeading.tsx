@@ -3,14 +3,16 @@ import React, { FC } from "react"
 import { useRouter } from "next/router"
 import Breadcrumbs from "@components/Breadcrumbs"
 import Button from "@components/Button"
+import NextLink from "next/link"
 
 interface Props {
   breadcrumbs: Array<{ name: string; href: string; current: boolean }>
   tabs: Array<{ name: string; href: string; current: boolean }>
   name: string
   actionText?: string
+  actionHref?: string
 }
-const StoreAdminHeading: FC<Props> = ({ actionText, breadcrumbs, name, tabs }) => {
+const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, name, tabs }) => {
   const router = useRouter()
 
   return (
@@ -32,9 +34,8 @@ const StoreAdminHeading: FC<Props> = ({ actionText, breadcrumbs, name, tabs }) =
               name="current-tab"
               className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
               defaultValue={tabs.find((tab) => tab.current).name}
-              onChange={(e) => {
-                console.log(tabs[e.target.selectedIndex].href)
-                router.push(tabs[e.target.selectedIndex].href)
+              onChange={async (e) => {
+                await router.push(tabs[e.target.selectedIndex].href)
               }}
             >
               {tabs.map((tab) => (
@@ -44,35 +45,35 @@ const StoreAdminHeading: FC<Props> = ({ actionText, breadcrumbs, name, tabs }) =
 
             {actionText && (
               <div className="pt-4 w-full">
-                <Link href="/me" className="w-full">
+                <Link href={actionHref} className="w-full">
                   <Button className="w-full">{actionText}</Button>
                 </Link>
               </div>
             )}
           </div>
 
-          <div className="hidden sm:flex items-end">
-            <nav className="-mb-px flex space-x-8">
+          <div className="hidden sm:flex items-end h-[46px]">
+            <nav className="-mb-px flex space-x-8 ">
               {tabs.map((tab) => (
-                <Link
-                  href={tab.href}
-                  key={tab.name}
-                  className={`
+                <NextLink href={tab.href} key={tab.name}>
+                  <a
+                    className={`
                       ${
                         tab.current
                           ? "!border-indigo-600 !text-indigo-600"
                           : "hover:text-gray-700 hover:border-gray-300"
                       } border-transparent text-gray-500 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm`}
-                  aria-current={tab.current ? "page" : undefined}
-                >
-                  {tab.name}
-                </Link>
+                    aria-current={tab.current ? "page" : undefined}
+                  >
+                    {tab.name}
+                  </a>
+                </NextLink>
               ))}
             </nav>
 
             {actionText && (
               <div className="pb-2 ml-auto">
-                <Link href="/me">
+                <Link href={actionHref} className="w-full">
                   <Button>{actionText}</Button>
                 </Link>
               </div>
