@@ -10,8 +10,10 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
   store
 }) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-32">
-      <StoreAdminHeading breadcrumbs={breadcrumbs} name={store.name} tabs={tabs} />
+    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
+      <div className="px-4 sm:px-0">
+        <StoreAdminHeading breadcrumbs={breadcrumbs} name={store.name} tabs={tabs} />
+      </div>
     </div>
   )
 }
