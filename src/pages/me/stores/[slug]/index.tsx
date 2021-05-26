@@ -31,7 +31,12 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
   return (
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
       <div className="px-4 sm:px-0">
-        <StoreAdminHeading breadcrumbs={breadcrumbs} name={store.name} tabs={tabs} />
+        <StoreAdminHeading
+          breadcrumbs={breadcrumbs}
+          name={store.name}
+          tabs={tabs}
+          actionText="Tambah produk"
+        />
       </div>
 
       <div className="flex flex-col mt-6">

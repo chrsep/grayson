@@ -2,13 +2,15 @@ import Link from "@components/Link"
 import React, { FC } from "react"
 import { useRouter } from "next/router"
 import Breadcrumbs from "@components/Breadcrumbs"
+import Button from "@components/Button"
 
 interface Props {
   breadcrumbs: Array<{ name: string; href: string; current: boolean }>
   tabs: Array<{ name: string; href: string; current: boolean }>
   name: string
+  actionText?: string
 }
-const StoreAdminHeading: FC<Props> = ({ breadcrumbs, name, tabs }) => {
+const StoreAdminHeading: FC<Props> = ({ actionText, breadcrumbs, name, tabs }) => {
   const router = useRouter()
 
   return (
@@ -39,9 +41,17 @@ const StoreAdminHeading: FC<Props> = ({ breadcrumbs, name, tabs }) => {
                 <option key={tab.name}>{tab.name}</option>
               ))}
             </select>
+
+            {actionText && (
+              <div className="pt-4 w-full">
+                <Link href="/me" className="w-full">
+                  <Button className="w-full">{actionText}</Button>
+                </Link>
+              </div>
+            )}
           </div>
 
-          <div className="hidden sm:block">
+          <div className="hidden sm:flex items-end">
             <nav className="-mb-px flex space-x-8">
               {tabs.map((tab) => (
                 <Link
@@ -59,6 +69,14 @@ const StoreAdminHeading: FC<Props> = ({ breadcrumbs, name, tabs }) => {
                 </Link>
               ))}
             </nav>
+
+            {actionText && (
+              <div className="pb-2 ml-auto">
+                <Link href="/me">
+                  <Button>{actionText}</Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
