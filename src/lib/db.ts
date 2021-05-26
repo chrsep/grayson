@@ -4,7 +4,7 @@ import { nanoid } from "nanoid"
 
 const db = new PrismaClient()
 
-export const findAllStores = async (userEmail: string) => {
+export const findUserStores = async (userEmail: string) => {
   const stores = await db.store.findMany({
     where: {
       users: {
@@ -26,6 +26,11 @@ export const insertStore = async (
     data: {
       ...store,
       slug: slugify(`${store.name}-${nanoid(3)}`),
+      users: {
+        connect: {
+          email: ownerEmail
+        }
+      },
       owner: {
         connect: {
           email: ownerEmail

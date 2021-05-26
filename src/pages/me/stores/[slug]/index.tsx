@@ -21,7 +21,7 @@ const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {stores.map((store) => (
           <Link key={store.id} href={`/me/stores/${store.slug}`}>
-            <li className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 flex items-center p-6 mx-4 sm:mx-0 hover:bg-purple-50">
+            <li className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 flex items-center p-6 mx-4 sm:mx-0">
               <div className="flex-1 truncate">
                 <div className="flex items-center space-x-3">
                   <h3 className="text-gray-900 text-sm font-medium truncate">{store.name}</h3>

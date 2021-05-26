@@ -27,7 +27,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
       <div className="px-4 sm:px-0 mt-2 md:flex md:items-center md:justify-between">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-            Toko anda
+            Buat toko baru
           </h2>
         </div>
       </div>
