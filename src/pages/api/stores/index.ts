@@ -1,9 +1,8 @@
-import { NextApiHandler } from "next"
-import { getSession } from "next-auth/client"
 import { insertStore } from "@lib/db"
-import { exact, string, type, TypeOf } from "io-ts"
+import { string, type, TypeOf } from "io-ts"
+import { newProtectedApi, newMutationHandler } from "@lib/rest"
 
-const PostStoreBody = type({
+const PostBody = type({
   name: string,
   description: string,
   phone: string,
@@ -13,26 +12,11 @@ const PostStoreBody = type({
   province: string,
   postcode: string
 })
+export type PostStoreBody = TypeOf<typeof PostBody>
 
-export type PostStoreBody = TypeOf<typeof PostStoreBody>
+const post = newMutationHandler(PostBody, async (data, session) => {
+  const store = await insertStore(data, session.user.email)
+  return { status: 200, body: store }
+})
 
-const handleStoreApi: NextApiHandler = async (req, res) => {
-  const session = await getSession({ req })
-
-  if (session === null) {
-    res.status(401).json({ message: "unauthorized" })
-    return
-  }
-
-  if (req.method === "POST") {
-    const body = JSON.parse(req.body)
-    if (PostStoreBody.is(body)) {
-      const store = await insertStore(body, session.user.email)
-      res.status(200).json(store)
-    } else {
-      res.status(400).json({ message: "bad request" })
-    }
-  }
-}
-
-export default handleStoreApi
+export default newProtectedApi({ post })
