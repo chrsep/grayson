@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import Adapters from "next-auth/adapters"
 import Providers from "next-auth/providers"
-import db from "@lib/db"
+import { getDB } from "@lib/db"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -41,7 +41,7 @@ export default NextAuth({
       clientSecret: process.env.TWITTER_SECRET
     })
   ],
-  adapter: Adapters.Prisma.Adapter({ prisma: db }),
+  adapter: Adapters.Prisma.Adapter({ prisma: getDB() }),
   database: process.env.DATABASE_URL,
 
   // The secret should be set to a reasonably long random string.
@@ -53,7 +53,7 @@ export default NextAuth({
   // The routes shown here are the default URLs that will be used when a custom
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
-  breadcrumbs: {
+  pages: {
     signIn: "/auth/signin", // Displays signin buttons
     // signOut: "/auth/signout", // Displays form with sign out button
     error: "/auth/error", // Error code passed in query string as ?error=

@@ -3,10 +3,17 @@ import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
 
-const db = new PrismaClient()
+let db: PrismaClient = null
+
+export const getDB = () => {
+  if (db === null) {
+    db = new PrismaClient()
+  }
+  return db
+}
 
 export const findUserStores = async (userEmail: string) => {
-  return db.store.findMany({
+  return getDB().store.findMany({
     where: {
       users: {
         some: {
@@ -21,7 +28,7 @@ export const insertStore = async (
   store: Omit<Store, "id" | "owner" | "ownerId" | "slug" | "address">,
   ownerEmail: string
 ) => {
-  return db.store.create({
+  return getDB().store.create({
     data: {
       ...store,
       slug: slugify(`${store.name}-${nanoid(3)}`),
@@ -40,7 +47,7 @@ export const insertStore = async (
 }
 
 export const findStoreBySlug = async (slug: string) => {
-  return db.store.findUnique({
+  return getDB().store.findUnique({
     where: {
       slug
     }
@@ -48,7 +55,7 @@ export const findStoreBySlug = async (slug: string) => {
 }
 
 export const findStoreWithProductsBySlug = async (slug: string) => {
-  return db.store.findUnique({
+  return getDB().store.findUnique({
     where: {
       slug
     },
@@ -62,7 +69,7 @@ export const insertProduct = async (
   product: Omit<Product, "id" | "storeId" | "slug">,
   storeSlug: string
 ) => {
-  return db.product.create({
+  return getDB().product.create({
     data: {
       ...product,
       slug: `${slugify(product.name)}-${nanoid(3)}`,
@@ -76,16 +83,14 @@ export const insertProduct = async (
 }
 
 export const updateUser = async (id: number, user: Omit<User, "id">) => {
-  return db.user.update({
+  return getDB().user.update({
     data: user,
     where: { id }
   })
 }
 
 export const findUserByEmail = async (email: string) => {
-  return db.user.findUnique({
+  return getDB().user.findUnique({
     where: { email }
   })
 }
-
-export default db

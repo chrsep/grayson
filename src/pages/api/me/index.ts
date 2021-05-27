@@ -1,7 +1,8 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
-import { partial, string } from "io-ts"
+import { nullType, partial, string, TypeOf, union } from "io-ts"
 import { findUserByEmail, updateUser } from "@lib/db"
 
+export type PatchUserBody = TypeOf<typeof PatchBody>
 const PatchBody = partial({
   name: string,
   email: string,
@@ -9,7 +10,8 @@ const PatchBody = partial({
   address: string,
   city: string,
   province: string,
-  postcode: string
+  postcode: string,
+  image: union([nullType, string])
 })
 const patch = newMutationHandler(PatchBody, async (data, session) => {
   const user = await findUserByEmail(session.user.email)

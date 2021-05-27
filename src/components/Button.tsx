@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import { FC } from "react"
+import { classNames } from "@lib/ui"
 
 type Variant = "primary" | "secondary" | "outline" | "icon"
 
@@ -8,35 +9,47 @@ interface Props {
   onClick?: () => void
   className?: string
   variant?: Variant
+  disabled?: boolean
 }
+
 const Button: FC<Props> = ({
   variant = "primary",
   type = "button",
   className = "",
   children,
-  onClick
+  onClick,
+  disabled
 }) => {
   let baseClassName: string
   switch (variant) {
-    case "outline":
-      baseClassName =
-        "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      break
     case "icon":
-      baseClassName =
-        "rounded-md text-gray-200 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      baseClassName = "!p-0 text-gray-200 hover:text-gray-500"
       break
     case "secondary":
+      baseClassName = "text-gray-200 hover:text-gray-500"
+      break
+    case "outline":
       baseClassName =
-        "py-2 px-4 rounded-md text-gray-200 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        "bg-white border border-gray-300 shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 "
       break
     default:
       baseClassName =
-        "flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        "border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
   }
 
   return (
-    <button type={type} className={`${className} ${baseClassName}`} onClick={onClick}>
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={classNames(
+        className,
+        baseClassName,
+        "flex items-center rounded-md py-2 px-4 justify-center ",
+        "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+        "disabled:opacity-40"
+      )}
+    >
       {children}
     </button>
   )
