@@ -98,7 +98,6 @@ const SignUp = () => (
           <div className="mt-6">
             <form action="#" method="POST" className="space-y-6">
               <TextField
-                id="email"
                 label="Alamat email"
                 autocomplete="email"
                 name="email"
@@ -108,7 +107,6 @@ const SignUp = () => (
               />
 
               <TextField
-                id="password"
                 containerClassName="space-y-1"
                 label="Password"
                 autocomplete="password"
