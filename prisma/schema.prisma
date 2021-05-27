@@ -83,6 +83,11 @@ model User {
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   ownedStores   Store[]   @relation("owner")
 
+  address  String @default("")
+  city     String @default("")
+  province String @default("")
+  postcode String @default("")
+
   Stores Store[]
   @@map(name: "users")
 }

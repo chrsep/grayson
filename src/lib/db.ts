@@ -1,6 +1,7 @@
 import { PrismaClient, Product, Store } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
+import { User } from "next-auth"
 
 const db = new PrismaClient()
 
@@ -71,6 +72,19 @@ export const insertProduct = async (
         }
       }
     }
+  })
+}
+
+export const updateUser = async (id: number, user: Omit<User, "id">) => {
+  return db.user.update({
+    data: user,
+    where: { id }
+  })
+}
+
+export const findUserByEmail = async (email: string) => {
+  return db.user.findUnique({
+    where: { email }
   })
 }
 
