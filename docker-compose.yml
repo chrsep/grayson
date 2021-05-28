@@ -12,6 +12,18 @@ services:
       - "5432:5432"
     volumes:
       - grayson-db:/var/lib/postgresql/data
+  minio:
+    image: minio/minio:latest
+    container_name: vor-minio
+    entrypoint: sh
+    command: -c 'mkdir -p /data/media && /usr/bin/minio server /data'
+    environment:
+      MINIO_HTTP_TRACE: "/dev/stdout"
+    ports:
+      - 9000:9000
+    volumes:
+      - grayson-minio:/data
 
 volumes:
   grayson-db:
+  grayson-minio:

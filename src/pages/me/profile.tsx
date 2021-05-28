@@ -207,7 +207,6 @@ export async function getServerSideProps(context) {
 
   const user = await findUserByEmail(session.user.email)
 
-  console.log(user)
   // Pass data to the page via props
   return {
     props: {

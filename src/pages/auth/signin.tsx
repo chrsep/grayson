@@ -1,12 +1,9 @@
 import LogoStandalone from "@components/LogoStandalone"
 import Image from "next/image"
 import TextField from "@components/TextField"
-import Checkbox from "@components/Checkbox"
 import Button from "@components/Button"
 import Link from "@components/Link"
 import { useState } from "react"
-import { signIn } from "next-auth/client"
-import { useRouter } from "next/router"
 import useEmailSignIn from "@hooks/useSignIn"
 
 const SignIn = () => {
@@ -97,7 +94,6 @@ const EmailLogin = () => {
         }}
       >
         <TextField
-          id="email"
           label="Alamat email"
           autocomplete="email"
           name="email"
