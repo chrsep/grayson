@@ -1,5 +1,5 @@
 import LogoStandalone from "@components/LogoStandalone"
-import Image from "next/image"
+import Image from "@components/Image"
 import TextField from "@components/TextField"
 import Button from "@components/Button"
 import Link from "@components/Link"

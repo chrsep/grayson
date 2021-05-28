@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from "react"
+import React, { ChangeEvent, FC, useState } from "react"
 import Button from "@components/Button"
 import Divider from "@components/Divider"
 import TextField from "@components/TextField"
@@ -37,14 +37,23 @@ const PersonalInfoForm: FC<{
   email: string
   image: string
 }> = ({ image, name, email }) => {
-  const { register, handleSubmit, formState, setValue, setError } = useForm<PatchUserBody>({
-    defaultValues: { name, email, image }
-  })
+  const { register, handleSubmit, formState, setValue, setError, watch, reset } =
+    useForm<PatchUserBody>({
+      defaultValues: { name, email, image }
+    })
 
   const submit = async (data: PatchUserBody) => {
-    await fetch("/api/me", {
+    const meResponse = await fetch("/api/me", {
       method: "PATCH",
       body: JSON.stringify(data)
+    })
+    if (!meResponse.ok) return
+
+    const { updatedUser } = await meResponse.json()
+    reset({
+      name: updatedUser.name,
+      image: updatedUser.image,
+      email: updatedUser.email
     })
   }
 
@@ -60,7 +69,7 @@ const PersonalInfoForm: FC<{
       return
     }
 
-    const { url } = await presignedUrl.json()
+    const { objectName, url } = await presignedUrl.json()
     const uploadImage = await fetch(url, {
       method: "PUT",
       body: e.target.files[0]
@@ -70,8 +79,9 @@ const PersonalInfoForm: FC<{
         type: "fetch",
         message: "Oops, upload gambar gagal, tolong coba kembali."
       })
-      return
     }
+
+    setValue("image", objectName, { shouldDirty: true })
   }
 
   return (
@@ -105,7 +115,7 @@ const PersonalInfoForm: FC<{
                   {...register("email")}
                 />
 
-                <ProfilePicSelector onChange={uploadImage} />
+                <ProfilePicSelector value={watch("image")} onChange={uploadImage} />
                 {formState.errors.image && (
                   <p className="text-red-800 text-xs !mt-4">{formState.errors.image.message}</p>
                 )}
@@ -131,14 +141,25 @@ const ContactForm: FC<{
   province: string
   postcode: string
 }> = ({ address, city, province, postcode, phone }) => {
-  const { register, handleSubmit, formState } = useForm<PatchUserBody>({
+  const { register, handleSubmit, formState, reset } = useForm<PatchUserBody>({
     defaultValues: { phone, address, city, province, postcode }
   })
 
   const submit = async (data: PatchUserBody) => {
-    await fetch("/api/me", {
+    const meResponse = await fetch("/api/me", {
       method: "PATCH",
       body: JSON.stringify(data)
+    })
+
+    if (!meResponse.ok) return
+    const { updatedUser } = await meResponse.json()
+
+    reset({
+      phone: updatedUser.phone,
+      address: updatedUser.address,
+      city: updatedUser.city,
+      province: updatedUser.province,
+      postcode: updatedUser.postcode
     })
   }
   return (

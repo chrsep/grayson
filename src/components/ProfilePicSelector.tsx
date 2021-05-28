@@ -1,11 +1,12 @@
-import Image from "next/image"
+import Image from "@components/Image"
 import Button from "@components/Button"
 import React, { ChangeEventHandler, FC, useRef } from "react"
 
 interface Props {
+  value?: string
   onChange: ChangeEventHandler<HTMLInputElement>
 }
-const ProfilePicSelector: FC<Props> = ({ onChange }) => {
+const ProfilePicSelector: FC<Props> = ({ value, onChange }) => {
   const ref = useRef<HTMLInputElement>(null)
   return (
     <div className="flex items-start">
@@ -24,7 +25,7 @@ const ProfilePicSelector: FC<Props> = ({ onChange }) => {
             <Image
               width={48}
               height={48}
-              src="/icons/user-circle.svg"
+              src={value || "/icons/user-circle.svg"}
               className="h-full w-full text-gray-300"
             />
           </span>

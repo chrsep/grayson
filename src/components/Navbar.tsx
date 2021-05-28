@@ -8,7 +8,7 @@ import LogoStandalone from "@components/LogoStandalone"
 import Button from "@components/Button"
 import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
-import Image from "next/image"
+import Image from "@components/Image"
 
 interface Props {
   navigation: Array<{
