@@ -11,19 +11,19 @@ interface Handler {
 }
 
 export function newApi(handler: Handler): NextApiHandler {
-  return (req, res) => {
+  return async (req, res) => {
     switch (req.method) {
       case "POST":
-        handler.post(req, res)
+        await handler.post(req, res)
         break
       case "GET":
-        handler.get(req, res)
+        await handler.get(req, res)
         break
       case "PUT":
-        handler.put(req, res)
+        await handler.put(req, res)
         break
       case "PATCH":
-        handler.patch(req, res)
+        await handler.patch(req, res)
         break
       default: {
         res.status(401).json({

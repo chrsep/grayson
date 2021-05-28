@@ -16,12 +16,11 @@ services:
     image: minio/minio:latest
     container_name: grayson-minio
     entrypoint: sh
-    command: -c 'mkdir -p /data/media && /usr/bin/minio server /data'
+    command: -c 'mkdir -p /data/grayson && /usr/bin/minio server /data'
     environment:
       MINIO_HTTP_TRACE: "/dev/stdout"
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: miniominio
-      MINIO_BUCKET_NAME: grayson
       MINIO_BUCKET_LOCATION: us-east-1
     ports:
       - 9000:9000

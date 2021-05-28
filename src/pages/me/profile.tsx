@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { ChangeEvent, FC } from "react"
 import Button from "@components/Button"
 import Divider from "@components/Divider"
 import TextField from "@components/TextField"
@@ -7,7 +7,7 @@ import { findUserByEmail } from "@lib/db"
 import { InferGetServerSidePropsType, NextPage } from "next"
 import { useForm } from "react-hook-form"
 import { PatchUserBody } from "@api/me"
-import Image from "next/image"
+import ProfilePicSelector from "@components/ProfilePicSelector"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
@@ -37,7 +37,7 @@ const PersonalInfoForm: FC<{
   email: string
   image: string
 }> = ({ image, name, email }) => {
-  const { register, handleSubmit, formState } = useForm<PatchUserBody>({
+  const { register, handleSubmit, formState, setValue, setError } = useForm<PatchUserBody>({
     defaultValues: { name, email, image }
   })
 
@@ -48,12 +48,30 @@ const PersonalInfoForm: FC<{
     })
   }
 
-  const uploadImage = async () => {
-    const result = await fetch("/api/images/sign", {
+  const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    const presignedUrl = await fetch("/api/images/presignedUrl", {
       method: "POST"
     })
+    if (!presignedUrl.ok) {
+      setError("image", {
+        type: "fetch",
+        message: "Oops, upload gambar gagal, tolong coba kembali."
+      })
+      return
+    }
 
-    console.log(result)
+    const { url } = await presignedUrl.json()
+    const uploadImage = await fetch(url, {
+      method: "PUT",
+      body: e.target.files[0]
+    })
+    if (!uploadImage.ok) {
+      setError("image", {
+        type: "fetch",
+        message: "Oops, upload gambar gagal, tolong coba kembali."
+      })
+      return
+    }
   }
 
   return (
@@ -87,23 +105,10 @@ const PersonalInfoForm: FC<{
                   {...register("email")}
                 />
 
-                <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
-                  Foto Profil
-                  <input id="avatar" type="file" className="hidden" onChange={uploadImage} />
-                  <div className="mt-1 flex items-center">
-                    <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                      <Image
-                        width={48}
-                        height={48}
-                        src="/icons/user-circle.svg"
-                        className="h-full w-full text-gray-300"
-                      />
-                    </span>
-                    <Button variant="outline" className="ml-4">
-                      Ubah
-                    </Button>
-                  </div>
-                </label>
+                <ProfilePicSelector onChange={uploadImage} />
+                {formState.errors.image && (
+                  <p className="text-red-800 text-xs !mt-4">{formState.errors.image.message}</p>
+                )}
               </div>
 
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

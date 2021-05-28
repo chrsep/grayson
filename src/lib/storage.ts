@@ -1,7 +1,7 @@
-import Minio from "minio"
+import { Client } from "minio"
 
 const BUCKET = process.env.S3_BUCKET
-const minio = new Minio.Client({
+const minio = new Client({
   endPoint: process.env.S3_ENDPOINT,
   port: parseInt(process.env.S3_PORT, 10),
   useSSL: process.env.NODE_ENV !== "development",
