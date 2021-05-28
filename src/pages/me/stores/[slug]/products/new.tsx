@@ -61,10 +61,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                 <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
                     <TextField
-                      id="name"
                       label="Nama produk*"
-                      name="name"
-                      type="text"
                       containerClassName="col-span-6 sm:col-span-4"
                       required
                       {...register("name")}
@@ -76,8 +73,6 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                     />
 
                     <Textarea
-                      id="description"
-                      name="description"
                       rows={3}
                       label="Tentang produk anda"
                       containerClassName="col-span-6"

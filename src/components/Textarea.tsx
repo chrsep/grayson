@@ -1,8 +1,8 @@
 import { ChangeEventHandler, FC, forwardRef, ForwardRefRenderFunction } from "react"
 
 interface Props {
-  id: string
   label: string
+  id?: string
   value?: string
   onChange?: ChangeEventHandler<HTMLTextAreaElement>
   name: string
@@ -30,12 +30,12 @@ const Textarea: ForwardRefRenderFunction<HTMLTextAreaElement, Props> = (
 ) => {
   return (
     <div className={`${containerClassName}`}>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
       <div className="mt-1 rounded-md shadow-sm relative">
         <textarea
-          id={id}
+          id={name}
           name={name}
           autoComplete={autocomplete}
           required={required}

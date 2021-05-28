@@ -48,6 +48,14 @@ const PersonalInfoForm: FC<{
     })
   }
 
+  const uploadImage = async () => {
+    const result = await fetch("/api/images/sign", {
+      method: "POST"
+    })
+
+    console.log(result)
+  }
+
   return (
     <div className="mt-6 md:mt-8">
       <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -81,7 +89,7 @@ const PersonalInfoForm: FC<{
 
                 <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
                   Foto Profil
-                  <input id="avatar" type="file" className="hidden" />
+                  <input id="avatar" type="file" className="hidden" onChange={uploadImage} />
                   <div className="mt-1 flex items-center">
                     <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                       <Image

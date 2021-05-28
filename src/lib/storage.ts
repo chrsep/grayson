@@ -1,9 +1,23 @@
 import Minio from "minio"
 
-const minioClient = new Minio.Client({
-  endPoint: "play.min.io",
-  port: 9000,
-  useSSL: true,
-  accessKey: "Q3AM3UQ867SPQQA43P2F",
-  secretKey: "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG"
+const BUCKET = process.env.S3_BUCKET
+const minio = new Minio.Client({
+  endPoint: process.env.S3_ENDPOINT,
+  port: parseInt(process.env.S3_PORT, 10),
+  useSSL: process.env.NODE_ENV !== "development",
+  accessKey: process.env.S3_KEY,
+  secretKey: process.env.S3_SECRET
 })
+
+// eslint-disable-next-line import/prefer-default-export
+export const newSignedUploadUrl = (objectName: string) => {
+  return new Promise((resolve, reject) => {
+    minio.presignedPutObject(BUCKET, objectName, (err, url) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(url)
+      }
+    })
+  })
+}

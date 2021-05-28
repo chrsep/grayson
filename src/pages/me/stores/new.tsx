@@ -51,9 +51,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                 <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
                     <TextField
-                      id="name"
                       label="Nama toko*"
-                      name="name"
                       type="text"
                       containerClassName="col-span-6 sm:col-span-4"
                       required
@@ -61,24 +59,15 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                     />
 
                     <Textarea
-                      id="description"
-                      name="description"
                       rows={3}
                       label="Tentang toko anda"
-                      onChange={() => {}}
-                      value=""
                       containerClassName="col-span-6"
                       {...register("description")}
                     />
 
                     <TextField
                       label="Nomor telefon"
-                      value=""
-                      onChange={() => {}}
                       autocomplete="phone"
-                      id="phone_number"
-                      name="phone_number"
-                      type="text"
                       containerClassName="col-span-6 sm:col-span-4"
                       placeholder="+62-1234-2322-1999"
                       iconSrc="/icons/phone.svg"
@@ -87,12 +76,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
 
                     <TextField
                       label="WhatsApp"
-                      value=""
-                      onChange={() => {}}
                       autocomplete="phone"
-                      id="whatsapp"
-                      name="whatsapp"
-                      type="text"
                       containerClassName="col-span-6 sm:col-span-4"
                       iconSrc="/icons/brand-whatsapp.svg"
                       placeholder="+62-1234-2322-1999"
@@ -101,46 +85,26 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
 
                     <TextField
                       label="Alamat"
-                      value=""
-                      onChange={() => {}}
                       containerClassName="col-span-6"
-                      type="text"
-                      name="street_address"
-                      id="street_address"
                       autocomplete="street-address"
                       {...register("address")}
                     />
 
                     <TextField
                       label="Kota / Kecamatan"
-                      value=""
-                      onChange={() => {}}
                       containerClassName="col-span-6 md:col-span-2"
-                      type="text"
-                      name="city"
-                      id="city"
                       {...register("city")}
                     />
 
                     <TextField
                       label="Provinsi"
-                      value=""
-                      onChange={() => {}}
                       containerClassName="col-span-3 md:col-span-2"
-                      type="text"
-                      name="province"
-                      id="province"
                       {...register("province")}
                     />
 
                     <TextField
                       label="Kode Pos"
-                      value=""
-                      onChange={() => {}}
                       containerClassName="col-span-3 md:col-span-2"
-                      type="text"
-                      name="postal_code"
-                      id="postal_code"
                       autocomplete="postal-code"
                       {...register("postcode")}
                     />
