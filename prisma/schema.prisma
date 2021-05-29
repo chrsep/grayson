@@ -31,12 +31,19 @@ model Store {
   products Product[]
 }
 
+model ProductImage {
+  objectName String   @id @default("")
+  Product    Product? @relation(fields: [productId], references: [id])
+  productId  String?
+}
+
 model Product {
-  id          String @id @default(cuid())
-  name        String @default("")
-  description String @default("")
-  slug        String @unique
-  price       Int    @default(0)
+  id          String         @id @default(cuid())
+  name        String         @default("")
+  description String         @default("")
+  slug        String         @unique
+  price       Int            @default(0)
+  images      ProductImage[]
 
   store   Store  @relation(fields: [storeId], references: [id])
   storeId String
@@ -84,8 +91,8 @@ model User {
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   ownedStores   Store[]   @relation("owner")
 
-  phone         String    @default("")
-  whatsapp         String    @default("")
+  phone    String @default("")
+  whatsapp String @default("")
 
   address  String @default("")
   city     String @default("")
