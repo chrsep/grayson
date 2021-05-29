@@ -40,9 +40,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
         { name: "Produk", href: `/me/stores/${slug}`, current: false },
         { name: "Profil toko", href: `/me/stores/${slug}/profile`, current: true }
       ],
-      breadcrumbs: [
-        { name: "Toko anda", href: "/me/stores", current: false },
-      ]
+      breadcrumbs: [{ name: "Toko anda", href: "/me/stores", current: false }]
     }
   }
 }

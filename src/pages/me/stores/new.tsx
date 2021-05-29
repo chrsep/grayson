@@ -10,8 +10,9 @@ import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
 
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
-  const { register, handleSubmit } = useForm<PostStoreBody>()
+  const { register, handleSubmit, formState } = useForm<PostStoreBody>({ mode: "onChange" })
   const router = useRouter()
+  const { isDirty, isValid } = formState
 
   const onSubmit = async (data: PostStoreBody) => {
     const result = await fetch("/api/stores", {
@@ -41,10 +42,12 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">Data kontak</h3>
               <p className="mt-1 text-sm text-gray-600">
-                Berikan data kontak toko anda agar pengguna lain dapat menghubungi anda.
+                Data kontak anda akan digunakan pembeli untuk menghubungi anda dan melanjutkan
+                transaksi saat checkout.
               </p>
             </div>
           </div>
+
           <div className="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
               <div className="shadow overflow-hidden sm:rounded-md">
@@ -108,6 +111,17 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                       autocomplete="postal-code"
                       {...register("postcode")}
                     />
+
+                    <Textarea
+                      rows={6}
+                      label="Cara pembayaran"
+                      containerClassName="col-span-6"
+                      placeholder={howToPayPlaceholder}
+                      {...register("howToPay")}
+                    />
+                    <p className="col-span-4 text-sm text-gray-500">
+                      Berikan instruksi cara pembayaran setelah pembeli checkout
+                    </p>
                   </div>
                 </div>
 
@@ -115,7 +129,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                   <p className="mt-1 text-sm text-gray-500">
                     Data yang diperlukan ditandai dengan tanda bintang (*)
                   </p>
-                  <Button type="submit" className="ml-auto">
+                  <Button type="submit" className="ml-auto" disabled={!isDirty || !isValid}>
                     Simpan
                   </Button>
                 </div>
@@ -127,6 +141,11 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
     </div>
   )
 }
+
+const howToPayPlaceholder = `Contoh: 
+- Pembayaran dapat dilakukan dengan transfer ke .... 
+- Pembayaran dapat dilakukan saat saya sampai di lokasi anda...
+`
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)

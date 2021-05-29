@@ -21,6 +21,7 @@ model Store {
   city     String @default("")
   province String @default("")
   postcode String @default("")
+  howToPay String @default("")
 
   slug    String @unique @default("")
   owner   User   @relation("owner", fields: [ownerId], references: [id])

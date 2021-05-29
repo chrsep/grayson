@@ -10,7 +10,8 @@ const PostBody = type({
   address: string,
   city: string,
   province: string,
-  postcode: string
+  postcode: string,
+  howToPay: string
 })
 export type PostStoreBody = TypeOf<typeof PostBody>
 

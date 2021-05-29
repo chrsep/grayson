@@ -53,14 +53,9 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                   </tr>
                 </thead>
                 <tbody>
-                  {store.products.map((product, idx) => (
+                  {store.products.map((product) => (
                     <NextLink href={`/me/stores/${store.slug}/products/${product.slug}`}>
-                      <tr
-                        key={product.id}
-                        className={`${
-                          idx % 2 === 0 ? "bg-white" : "bg-gray-50"
-                        } cursor-pointer hover:bg-purple-50`}
-                      >
+                      <tr key={product.id} className="bg-white cursor-pointer hover:bg-purple-50">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {product.name}
                         </td>
@@ -81,7 +76,9 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                 </tbody>
               </table>
               {store.products.length === 0 && (
-                <div className="w-full text-center p-4 block">Belum ada product terpasang</div>
+                <div className="w-full text-center p-4 block bg-white border-t">
+                  Belum ada product terpasang
+                </div>
               )}
             </div>
           </div>
