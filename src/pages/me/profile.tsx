@@ -24,6 +24,7 @@ const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> 
     <Divider className="hidden sm:block" />
     <ContactForm
       phone={user.phone}
+      whatsapp={user.whatsapp}
       address={user.address}
       postcode={user.postcode}
       city={user.city}
@@ -112,6 +113,7 @@ const PersonalInfoForm: FC<{
                   containerClassName="col-span-6 sm:col-span-4"
                   iconSrc="/icons/mail.svg"
                   placeholder="jessica@hey.com"
+                  type="email"
                   {...register("email")}
                 />
 
@@ -136,13 +138,14 @@ const PersonalInfoForm: FC<{
 
 const ContactForm: FC<{
   phone: string
+  whatsapp: string
   address: string
   city: string
   province: string
   postcode: string
-}> = ({ address, city, province, postcode, phone }) => {
+}> = ({ address, city, province, postcode, phone, whatsapp }) => {
   const { register, handleSubmit, formState, reset } = useForm<PatchUserBody>({
-    defaultValues: { phone, address, city, province, postcode }
+    defaultValues: { phone, address, city, province, postcode, whatsapp }
   })
 
   const submit = async (data: PatchUserBody) => {
@@ -159,7 +162,8 @@ const ContactForm: FC<{
       address: updatedUser.address,
       city: updatedUser.city,
       province: updatedUser.province,
-      postcode: updatedUser.postcode
+      postcode: updatedUser.postcode,
+      whatsapp: updatedUser.whatsapp
     })
   }
   return (
@@ -179,12 +183,21 @@ const ContactForm: FC<{
               <div className="px-4 py-5 bg-white sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   <TextField
-                    label="Nomor telefon / WhatApp"
+                    label="Nomor telefon"
                     autocomplete="phone"
                     containerClassName="col-span-6 sm:col-span-4"
                     placeholder="+62-1234-2322-1999"
                     iconSrc="/icons/phone.svg"
                     {...register("phone")}
+                  />
+
+                  <TextField
+                    label="WhatsApp"
+                    autocomplete="phone"
+                    containerClassName="col-span-6 sm:col-span-4"
+                    iconSrc="/icons/brand-whatsapp.svg"
+                    placeholder="+62-1234-2322-1999"
+                    {...register("whatsapp")}
                   />
 
                   <TextField

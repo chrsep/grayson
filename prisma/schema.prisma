@@ -84,6 +84,7 @@ model User {
   ownedStores   Store[]   @relation("owner")
 
   phone         String    @default("")
+  whatsapp         String    @default("")
 
   address  String @default("")
   city     String @default("")
