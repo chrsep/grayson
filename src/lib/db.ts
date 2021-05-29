@@ -66,7 +66,7 @@ export const findStoreWithProductsBySlug = async (slug: string) => {
 }
 
 export const insertProduct = async (
-  product: Omit<Product, "id" | "storeId" | "slug">,
+  product: Omit<Product, "id" | "storeId" | "slug" | "images"> & { images: string[] },
   storeSlug: string
 ) => {
   return getDB().product.create({
@@ -77,6 +77,11 @@ export const insertProduct = async (
         connect: {
           slug: storeSlug
         }
+      },
+      images: {
+        create: product.images.map((image) => ({
+          objectName: image
+        }))
       }
     }
   })
