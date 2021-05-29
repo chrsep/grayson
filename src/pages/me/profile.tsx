@@ -8,6 +8,7 @@ import { InferGetServerSidePropsType, NextPage } from "next"
 import { useForm } from "react-hook-form"
 import { PatchUserBody } from "@api/me"
 import ProfilePicSelector from "@components/ProfilePicSelector"
+import { uploadImage } from "@lib/image"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
@@ -58,11 +59,9 @@ const PersonalInfoForm: FC<{
     })
   }
 
-  const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    const presignedUrl = await fetch("/api/images/presignedUrl", {
-      method: "POST"
-    })
-    if (!presignedUrl.ok) {
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const result = await uploadImage(e.target.files[0])
+    if (result === null) {
       setError("image", {
         type: "fetch",
         message: "Oops, upload gambar gagal, tolong coba kembali."
@@ -70,19 +69,7 @@ const PersonalInfoForm: FC<{
       return
     }
 
-    const { objectName, url } = await presignedUrl.json()
-    const uploadImage = await fetch(url, {
-      method: "PUT",
-      body: e.target.files[0]
-    })
-    if (!uploadImage.ok) {
-      setError("image", {
-        type: "fetch",
-        message: "Oops, upload gambar gagal, tolong coba kembali."
-      })
-    }
-
-    setValue("image", objectName, { shouldDirty: true })
+    setValue("image", result, { shouldDirty: true })
   }
 
   return (
@@ -117,7 +104,7 @@ const PersonalInfoForm: FC<{
                   {...register("email")}
                 />
 
-                <ProfilePicSelector value={watch("image")} onChange={uploadImage} />
+                <ProfilePicSelector value={watch("image")} onChange={handleImageChange} />
                 {formState.errors.image && (
                   <p className="text-red-800 text-xs !mt-4">{formState.errors.image.message}</p>
                 )}
