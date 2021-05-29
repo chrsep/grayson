@@ -1,5 +1,5 @@
 import Breadcrumbs from "@components/Breadcrumbs"
-import React from "react"
+import React, { FC } from "react"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
 import { findStoreWithProductsBySlug } from "@lib/db"
@@ -19,8 +19,15 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   breadcrumbs,
   store
 }) => {
-  const { register, handleSubmit } = useForm<FormData>()
   const router = useRouter()
+  const { register, handleSubmit, watch } = useForm<FormData>({
+    defaultValues: {
+      images: [
+        "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
+        "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
+      ]
+    }
+  })
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
@@ -84,14 +91,21 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                   </div>
 
                   <div className="pt-12">
-                    <div className="">
-                      <h3 className="text-lg leading-6 font-medium text-gray-900">Gambar</h3>
-                      <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                        Tambahkan gambar untuk produk anda.
-                      </p>
+                    <div className="flex flex-col sm:flex-row sm:items-center">
+                      <div className="">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">Gambar</h3>
+                        <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                          Tambahkan gambar untuk produk anda.
+                        </p>
+                      </div>
+
+                      <Button variant="outline" className="ml-auto w-full sm:w-auto mt-4">
+                        Tambah gambar
+                      </Button>
                     </div>
+
                     <Divider className="" />
-                    <ProductImages />
+                    <ProductImages files={watch("images")} />
                   </div>
                 </div>
 
@@ -112,45 +126,18 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   )
 }
 
-const files = [
-  {
-    title: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
-  },
-  {
-    title: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
-  },
-  {
-    title: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
-  },
-  {
-    title: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
-  }
-  // More files...
-]
-const ProductImages = () => (
+const ProductImages: FC<{ files: string[] }> = ({ files }) => (
   <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-6">
     {files.map((file) => (
-      <li key={file.source} className="relative">
+      <li key={file} className="relative">
         <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
           <img
-            src={file.source}
+            src={file}
             alt=""
             className="object-cover pointer-events-none group-hover:opacity-75"
           />
           <button type="button" className="absolute inset-0 focus:outline-none">
-            <span className="sr-only">View details for {file.title}</span>
+            <span className="sr-only">View details for</span>
           </button>
         </div>
       </li>

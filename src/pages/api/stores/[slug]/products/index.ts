@@ -1,11 +1,12 @@
 import { insertProduct } from "@lib/db"
-import { number, string, type, TypeOf } from "io-ts"
+import { array, number, string, type, TypeOf } from "io-ts"
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 
 const PostBody = type({
   name: string,
   description: string,
-  price: number
+  price: number,
+  images: array(string)
 })
 export type PostProductBody = TypeOf<typeof PostBody>
 
