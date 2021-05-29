@@ -1,5 +1,5 @@
 import Breadcrumbs from "@components/Breadcrumbs"
-import React, { FC } from "react"
+import React, { ChangeEventHandler, FC } from "react"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
 import { findStoreWithProductsBySlug } from "@lib/db"
@@ -12,6 +12,9 @@ import { useRouter } from "next/router"
 import { PostProductBody } from "@api/stores/[slug]/products"
 import Pricefield from "@components/Pricefield"
 import Divider from "@components/Divider"
+import { uploadImage } from "@lib/image"
+import UploadImageButton from "@components/UploadImageButton"
+import Image from "@components/Image"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
 
@@ -20,12 +23,9 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   store
 }) => {
   const router = useRouter()
-  const { register, handleSubmit, watch } = useForm<FormData>({
+  const { register, handleSubmit, watch, setValue, getValues } = useForm<FormData>({
     defaultValues: {
-      images: [
-        "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-        "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
-      ]
+      images: []
     }
   })
 
@@ -40,6 +40,14 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
     })
 
     if (result.ok) await router.push(`/me/stores/${store.slug}`)
+  }
+
+  const handleImageUpload: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    const result = await uploadImage(e.target.files[0])
+
+    const images = getValues("images")
+    images.push(result)
+    setValue("images", images)
   }
 
   return (
@@ -99,9 +107,13 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                         </p>
                       </div>
 
-                      <Button variant="outline" className="ml-auto w-full sm:w-auto mt-4">
+                      <UploadImageButton
+                        variant="outline"
+                        className="ml-auto w-full sm:w-auto mt-4"
+                        onChange={handleImageUpload}
+                      >
                         Tambah gambar
-                      </Button>
+                      </UploadImageButton>
                     </div>
 
                     <Divider className="" />
@@ -131,17 +143,29 @@ const ProductImages: FC<{ files: string[] }> = ({ files }) => (
     {files.map((file) => (
       <li key={file} className="relative">
         <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-          <img
-            src={file}
-            alt=""
-            className="object-cover pointer-events-none group-hover:opacity-75"
-          />
+          <div>
+            <Image
+              width={170}
+              height={120}
+              src={file}
+              className="object-cover pointer-events-none group-hover:opacity-75"
+              objectFit="cover"
+              alt=""
+            />
+          </div>
+
           <button type="button" className="absolute inset-0 focus:outline-none">
             <span className="sr-only">View details for</span>
           </button>
         </div>
       </li>
     ))}
+
+    {files.length === 0 && (
+      <li className="relative col-span-full text-center text-gray-500 py-8">
+        Belum ada gambar terpasang
+      </li>
+    )}
   </ul>
 )
 

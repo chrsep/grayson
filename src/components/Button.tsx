@@ -2,13 +2,13 @@
 import { FC } from "react"
 import { classNames } from "@lib/ui"
 
-type Variant = "primary" | "secondary" | "outline" | "icon"
+export type ButtonVariant = "primary" | "secondary" | "outline" | "icon"
 
 interface Props {
   type?: "submit" | "reset" | "button"
   onClick?: () => void
   className?: string
-  variant?: Variant
+  variant?: ButtonVariant
   disabled?: boolean
 }
 
