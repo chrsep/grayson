@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
 import { findProductBySlugWithImages, findStoreWithProductsBySlug } from "@lib/db"
-import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import React, { ChangeEventHandler } from "react"
 import { uploadImage } from "@lib/image"
@@ -31,7 +30,6 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         description: product.description
       }
     })
-  const { isDirty } = formState
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
@@ -46,8 +44,10 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
     if (result.ok) {
       const newProduct = await result.json()
       reset({
-        ...newProduct,
-        images: newProduct.images.map(({ objectName }) => objectName)
+        images: newProduct.images.map(({ objectName }) => objectName),
+        name: newProduct.name,
+        price: newProduct.price.toString(),
+        description: newProduct.description
       })
     }
   }
@@ -136,7 +136,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   <p className="mt-1 text-sm text-gray-500 mr-4">
                     Data yang diperlukan ditandai dengan tanda bintang (*)
                   </p>
-                  <Button type="submit" className="ml-auto" disabled={!isDirty}>
+                  <Button type="submit" className="ml-auto" disabled={!formState.isDirty}>
                     Simpan
                   </Button>
                 </div>
@@ -167,7 +167,6 @@ export async function getServerSideProps(
 
   const product = await findProductBySlugWithImages(productSlug)
 
-  console.log(product)
   // Pass data to the page via props
   return {
     props: {

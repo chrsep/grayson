@@ -117,6 +117,7 @@ export const updateProduct = async (
 ) => {
   return prisma.product.update({
     where: { id },
+    include: { images: true },
     data: {
       ...product,
       images: {
