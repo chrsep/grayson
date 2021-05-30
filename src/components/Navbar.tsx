@@ -35,7 +35,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Link href="/">
                 <a className="flex-shrink-0 flex items-center">
-                  <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto ml-4" />
+                  <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto " />
                   <LogoFull className="hidden lg:block h-8 w-auto" />
                 </a>
               </Link>
