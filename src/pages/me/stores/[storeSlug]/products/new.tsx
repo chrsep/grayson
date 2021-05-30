@@ -85,6 +85,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                     />
 
                     <Pricefield
+                      label="Harga*"
                       containerClassName="col-span-6 sm:col-span-2"
                       required
                       {...register("price")}
