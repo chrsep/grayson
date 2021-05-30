@@ -1,24 +1,24 @@
-import Breadcrumbs from "@components/Breadcrumbs"
-import React, { ChangeEventHandler } from "react"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
 import { findStoreWithProductsBySlug } from "@lib/db"
-import PageContainer from "@components/Container"
-import TextField from "@components/TextField"
-import Textarea from "@components/Textarea"
-import Button from "@components/Button"
-import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
-import { PostProductBody } from "@api/stores/[storeSlug]/products"
-import Pricefield from "@components/Pricefield"
-import Divider from "@components/Divider"
+import { useForm } from "react-hook-form"
+import React, { ChangeEventHandler } from "react"
 import { uploadImage } from "@lib/image"
+import PageContainer from "@components/Container"
+import Breadcrumbs from "@components/Breadcrumbs"
+import TextField from "@components/TextField"
+import Pricefield from "@components/Pricefield"
+import Textarea from "@components/Textarea"
 import UploadImageButton from "@components/UploadImageButton"
+import Divider from "@components/Divider"
 import ProductImagePreviews from "@components/ProductImagePreviews"
+import Button from "@components/Button"
+import { PostProductBody } from "@api/stores/[slug]/products"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
 
-const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
+const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   store
 }) => {
@@ -166,4 +166,4 @@ export async function getServerSideProps(
   }
 }
 
-export default NewProduct
+export default EditProduct

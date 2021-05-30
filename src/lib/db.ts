@@ -99,3 +99,12 @@ export const findUserByEmail = async (email: string) => {
     where: { email }
   })
 }
+
+export const findUserByEmailWithStores = async (email: string) => {
+  return getDB().user.findUnique({
+    where: { email },
+    include: {
+      stores: true
+    }
+  })
+}

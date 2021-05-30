@@ -101,7 +101,8 @@ model User {
   province String @default("")
   postcode String @default("")
 
-  Stores Store[]
+  stores Store[]
+
   @@map(name: "users")
 }
 

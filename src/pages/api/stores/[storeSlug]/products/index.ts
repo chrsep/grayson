@@ -1,4 +1,4 @@
-import { insertProduct } from "@lib/db"
+import { findUserByEmailWithStores, insertProduct } from "@lib/db"
 import { array, number, string, type, TypeOf } from "io-ts"
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 
@@ -10,9 +10,18 @@ const PostBody = type({
 })
 export type PostProductBody = TypeOf<typeof PostBody>
 
-const post = newMutationHandler(PostBody, async (data, session, { query: { slug } }) => {
-  if (string.is(slug)) {
-    const store = await insertProduct(data, slug)
+const post = newMutationHandler(PostBody, async (data, session, { query: { storeSlug } }) => {
+  const user = await findUserByEmailWithStores(session.user.email)
+
+  if (user.stores.findIndex((store) => store.slug === storeSlug) === -1) {
+    return {
+      status: 403,
+      body: { error: "unauthorized", description: "You don't have access to this store" }
+    }
+  }
+
+  if (string.is(storeSlug)) {
+    const store = await insertProduct(data, storeSlug)
     return { status: 200, body: store }
   }
 
