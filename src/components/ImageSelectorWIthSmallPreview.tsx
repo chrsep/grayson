@@ -3,17 +3,26 @@ import Button from "@components/Button"
 import React, { ChangeEventHandler, FC, useRef } from "react"
 
 interface Props {
-  value?: string
+  label: string
   onChange: ChangeEventHandler<HTMLInputElement>
+  placeholder: string
+  value?: string
+  className?: string
 }
-const ProfilePicSelector: FC<Props> = ({ value, onChange }) => {
+const ImageSelectorWIthSmallPreview: FC<Props> = ({
+  placeholder,
+  label,
+  value,
+  onChange,
+  className
+}) => {
   const ref = useRef<HTMLInputElement>(null)
   return (
-    <div className="flex items-start">
-      <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
-        Foto Profil
+    <div className={`flex items-start ${className}`}>
+      <label htmlFor="image-input" className="block text-sm font-medium text-gray-700">
+        {label}
         <input
-          id="avatar"
+          id="image-input"
           type="file"
           className="hidden"
           onChange={onChange}
@@ -21,11 +30,11 @@ const ProfilePicSelector: FC<Props> = ({ value, onChange }) => {
           accept="image/*"
         />
         <div className="mt-1 flex items-center">
-          <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+          <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 border">
             <Image
               width={48}
               height={48}
-              src={value || "/icons/user-circle.svg"}
+              src={value || placeholder}
               className="h-full w-full text-gray-300"
             />
           </span>
@@ -38,4 +47,4 @@ const ProfilePicSelector: FC<Props> = ({ value, onChange }) => {
   )
 }
 
-export default ProfilePicSelector
+export default ImageSelectorWIthSmallPreview

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from "react"
+import React, { ChangeEvent, FC } from "react"
 import Button from "@components/Button"
 import Divider from "@components/Divider"
 import TextField from "@components/TextField"
@@ -7,7 +7,7 @@ import { findUserByEmail } from "@lib/db"
 import { InferGetServerSidePropsType, NextPage } from "next"
 import { useForm } from "react-hook-form"
 import { PatchUserBody } from "@api/me"
-import ProfilePicSelector from "@components/ProfilePicSelector"
+import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
@@ -104,7 +104,12 @@ const PersonalInfoForm: FC<{
                   {...register("email")}
                 />
 
-                <ProfilePicSelector value={watch("image")} onChange={handleImageChange} />
+                <ImageSelectorWIthSmallPreview
+                  label="Foto profil"
+                  value={watch("image")}
+                  onChange={handleImageChange}
+                  placeholder="/icons/user-circle.svg"
+                />
                 {formState.errors.image && (
                   <p className="text-red-800 text-xs !mt-4">{formState.errors.image.message}</p>
                 )}

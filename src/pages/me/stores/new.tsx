@@ -1,5 +1,5 @@
 import Divider from "@components/Divider"
-import React from "react"
+import React, { ChangeEvent } from "react"
 import { getSession } from "next-auth/client"
 import { InferGetServerSidePropsType, NextPage } from "next"
 import TextField from "@components/TextField"
@@ -8,9 +8,16 @@ import Textarea from "@components/Textarea"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
+import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
+import { uploadImage } from "@lib/image"
 
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
-  const { register, handleSubmit, formState } = useForm<PostStoreBody>({ mode: "onChange" })
+  const { watch, setValue, setError, register, handleSubmit, formState } = useForm<PostStoreBody>({
+    mode: "onChange",
+    defaultValues: {
+      logo: null
+    }
+  })
   const router = useRouter()
   const { isDirty, isValid } = formState
 
@@ -22,6 +29,19 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
     })
 
     if (result.ok) await router.push("/me/stores")
+  }
+
+  const handleChangeLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+    const result = await uploadImage(e.target.files[0])
+    if (result === null) {
+      setError("logo", {
+        type: "fetch",
+        message: "Oops, upload gambar gagal, tolong coba kembali."
+      })
+      return
+    }
+
+    setValue("logo", result, { shouldDirty: true })
   }
 
   return (
@@ -66,6 +86,14 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                       label="Tentang toko anda"
                       containerClassName="col-span-6"
                       {...register("description")}
+                    />
+
+                    <ImageSelectorWIthSmallPreview
+                      label="Logo toko"
+                      onChange={handleChangeLogo}
+                      className="col-span-full"
+                      placeholder="/icons/building-warehouse.svg"
+                      value={watch("logo")}
                     />
 
                     <TextField

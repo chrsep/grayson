@@ -27,6 +27,8 @@ model Store {
   owner   User   @relation("owner", fields: [ownerId], references: [id])
   ownerId Int
 
+  logo String?
+
   users    User[]
   products Product[]
 }

@@ -1,6 +1,6 @@
 import { insertStore } from "@lib/db"
-import { string, type, TypeOf } from "io-ts"
-import { newProtectedApi, newMutationHandler } from "@lib/rest"
+import { newMutationHandler, newProtectedApi } from "@lib/rest"
+import { nullType, string, type, TypeOf, union } from "io-ts"
 
 const PostBody = type({
   name: string,
@@ -11,7 +11,8 @@ const PostBody = type({
   city: string,
   province: string,
   postcode: string,
-  howToPay: string
+  howToPay: string,
+  logo: union([nullType, string])
 })
 export type PostStoreBody = TypeOf<typeof PostBody>
 
