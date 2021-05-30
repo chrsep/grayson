@@ -20,32 +20,36 @@ type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
 
 const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
-  store,
   product
 }) => {
-  const router = useRouter()
-  const { register, handleSubmit, watch, setValue, getValues, formState } = useForm<FormData>({
-    defaultValues: {
-      images: product.images.map(({ objectName }) => objectName),
-      name: product.name,
-      price: product.price.toString(),
-      description: product.description
-    }
-  })
-
+  const { reset, register, handleSubmit, watch, setValue, getValues, formState } =
+    useForm<FormData>({
+      defaultValues: {
+        images: product.images.map(({ objectName }) => objectName),
+        name: product.name,
+        price: product.price.toString(),
+        description: product.description
+      }
+    })
   const { isDirty } = formState
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
     if (typeof price !== "number") return
 
-    const result = await fetch(`/api/stores/${store.slug}/products`, {
-      method: "POST",
+    const result = await fetch(`/api/products/${product.slug}`, {
+      method: "PATCH",
       credentials: "include",
       body: JSON.stringify({ ...data, price })
     })
 
-    if (result.ok) await router.push(`/me/stores/${store.slug}`)
+    if (result.ok) {
+      const newProduct = await result.json()
+      reset({
+        ...newProduct,
+        images: newProduct.images.map(({ objectName }) => objectName)
+      })
+    }
   }
 
   const handleImageUpload: ChangeEventHandler<HTMLInputElement> = async (e) => {
@@ -162,6 +166,7 @@ export async function getServerSideProps(
 
   const product = await findProductBySlugWithImages(productSlug)
 
+  console.log(product)
   // Pass data to the page via props
   return {
     props: {

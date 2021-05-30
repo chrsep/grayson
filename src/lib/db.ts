@@ -1,19 +1,11 @@
-import { PrismaClient, Product, Store } from "@prisma/client"
+import { ProductImage, Product, Store } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
-
-let db: PrismaClient = null
-
-export const getDB = () => {
-  if (db === null) {
-    db = new PrismaClient()
-  }
-  return db
-}
+import prisma from "@lib/prisma"
 
 export const findUserStores = async (userEmail: string) => {
-  return getDB().store.findMany({
+  return prisma.store.findMany({
     where: {
       users: {
         some: {
@@ -28,7 +20,7 @@ export const insertStore = async (
   store: Omit<Store, "id" | "owner" | "ownerId" | "slug" | "address">,
   ownerEmail: string
 ) => {
-  return getDB().store.create({
+  return prisma.store.create({
     data: {
       ...store,
       slug: slugify(`${store.name}-${nanoid(3)}`),
@@ -47,7 +39,7 @@ export const insertStore = async (
 }
 
 export const findStoreBySlug = async (slug: string) => {
-  return getDB().store.findUnique({
+  return prisma.store.findUnique({
     where: {
       slug
     }
@@ -55,7 +47,7 @@ export const findStoreBySlug = async (slug: string) => {
 }
 
 export const findStoreWithProductsBySlug = async (slug: string) => {
-  return getDB().store.findUnique({
+  return prisma.store.findUnique({
     where: {
       slug
     },
@@ -69,7 +61,7 @@ export const insertProduct = async (
   product: Omit<Product, "id" | "storeId" | "slug" | "images"> & { images: string[] },
   storeSlug: string
 ) => {
-  return getDB().product.create({
+  return prisma.product.create({
     data: {
       ...product,
       slug: `${slugify(product.name)}-${nanoid(3)}`,
@@ -88,20 +80,20 @@ export const insertProduct = async (
 }
 
 export const updateUser = async (id: number, user: Omit<User, "id">) => {
-  return getDB().user.update({
+  return prisma.user.update({
     data: user,
     where: { id }
   })
 }
 
 export const findUserByEmail = async (email: string) => {
-  return getDB().user.findUnique({
+  return prisma.user.findUnique({
     where: { email }
   })
 }
 
 export const findUserByEmailWithStores = async (email: string) => {
-  return getDB().user.findUnique({
+  return prisma.user.findUnique({
     where: { email },
     include: {
       stores: true
@@ -110,12 +102,31 @@ export const findUserByEmailWithStores = async (email: string) => {
 }
 
 export const findProductBySlugWithImages = async (slug: string) => {
-  return getDB().product.findUnique({
-    where: {
-      slug
-    },
+  return prisma.product.findUnique({
+    where: { slug },
     include: {
       images: true
+    }
+  })
+}
+
+export const updateProduct = async (
+  id: string,
+  product: Product,
+  images: Omit<ProductImage, "productId">[]
+) => {
+  return prisma.product.update({
+    where: { id },
+    data: {
+      ...product,
+      images: {
+        connectOrCreate: images.map((image) => ({
+          where: { objectName: image.objectName },
+          create: {
+            objectName: image.objectName
+          }
+        }))
+      }
     }
   })
 }

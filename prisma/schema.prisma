@@ -34,7 +34,7 @@ model Store {
 }
 
 model ProductImage {
-  objectName String   @id @default("")
+  objectName String   @id
   Product    Product? @relation(fields: [productId], references: [id])
   productId  String?
 }
