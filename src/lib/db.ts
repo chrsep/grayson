@@ -108,3 +108,14 @@ export const findUserByEmailWithStores = async (email: string) => {
     }
   })
 }
+
+export const findProductBySlugWithImages = async (slug: string) => {
+  return getDB().product.findUnique({
+    where: {
+      slug
+    },
+    include: {
+      images: true
+    }
+  })
+}

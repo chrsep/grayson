@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
-import { findStoreWithProductsBySlug } from "@lib/db"
+import { findProductBySlugWithImages, findStoreWithProductsBySlug } from "@lib/db"
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import React, { ChangeEventHandler } from "react"
@@ -14,20 +14,26 @@ import UploadImageButton from "@components/UploadImageButton"
 import Divider from "@components/Divider"
 import ProductImagePreviews from "@components/ProductImagePreviews"
 import Button from "@components/Button"
-import { PostProductBody } from "@api/stores/[slug]/products"
+import { PostProductBody } from "@api/stores/[storeSlug]/products"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
 
 const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
-  store
+  store,
+  product
 }) => {
   const router = useRouter()
-  const { register, handleSubmit, watch, setValue, getValues } = useForm<FormData>({
+  const { register, handleSubmit, watch, setValue, getValues, formState } = useForm<FormData>({
     defaultValues: {
-      images: []
+      images: product.images.map(({ objectName }) => objectName),
+      name: product.name,
+      price: product.price.toString(),
+      description: product.description
     }
   })
+
+  const { isDirty } = formState
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
@@ -47,7 +53,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
     const images = getValues("images")
     images.push(result)
-    setValue("images", images)
+    setValue("images", images, { shouldDirty: true })
   }
 
   return (
@@ -56,7 +62,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <div className="pb-5 border-b border-gray-200">
           <h2 className="pt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-            Produk baru
+            Ubah produk
           </h2>
         </div>
       </div>
@@ -125,7 +131,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   <p className="mt-1 text-sm text-gray-500 mr-4">
                     Data yang diperlukan ditandai dengan tanda bintang (*)
                   </p>
-                  <Button type="submit" className="ml-auto">
+                  <Button type="submit" className="ml-auto" disabled={!isDirty}>
                     Simpan
                   </Button>
                 </div>
@@ -139,7 +145,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 }
 
 export async function getServerSideProps(
-  context: GetServerSidePropsContext<{ storeSlug: string }>
+  context: GetServerSidePropsContext<{ storeSlug: string; productSlug: string }>
 ) {
   const session = await getSession(context)
   if (session === null) {
@@ -151,13 +157,16 @@ export async function getServerSideProps(
     }
   }
 
-  const { storeSlug } = context.params
+  const { productSlug, storeSlug } = context.params
   const store = await findStoreWithProductsBySlug(storeSlug)
+
+  const product = await findProductBySlugWithImages(productSlug)
 
   // Pass data to the page via props
   return {
     props: {
       store,
+      product,
       breadcrumbs: [
         { name: "Toko anda", href: "/me/stores", current: false },
         { name: store.name, href: `/me/stores/${storeSlug}`, current: true }
