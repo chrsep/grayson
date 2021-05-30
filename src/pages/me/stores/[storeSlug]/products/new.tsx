@@ -169,7 +169,9 @@ const ProductImages: FC<{ files: string[] }> = ({ files }) => (
   </ul>
 )
 
-export async function getServerSideProps(context: GetServerSidePropsContext<{ slug: string }>) {
+export async function getServerSideProps(
+  context: GetServerSidePropsContext<{ storeSlug: string }>
+) {
   const session = await getSession(context)
   if (session === null) {
     return {
@@ -180,8 +182,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
     }
   }
 
-  const { slug } = context.params
-  const store = await findStoreWithProductsBySlug(slug)
+  const { storeSlug } = context.params
+  const store = await findStoreWithProductsBySlug(storeSlug)
 
   // Pass data to the page via props
   return {
@@ -189,7 +191,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
       store,
       breadcrumbs: [
         { name: "Toko anda", href: "/me/stores", current: false },
-        { name: store.name, href: `/me/stores/${slug}`, current: true }
+        { name: store.name, href: `/me/stores/${storeSlug}`, current: true }
       ]
     }
   }

@@ -88,7 +88,9 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext<{ slug: string }>) {
+export async function getServerSideProps(
+  context: GetServerSidePropsContext<{ storeSlug: string }>
+) {
   const session = await getSession(context)
   if (session === null) {
     return {
@@ -99,16 +101,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
     }
   }
 
-  const { slug } = context.params
-  const store = await findStoreWithProductsBySlug(slug)
+  const { storeSlug } = context.params
+  const store = await findStoreWithProductsBySlug(storeSlug)
 
   // Pass data to the page via props
   return {
     props: {
       store,
       tabs: [
-        { name: "Produk", href: `/me/stores/${slug}`, current: true },
-        { name: "Profil toko", href: `/me/stores/${slug}/profile`, current: false }
+        { name: "Produk", href: `/me/stores/${storeSlug}`, current: true },
+        { name: "Profil toko", href: `/me/stores/${storeSlug}/profile`, current: false }
       ],
       breadcrumbs: [{ name: "Toko anda", href: "/me/stores", current: false }]
     }
