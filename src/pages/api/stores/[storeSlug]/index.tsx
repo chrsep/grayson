@@ -1,5 +1,5 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
-import { partial, string } from "io-ts"
+import { nullType, partial, string, union } from "io-ts"
 import { findStoreBySlug, updateStore } from "@lib/db"
 
 const PatchBody = partial({
@@ -12,11 +12,11 @@ const PatchBody = partial({
   province: string,
   postcode: string,
   howToPay: string,
-  logo: string
+  logo: union([nullType, string])
 })
-const patch = newMutationHandler(PatchBody, async (data, session, { query: { slug } }) => {
-  if (string.is(slug)) {
-    const store = await findStoreBySlug(slug)
+const patch = newMutationHandler(PatchBody, async (data, session, { query: { storeSlug } }) => {
+  if (string.is(storeSlug)) {
+    const store = await findStoreBySlug(storeSlug)
     const updatedStore = {
       ...store,
       ...data
