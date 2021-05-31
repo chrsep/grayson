@@ -78,6 +78,14 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
               <div className="shadow overflow-hidden sm:rounded-md">
                 <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
+                    <ImageSelectorWIthSmallPreview
+                      label="Logo toko"
+                      onChange={handleChangeLogo}
+                      className="col-span-full"
+                      placeholder="/icons/building-warehouse.svg"
+                      value={watch("logo")}
+                    />
+
                     <TextField
                       label="Nama toko*"
                       type="text"
@@ -91,14 +99,6 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                       label="Tentang toko anda"
                       containerClassName="col-span-6"
                       {...register("description")}
-                    />
-
-                    <ImageSelectorWIthSmallPreview
-                      label="Logo toko"
-                      onChange={handleChangeLogo}
-                      className="col-span-full"
-                      placeholder="/icons/building-warehouse.svg"
-                      value={watch("logo")}
                     />
 
                     <TextField
@@ -159,8 +159,8 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
-                  <p className="mt-1 text-sm text-gray-500">
-                    Data yang diperlukan ditandai dengan tanda bintang (*)
+                  <p className="text-sm text-gray-500">
+                    Data yang ditandai dengan bintang (*) harus diisi
                   </p>
                   <Button type="submit" className="ml-auto" disabled={!isDirty || !isValid}>
                     Simpan

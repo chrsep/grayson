@@ -123,8 +123,8 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
-                  <p className="mt-1 text-sm text-gray-500 mr-4">
-                    Data yang diperlukan ditandai dengan tanda bintang (*)
+                  <p className="text-sm text-gray-500 mr-4">
+                    Data yang ditandai dengan bintang (*) harus diisi
                   </p>
                   <Button type="submit" className="ml-auto">
                     Simpan

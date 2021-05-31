@@ -13,8 +13,8 @@ import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
 
 const howToPayPlaceholder = `Contoh: 
-- Pembayaran dapat dilakukan dengan transfer ke .... 
-- Pembayaran dapat dilakukan saat saya sampai di lokasi anda...
+- Pembayaran dapat dilakukan dengan transfer 
+- Pembayaran dapat dilakukan saat saya sampai di lokasi
 `
 
 const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
@@ -101,6 +101,14 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
+                    <ImageSelectorWIthSmallPreview
+                      label="Logo toko"
+                      onChange={handleChangeLogo}
+                      className="col-span-full"
+                      placeholder="/icons/building-warehouse.svg"
+                      value={watch("logo")}
+                    />
+
                     <TextField
                       label="Nama toko*"
                       type="text"
@@ -114,14 +122,6 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
                       label="Tentang toko anda"
                       containerClassName="col-span-6"
                       {...register("description")}
-                    />
-
-                    <ImageSelectorWIthSmallPreview
-                      label="Logo toko"
-                      onChange={handleChangeLogo}
-                      className="col-span-full"
-                      placeholder="/icons/building-warehouse.svg"
-                      value={watch("logo")}
                     />
 
                     <TextField
@@ -168,23 +168,22 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
                       {...register("postcode")}
                     />
 
-                    <Textarea
-                      rows={6}
-                      label="Cara pembayaran"
-                      containerClassName="col-span-6"
-                      placeholder={howToPayPlaceholder}
-                      {...register("howToPay")}
-                    />
-                    <p className="col-span-4 text-sm text-gray-500">
-                      Berikan instruksi cara pembayaran setelah pembeli checkout
-                    </p>
+                    <div className="col-span-6">
+                      <Textarea
+                        rows={6}
+                        label="Cara pembayaran"
+                        placeholder={howToPayPlaceholder}
+                        {...register("howToPay")}
+                      />
+                      <p className="text-sm text-gray-500 mt-2">
+                        Instruksi pembayaran akan ditunjukan ke pembeli saat checkout
+                      </p>
+                    </div>
                   </div>
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center sticky sm:relative bottom-0 border-t">
-                  <p className="mt-1 text-sm text-gray-500">
-                    Data yang diperlukan ditandai dengan tanda bintang (*)
-                  </p>
+                  <p className="text-sm text-gray-500">Data dengan tanda bintang harus diisi (*)</p>
                   <Button type="submit" className="ml-auto" disabled={!isDirty || !isValid}>
                     Simpan
                   </Button>
