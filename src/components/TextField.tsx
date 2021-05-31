@@ -55,7 +55,7 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
             value={value}
             placeholder={placeholder}
             ref={ref}
-            className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full ${
+            className={`focus:ring-primary-500 focus:border-primary-500 block w-full ${
               iconSrc ? "pl-10" : ""
             } sm:text-sm border-gray-300 rounded-md`}
           />

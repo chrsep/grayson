@@ -55,7 +55,7 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                 <tbody>
                   {store.products.map((product) => (
                     <NextLink href={`/me/stores/${store.slug}/products/${product.slug}`}>
-                      <tr key={product.id} className="bg-white cursor-pointer hover:bg-purple-50">
+                      <tr key={product.id} className="bg-white cursor-pointer hover:bg-primary-100">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {product.name}
                         </td>
@@ -66,7 +66,7 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                           {product.price}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                          <a href="#" className="text-primary-400 hover:text-indigo-900">
                             Edit
                           </a>
                         </td>

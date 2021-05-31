@@ -44,7 +44,7 @@ const Textarea: ForwardRefRenderFunction<HTMLTextAreaElement, Props> = (
           placeholder={placeholder}
           rows={rows}
           ref={ref}
-          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          className="focus:ring-primary-400 focus:border-primary-400 block w-full sm:text-sm border-gray-300 rounded-md"
         />
       </div>
     </div>

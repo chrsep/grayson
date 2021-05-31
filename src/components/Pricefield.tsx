@@ -36,7 +36,7 @@ const Pricefield: ForwardRefRenderFunction<HTMLInputElement, Props> = (
       </div>
       <input
         type="text"
-        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md"
+        className="focus:ring-primary-400 focus:border-primary-400 block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md"
         aria-describedby="price-currency"
         placeholder={placeholder}
         name={name}

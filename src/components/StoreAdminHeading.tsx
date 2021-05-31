@@ -32,7 +32,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
             <select
               id="current-tab"
               name="current-tab"
-              className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-400 focus:border-primary-400 sm:text-sm rounded-md"
               defaultValue={tabs.find((tab) => tab.current).name}
               onChange={async (e) => {
                 await router.push(tabs[e.target.selectedIndex].href)
@@ -60,7 +60,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
                     className={`
                       ${
                         tab.current
-                          ? "!border-indigo-600 !text-indigo-600"
+                          ? "!border-primary-400 !text-primary-400"
                           : "hover:text-gray-700 hover:border-gray-300"
                       } border-transparent text-gray-500 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm`}
                     aria-current={tab.current ? "page" : undefined}

@@ -7,7 +7,7 @@ interface Props extends HTMLProps<HTMLAnchorElement> {
 }
 const Link: FC<Props> = ({ href, className = "", children, ...props }) => (
   <NextLink href={href}>
-    <a className={`font-medium text-indigo-600 hover:text-indigo-500 ${className}`} {...props}>
+    <a className={`font-medium text-primary-400 hover:text-primary-300 ${className}`} {...props}>
       {children}
     </a>
   </NextLink>
