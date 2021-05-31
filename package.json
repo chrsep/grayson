@@ -10,7 +10,9 @@
     "start": "prisma migrate deploy && next start",
     "prisma:generate": "prisma generate",
     "prepare": "husky install",
-    "lint": "eslint --fix **.{ts,tsx}"
+    "lint": "eslint --fix **.{ts,tsx}",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@headlessui/react": "1.2.0",
@@ -46,6 +48,7 @@
     "@tailwindcss/typography": "0.4.1",
     "@typescript-eslint/eslint-plugin": "4.25.0",
     "autoprefixer": "10.2.5",
+    "cypress": "^7.4.0",
     "eslint": "7.27.0",
     "eslint-config-airbnb-typescript": "12.3.1",
     "eslint-config-prettier": "8.3.0",
