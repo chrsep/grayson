@@ -138,3 +138,9 @@ export const updateProduct = async (
     }
   })
 }
+
+export const deleteStoreBySlug = async (slug: string) => {
+  return prisma.store.delete({
+    where: { slug }
+  })
+}

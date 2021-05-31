@@ -23,14 +23,15 @@ const Button: FC<Props> = ({
   let baseClassName: string
   switch (variant) {
     case "icon":
-      baseClassName = "!p-0 text-gray-200 hover:text-gray-500"
+      baseClassName =
+        "!p-0 text-gray-200 hover:text-gray-500  hover:bg-gray-900 hover:bg-opacity-20"
       break
     case "secondary":
       baseClassName = "text-gray-200 hover:text-gray-500"
       break
     case "outline":
       baseClassName =
-        "bg-white border border-gray-300 shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 "
+        "bg-white border border-gray-300 shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
       break
     default:
       baseClassName =
@@ -47,7 +48,8 @@ const Button: FC<Props> = ({
         baseClassName,
         "flex items-center rounded-md py-2 px-4 justify-center ",
         "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-300",
-        "disabled:opacity-40"
+        "disabled:opacity-40",
+        "transition-color"
       )}
     >
       {children}

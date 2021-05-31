@@ -1,6 +1,6 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { nullType, partial, string, union } from "io-ts"
-import { findStoreBySlug, updateStore } from "@lib/db"
+import { deleteStoreBySlug, findStoreBySlug, updateStore } from "@lib/db"
 
 const PatchBody = partial({
   name: string,
@@ -38,4 +38,19 @@ const patch = newMutationHandler(PatchBody, async (data, session, { query: { sto
   }
 })
 
-export default newProtectedApi({ patch })
+const del = newMutationHandler(PatchBody, async (data, session, { query: { storeSlug } }) => {
+  if (string.is(storeSlug)) {
+    await deleteStoreBySlug(storeSlug)
+    return { status: 201, body: {} }
+  }
+
+  return {
+    status: 400,
+    body: {
+      error: "bad_request",
+      description: "The data provided does not adhere to the standard"
+    }
+  }
+})
+
+export default newProtectedApi({ patch, del })

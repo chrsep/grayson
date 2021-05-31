@@ -8,6 +8,7 @@ interface Handler {
   post?: NextApiHandler
   put?: NextApiHandler
   patch?: NextApiHandler
+  del?: NextApiHandler
 }
 
 export function newApi(handler: Handler): NextApiHandler {
@@ -24,6 +25,9 @@ export function newApi(handler: Handler): NextApiHandler {
         break
       case "PATCH":
         await handler.patch(req, res)
+        break
+      case "DELETE":
+        await handler.del(req, res)
         break
       default: {
         res.status(401).json({
