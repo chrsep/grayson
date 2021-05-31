@@ -11,6 +11,11 @@ import { useRouter } from "next/router"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image"
 
+const howToPayPlaceholder = `Contoh: 
+- Pembayaran dapat dilakukan dengan transfer ke .... 
+- Pembayaran dapat dilakukan saat saya sampai di lokasi anda...
+`
+
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
   const { watch, setValue, setError, register, handleSubmit, formState } = useForm<PostStoreBody>({
     mode: "onChange",
@@ -169,11 +174,6 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
     </div>
   )
 }
-
-const howToPayPlaceholder = `Contoh: 
-- Pembayaran dapat dilakukan dengan transfer ke .... 
-- Pembayaran dapat dilakukan saat saya sampai di lokasi anda...
-`
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
