@@ -1,8 +1,8 @@
 import { ChangeEventHandler, forwardRef, ForwardRefRenderFunction } from "react"
 
 interface Props {
-  label: string
   name: string
+  label?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   type?: string
   value?: string
@@ -11,6 +11,7 @@ interface Props {
   required?: boolean
   iconSrc?: string
   placeholder?: string
+  hideLabel?: boolean
 }
 
 const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -24,15 +25,16 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
     name,
     iconSrc,
     placeholder,
-    type = "text"
+    type = "text",
+    hideLabel = false
   },
   ref
 ) => {
   return (
     <div className={`${containerClassName}`}>
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
-        {label}
-        <div className="mt-1 rounded-md shadow-sm relative">
+        {!hideLabel && <span className="mb-1 block">{label}</span>}
+        <div className="rounded-md shadow-sm relative">
           {iconSrc && (
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <img

@@ -9,6 +9,7 @@ import Button from "@components/Button"
 import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
+import TextField from "@components/TextField"
 
 interface Props {
   navigation: Array<{
@@ -32,7 +33,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
               <LogoStandalone className="block lg:hidden h-8 w-auto ml-4" />
             </div>
 
-            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start flex-shrink-0">
               <Link href="/">
                 <a className="flex-shrink-0 flex items-center">
                   <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto " />
@@ -59,7 +60,9 @@ const Navbar: FC<Props> = ({ navigation }) => (
                 </div>
               </div>
             </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+            <div className="absolute ml-[91px] inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <SearchLink />
               <Cart />
               <UserProfile />
             </div>
@@ -90,6 +93,24 @@ const Navbar: FC<Props> = ({ navigation }) => (
   </Disclosure>
 )
 
+const SearchLink = () => {
+  return (
+    <div className="min-w-0 px-4 sm:px-6">
+      <Link href="/search">
+        <a className="flex w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate">
+          <img
+            src="/icons/search-light.svg"
+            className="h-5 w-5 opacity-70 mr-3"
+            aria-hidden="true"
+            alt=""
+          />
+          Cari produk
+        </a>
+      </Link>
+    </div>
+  )
+}
+
 const UserProfile = () => {
   const [session, loading] = useSession()
 
@@ -106,7 +127,7 @@ const UserProfile = () => {
   }
 
   return (
-    <Menu as="div" className="relative">
+    <Menu as="div" className="relative flex-shrink-0">
       {({ open }) => (
         <>
           <div>
@@ -191,7 +212,7 @@ const UserProfile = () => {
 const Cart = () => {
   const [open, setOpen] = useState(false)
   return (
-    <>
+    <div className="flex-shrink-0">
       <Button
         variant="icon"
         className="mr-4 opacity-80 hover:opacity-100 transition-opacity"
@@ -200,7 +221,7 @@ const Cart = () => {
         <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
-    </>
+    </div>
   )
 }
 
