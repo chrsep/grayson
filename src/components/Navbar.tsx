@@ -9,7 +9,6 @@ import Button from "@components/Button"
 import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
-import TextField from "@components/TextField"
 
 interface Props {
   navigation: Array<{
@@ -95,9 +94,19 @@ const Navbar: FC<Props> = ({ navigation }) => (
 
 const SearchLink = () => {
   return (
-    <div className="min-w-0 px-4 sm:px-6">
+    <div className="min-w-0 px-4 sm:px-6 ">
       <Link href="/search">
-        <a className="flex w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate">
+        <a>
+          <Button
+            variant="icon"
+            className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
+          >
+            <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
+          </Button>
+        </a>
+      </Link>
+      <Link href="/search">
+        <a className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex">
           <img
             src="/icons/search-light.svg"
             className="h-5 w-5 opacity-70 mr-3"

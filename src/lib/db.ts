@@ -86,6 +86,13 @@ export const updateUser = async (id: number, user: Omit<User, "id">) => {
   })
 }
 
+export const updateStore = async (id: string, user: Omit<Store, "id">) => {
+  return prisma.store.update({
+    data: user,
+    where: { id }
+  })
+}
+
 export const findUserByEmail = async (email: string) => {
   return prisma.user.findUnique({
     where: { email }
