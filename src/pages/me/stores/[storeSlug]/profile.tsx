@@ -192,6 +192,28 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
             </form>
           </div>
         </div>
+
+        <div className="md:grid md:grid-cols-3 md:gap-6 mt-10">
+          <div className="md:col-span-1">
+            <div className="px-4 sm:px-0">
+              <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">Danger Zone</h3>
+            </div>
+          </div>
+
+          <div className="mt-5 md:mt-0 md:col-span-2">
+            <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
+              <p className="text-gray-500 text-sm">
+                Data toko tak akan bisa dikembahlikan setelah dihapus
+              </p>
+              <Button
+                variant="outline"
+                className="ml-auto text-red-700 hover:bg-red-100 flex-shrink-0"
+              >
+                Hapus toko
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </PageContainer>
   )
