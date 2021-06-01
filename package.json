@@ -65,7 +65,7 @@
     "prisma": "2.23.0",
     "tailwindcss": "2.1.2",
     "typescript": "4.3.2",
-    "webpack": "5.37.1"
+    "webpack": "5.38.1"
   },
   "lint-staged": {
     "*.{js,ts,ts}": "eslint --cache --fix"
