@@ -140,6 +140,14 @@ export const updateProduct = async (
 }
 
 export const deleteStoreBySlug = async (slug: string) => {
+  await prisma.product.deleteMany({
+    where: {
+      store: {
+        slug
+      }
+    }
+  })
+
   return prisma.store.delete({
     where: { slug }
   })

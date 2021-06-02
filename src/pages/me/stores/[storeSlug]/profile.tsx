@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react"
+import React, { ChangeEvent, FC } from "react"
 import { findStoreBySlug } from "@lib/db"
 import { getSession } from "next-auth/client"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
@@ -12,6 +12,7 @@ import { PostStoreBody } from "@api/stores"
 import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
 import Divider from "@components/Divider"
+import { useRouter } from "next/router"
 
 const howToPayPlaceholder = `Contoh: 
 - Pembayaran dapat dilakukan dengan transfer 
@@ -196,29 +197,45 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
 
         <Divider className="hidden sm:block" />
 
-        <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
-          <div className="md:col-span-1">
-            <div className="px-4 sm:px-0">
-              <h3 className="text-lg  leading-6 text-gray-900 mb-4">Danger Zone</h3>
-            </div>
-          </div>
-
-          <div className="mt-5 md:mt-0 md:col-span-2">
-            <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
-              <p className="text-gray-500 text-sm">
-                Data toko tak akan bisa dikembalikan setelah dihapus
-              </p>
-              <Button
-                variant="outline"
-                className="ml-auto text-red-700 hover:bg-red-100 flex-shrink-0"
-              >
-                Hapus toko
-              </Button>
-            </div>
-          </div>
-        </div>
+        <DangerZone slug={store.slug} />
       </div>
     </PageContainer>
+  )
+}
+
+const DangerZone: FC<{ slug: string }> = ({ slug }) => {
+  const router = useRouter()
+  const handleDelete = async () => {
+    const deleteResponse = await fetch(`/api/stores/${slug}`, {
+      method: "DELETE",
+      credentials: "include"
+    })
+
+    if (deleteResponse.ok) await router.replace("/me/stores")
+  }
+  return (
+    <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
+      <div className="md:col-span-1">
+        <div className="px-4 sm:px-0">
+          <h3 className="text-lg  leading-6 text-gray-900 mb-4">Danger Zone</h3>
+        </div>
+      </div>
+
+      <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
+          <p className="text-gray-500 text-sm">
+            Data toko tak akan bisa dikembalikan setelah dihapus
+          </p>
+          <Button
+            variant="outline"
+            className="ml-auto text-red-700 hover:bg-red-100 flex-shrink-0"
+            onClick={handleDelete}
+          >
+            Hapus toko
+          </Button>
+        </div>
+      </div>
+    </div>
   )
 }
 
