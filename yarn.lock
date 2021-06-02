@@ -120,12 +120,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/inria-sans@^4.4.2":
+"@fontsource/inria-sans@4.4.2":
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/@fontsource/inria-sans/-/inria-sans-4.4.2.tgz#48a5f4cba113d0b37a320253118aa06873929a75"
   integrity sha512-ZTfvjvzYqt3XPlZepgpBtaVYQ8viIZJcxSkyT6R132YAEW42OOdxkzgCBoK2W/CfXjYxSVXOAqz5/S7lSUJtwA==
 
-"@fontsource/noto-sans@^4.4.2":
+"@fontsource/noto-sans@4.4.2":
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/@fontsource/noto-sans/-/noto-sans-4.4.2.tgz#e1736311ca7be5995df5a367d6a8f214755b287e"
   integrity sha512-ulwkRDyk9QH3sH9BR0oikgc929YsqQOEYsHvypmTYNXlqfbJxYTwzK10sbrvcO53lFHgpf8o0296BqrDuYnG2g==
@@ -5383,7 +5383,7 @@ supports-color@^8.0.0, supports-color@^8.1.1:
   dependencies:
     has-flag "^4.0.0"
 
-swr@^0.5.6:
+swr@0.5.6:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/swr/-/swr-0.5.6.tgz#70bfe9bc9d7ac49a064be4a0f4acf57982e55a31"
   integrity sha512-Bmx3L4geMZjYT5S2Z6EE6/5Cx6v1Ka0LhqZKq8d6WL2eu9y6gHWz3dUzfIK/ymZVHVfwT/EweFXiYGgfifei3w==
