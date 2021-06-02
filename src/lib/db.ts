@@ -122,12 +122,21 @@ export const updateProduct = async (
   product: Product,
   images: Omit<ProductImage, "productId">[]
 ) => {
+  const originalImages = await prisma.productImage.findMany({
+    where: {
+      productId: product.id
+    }
+  })
+
   return prisma.product.update({
     where: { id },
     include: { images: true },
     data: {
       ...product,
       images: {
+        disconnect: originalImages
+          .filter((image) => images.findIndex((i) => image.objectName === i.objectName) === -1)
+          .map((image) => ({ objectName: image.objectName })),
         connectOrCreate: images.map((image) => ({
           where: { objectName: image.objectName },
           create: {

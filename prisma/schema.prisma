@@ -35,7 +35,7 @@ model Store {
 
 model ProductImage {
   objectName String   @id
-  Product    Product? @relation(fields: [productId], references: [id])
+  product    Product? @relation(fields: [productId], references: [id])
   productId  String?
 }
 

@@ -160,7 +160,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
                   <p className="text-sm text-gray-500">
-                    Data yang ditandai dengan bintang (*) harus diisi
+                    Data dengan tanda bintang (*) harus di-isi.
                   </p>
                   <Button type="submit" className="ml-auto" disabled={!isDirty || !isValid}>
                     Simpan

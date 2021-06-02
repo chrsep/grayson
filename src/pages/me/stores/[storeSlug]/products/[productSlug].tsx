@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from
 import { getSession } from "next-auth/client"
 import { findProductBySlugWithImages, findStoreWithProductsBySlug } from "@lib/db"
 import { useForm } from "react-hook-form"
-import React, { ChangeEventHandler } from "react"
+import React, { ChangeEventHandler, useState } from "react"
 import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
 import Breadcrumbs from "@components/Breadcrumbs"
@@ -15,21 +15,21 @@ import ProductImagePreviews from "@components/ProductImagePreviews"
 import Button from "@components/Button"
 import { PostProductBody } from "@api/stores/[storeSlug]/products"
 
-type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
+type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
 const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   product
 }) => {
-  const { reset, register, handleSubmit, watch, setValue, getValues, formState } =
-    useForm<FormData>({
-      defaultValues: {
-        images: product.images.map(({ objectName }) => objectName),
-        name: product.name,
-        price: product.price.toString(),
-        description: product.description
-      }
-    })
+  const [images, setImages] = useState(product.images.map(({ objectName }) => objectName))
+  const [imageChanged, setImageChanged] = useState(false)
+  const { reset, register, handleSubmit, setValue, getValues, formState } = useForm<FormData>({
+    defaultValues: {
+      name: product.name,
+      price: product.price.toString(),
+      description: product.description
+    }
+  })
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
@@ -38,26 +38,24 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
     const result = await fetch(`/api/products/${product.slug}`, {
       method: "PATCH",
       credentials: "include",
-      body: JSON.stringify({ ...data, price })
+      body: JSON.stringify({ ...data, price, images })
     })
 
     if (result.ok) {
       const newProduct = await result.json()
       reset({
-        images: newProduct.images.map(({ objectName }) => objectName),
         name: newProduct.name,
         price: newProduct.price.toString(),
         description: newProduct.description
       })
+      setImageChanged(false)
     }
   }
 
   const handleImageUpload: ChangeEventHandler<HTMLInputElement> = async (e) => {
     const result = await uploadImage(e.target.files[0])
-
-    const images = getValues("images")
-    images.push(result)
-    setValue("images", images, { shouldDirty: true })
+    setImages([...images, result])
+    setImageChanged(true)
   }
 
   return (
@@ -128,15 +126,25 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                     </div>
 
                     <Divider className="" />
-                    <ProductImagePreviews files={watch("images")} />
+                    <ProductImagePreviews
+                      files={images}
+                      onDeleteClick={(file) => {
+                        setImages(images.filter((image) => file !== image))
+                        setImageChanged(true)
+                      }}
+                    />
                   </div>
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
                   <p className="text-sm text-gray-500 mr-4">
-                    Data yang ditandai dengan bintang (*) harus diisi
+                    Data dengan tanda bintang (*) harus di-isi.
                   </p>
-                  <Button type="submit" className="ml-auto" disabled={!formState.isDirty}>
+                  <Button
+                    type="submit"
+                    className="ml-auto"
+                    disabled={!formState.isDirty && !imageChanged}
+                  >
                     Simpan
                   </Button>
                 </div>
