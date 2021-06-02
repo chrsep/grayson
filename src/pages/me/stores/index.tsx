@@ -24,7 +24,7 @@ const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
             <li className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 flex items-center p-6 mx-4 sm:mx-0 hover:bg-primary-100 min-h-[92px] transition-colors">
               <div className="flex-1 truncate">
                 <div className="flex items-center space-x-3">
-                  <h3 className="text-gray-900 text-sm font-medium truncate">{store.name}</h3>
+                  <h3 className="text-gray-900 text-sm  truncate">{store.name}</h3>
                 </div>
                 <p className="mt-1 text-gray-500 text-sm truncate">{store.description}</p>
               </div>

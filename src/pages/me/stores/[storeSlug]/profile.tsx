@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
 import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
+import Divider from "@components/Divider"
 
 const howToPayPlaceholder = `Contoh: 
 - Pembayaran dapat dilakukan dengan transfer 
@@ -88,7 +89,7 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">Data kontak</h3>
+              <h3 className="text-lg font-bold leading-6 text-gray-900 mb-2">Data kontak</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Data kontak anda akan digunakan pembeli untuk menghubungi anda dan melanjutkan
                 transaksi saat checkout.
@@ -183,7 +184,7 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center sticky sm:relative bottom-0 border-t">
-                  <p className="text-sm text-gray-500">Data dengan tanda bintang harus diisi (*)</p>
+                  <p className="text-sm text-gray-500">Data dengan bintang (*) perlu di-isi. </p>
                   <Button type="submit" className="ml-auto" disabled={!isDirty || !isValid}>
                     Simpan
                   </Button>
@@ -193,17 +194,19 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
           </div>
         </div>
 
-        <div className="md:grid md:grid-cols-3 md:gap-6 mt-10">
+        <Divider className="hidden sm:block" />
+
+        <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">Danger Zone</h3>
+              <h3 className="text-lg  leading-6 text-gray-900 mb-4">Danger Zone</h3>
             </div>
           </div>
 
           <div className="mt-5 md:mt-0 md:col-span-2">
             <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
               <p className="text-gray-500 text-sm">
-                Data toko tak akan bisa dikembahlikan setelah dihapus
+                Data toko tak akan bisa dikembalikan setelah dihapus
               </p>
               <Button
                 variant="outline"

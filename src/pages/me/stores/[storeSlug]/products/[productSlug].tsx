@@ -75,7 +75,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">Data produk</h3>
+              <h3 className="text-lg  leading-6 text-gray-900">Data produk</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Isi data produk atau jasa yang ingin anda pasang.
               </p>
@@ -112,7 +112,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   <div className="pt-12">
                     <div className="flex flex-col sm:flex-row sm:items-center">
                       <div className="">
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">Gambar</h3>
+                        <h3 className="text-lg leading-6  text-gray-900">Gambar</h3>
                         <p className="mt-1 max-w-2xl text-sm text-gray-500">
                           Tambahkan gambar untuk produk anda.
                         </p>

@@ -1,10 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import "tailwindcss/tailwind.css"
 import { AppProps } from "next/app"
 import { getSession, Provider } from "next-auth/client"
 import Navbar from "@components/Navbar"
 import { useRouter } from "next/router"
 import categories from "../lib/categories"
+import "@fontsource/inria-sans/index.css"
+import "@fontsource/noto-sans/index.css"
+import "./global.css"
 
 function useGetNavigation() {
   const router = useRouter()

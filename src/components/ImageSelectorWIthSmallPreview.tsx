@@ -19,7 +19,7 @@ const ImageSelectorWIthSmallPreview: FC<Props> = ({
   const ref = useRef<HTMLInputElement>(null)
   return (
     <div className={`flex items-start ${className}`}>
-      <label htmlFor="image-input" className="block text-sm font-medium text-gray-700">
+      <label htmlFor="image-input" className="block text-sm  text-gray-700">
         {label}
         <input
           id="image-input"

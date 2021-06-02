@@ -62,7 +62,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
                         tab.current
                           ? "!border-primary-400 !text-primary-400"
                           : "hover:text-gray-700 hover:border-gray-300"
-                      } border-transparent text-gray-500 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm`}
+                      } border-transparent text-gray-500 whitespace-nowrap pb-4 px-1 border-b-2 text-sm`}
                     aria-current={tab.current ? "page" : undefined}
                   >
                     {tab.name}

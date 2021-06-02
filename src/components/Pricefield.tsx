@@ -27,7 +27,7 @@ const Pricefield: ForwardRefRenderFunction<HTMLInputElement, Props> = (
   ref
 ) => (
   <div className={containerClassName}>
-    <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+    <label htmlFor={id} className="block text-sm  text-gray-700">
       {label}
     </label>
     <div className="mt-1 relative rounded-md shadow-sm">

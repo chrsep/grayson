@@ -31,19 +31,19 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                   <tr>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs  text-gray-500 uppercase tracking-wider"
                     >
                       Nama
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs  text-gray-500 uppercase tracking-wider"
                     >
                       Deskripsi
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs  text-gray-500 uppercase tracking-wider"
                     >
                       Harga
                     </th>
@@ -56,7 +56,7 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                   {store.products.map((product) => (
                     <NextLink href={`/me/stores/${store.slug}/products/${product.slug}`}>
                       <tr key={product.id} className="bg-white cursor-pointer hover:bg-primary-100">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm  text-gray-900">
                           {product.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">
@@ -65,7 +65,7 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {product.price}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm ">
                           <a href="#" className="text-primary-400 hover:text-indigo-900">
                             Edit
                           </a>

@@ -6,6 +6,10 @@ module.exports = {
   mode: "jit",
   purge: ["src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      ui: `"Inria Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", sans-serif`,
+      body: `"Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", sans-serif`
+    },
     colors: {
       ...colors,
       primary: {

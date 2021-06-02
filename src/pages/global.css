@@ -1,0 +1,13 @@
+@tailwind base;
+
+@tailwind components;
+
+body {
+  @apply font-ui;
+}
+
+p {
+  @apply font-body;
+}
+
+@tailwind utilities;

@@ -77,7 +77,7 @@ const PersonalInfoForm: FC<{
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Data diri</h3>
+            <h3 className="text-lg font-bold leading-6 text-gray-900 mb-2">Data diri</h3>
             <p className="mt-1 text-sm text-gray-600">
               Data ini akan ditampilkan pada halaman profil dan pada listing produk anda.
             </p>
@@ -163,7 +163,7 @@ const ContactForm: FC<{
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Data kontak</h3>
+            <h3 className="text-lg font-bold leading-6 text-gray-900 mb-2">Data kontak</h3>
             <p className="mt-1 text-sm text-gray-600">
               Berikan data kontak lengkap anda agar pengguna lain dapat menghubungi anda.
             </p>

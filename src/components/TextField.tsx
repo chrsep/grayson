@@ -32,7 +32,7 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
 ) => {
   return (
     <div className={`${containerClassName}`}>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block text-sm  text-gray-700">
         {!hideLabel && <span className="mb-1 block">{label}</span>}
         <div className="rounded-md shadow-sm relative">
           {iconSrc && (

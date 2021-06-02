@@ -30,7 +30,7 @@ const Textarea: ForwardRefRenderFunction<HTMLTextAreaElement, Props> = (
 ) => {
   return (
     <div className={`${containerClassName}`}>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block text-sm  text-gray-700">
         {label}
       </label>
       <div className="mt-1 rounded-md shadow-sm relative">

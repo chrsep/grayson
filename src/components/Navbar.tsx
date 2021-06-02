@@ -48,7 +48,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
                           item.current
                             ? "bg-gray-900 text-white bg-opacity-20 "
                             : "text-gray-300 hover:bg-white hover:bg-opacity-20  hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium "
+                          "px-3 py-2 rounded-md text-sm  "
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
@@ -77,7 +77,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
                     item.current
                       ? "bg-gray-900 text-white bg-opacity-20 "
                       : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
+                    "block px-3 py-2 rounded-md text-base "
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
@@ -92,33 +92,31 @@ const Navbar: FC<Props> = ({ navigation }) => (
   </Disclosure>
 )
 
-const SearchLink = () => {
-  return (
-    <div className="min-w-0 px-4 sm:px-6 ">
-      <Link href="/search">
-        <a>
-          <Button
-            variant="icon"
-            className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
-          >
-            <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
-          </Button>
-        </a>
-      </Link>
-      <Link href="/search">
-        <a className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex">
-          <img
-            src="/icons/search-light.svg"
-            className="h-5 w-5 opacity-70 mr-3"
-            aria-hidden="true"
-            alt=""
-          />
-          Cari produk
-        </a>
-      </Link>
-    </div>
-  )
-}
+const SearchLink = () => (
+  <div className="min-w-0 px-4 sm:px-6 ">
+    <Link href="/search">
+      <a>
+        <Button
+          variant="icon"
+          className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
+        >
+          <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
+        </Button>
+      </a>
+    </Link>
+    <Link href="/search">
+      <a className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex ">
+        <img
+          src="/icons/search-light.svg"
+          className="h-5 w-5 opacity-70 mr-3"
+          aria-hidden="true"
+          alt=""
+        />
+        <span className="-pb-6">Cari produk</span>
+      </a>
+    </Link>
+  </div>
+)
 
 const UserProfile = () => {
   const [session, loading] = useSession()

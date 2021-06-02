@@ -21,12 +21,12 @@ const SignIn = () => {
           <div className="mt-8">
             {/* <div> */}
             {/*  <div> */}
-            {/*    <p className="text-sm font-medium text-gray-700">Masuk dengan</p> */}
+            {/*    <p className="text-sm  text-gray-700">Masuk dengan</p> */}
 
             {/*    <div className="mt-1 grid grid-cols-3 gap-3"> */}
             {/*      <button */}
             {/*        type="button" */}
-            {/*        className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 flex" */}
+            {/*        className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm  text-gray-500 hover:bg-gray-50 flex" */}
             {/*        onClick={() => signIn("facebook")} */}
             {/*      > */}
             {/*        Facebook */}
@@ -34,7 +34,7 @@ const SignIn = () => {
 
             {/*      <button */}
             {/*        type="button" */}
-            {/*        className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" */}
+            {/*        className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm  text-gray-500 hover:bg-gray-50" */}
             {/*        onClick={() => signIn("google")} */}
             {/*      > */}
             {/*        Google */}
@@ -42,7 +42,7 @@ const SignIn = () => {
 
             {/*      <button */}
             {/*        type="button" */}
-            {/*        className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" */}
+            {/*        className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm  text-gray-500 hover:bg-gray-50" */}
             {/*        onClick={() => signIn("twitter")} */}
             {/*      > */}
             {/*        Twitter */}

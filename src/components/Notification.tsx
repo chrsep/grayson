@@ -39,7 +39,7 @@ const Notification: FC<Props> = ({ heading, description, show, onClose }) => (
                   />
                 </div>
                 <div className="ml-3 w-0 flex-1 pt-0.5">
-                  <p className="text-sm font-medium text-gray-900">{heading}</p>
+                  <p className="text-sm  text-gray-900">{heading}</p>
                   <p className="mt-1 text-sm text-gray-500">{description}</p>
                 </div>
                 <div className="ml-4 flex-shrink-0 flex">
