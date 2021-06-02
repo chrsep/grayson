@@ -9,6 +9,7 @@ import Button from "@components/Button"
 import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
+import useGetUser from "@hooks/api/useGetUser"
 
 interface Props {
   navigation: Array<{
@@ -121,13 +122,13 @@ const SearchLink = () => (
 )
 
 const UserProfile = () => {
-  const [session, loading] = useSession()
+  const { error, data } = useGetUser()
 
-  if (loading) {
+  if (!error && !data) {
     return <div className="w-[32px] h-[32px]" />
   }
 
-  if (!session?.user?.email) {
+  if (!data?.user?.email) {
     return (
       <Link href="/auth/signin">
         <Button variant="outline" className="text-gray-400">
@@ -142,13 +143,13 @@ const UserProfile = () => {
       {({ open }) => (
         <>
           <div>
-            <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <Menu.Button className="bg-gray-100 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span className="sr-only">Open user menu</span>
               <Image
                 width={32}
                 height={32}
                 className="h-8 w-8 rounded-full"
-                src={session.user.image || "/icons/user-circle-light.svg"}
+                src={data.user.image || "/icons/user-circle-light.svg"}
                 alt=""
               />
             </Menu.Button>

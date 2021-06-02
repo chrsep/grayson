@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form"
 import { PatchUserBody } from "@api/me"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image"
+import { mutate } from "swr"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
@@ -52,6 +53,7 @@ const PersonalInfoForm: FC<{
     if (!meResponse.ok) return
 
     const { updatedUser } = await meResponse.json()
+    await mutate("/api/auth/session")
     reset({
       name: updatedUser.name,
       image: updatedUser.image,
