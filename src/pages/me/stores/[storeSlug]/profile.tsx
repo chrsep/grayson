@@ -244,7 +244,7 @@ export async function getServerSideProps(
       store,
       tabs: [
         { name: "Produk", href: `/me/stores/${storeSlug}`, current: false },
-        { name: "Profil toko", href: `/me/stores/${storeSlug}/profile`, current: true }
+        { name: "Informasi toko", href: `/me/stores/${storeSlug}/profile`, current: true }
       ],
       breadcrumbs: [{ name: "Toko anda", href: "/me/stores", current: false }]
     }

@@ -29,12 +29,16 @@ const Navbar: FC<Props> = ({ navigation }) => (
                 <span className="sr-only">Open main menu</span>
                 {open ? <Icon src="/icons/x-light.svg" /> : <Icon src="/icons/menu-light.svg" />}
               </Disclosure.Button>
-              <LogoStandalone className="block lg:hidden h-8 w-auto ml-4" />
+              <Link href="/">
+                <a className="flex-shrink-0 flex items-center ml-4">
+                  <LogoStandalone className="block lg:hidden h-8 w-auto" />
+                </a>
+              </Link>
             </div>
 
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start flex-shrink-0">
               <Link href="/">
-                <a className="flex-shrink-0 flex items-center">
+                <a className="flex-shrink-0 flex items-center hidden sm:block">
                   <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto " />
                   <LogoFull className="hidden lg:block h-8 w-auto" />
                 </a>
@@ -95,14 +99,12 @@ const Navbar: FC<Props> = ({ navigation }) => (
 const SearchLink = () => (
   <div className="min-w-0 px-4 sm:px-6 ">
     <Link href="/search">
-      <a>
-        <Button
-          variant="icon"
-          className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
-        >
-          <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
-        </Button>
-      </a>
+      <Button
+        variant="icon"
+        className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
+      >
+        <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
+      </Button>
     </Link>
     <Link href="/search">
       <a className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex ">

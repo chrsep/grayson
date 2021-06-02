@@ -1,4 +1,3 @@
-import Link from "@components/Link"
 import React, { FC } from "react"
 import { useRouter } from "next/router"
 import Breadcrumbs from "@components/Breadcrumbs"
@@ -47,9 +46,9 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
 
             {actionText && (
               <div className="pt-4 w-full">
-                <Link href={actionHref} className="w-full">
+                <NextLink href={actionHref}>
                   <Button className="w-full">{actionText}</Button>
-                </Link>
+                </NextLink>
               </div>
             )}
           </div>
@@ -64,7 +63,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
                         tab.current
                           ? "!border-primary-400 !text-primary-400"
                           : "hover:text-gray-700 hover:border-gray-300"
-                      } border-transparent text-gray-500 whitespace-nowrap pb-4 px-1 border-b-2 text-sm`}
+                      } border-transparent text-gray-500 whitespace-nowrap py-3 px-1 border-b-2 text-sm`}
                     aria-current={tab.current ? "page" : undefined}
                   >
                     {tab.name}
@@ -75,9 +74,9 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
 
             {actionText && (
               <div className="pb-2 ml-auto">
-                <Link href={actionHref} className="w-full">
-                  <Button>{actionText}</Button>
-                </Link>
+                <NextLink href={actionHref}>
+                  <Button className="w-full">{actionText}</Button>
+                </NextLink>
               </div>
             )}
           </div>
