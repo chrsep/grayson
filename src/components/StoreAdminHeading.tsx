@@ -33,13 +33,15 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
               id="current-tab"
               name="current-tab"
               className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-400 focus:border-primary-400 sm:text-sm rounded-md"
-              defaultValue={tabs.find((tab) => tab.current).name}
+              value={tabs.find((tab) => tab.current).name}
               onChange={async (e) => {
                 await router.push(tabs[e.target.selectedIndex].href)
               }}
             >
               {tabs.map((tab) => (
-                <option key={tab.name}>{tab.name}</option>
+                <option key={tab.name} value={tab.name}>
+                  {tab.name}
+                </option>
               ))}
             </select>
 
