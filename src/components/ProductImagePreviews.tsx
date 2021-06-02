@@ -1,7 +1,11 @@
 import React, { FC } from "react"
 import Image from "@components/Image"
+import Button from "@components/Button"
 
-const ProductImagePreviews: FC<{ files: string[] }> = ({ files }) => (
+const ProductImagePreviews: FC<{
+  files: string[]
+  onDeleteClick: (file: string) => void
+}> = ({ files, onDeleteClick }) => (
   <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-6">
     {files.map((file) => (
       <li key={file} className="relative">
@@ -20,6 +24,13 @@ const ProductImagePreviews: FC<{ files: string[] }> = ({ files }) => (
             <span className="sr-only">View details for</span>
           </button>
         </div>
+        <Button
+          variant="outline"
+          className="mt-2 w-full text-red-600 py-1"
+          onClick={() => onDeleteClick(file)}
+        >
+          Hapus
+        </Button>
       </li>
     ))}
 

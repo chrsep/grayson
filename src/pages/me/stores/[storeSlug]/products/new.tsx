@@ -1,5 +1,5 @@
 import Breadcrumbs from "@components/Breadcrumbs"
-import React, { ChangeEventHandler } from "react"
+import React, { ChangeEventHandler, useState } from "react"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
 import { findStoreWithProductsBySlug } from "@lib/db"
@@ -16,18 +16,15 @@ import { uploadImage } from "@lib/image"
 import UploadImageButton from "@components/UploadImageButton"
 import ProductImagePreviews from "@components/ProductImagePreviews"
 
-type FormData = Omit<PostProductBody, "storeSlug" | "price"> & { price: string }
+type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
 const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   store
 }) => {
   const router = useRouter()
-  const { register, handleSubmit, watch, setValue, getValues } = useForm<FormData>({
-    defaultValues: {
-      images: []
-    }
-  })
+  const [images, setImages] = useState([])
+  const { register, handleSubmit } = useForm<FormData>({})
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
@@ -36,7 +33,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
     const result = await fetch(`/api/stores/${store.slug}/products`, {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ ...data, price })
+      body: JSON.stringify({ ...data, price, images })
     })
 
     if (result.ok) await router.push(`/me/stores/${store.slug}`)
@@ -44,10 +41,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
 
   const handleImageUpload: ChangeEventHandler<HTMLInputElement> = async (e) => {
     const result = await uploadImage(e.target.files[0])
-
-    const images = getValues("images")
-    images.push(result)
-    setValue("images", images)
+    setImages([...images, result])
   }
 
   return (
@@ -118,7 +112,12 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                     </div>
 
                     <Divider className="" />
-                    <ProductImagePreviews files={watch("images")} />
+                    <ProductImagePreviews
+                      files={images}
+                      onDeleteClick={(file) => {
+                        setImages(images.filter((image) => image !== file))
+                      }}
+                    />
                   </div>
                 </div>
 
