@@ -161,3 +161,14 @@ export const deleteStoreBySlug = async (slug: string) => {
     where: { slug }
   })
 }
+
+export const findProductsWithPrimaryImagesAndStore = () => {
+  return prisma.product.findMany({
+    include: {
+      images: {
+        take: 1
+      },
+      store: true
+    }
+  })
+}

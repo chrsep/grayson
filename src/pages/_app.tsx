@@ -12,7 +12,7 @@ import "./global.css"
 function useGetNavigation() {
   const router = useRouter()
   return [
-    { name: "Semua", href: "/", current: router.route === "/" },
+    { name: "Home", href: "/", current: router.route === "/" },
     ...categories.map(({ slug, name }) => {
       const href = `/categories/${slug}`
       const current = router.asPath.startsWith(href)

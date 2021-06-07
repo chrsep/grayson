@@ -39,6 +39,15 @@ model ProductImage {
   productId  String?
 }
 
+enum Category {
+  MAKANAN
+  SENI
+  PAKAIAN
+  JASA
+  EDUKASI
+  LAINNYA
+}
+
 model Product {
   id          String         @id @default(cuid())
   name        String         @default("")
@@ -46,6 +55,7 @@ model Product {
   slug        String         @unique
   price       Int            @default(0)
   images      ProductImage[]
+  category    Category       @default(LAINNYA)
 
   store   Store  @relation(fields: [storeId], references: [id])
   storeId String
