@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/client"
 import { findProductsWithPrimaryImagesAndStore } from "@lib/db"
 import { InferGetServerSidePropsType, NextPage } from "next"
 import Image from "@components/Image"
@@ -44,16 +43,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
   </div>
 )
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  if (session === null) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permanent: false
-      }
-    }
-  }
+export async function getServerSideProps() {
   const products = await findProductsWithPrimaryImagesAndStore()
 
   // Pass data to the page via props
