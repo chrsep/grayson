@@ -3885,10 +3885,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-auth@3.23.2:
-  version "3.23.2"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.23.2.tgz#48f8e933062b035d2f3afe2016ce19090a30d61c"
-  integrity sha512-VsvXugL/6ZdyhZguH9CO01U7fuijxnYyk8zHABKnId0sPLPKVwyzOFaweapAzD927GZUgDWyDp6NoQnqoY8H3w==
+next-auth@3.25.0:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.25.0.tgz#95b24e3c1799c62f213a957563614a0867db9a79"
+  integrity sha512-lcg9V7bdUOLIPL99xgiJDenlQN7ubED0EzAEYODl1HGWh3byBhkbCaVleHL2lyJSepEskLElAmj2hRtd1nssRQ==
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@next-auth/prisma-legacy-adapter" "0.0.1-canary.127"
