@@ -1,4 +1,4 @@
-import React, { EventHandler, FC, Fragment, SyntheticEvent, useRef, useState } from "react"
+import React, { FC, Fragment, SyntheticEvent, useRef, useState } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import Icon from "@components/Icon"
 import Link from "next/link"
@@ -10,7 +10,6 @@ import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
 import useGetUser from "@hooks/api/useGetUser"
-import { useForm } from "react-hook-form"
 import TextField from "@components/TextField"
 import { useRouter } from "next/router"
 
@@ -22,7 +21,10 @@ interface Props {
   }>
 }
 const Navbar: FC<Props> = ({ navigation }) => (
-  <Disclosure as="nav" className="bg-primary-500 sticky top-0 z-30">
+  <Disclosure
+    as="nav"
+    className="bg-gradient-to-tr from-primary-500 to-indigo-700 sticky top-0 z-30"
+  >
     {({ open }) => (
       <>
         <div className="mx-auto px-2 sm:px-6 lg:px-8">

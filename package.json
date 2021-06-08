@@ -24,7 +24,6 @@
     "@types/minio": "7.0.7",
     "@types/react": "17.0.9",
     "@types/uuid": "8.3.0",
-    "argon2": "0.28.1",
     "fp-ts": "2.10.5",
     "io-ts": "2.2.16",
     "minio": "7.0.18",
