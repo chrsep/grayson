@@ -12,6 +12,7 @@ import Image from "@components/Image"
 import useGetUser from "@hooks/api/useGetUser"
 import { useForm } from "react-hook-form"
 import TextField from "@components/TextField"
+import { useRouter } from "next/router"
 
 interface Props {
   navigation: Array<{
@@ -103,6 +104,7 @@ const SearchField = () => {
   const input = useRef<HTMLInputElement>(null)
   const [showSearch, setShowSearch] = useState(false)
   const [search, setSearch] = useState("")
+  const router = useRouter()
 
   const handleShowSearchBar = () => {
     setShowSearch(true)
@@ -111,8 +113,11 @@ const SearchField = () => {
     })
   }
 
-  const searchProduct = (e: SyntheticEvent) => {
+  const searchProduct = async (e: SyntheticEvent) => {
     e.preventDefault()
+    const queryString = encodeURIComponent(search)
+    await router.push(`/search?q=${queryString}`)
+    setShowSearch(false)
   }
 
   return (
@@ -148,6 +153,7 @@ const SearchField = () => {
 
           <form className="flex  items-center w-full" onSubmit={searchProduct}>
             <TextField
+              type="search"
               iconSrc="/icons/search.svg"
               hideLabel
               name="search-product"
@@ -160,16 +166,14 @@ const SearchField = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
 
-            <Link href={`/search?q=${search}`}>
-              <Button
-                variant="outline"
-                className="text-primary-500 font-bold mr-4"
-                disabled={search === ""}
-                onClick={() => setShowSearch(false)}
-              >
-                Cari
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              variant="outline"
+              className="text-primary-500 font-bold mr-4"
+              disabled={search === ""}
+            >
+              Cari
+            </Button>
           </form>
         </div>
       )}

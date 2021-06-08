@@ -172,3 +172,42 @@ export const findProductsWithPrimaryImagesAndStore = () => {
     }
   })
 }
+
+export const findProductsByNameStoreOrOwner = (query: string) => {
+  return prisma.product.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: query,
+            mode: "insensitive"
+          }
+        },
+        {
+          store: {
+            name: {
+              contains: query,
+              mode: "insensitive"
+            }
+          }
+        },
+        {
+          store: {
+            owner: {
+              name: {
+                contains: query,
+                mode: "insensitive"
+              }
+            }
+          }
+        }
+      ]
+    },
+    include: {
+      images: {
+        take: 1
+      },
+      store: true
+    }
+  })
+}
