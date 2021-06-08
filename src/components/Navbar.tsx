@@ -148,7 +148,7 @@ const SearchField = () => {
       </div>
 
       {showSearch && (
-        <div className="fixed top-0 left-0 right-0 flex items-center z-20 bg-white focus-within:shadow-md h-16">
+        <div className="fixed top-0 left-0 right-0 flex items-center z-20 bg-white focus-within:shadow-md h-16 sm:px-4">
           <Button variant="icon" className="ml-4" onClick={() => setShowSearch(false)}>
             <img src="/icons/x.svg" className="w-6 h-6" alt="tutup input pencarian" />
           </Button>
