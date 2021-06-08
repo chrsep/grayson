@@ -58,7 +58,7 @@ export const findStoreWithProductsBySlug = async (slug: string) => {
 }
 
 export const insertProduct = async (
-  product: Omit<Product, "id" | "storeId" | "slug" | "images"> & { images: string[] },
+  product: Omit<Product, "id" | "storeId" | "slug" | "images" | "category"> & { images: string[] },
   storeSlug: string
 ) => {
   return prisma.product.create({

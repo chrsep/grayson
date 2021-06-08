@@ -3,7 +3,7 @@ import { Client } from "minio"
 const BUCKET = process.env.S3_BUCKET
 const minio = new Client({
   endPoint: process.env.S3_ENDPOINT,
-  port: parseInt(process.env.S3_PORT, 10),
+  port: process.env.S3_PORT ? parseInt(process.env.S3_PORT, 10) : undefined,
   useSSL: process.env.NODE_ENV !== "development",
   accessKey: process.env.S3_KEY,
   secretKey: process.env.S3_SECRET
