@@ -7,7 +7,7 @@ import Link from "@components/Link"
 const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ products }) => (
   <div>
     <main>
-      <div className="p-4 lg:p-8">
+      <div className="p-4">
         <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8">
           {products.map(({ id, images, name, price, store }) => (
             <li key={id} className="relative">

@@ -12,6 +12,7 @@ interface Props {
   iconSrc?: string
   placeholder?: string
   hideLabel?: boolean
+  inputClassName?: string
 }
 
 const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -25,6 +26,7 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
     name,
     iconSrc,
     placeholder,
+    inputClassName,
     type = "text",
     hideLabel = false
   },
@@ -32,9 +34,9 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
 ) => {
   return (
     <div className={`${containerClassName}`}>
-      <label htmlFor={name} className="block text-sm  text-gray-700">
+      <label htmlFor={name} className="block text-sm text-gray-700">
         {!hideLabel && <span className="mb-1 block">{label}</span>}
-        <div className="rounded-md shadow-sm relative">
+        <div className="rounded-md relative">
           {iconSrc && (
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <img
@@ -55,9 +57,9 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
             value={value}
             placeholder={placeholder}
             ref={ref}
-            className={`focus:ring-primary-500 focus:border-primary-500 block w-full ${
+            className={`${inputClassName} focus:ring-primary-500 focus:border-primary-500 block w-full ${
               iconSrc ? "pl-10" : ""
-            } sm:text-sm border-gray-300 rounded-md`}
+            } sm:text-sm border-gray-300 rounded-md shadow-sm `}
           />
         </div>
       </label>

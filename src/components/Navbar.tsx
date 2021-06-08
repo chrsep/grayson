@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState } from "react"
+import React, { EventHandler, FC, Fragment, SyntheticEvent, useRef, useState } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import Icon from "@components/Icon"
 import Link from "next/link"
@@ -10,6 +10,8 @@ import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
 import useGetUser from "@hooks/api/useGetUser"
+import { useForm } from "react-hook-form"
+import TextField from "@components/TextField"
 
 interface Props {
   navigation: Array<{
@@ -66,7 +68,7 @@ const Navbar: FC<Props> = ({ navigation }) => (
             </div>
 
             <div className="absolute ml-[91px] inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <SearchLink />
+              <SearchField />
               <Cart />
               <UserProfile />
             </div>
@@ -97,29 +99,76 @@ const Navbar: FC<Props> = ({ navigation }) => (
   </Disclosure>
 )
 
-const SearchLink = () => (
-  <div className="min-w-0 px-4 sm:px-6 ">
-    <Link href="/search">
-      <Button
-        variant="icon"
-        className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
-      >
-        <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
-      </Button>
-    </Link>
-    <Link href="/search">
-      <a className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex ">
-        <img
-          src="/icons/search-light.svg"
-          className="h-5 w-5 opacity-70 mr-3"
-          aria-hidden="true"
-          alt=""
-        />
-        <span className="-pb-6">Cari produk</span>
-      </a>
-    </Link>
-  </div>
-)
+const SearchField = () => {
+  const input = useRef<HTMLInputElement>(null)
+  const [showSearch, setShowSearch] = useState(false)
+  const [search, setSearch] = useState("")
+
+  const handleShowSearchBar = () => {
+    setShowSearch(true)
+    requestAnimationFrame(() => {
+      input.current.focus()
+    })
+  }
+
+  const searchProduct = (e: SyntheticEvent) => {
+    e.preventDefault()
+  }
+
+  return (
+    <>
+      <div className="min-w-0 px-4 sm:px-6 ">
+        <Button
+          variant="icon"
+          className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
+          onClick={handleShowSearchBar}
+        >
+          <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
+        </Button>
+        <button
+          type="button"
+          className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex "
+          onClick={handleShowSearchBar}
+        >
+          <img
+            src="/icons/search-light.svg"
+            className="h-5 w-5 opacity-70 mr-3"
+            aria-hidden="true"
+            alt=""
+          />
+          <span className="-pb-6">{search || "Cari produk"}</span>
+        </button>
+      </div>
+
+      {showSearch && (
+        <div className="fixed top-0 left-0 right-0 flex items-center z-20 bg-white focus-within:shadow-md h-16">
+          <Button variant="icon" className="ml-4" onClick={() => setShowSearch(false)}>
+            <img src="/icons/x.svg" className="w-6 h-6" alt="tutup input pencarian" />
+          </Button>
+
+          <form className="flex  items-center w-full" onSubmit={searchProduct}>
+            <TextField
+              iconSrc="/icons/search.svg"
+              hideLabel
+              name="search-product"
+              label="cari produk"
+              containerClassName="w-full px-4 py-2 bg-transparent block rounded-xl "
+              inputClassName="border-none shadow-none"
+              placeholder="Cari produk"
+              ref={input}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            <Button variant="outline" className="text-primary-500 font-bold mr-4">
+              Cari
+            </Button>
+          </form>
+        </div>
+      )}
+    </>
+  )
+}
 
 const UserProfile = () => {
   const { error, data } = useGetUser()
