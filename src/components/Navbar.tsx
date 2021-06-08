@@ -127,7 +127,7 @@ const SearchField = () => {
         </Button>
         <button
           type="button"
-          className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex "
+          className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex max-w-sm"
           onClick={handleShowSearchBar}
         >
           <img
@@ -160,9 +160,16 @@ const SearchField = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
 
-            <Button variant="outline" className="text-primary-500 font-bold mr-4">
-              Cari
-            </Button>
+            <Link href={`/search?q=${search}`}>
+              <Button
+                variant="outline"
+                className="text-primary-500 font-bold mr-4"
+                disabled={search === ""}
+                onClick={() => setShowSearch(false)}
+              >
+                Cari
+              </Button>
+            </Link>
           </form>
         </div>
       )}
