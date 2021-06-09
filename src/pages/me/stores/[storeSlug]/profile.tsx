@@ -196,7 +196,6 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         </div>
 
         <Divider className="hidden sm:block" />
-
         <DangerZone slug={store.slug} />
       </div>
     </PageContainer>

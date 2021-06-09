@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from
 import { getSession } from "next-auth/client"
 import { findProductBySlugWithImages, findStoreWithProductsBySlug } from "@lib/db"
 import { useForm } from "react-hook-form"
-import React, { ChangeEventHandler, useState } from "react"
+import React, { ChangeEventHandler, FC, useState } from "react"
 import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
 import Breadcrumbs from "@components/Breadcrumbs"
@@ -16,12 +16,14 @@ import Button from "@components/Button"
 import { PostProductBody } from "@api/stores/[storeSlug]/products"
 import categories from "@lib/categories"
 import Select from "@components/Select"
+import { useRouter } from "next/router"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
 const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
-  product
+  product,
+  store
 }) => {
   const [images, setImages] = useState(product.images.map(({ objectName }) => objectName))
   const [imageChanged, setImageChanged] = useState(false)
@@ -169,8 +171,47 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
             </form>
           </div>
         </div>
+
+        <Divider className="hidden sm:block" />
+        <DangerZone slug={product.slug} storeSlug={store.slug} />
       </div>
     </PageContainer>
+  )
+}
+
+const DangerZone: FC<{ slug: string; storeSlug: string }> = ({ slug, storeSlug }) => {
+  const router = useRouter()
+  const handleDelete = async () => {
+    const deleteResponse = await fetch(`/api/products/${slug}`, {
+      method: "DELETE",
+      credentials: "include"
+    })
+
+    if (deleteResponse.ok) await router.replace(`/me/stores/${storeSlug}`)
+  }
+  return (
+    <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
+      <div className="md:col-span-1">
+        <div className="px-4 sm:px-0">
+          <h3 className="text-lg  leading-6 text-gray-900 mb-4">Danger Zone</h3>
+        </div>
+      </div>
+
+      <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
+          <p className="text-gray-500 text-sm">
+            Data produk ini tak akan bisa dikembalikan setelah dihapus
+          </p>
+          <Button
+            variant="outline"
+            className="ml-auto text-red-700 hover:bg-red-100 flex-shrink-0"
+            onClick={handleDelete}
+          >
+            Hapus produk
+          </Button>
+        </div>
+      </div>
+    </div>
   )
 }
 
