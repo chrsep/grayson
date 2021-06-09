@@ -23,7 +23,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 }) => {
   const [images, setImages] = useState(product.images.map(({ objectName }) => objectName))
   const [imageChanged, setImageChanged] = useState(false)
-  const { reset, register, handleSubmit, setValue, getValues, formState } = useForm<FormData>({
+  const { reset, register, handleSubmit, formState } = useForm<FormData>({
     defaultValues: {
       name: product.name,
       price: product.price.toString(),

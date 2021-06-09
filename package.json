@@ -10,7 +10,7 @@
     "start": "prisma migrate deploy && next start",
     "prisma:generate": "prisma generate",
     "prepare": "husky install",
-    "lint": "eslint --fix **.{ts,tsx}",
+    "lint": "eslint --fix **/*.{ts,tsx}",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
   },
