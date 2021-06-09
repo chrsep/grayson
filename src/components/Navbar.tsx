@@ -1,5 +1,5 @@
 import React, { FC, Fragment, SyntheticEvent, useRef, useState } from "react"
-import { Disclosure, Menu, Transition } from "@headlessui/react"
+import { Menu, Popover, Transition } from "@headlessui/react"
 import Icon from "@components/Icon"
 import Link from "next/link"
 import { signout } from "next-auth/client"
@@ -12,95 +12,142 @@ import Image from "@components/Image"
 import useGetUser from "@hooks/api/useGetUser"
 import TextField from "@components/TextField"
 import { useRouter } from "next/router"
+import categories from "@lib/categories"
 
-interface Props {
-  navigation: Array<{
-    name: string
-    href: string
-    current: boolean
-  }>
-}
-const Navbar: FC<Props> = ({ navigation }) => (
-  <Disclosure
-    as="nav"
-    className="bg-gradient-to-tr from-primary-500 to-indigo-700 sticky top-0 z-30"
-  >
-    {({ open }) => (
-      <>
-        <div className="mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button */}
-              <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                <span className="sr-only">Open main menu</span>
-                {open ? <Icon src="/icons/x-light.svg" /> : <Icon src="/icons/menu-light.svg" />}
-              </Disclosure.Button>
-              <Link href="/">
-                <a className="flex-shrink-0 flex items-center ml-4">
-                  <LogoStandalone className="block lg:hidden h-8 w-auto" />
-                </a>
-              </Link>
+const navigations = [
+  {
+    name: "Home",
+    href: "/"
+  }
+]
+
+const Navbar: FC = () => {
+  const router = useRouter()
+
+  return (
+    <Popover
+      as="nav"
+      className="bg-gradient-to-tr from-primary-500 to-indigo-700 sticky top-0 z-30"
+    >
+      {({ open }) => (
+        <>
+          <div className="mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button */}
+                <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? <Icon src="/icons/x-light.svg" /> : <Icon src="/icons/menu-light.svg" />}
+                </Popover.Button>
+                <Link href="/">
+                  <a className="flex-shrink-0 flex items-center ml-4">
+                    <LogoStandalone className="block lg:hidden h-8 w-auto" />
+                  </a>
+                </Link>
+              </div>
+
+              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start flex-shrink-0">
+                <Link href="/">
+                  <a className="flex-shrink-0 flex items-center hidden sm:block">
+                    <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto " />
+                    <LogoFull className="hidden lg:block h-8 w-auto" />
+                  </a>
+                </Link>
+                <div className="hidden sm:block sm:ml-6">
+                  <div className="flex space-x-4">
+                    {navigations.map((item) => {
+                      const current = router.asPath === item.href
+
+                      return (
+                        <Link key={item.name} href={item.href}>
+                          <a
+                            className={classNames(
+                              current
+                                ? "bg-gray-900 text-white bg-opacity-20 "
+                                : "text-gray-300 hover:bg-white hover:bg-opacity-20  hover:text-white",
+                              "px-3 py-2 rounded-md text-sm  "
+                            )}
+                            aria-current={current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </a>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute ml-[91px] inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <SearchField />
+                <Cart />
+                <UserProfile />
+              </div>
             </div>
+          </div>
 
-            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start flex-shrink-0">
-              <Link href="/">
-                <a className="flex-shrink-0 flex items-center hidden sm:block">
-                  <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto " />
-                  <LogoFull className="hidden lg:block h-8 w-auto" />
-                </a>
-              </Link>
-              <div className="hidden sm:block sm:ml-6">
-                <div className="flex space-x-4">
-                  {navigation.map((item) => (
-                    <Link key={item.name} href={item.href}>
+          <Transition
+            enter="transition duration-100 ease-out"
+            enterFrom="transform scale-95 opacity-0"
+            enterTo="transform scale-100 opacity-100"
+            leave="transition duration-75 ease-out"
+            leaveFrom="transform scale-100 opacity-100"
+            leaveTo="transform scale-95 opacity-0"
+          >
+            <Popover.Panel className="sm:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                {navigations.map((item) => {
+                  const current = router.asPath === item.href
+
+                  return (
+                    <Link href={item.href}>
                       <a
                         className={classNames(
-                          item.current
+                          current
                             ? "bg-gray-900 text-white bg-opacity-20 "
-                            : "text-gray-300 hover:bg-white hover:bg-opacity-20  hover:text-white",
-                          "px-3 py-2 rounded-md text-sm  "
+                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
+                          "block px-3 py-2 rounded-md text-base "
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
                     </Link>
-                  ))}
-                </div>
+                  )
+                })}
               </div>
-            </div>
 
-            <div className="absolute ml-[91px] inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <SearchField />
-              <Cart />
-              <UserProfile />
-            </div>
-          </div>
-        </div>
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <div className="text-white px-3 py-3 text-sm border-b border-white border-opacity-10">
+                  Kategori
+                </div>
+                {categories.map((item) => {
+                  const current = router.asPath.endsWith(item.slug)
 
-        <Disclosure.Panel className="sm:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <a
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white bg-opacity-20 "
-                      : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
-                    "block px-3 py-2 rounded-md text-base "
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-        </Disclosure.Panel>
-      </>
-    )}
-  </Disclosure>
-)
+                  return (
+                    <Link href={`/categories/${item.slug}`}>
+                      <a
+                        className={classNames(
+                          current
+                            ? "bg-gray-900 text-white bg-opacity-20 "
+                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
+                          "block px-3 py-2 rounded-md text-base "
+                        )}
+                        aria-current={current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    </Link>
+                  )
+                })}
+              </div>
+            </Popover.Panel>
+          </Transition>
+        </>
+      )}
+    </Popover>
+  )
+}
 
 const SearchField = () => {
   const input = useRef<HTMLInputElement>(null)
@@ -148,7 +195,7 @@ const SearchField = () => {
       </div>
 
       {showSearch && (
-        <div className="fixed top-0 left-0 right-0 flex items-center z-20 bg-white focus-within:shadow-md h-16 sm:px-4">
+        <div className="fixed top-0 left-0 right-0 flex items-center z-20 bg-white border-b h-16 sm:px-4">
           <Button variant="icon" className="ml-4" onClick={() => setShowSearch(false)}>
             <img src="/icons/x.svg" className="w-6 h-6" alt="tutup input pencarian" />
           </Button>
