@@ -10,6 +10,7 @@ import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image"
+import Breadcrumbs from "@components/Breadcrumbs"
 
 const howToPayPlaceholder = `Contoh: 
 - Pembayaran dapat dilakukan dengan transfer ke .... 
@@ -51,6 +52,8 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
 
   return (
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
+      <Breadcrumbs breadcrumbs={[{ name: "Toko anda", href: "/me/stores", current: false }]} />
+
       <div className="px-4 sm:px-0 mt-2 md:flex md:items-center md:justify-between">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
@@ -65,7 +68,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg  leading-6 text-gray-900">Data kontak</h3>
+              <h3 className="text-lg  leading-6 text-gray-900 font-bold">Data kontak</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Data kontak anda akan digunakan pembeli untuk menghubungi anda dan melanjutkan
                 transaksi saat checkout.
