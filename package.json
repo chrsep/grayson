@@ -21,7 +21,7 @@
     "@next/bundle-analyzer": "10.2.3",
     "@preact/compat": "0.0.4",
     "@prisma/client": "2.24.1",
-    "@tailwindcss/line-clamp": "^0.2.1",
+    "@tailwindcss/line-clamp": "0.2.1",
     "@types/minio": "7.0.7",
     "@types/react": "17.0.10",
     "@types/uuid": "8.3.0",
