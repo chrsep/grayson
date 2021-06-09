@@ -10,17 +10,23 @@ interface Props {
 
 const Example: FC<Props> = ({ open, setOpen }) => (
   <Transition.Root show={open} as={Fragment}>
-    <Dialog as="div" static className="fixed inset-0 overflow-hidden z-40" open={open} onClose={setOpen}>
+    <Dialog
+      as="div"
+      static
+      className="fixed inset-0 overflow-hidden z-40"
+      open={open}
+      onClose={setOpen}
+    >
       <div className="absolute inset-0 overflow-hidden">
         <Dialog.Overlay className="absolute inset-0" />
 
         <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex">
           <Transition.Child
             as={Fragment}
-            enter="transform transition ease-in-out duration-500 sm:duration-700"
+            enter="transform transition ease-in-out duration-300"
             enterFrom="translate-x-full"
             enterTo="translate-x-0"
-            leave="transform transition ease-in-out duration-500 sm:duration-700"
+            leave="transform transition ease-in-out duration-200"
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
@@ -29,9 +35,7 @@ const Example: FC<Props> = ({ open, setOpen }) => (
                 <div className="min-h-0 flex-1 flex flex-col py-6 overflow-y-auto">
                   <div className="px-4 sm:px-6">
                     <div className="flex items-start justify-between">
-                      <Dialog.Title className="text-lg  text-gray-900">
-                        Keranjang Anda
-                      </Dialog.Title>
+                      <Dialog.Title className="text-lg  text-gray-900">Keranjang Anda</Dialog.Title>
                       <div className="ml-3 h-7 flex items-center">
                         <Button variant="icon" onClick={() => setOpen(false)}>
                           <span className="sr-only">Close panel</span>
