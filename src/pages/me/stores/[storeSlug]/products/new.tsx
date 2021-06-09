@@ -15,6 +15,9 @@ import Divider from "@components/Divider"
 import { uploadImage } from "@lib/image"
 import UploadImageButton from "@components/UploadImageButton"
 import ProductImagePreviews from "@components/ProductImagePreviews"
+import categories from "@lib/categories"
+import Select from "@components/Select"
+import { Category } from "@prisma/client"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
@@ -24,7 +27,11 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
 }) => {
   const router = useRouter()
   const [images, setImages] = useState([])
-  const { register, handleSubmit } = useForm<FormData>({})
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      category: Category.LAINNYA
+    }
+  })
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
@@ -91,6 +98,19 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                       containerClassName="col-span-6"
                       {...register("description")}
                     />
+
+                    <Select
+                      id="kategori"
+                      label="Kategori"
+                      containerClassName="col-span-6 sm:col-span-2"
+                      {...register("category")}
+                    >
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </Select>
                   </div>
 
                   <div className="pt-12">

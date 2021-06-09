@@ -10,7 +10,6 @@ interface Props {
   autocomplete?: string
   required?: boolean
   placeholder?: string
-  rows?: number
 }
 const Pricefield: ForwardRefRenderFunction<HTMLInputElement, Props> = (
   {

@@ -14,6 +14,8 @@ import Divider from "@components/Divider"
 import ProductImagePreviews from "@components/ProductImagePreviews"
 import Button from "@components/Button"
 import { PostProductBody } from "@api/stores/[storeSlug]/products"
+import categories from "@lib/categories"
+import Select from "@components/Select"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
@@ -27,7 +29,8 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
     defaultValues: {
       name: product.name,
       price: product.price.toString(),
-      description: product.description
+      description: product.description,
+      category: product.category
     }
   })
 
@@ -46,7 +49,8 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       reset({
         name: newProduct.name,
         price: newProduct.price.toString(),
-        description: newProduct.description
+        description: newProduct.description,
+        category: newProduct.category
       })
       setImageChanged(false)
     }
@@ -73,7 +77,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg  leading-6 text-gray-900">Data produk</h3>
+              <h3 className="text-lg  leading-6 text-gray-900 font-bold mb-1">Data produk</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Isi data produk atau jasa yang ingin anda pasang.
               </p>
@@ -105,6 +109,19 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                       containerClassName="col-span-6"
                       {...register("description")}
                     />
+
+                    <Select
+                      id="kategori"
+                      label="Kategori"
+                      containerClassName="col-span-6 sm:col-span-2"
+                      {...register("category")}
+                    >
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </Select>
                   </div>
 
                   <div className="pt-12">

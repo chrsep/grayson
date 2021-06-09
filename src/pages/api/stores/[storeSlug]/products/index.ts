@@ -1,12 +1,15 @@
 import { findUserByEmailWithStores, insertProduct } from "@lib/db"
 import { array, number, string, type, TypeOf } from "io-ts"
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
+import { createEnum } from "@lib/enum"
+import { Category } from "@prisma/client"
 
 const PostBody = type({
   name: string,
   description: string,
   price: number,
-  images: array(string)
+  images: array(string),
+  category: createEnum<Category>(Category, "Category")
 })
 export type PostProductBody = TypeOf<typeof PostBody>
 

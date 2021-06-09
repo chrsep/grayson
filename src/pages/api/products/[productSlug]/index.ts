@@ -1,12 +1,15 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { array, number, partial, string } from "io-ts"
 import { findProductBySlugWithImages, updateProduct } from "@lib/db"
+import { createEnum } from "@lib/enum"
+import { Category } from "@prisma/client"
 
 const PatchBody = partial({
   name: string,
   description: string,
   price: number,
-  images: array(string)
+  images: array(string),
+  category: createEnum<Category>(Category, "Category")
 })
 const patch = newMutationHandler(PatchBody, async (body, session, { query: { productSlug } }) => {
   if (string.is(productSlug)) {
