@@ -211,3 +211,9 @@ export const findProductsByNameStoreOrOwner = (query: string) => {
     }
   })
 }
+
+export const deleteProductBySlug = (slug: string) => {
+  return prisma.product.delete({
+    where: { slug }
+  })
+}

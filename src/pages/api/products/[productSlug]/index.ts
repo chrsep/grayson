@@ -1,8 +1,14 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { array, number, partial, string } from "io-ts"
-import { findProductBySlugWithImages, updateProduct } from "@lib/db"
+import {
+  deleteProductBySlug,
+  deleteStoreBySlug,
+  findProductBySlugWithImages,
+  updateProduct
+} from "@lib/db"
 import { createEnum } from "@lib/enum"
 import { Category } from "@prisma/client"
+import { NextApiHandler } from "next"
 
 const PatchBody = partial({
   name: string,
@@ -36,4 +42,16 @@ const patch = newMutationHandler(PatchBody, async (body, session, { query: { pro
   }
 })
 
-export default newProtectedApi({ patch })
+const del: NextApiHandler = async ({ query: { productSlug } }, res) => {
+  if (string.is(productSlug)) {
+    await deleteProductBySlug(productSlug)
+    res.status(201).json({})
+  } else {
+    res.status(400).json({
+      error: "bad_request",
+      description: "the data provided does not adhere to the standard"
+    })
+  }
+}
+
+export default newProtectedApi({ patch, del })
