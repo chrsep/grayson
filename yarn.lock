@@ -376,7 +376,7 @@
     "@sentry/types" "6.6.0"
     tslib "^1.9.3"
 
-"@sentry/nextjs@^6.6.0":
+"@sentry/nextjs@6.6.0":
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/@sentry/nextjs/-/nextjs-6.6.0.tgz#c037a84f4bf2c813f981c066ccad05581f46c6e9"
   integrity sha512-UFI9cfwUoNWXTzTNWvzi13o6qc6qQcdDRBaomyZq4H4fVz2Hy5DSMsoFqsjtwHWgnQphkJbtutE76YebaLZaKA==
