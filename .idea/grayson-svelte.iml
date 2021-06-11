@@ -14,5 +14,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="b19afc30ece64865ab9f82bf940fa34e" level="application" />
   </component>
 </module>

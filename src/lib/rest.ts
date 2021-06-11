@@ -2,6 +2,7 @@ import { Any, TypeOf } from "io-ts"
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next"
 import { Session } from "next-auth"
 import { getSession } from "next-auth/client"
+import { withSentry } from "@sentry/nextjs"
 
 interface Handler {
   get?: NextApiHandler
@@ -11,7 +12,8 @@ interface Handler {
   del?: NextApiHandler
 }
 
-export function newApi(handler: Handler): NextApiHandler {
+/** handles requests based on their methods */
+function handleMethod(handler: Handler): NextApiHandler {
   return async (req, res) => {
     switch (req.method) {
       case "POST":
@@ -40,9 +42,7 @@ export function newApi(handler: Handler): NextApiHandler {
 }
 
 export function newProtectedApi(handler: Handler): NextApiHandler {
-  const apiRoute = newApi(handler)
-
-  return async (req, res) => {
+  return withSentry(async (req, res) => {
     const session = await getSession({ req })
 
     if (!session || !session.user) {
@@ -53,8 +53,8 @@ export function newProtectedApi(handler: Handler): NextApiHandler {
       return
     }
 
-    await apiRoute(req, res)
-  }
+    await handleMethod(handler)(req, res)
+  })
 }
 
 type MutationHandler<T extends Any> = (
