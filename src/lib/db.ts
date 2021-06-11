@@ -1,4 +1,4 @@
-import { ProductImage, Product, Store } from "@prisma/client"
+import { ProductImage, Product, Store, Category } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
@@ -113,6 +113,18 @@ export const findProductBySlugWithImages = async (slug: string) => {
     where: { slug },
     include: {
       images: true
+    }
+  })
+}
+
+export const findProductsByCategory = async (category: Category) => {
+  return prisma.product.findMany({
+    where: { category },
+    include: {
+      images: {
+        take: 1
+      },
+      store: true
     }
   })
 }
