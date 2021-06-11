@@ -1,4 +1,11 @@
-import { Category } from "@prisma/client"
+const Category = {
+  MAKANAN: "MAKANAN",
+  SENI: "SENI",
+  PAKAIAN: "PAKAIAN",
+  JASA: "JASA",
+  EDUKASI: "EDUKASI",
+  LAINNYA: "LAINNYA"
+}
 
 const categories = [
   {

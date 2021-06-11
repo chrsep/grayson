@@ -189,6 +189,7 @@ const DangerZone: FC<{ slug: string; storeSlug: string }> = ({ slug, storeSlug }
 
     if (deleteResponse.ok) await router.replace(`/me/stores/${storeSlug}`)
   }
+
   return (
     <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
       <div className="md:col-span-1">

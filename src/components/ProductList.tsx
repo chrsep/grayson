@@ -1,7 +1,7 @@
 import Image from "@components/Image"
 import Link from "@components/Link"
 import { toIDR } from "@lib/currency"
-import { Product, ProductImage, Store } from "@prisma/client"
+import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
 
 const ProductList: FC<{ products: Array<Product & { images: ProductImage[]; store: Store }> }> = ({

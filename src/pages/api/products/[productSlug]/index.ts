@@ -1,11 +1,6 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { array, number, partial, string } from "io-ts"
-import {
-  deleteProductBySlug,
-  deleteStoreBySlug,
-  findProductBySlugWithImages,
-  updateProduct
-} from "@lib/db"
+import { deleteProductBySlug, findProductBySlugWithImages, updateProduct } from "@lib/db"
 import { createEnum } from "@lib/enum"
 import { Category } from "@prisma/client"
 import { NextApiHandler } from "next"
