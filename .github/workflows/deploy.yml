@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Crete sentry.properties
         run: echo $SENTRY_PROPERTIES > sentry.properties
+        env:
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
       - uses: superfly/flyctl-actions@master
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
