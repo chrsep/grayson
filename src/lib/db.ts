@@ -229,3 +229,22 @@ export const deleteProductBySlug = (slug: string) => {
     where: { slug }
   })
 }
+
+export const findProductBySlug = (slug: string) => {
+  return prisma.product.findUnique({
+    where: { slug },
+    include: {
+      store: {
+        include: {
+          owner: {
+            select: {
+              email: true,
+              name: true
+            }
+          }
+        }
+      },
+      images: true
+    }
+  })
+}
