@@ -7,7 +7,7 @@ import "@fontsource/inria-sans/400.css"
 import "@fontsource/inria-sans/700.css"
 import "@fontsource/inria-sans/700-italic.css"
 import "@fontsource/noto-sans/index.css"
-import "./global.css"
+import "../global.css"
 
 function Grayson({ Component, pageProps }: AppProps) {
   const router = useRouter()
