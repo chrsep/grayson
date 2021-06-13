@@ -238,6 +238,7 @@ export const findProductBySlug = (slug: string) => {
         include: {
           owner: {
             select: {
+              whatsapp: true,
               image: true,
               email: true,
               name: true
@@ -250,28 +251,44 @@ export const findProductBySlug = (slug: string) => {
   })
 }
 
-// Take is 4 by default because that is what we usually show on store product preview
-export const findProductsByStoreSlug = (slug: string, take = 4) => {
+export const findCategoryHighlights = async (
+  category: Category,
+  excludedProductId?: string,
+  take = 6
+) => {
+  return prisma.product.findMany({
+    where: {
+      category,
+      id: {
+        not: excludedProductId
+      }
+    },
+    include: {
+      images: {
+        take: 1
+      },
+      store: true
+    },
+    take
+  })
+}
+
+export const findStoreHighlights = async (slug: string, excludedProductId?: string, take = 6) => {
   return prisma.product.findMany({
     where: {
       store: {
         slug
+      },
+      id: {
+        not: excludedProductId
       }
     },
-    take,
     include: {
-      store: {
-        include: {
-          owner: {
-            select: {
-              image: true,
-              email: true,
-              name: true
-            }
-          }
-        }
+      images: {
+        take: 1
       },
-      images: true
-    }
+      store: true
+    },
+    take
   })
 }

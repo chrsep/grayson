@@ -4,10 +4,13 @@ import { toIDR } from "@lib/currency"
 import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
 
-const ProductList: FC<{ products: Array<Product & { images: ProductImage[]; store: Store }> }> = ({
-  products
-}) => (
-  <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-4">
+const ProductList: FC<{
+  products: Array<Product & { images: ProductImage[]; store: Store }>
+  containerClassName?: string
+}> = ({ containerClassName, products }) => (
+  <ul
+    className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-4 ${containerClassName}`}
+  >
     {products.map(({ id, images, name, price, store, slug }) => (
       <Link href={`/products/${slug}`}>
         <li key={id} className="relative">
