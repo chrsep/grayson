@@ -1,5 +1,5 @@
 import { newProtectedApi } from "@lib/rest"
-import { newSignedUploadUrl } from "@lib/storage"
+import { newSignedUploadUrl } from "@lib/file-storage"
 import { NextApiHandler } from "next"
 import { v4 } from "uuid"
 
