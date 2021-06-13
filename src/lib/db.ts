@@ -229,3 +229,66 @@ export const deleteProductBySlug = (slug: string) => {
     where: { slug }
   })
 }
+
+export const findProductBySlug = (slug: string) => {
+  return prisma.product.findUnique({
+    where: { slug },
+    include: {
+      store: {
+        include: {
+          owner: {
+            select: {
+              whatsapp: true,
+              image: true,
+              email: true,
+              name: true
+            }
+          }
+        }
+      },
+      images: true
+    }
+  })
+}
+
+export const findCategoryHighlights = async (
+  category: Category,
+  excludedProductId?: string,
+  take = 6
+) => {
+  return prisma.product.findMany({
+    where: {
+      category,
+      id: {
+        not: excludedProductId
+      }
+    },
+    include: {
+      images: {
+        take: 1
+      },
+      store: true
+    },
+    take
+  })
+}
+
+export const findStoreHighlights = async (slug: string, excludedProductId?: string, take = 6) => {
+  return prisma.product.findMany({
+    where: {
+      store: {
+        slug
+      },
+      id: {
+        not: excludedProductId
+      }
+    },
+    include: {
+      images: {
+        take: 1
+      },
+      store: true
+    },
+    take
+  })
+}

@@ -4,22 +4,24 @@ import { toIDR } from "@lib/currency"
 import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
 
-const ProductList: FC<{ products: Array<Product & { images: ProductImage[]; store: Store }> }> = ({
-  products
-}) => (
-  <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-4">
+const ProductList: FC<{
+  products: Array<Product & { images: ProductImage[]; store: Store }>
+  containerClassName?: string
+}> = ({ containerClassName, products }) => (
+  <ul
+    className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-4 ${containerClassName}`}
+  >
     {products.map(({ id, images, name, price, store, slug }) => (
       <Link href={`/products/${slug}`}>
         <li key={id} className="relative">
-          <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
+          <div className="group block w-full aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
             <div className="object-cover pointer-events-none group-hover:opacity-75">
               <Image
                 layout="responsive"
-                width={200}
-                height={140}
+                width={400}
+                height={302}
                 src={images[0]?.objectName || "/empty-image-placeholder.jpeg"}
                 objectFit="cover"
-                alt=""
               />
             </div>
             <span className="sr-only">Lihat details untuk {name}</span>

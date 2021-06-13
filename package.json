@@ -12,7 +12,8 @@
     "prepare": "husky install",
     "lint": "eslint --fix **/*.{ts,tsx}",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fontsource/inria-sans": "4.4.5",

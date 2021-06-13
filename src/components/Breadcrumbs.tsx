@@ -9,9 +9,10 @@ export interface BreadCrumb {
 
 interface Props {
   breadcrumbs: Array<BreadCrumb>
+  className?: string
 }
-const Breadcrumbs: FC<Props> = ({ breadcrumbs }) => (
-  <nav className="flex mb-8" aria-label="Breadcrumb">
+const Breadcrumbs: FC<Props> = ({ className, breadcrumbs }) => (
+  <nav className={`flex mb-8 ${className}`} aria-label="Breadcrumb">
     <ol className="flex items-center space-x-4">
       <li>
         <div>
