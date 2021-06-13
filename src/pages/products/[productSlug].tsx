@@ -7,49 +7,76 @@ import { toIDR } from "@lib/currency"
 import Button from "@components/Button"
 import Breadcrumbs from "@components/Breadcrumbs"
 
-const profile = {
-  name: "Ricardo Cooper",
-  imageUrl:
-    "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-  coverImageUrl:
-    "https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-  about:
-    "\n        <p>\n          Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean posuere aliquam.\n        </p>\n        <p>\n          Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum, cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus suspendisse.\n        </p>\n      ",
-  fields: {
-    Phone: "(555) 123-4567",
-    Email: "ricardocooper@example.com",
-    Title: "Senior Front-End Developer",
-    Team: "Product Development",
-    Location: "San Francisco",
-    Sits: "Oasis, 4th floor",
-    Salary: "$145,000",
-    Birthday: "June 8, 1990"
-  }
-}
-
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product
 }) => {
-  const [selectedImage, setSelectedImage] = useState(0)
+  const [selectedImage, setSelectedImage] = useState(product.images[0]?.objectName)
 
   return (
     <div>
       <CategoryNavigation />
 
-      <main className="sm:flex">
-        <div className="flex-1 sm:p-8">
-          <Image
-            src={product.images[selectedImage]?.objectName || "/empty-image-placeholder.jpeg"}
-            layout="responsive"
-            objectFit="contain"
-            width={200}
-            height={200}
-            className="w-full bg-black sm:rounded-xl"
-          />
+      <main className="md:flex">
+        <div className="hidden md:block my-8 ml-8">
+          {product.images.map(({ objectName }, index) => {
+            const selected = selectedImage === objectName
+            return (
+              <button
+                key={`${objectName}-vertical`}
+                type="button"
+                className={`mb-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-4 focus:ring-indigo-400 ring-offset-2 ring-primary-500 ${
+                  selected ? "ring-4" : "ring-0"
+                }`}
+                onClick={() => setSelectedImage(objectName)}
+              >
+                <span className="sr-only">Gambar {index}</span>
+                <Image src={objectName} layout="fixed" objectFit="cover" width={80} height={80} />
+              </button>
+            )
+          })}
+        </div>
+
+        <div className="flex-1">
+          <div className="sm:p-8">
+            <Image
+              src={selectedImage || "/empty-image-placeholder.jpeg"}
+              layout="responsive"
+              objectFit="contain"
+              width={800}
+              height={800}
+              className="bg-black sm:rounded-xl"
+            />
+
+            <div className="flex md:hidden py-4 pl-4 sm:pl-0 overflow-auto">
+              {product.images.map(({ objectName }, index) => {
+                const selected = selectedImage === objectName
+                return (
+                  <button
+                    key={`${objectName}-horizontal`}
+                    type="button"
+                    className={`mr-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-4 focus:ring-indigo-400 ring-offset-2 ring-primary-500 ${
+                      selected ? "ring-4" : "ring-0"
+                    }`}
+                    onClick={() => setSelectedImage(objectName)}
+                  >
+                    <span className="sr-only">Gambar {index}</span>
+                    <Image
+                      src={objectName}
+                      layout="fixed"
+                      objectFit="cover"
+                      width={64}
+                      height={64}
+                      className="block bg-black rounded-lg"
+                    />
+                  </button>
+                )
+              })}
+            </div>
+          </div>
         </div>
 
         <div className="text-gray-900 flex-1 max-w-2xl">
-          <div className="p-4 sm:p-8 ">
+          <div className="p-4 sm:px-8 md:p-8">
             <Breadcrumbs
               className="my-4"
               breadcrumbs={[
@@ -63,7 +90,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
             <h1 className="text-4xl font-light mb-4 mt-8 text-gray-700">{product.name}</h1>
             <h2 className="text-2xl font-bold mb-4">{toIDR(product.price)}</h2>
-            <Button className="w-full sm:text-lg py-4 my-4">
+            <Button className="w-full sm:text-lg py-4 my-4 rounded-xl">
               <img src="/icons/shopping-cart-plus-light.svg" alt="" className="mr-4 opacity-90" />
               Masukan ke keranjang
             </Button>
