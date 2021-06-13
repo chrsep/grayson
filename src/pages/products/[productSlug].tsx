@@ -1,6 +1,6 @@
 import CategoryNavigation from "@components/CategoryNavigation"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
-import { findProductBySlug } from "@lib/db"
+import { findProductBySlug, findProductsByStoreSlug } from "@lib/db"
 import Image from "@components/Image"
 import { useState } from "react"
 import { toIDR } from "@lib/currency"
@@ -10,7 +10,8 @@ import categories from "@lib/categories"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
-  category
+  category,
+  storeProducts
 }) => {
   const [selectedImage, setSelectedImage] = useState(product.images[0]?.objectName)
 
@@ -19,20 +20,20 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       <CategoryNavigation />
 
       <main className="md:flex">
-        <div className="hidden md:block my-8 ml-8">
+        <div className="hidden md:block my-8 ml-8 min-w-[60px]">
           {product.images.map(({ objectName }, index) => {
             const selected = selectedImage === objectName
             return (
               <button
                 key={`${objectName}-vertical`}
                 type="button"
-                className={`mb-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-4 focus:ring-indigo-400 ring-offset-2 ring-primary-500 ${
-                  selected ? "ring-4" : "ring-0"
+                className={`mb-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
+                  selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
                 }`}
                 onClick={() => setSelectedImage(objectName)}
               >
                 <span className="sr-only">Gambar {index}</span>
-                <Image src={objectName} layout="fixed" objectFit="cover" width={80} height={80} />
+                <Image src={objectName} layout="fixed" objectFit="cover" width={60} height={60} />
               </button>
             )
           })}
@@ -44,8 +45,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
               src={selectedImage || "/empty-image-placeholder.jpeg"}
               layout="responsive"
               objectFit="contain"
-              width={800}
-              height={800}
+              width={400}
+              height={300}
               className="bg-black sm:rounded-xl"
             />
 
@@ -56,8 +57,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   <button
                     key={`${objectName}-horizontal`}
                     type="button"
-                    className={`mr-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-4 focus:ring-indigo-400 ring-offset-2 ring-primary-500 ${
-                      selected ? "ring-4" : "ring-0"
+                    className={`mr-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
+                      selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
                     }`}
                     onClick={() => setSelectedImage(objectName)}
                   >
@@ -142,8 +143,16 @@ export async function getServerSideProps({
   const product = await findProductBySlug(productSlug as string)
   const category = categories.find((c) => c.id === product.category)
 
+  const storeProducts = await findProductsByStoreSlug(product.store.slug)
+
   // Pass data to the page via props
-  return { props: { product, category } }
+  return {
+    props: {
+      product,
+      category,
+      storeProducts
+    }
+  }
 }
 
 export default ProductPage

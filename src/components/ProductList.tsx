@@ -11,12 +11,12 @@ const ProductList: FC<{ products: Array<Product & { images: ProductImage[]; stor
     {products.map(({ id, images, name, price, store, slug }) => (
       <Link href={`/products/${slug}`}>
         <li key={id} className="relative">
-          <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
+          <div className="group block w-full aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
             <div className="object-cover pointer-events-none group-hover:opacity-75">
               <Image
                 layout="responsive"
-                width={200}
-                height={144}
+                width={400}
+                height={302}
                 src={images[0]?.objectName || "/empty-image-placeholder.jpeg"}
                 objectFit="cover"
               />

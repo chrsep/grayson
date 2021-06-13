@@ -249,3 +249,29 @@ export const findProductBySlug = (slug: string) => {
     }
   })
 }
+
+// Take is 4 by default because that is what we usually show on store product preview
+export const findProductsByStoreSlug = (slug: string, take = 4) => {
+  return prisma.product.findMany({
+    where: {
+      store: {
+        slug
+      }
+    },
+    take,
+    include: {
+      store: {
+        include: {
+          owner: {
+            select: {
+              image: true,
+              email: true,
+              name: true
+            }
+          }
+        }
+      },
+      images: true
+    }
+  })
+}
