@@ -238,6 +238,7 @@ export const findProductBySlug = (slug: string) => {
         include: {
           owner: {
             select: {
+              image: true,
               email: true,
               name: true
             }

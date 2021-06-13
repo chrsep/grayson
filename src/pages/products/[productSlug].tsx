@@ -103,67 +103,77 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
           </div>
 
           <article className="sm:mx-8 mt-8 bg-white overflow-hidden sm:rounded-xl sm:border sm:shadow-md">
-            {/* Profile header */}
-            <div>
-              <div>
-                <Image
-                  className="h-32 w-full object-cover lg:h-48"
-                  src="/store-cover-placeholder.jpg"
-                  layout="responsive"
-                  width={700}
-                  height={200}
-                  alt=""
-                />
-              </div>
-              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-                  <div className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 bg-white">
-                    <Image
-                      className="rounded-full"
-                      layout="responsive"
-                      src={product.store.logo || "/empty-logo-placeholder.jpeg"}
-                      height={96}
-                      width={96}
-                      alt=""
-                    />
-                  </div>
-                  <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-                    <div className="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
-                      <h1 className="text-2xl font-bold text-gray-900 truncate">
-                        {product.store.name}
-                      </h1>
-                    </div>
+            <Image
+              className="h-32 w-full object-cover lg:h-48"
+              src="/store-cover-placeholder.jpg"
+              layout="responsive"
+              width={700}
+              height={200}
+              alt=""
+            />
+
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+                <div className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 bg-white">
+                  <Image
+                    className="rounded-full"
+                    layout="responsive"
+                    src={product.store.logo || "/empty-logo-placeholder.jpeg"}
+                    height={96}
+                    width={96}
+                    alt=""
+                  />
+                </div>
+                <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+                  <div className="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
+                    <h1 className="text-2xl font-bold text-gray-900 truncate">
+                      {product.store.name}
+                    </h1>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Description list */}
             <div className="mt-6 max-w-5xl mx-auto px-4 sm:px-6 pb-6">
-              <dl className="grid gap-x-4 gap-y-4 grid-cols-2">
-                <div className="col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Telfon</dt>
-                  <dd className="mt-1 text-sm text-gray-900">{product.store.phone}</dd>
-                </div>
+              <dl className="grid gap-x-4 gap-y-6 grid-cols-2">
+                {/* <div className="col-span-1"> */}
+                {/*  <dt className="text-sm font-medium text-gray-500">Telfon</dt> */}
+                {/*  <dd className="mt-1 text-sm text-gray-900">{product.store.phone}</dd> */}
+                {/* </div> */}
 
-                <div className="col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">WhatsApp</dt>
-                  <dd className="mt-1 text-sm text-gray-900">{product.store.whatsapp}</dd>
-                </div>
+                {/* <div className="col-span-1"> */}
+                {/*  <dt className="text-sm font-medium text-gray-500">WhatsApp</dt> */}
+                {/*  <dd className="mt-1 text-sm text-gray-900">{product.store.whatsapp}</dd> */}
+                {/* </div> */}
+
+                {/* <div className="col-span-2"> */}
+                {/*  <dt className="text-sm font-medium text-gray-500">Alamat</dt> */}
+                {/*  <dd className="mt-1 text-sm text-gray-900"> */}
+                {/*    {`${product.store.address}, ${product.store.city}, ${product.store.province}, ${product.store.postcode}`} */}
+                {/*  </dd> */}
+                {/* </div> */}
 
                 <div className="col-span-2">
-                  <dt className="text-sm font-medium text-gray-500">Alamat</dt>
-                  <dd className="mt-1 text-sm text-gray-900">
-                    {`${product.store.address}, ${product.store.city}, ${product.store.province}, ${product.store.postcode}`}
-                  </dd>
-                </div>
-
-                <div className="sm:col-span-2">
-                  <dt className="text-sm font-medium text-gray-500">Tentang Toko</dt>
+                  <dt className="text-sm font-medium text-gray-500">Tentang UMKM</dt>
                   <dd
                     className="mt-1 max-w-prose text-sm text-gray-900 space-y-5"
                     dangerouslySetInnerHTML={{ __html: product.store.description }}
                   />
+                </div>
+
+                <div className="col-span-2">
+                  <dt className="text-sm font-medium text-gray-500 mb-2">Didirikan oleh</dt>
+                  <dd className="flex items-center pb-2">
+                    <Image
+                      src={product.store.owner.image || "/store-cover-placeholder.jpg"}
+                      height={48}
+                      width={48}
+                      alt=""
+                      className="rounded-full"
+                    />
+
+                    <p className="ml-4 font-ui">{product.store.owner.name}</p>
+                  </dd>
                 </div>
               </dl>
             </div>
