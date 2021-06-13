@@ -66,7 +66,6 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                       objectFit="cover"
                       width={64}
                       height={64}
-                      className="block bg-black rounded-lg"
                     />
                   </button>
                 )

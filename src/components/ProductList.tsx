@@ -16,10 +16,9 @@ const ProductList: FC<{ products: Array<Product & { images: ProductImage[]; stor
               <Image
                 layout="responsive"
                 width={200}
-                height={140}
+                height={144}
                 src={images[0]?.objectName || "/empty-image-placeholder.jpeg"}
                 objectFit="cover"
-                alt=""
               />
             </div>
             <span className="sr-only">Lihat details untuk {name}</span>
