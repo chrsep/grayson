@@ -1,10 +1,15 @@
 import { NextApiHandler } from "next"
 import { newMutationHandler, newPublicApi } from "@lib/rest"
-import { type } from "io-ts"
+import { number, string, type } from "io-ts"
 
-const PutBody = type({})
+const PutBody = type({
+  productId: string,
+  qty: number
+})
 
 const put: NextApiHandler = newMutationHandler(PutBody, async (body, session, req, res) => {
+  const { cartId } = req.query
+
   return {
     status: 200,
     body: {}

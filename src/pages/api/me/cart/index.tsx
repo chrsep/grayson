@@ -10,6 +10,11 @@ export type GetResponseBody = Omit<Cart, "userId"> & { lineItems: LineItem[] }
 async function handleGetGuestCart(cartId: string, res: NextApiResponse) {
   let cart = await findCartById(cartId)
 
+  if (cart.user !== null) {
+    res.status(401).end()
+    return
+  }
+
   if (!cart) {
     cart = await insertGuestCart()
     res.setHeader("Set-Cookie", `guest-cart-id=${cart.id}`)
