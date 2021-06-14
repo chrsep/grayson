@@ -102,7 +102,19 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
               <h1 className="text-4xl font-light mb-4 text-gray-700">{product.name}</h1>
               <h2 className="text-2xl font-bold mb-4">{toIDR(product.price)}</h2>
-              <Button className="w-full sm:text-lg py-4 my-4 rounded-xl">
+              <Button
+                className="w-full sm:text-lg py-4 my-4 rounded-xl"
+                onClick={async () => {
+                  await fetch("/api/me/cart/line-items", {
+                    method: "PUT",
+                    credentials: "include",
+                    body: JSON.stringify({
+                      productId: product.id,
+                      qty: 1
+                    })
+                  })
+                }}
+              >
                 <img src="/icons/shopping-cart-plus-light.svg" alt="" className="mr-4 opacity-90" />
                 Masukan ke keranjang
               </Button>

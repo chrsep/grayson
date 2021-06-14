@@ -140,12 +140,13 @@ model Cart {
 }
 
 model LineItem {
-  id  String @id @default(cuid())
   qty Int
 
   product   Product @relation(fields: [productId], references: [id])
   productId String
 
-  cart   Cart?   @relation(fields: [cartId], references: [id])
-  cartId String?
+  cart   Cart   @relation(fields: [cartId], references: [id])
+  cartId String
+
+  @@id([productId, cartId])
 }

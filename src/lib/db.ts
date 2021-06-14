@@ -347,17 +347,27 @@ export const insertLineItemToCartById = async (
   cartId: string,
   data: { productId: string; qty: number }
 ) => {
-  return prisma.lineItem.create({
+  return prisma.cart.update({
+    where: {
+      id: cartId
+    },
     data: {
-      qty: data.qty,
-      product: {
-        connect: {
-          id: data.productId
-        }
-      },
-      cart: {
-        connect: {
-          id: cartId
+      lineItems: {
+        connectOrCreate: {
+          where: {
+            productId_cartId: {
+              cartId,
+              productId: data.productId
+            }
+          },
+          create: {
+            qty: data.qty,
+            product: {
+              connect: {
+                id: data.productId
+              }
+            }
+          }
         }
       }
     }

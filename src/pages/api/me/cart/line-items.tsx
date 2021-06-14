@@ -56,13 +56,13 @@ async function handleUserPutLineItems(
 }
 
 const put: NextApiHandler = newMutationHandler(PutBody, async (body, session, req) => {
-  const { cartId } = req.query
+  const cartId = req.cookies["guest-cart-id"]
 
   if (!session) {
     return handleGuestPutLineItems(cartId as string, body)
   }
-  await handleUserPutLineItems(session, body)
 
+  await handleUserPutLineItems(session, body)
   return {
     status: 200,
     body: {}
