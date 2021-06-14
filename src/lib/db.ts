@@ -294,6 +294,8 @@ export const findStoreHighlights = async (slug: string, excludedProductId?: stri
 }
 
 export const findCartById = async (id: string) => {
+  if (!id) return null
+
   return prisma.cart.findUnique({
     where: { id },
     include: {
