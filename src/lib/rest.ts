@@ -41,6 +41,12 @@ function handleMethod(handler: Handler): NextApiHandler {
   }
 }
 
+export function newPublicApi(handler: Handler): NextApiHandler {
+  return withSentry(async (req, res) => {
+    await handleMethod(handler)(req, res)
+  })
+}
+
 export function newProtectedApi(handler: Handler): NextApiHandler {
   return withSentry(async (req, res) => {
     const session = await getSession({ req })

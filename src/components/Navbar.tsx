@@ -9,10 +9,10 @@ import Button from "@components/Button"
 import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
-import useGetUser from "@hooks/api/useGetUser"
 import TextField from "@components/TextField"
 import { useRouter } from "next/router"
 import categories from "@lib/categories"
+import useGetUser from "@lib/auth/useGetUser"
 
 const navigations = [
   {

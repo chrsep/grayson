@@ -4,7 +4,7 @@ import TextField from "@components/TextField"
 import Button from "@components/Button"
 import Link from "@components/Link"
 import { useState } from "react"
-import useEmailSignIn from "@hooks/useSignIn"
+import useEmailSignIn from "@lib/auth/useSignIn"
 
 const SignIn = () => {
   return (

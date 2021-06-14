@@ -292,3 +292,51 @@ export const findStoreHighlights = async (slug: string, excludedProductId?: stri
     take
   })
 }
+
+export const findCartById = async (id: string) => {
+  return prisma.cart.findUnique({
+    where: { id },
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const findCartByUserEmail = async (email: string) => {
+  return prisma.cart.findFirst({
+    where: {
+      user: { email }
+    },
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const insertGuestCart = async () => {
+  return prisma.cart.create({
+    data: {},
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const insertUserCart = async (userEmail?: string) => {
+  return prisma.cart.create({
+    data: {
+      user: {
+        connect: {
+          email: userEmail
+        }
+      }
+    },
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
