@@ -1,4 +1,4 @@
-import { ProductImage, Product, Store, Category } from "@prisma/client"
+import { ProductImage, Product, Store, Category, LineItem } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
@@ -339,6 +339,27 @@ export const insertUserCart = async (userEmail?: string) => {
     include: {
       lineItems: true,
       user: true
+    }
+  })
+}
+
+export const insertLineItemToCartById = async (
+  cartId: string,
+  data: { productId: string; qty: number }
+) => {
+  return prisma.lineItem.create({
+    data: {
+      qty: data.qty,
+      product: {
+        connect: {
+          id: data.productId
+        }
+      },
+      cart: {
+        connect: {
+          id: cartId
+        }
+      }
     }
   })
 }

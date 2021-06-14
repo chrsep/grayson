@@ -63,15 +63,17 @@ export function newProtectedApi(handler: Handler): NextApiHandler {
   })
 }
 
+export interface ApiResponse {
+  status: number
+  body: unknown
+}
+
 type MutationHandler<T extends Any> = (
   body: TypeOf<T>,
   session: Session,
   req: NextApiRequest,
   res: NextApiResponse
-) => Promise<{
-  status: number
-  body: unknown
-}>
+) => Promise<ApiResponse>
 
 /** validate body and get session */
 export function newMutationHandler<T extends Any>(
