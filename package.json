@@ -33,7 +33,7 @@
     "minio": "7.0.18",
     "nanoid": "3.1.23",
     "next": "10.2.3",
-    "next-auth": "3.27.0",
+    "next-auth": "3.27.1",
     "next-compose-plugins": "2.2.1",
     "next-plugin-preact": "3.0.6",
     "preact": "10.5.13",
