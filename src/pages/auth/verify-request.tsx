@@ -1,7 +1,8 @@
 import LogoStandalone from "@components/LogoStandalone"
-import Image from "@components/Image"
+import Image from "next/image"
 import Link from "@components/Link"
 import Button from "@components/Button"
+import Hero from "@public/signup-hero.jpeg"
 
 const VerifyRequest = () => (
   <div className="min-h-screen bg-white flex">
@@ -28,10 +29,11 @@ const VerifyRequest = () => (
     <div className="hidden lg:block relative w-0 flex-1">
       <Image
         className="absolute inset-0 h-full w-full object-cover"
-        src="/sigin-hero.jpeg"
-        alt=""
+        placeholder="blur"
+        src={Hero}
         layout="fill"
         objectFit="cover"
+        alt=""
       />
     </div>
   </div>
