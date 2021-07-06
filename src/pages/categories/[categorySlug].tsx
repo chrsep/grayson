@@ -1,7 +1,6 @@
 import CategoryNavigation from "@components/CategoryNavigation"
 import React from "react"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
-import { getSession } from "next-auth/client"
 import categories from "@lib/categories"
 import { findProductsByCategory } from "@lib/db"
 import type { Category } from "@prisma/client"
@@ -24,26 +23,14 @@ const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
 export async function getServerSideProps(
   context: GetServerSidePropsContext<{ categorySlug: string }>
 ) {
-  const session = await getSession(context)
-  if (session === null) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permanent: false
-      }
-    }
-  }
-
   const { categorySlug } = context.params
   const category = categories.find(({ slug }) => slug === categorySlug)
-
-  const products = await findProductsByCategory(category.id as Category)
 
   // Pass data to the page via props
   return {
     props: {
-      category,
-      products
+      products: await findProductsByCategory(category.id as Category),
+      category
     }
   }
 }
