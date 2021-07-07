@@ -13,7 +13,7 @@ import { ParsedUrlQuery } from "querystring"
 import { Store, Product } from "@prisma/client"
 import { Breadcrumb } from "@components/Breadcrumbs"
 
-const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
+const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   tabs,
   store
@@ -137,4 +137,4 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (
   }
 }
 
-export default Store
+export default StorePage
