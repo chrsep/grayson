@@ -3,6 +3,7 @@ module.exports = {
     project: "./tsconfig.eslint.json"
   },
   extends: [
+    "next",
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
