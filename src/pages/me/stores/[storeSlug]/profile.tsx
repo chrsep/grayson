@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from "react"
 import { findStoreBySlug } from "@lib/db"
 import { getSession } from "next-auth/client"
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import StoreAdminHeading from "@components/StoreAdminHeading"
 import TextField from "@components/TextField"
 import Textarea from "@components/Textarea"
@@ -13,6 +13,9 @@ import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
 import Divider from "@components/Divider"
 import { useRouter } from "next/router"
+import { Store } from "@prisma/client"
+import { Breadcrumb } from "@components/Breadcrumbs"
+import { ParsedUrlQuery } from "querystring"
 
 const howToPayPlaceholder = `Contoh: 
 - Pembayaran dapat dilakukan dengan transfer 
@@ -68,6 +71,7 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
   }
 
   const handleChangeLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.[0]) return
     const result = await uploadImage(e.target.files[0])
     if (result === null) {
       setError("logo", {
@@ -238,10 +242,19 @@ const DangerZone: FC<{ slug: string }> = ({ slug }) => {
   )
 }
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext<{ storeSlug: string }>
-) {
-  const session = await getSession(context)
+interface Query extends ParsedUrlQuery {
+  storeSlug: string
+}
+
+interface Props {
+  store: Store
+  breadcrumbs: Breadcrumb[]
+  tabs: { name: string; href: string; current: boolean }[]
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) => {
+  if (!ctx.params) return { notFound: true }
+  const session = await getSession(ctx)
   if (session === null) {
     return {
       redirect: {
@@ -251,8 +264,9 @@ export async function getServerSideProps(
     }
   }
 
-  const { storeSlug } = context.params
+  const { storeSlug } = ctx.params
   const store = await findStoreBySlug(storeSlug)
+  if (!store) return { notFound: true }
 
   // Pass data to the page via props
   return {

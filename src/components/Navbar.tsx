@@ -158,7 +158,7 @@ const SearchField = () => {
   const handleShowSearchBar = () => {
     setShowSearch(true)
     requestAnimationFrame(() => {
-      input.current.focus()
+      input.current?.focus()
     })
   }
 
@@ -258,7 +258,7 @@ const UserProfile = () => {
                 width={32}
                 height={32}
                 className="h-8 w-8 rounded-full"
-                src={data.user.image || "/icons/user-circle-light.svg"}
+                src={data.user?.image || "/icons/user-circle-light.svg"}
                 alt=""
               />
             </Menu.Button>

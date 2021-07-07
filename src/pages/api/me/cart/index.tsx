@@ -10,7 +10,7 @@ export type GetResponseBody = Omit<Cart, "userId"> & { lineItems: LineItem[] }
 async function handleGetGuestCart(cartId: string, res: NextApiResponse) {
   let cart = await findCartById(cartId)
 
-  if (cart.user !== null) {
+  if (cart?.user !== null) {
     res.status(401).end()
     return
   }
@@ -27,6 +27,10 @@ async function handleGetGuestCart(cartId: string, res: NextApiResponse) {
 }
 
 async function handleGetUserCart(session: Session, res: NextApiResponse) {
+  if (!session.user?.email) {
+    res.status(401).end()
+    return
+  }
   let cart = await findCartByUserEmail(session.user.email)
 
   if (!cart) {

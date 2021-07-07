@@ -1,18 +1,24 @@
 import { Client } from "minio"
 
-const BUCKET = process.env.S3_BUCKET
+const { S3_ENDPOINT, S3_PORT, S3_KEY, S3_SECRET, S3_BUCKET } = process.env
+
+if (!S3_BUCKET) throw new Error("S3 bucket url is not specified")
+if (!S3_SECRET) throw new Error("S3 secret is not specified")
+if (!S3_ENDPOINT) throw new Error("S3 endpoint is not specified")
+if (!S3_KEY) throw new Error("S3 key is not specified")
+
 const minio = new Client({
-  endPoint: process.env.S3_ENDPOINT,
-  port: process.env.S3_PORT ? parseInt(process.env.S3_PORT, 10) : undefined,
-  useSSL: process.env.NODE_ENV !== "development",
-  accessKey: process.env.S3_KEY,
-  secretKey: process.env.S3_SECRET
+  endPoint: S3_ENDPOINT,
+  accessKey: S3_KEY,
+  secretKey: S3_SECRET,
+  port: S3_PORT ? parseInt(S3_PORT, 10) : undefined,
+  useSSL: process.env.NODE_ENV !== "development"
 })
 
 // eslint-disable-next-line import/prefer-default-export
 export const newSignedUploadUrl = (objectName: string) => {
   return new Promise((resolve, reject) => {
-    minio.presignedPutObject(BUCKET, objectName, (err, url) => {
+    minio.presignedPutObject(S3_BUCKET, objectName, (err, url) => {
       if (err) {
         reject(err)
       } else {

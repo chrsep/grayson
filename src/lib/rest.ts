@@ -1,3 +1,6 @@
+/* eslint-disable no-fallthrough */
+// noinspection FallThroughInSwitchStatementJS
+
 import { Any, TypeOf } from "io-ts"
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next"
 import { Session } from "next-auth"
@@ -17,24 +20,34 @@ function handleMethod(handler: Handler): NextApiHandler {
   return async (req, res) => {
     switch (req.method) {
       case "POST":
-        await handler.post(req, res)
-        break
+        if (handler.post) {
+          await handler.post(req, res)
+          break
+        }
       case "GET":
-        await handler.get(req, res)
-        break
+        if (handler.get) {
+          await handler.get(req, res)
+          break
+        }
       case "PUT":
-        await handler.put(req, res)
-        break
+        if (handler.put) {
+          await handler.put(req, res)
+          break
+        }
       case "PATCH":
-        await handler.patch(req, res)
-        break
+        if (handler.patch) {
+          await handler.patch(req, res)
+          break
+        }
       case "DELETE":
-        await handler.del(req, res)
-        break
+        if (handler.del) {
+          await handler.del(req, res)
+          break
+        }
       default: {
-        res.status(401).json({
-          error: "not_authenticated",
-          description: "The user does not have an active session or is not authenticated"
+        res.status(405).json({
+          error: "method_not_allowed",
+          description: "this method is not allowed"
         })
       }
     }
@@ -70,7 +83,7 @@ export interface ApiResponse {
 
 type MutationHandler<T extends Any> = (
   body: TypeOf<T>,
-  session: Session,
+  session: Session | null,
   req: NextApiRequest,
   res: NextApiResponse
 ) => Promise<ApiResponse>

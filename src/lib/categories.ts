@@ -40,4 +40,24 @@ const categories = [
   }
 ]
 
+export const findCategoryById = (id: string) => {
+  return (
+    categories.find((c) => c.id === id) || {
+      id: Category.LAINNYA,
+      name: "Lainnya",
+      slug: "lainnya"
+    }
+  )
+}
+
+export const findCategoryBySlug = (slug: string) => {
+  return (
+    categories.find((c) => c.slug === slug) || {
+      id: Category.LAINNYA,
+      name: "Lainnya",
+      slug: "lainnya"
+    }
+  )
+}
+
 export default categories

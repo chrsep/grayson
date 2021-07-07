@@ -18,10 +18,13 @@ const PatchBody = partial({
 const patch = newMutationHandler(PatchBody, async (data, session, { query: { storeSlug } }) => {
   if (string.is(storeSlug)) {
     const store = await findStoreBySlug(storeSlug)
-    const updatedStore = {
-      ...store,
-      ...data
+    if (!store) {
+      return {
+        status: 404,
+        body: { message: "store not found" }
+      }
     }
+    const updatedStore = { ...store, ...data }
     await updateStore(store.id, updatedStore)
 
     return {

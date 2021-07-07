@@ -24,7 +24,7 @@
     "@prisma/client": "2.26.0",
     "@sentry/nextjs": "6.8.0",
     "@tailwindcss/line-clamp": "0.2.1",
-    "@types/minio": "7.0.7",
+    "@types/minio": "7.0.8",
     "@types/react": "17.0.13",
     "@types/uuid": "8.3.1",
     "fp-ts": "2.10.5",
@@ -64,14 +64,15 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
-    "husky": "7.0.0",
+    "husky": "7.0.1",
     "lint-staged": "11.0.0",
     "postcss": "8.3.5",
     "prettier": "2.3.2",
     "prisma": "2.26.0",
     "tailwindcss": "2.2.4",
+    "ts-node": "^10.0.0",
     "typescript": "4.3.5",
-    "webpack": "5.42.1"
+    "webpack": "5.43.0"
   },
   "lint-staged": {
     "*.{js,ts,ts}": "eslint --cache --fix"

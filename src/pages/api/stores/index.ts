@@ -17,7 +17,9 @@ const PostBody = type({
 export type PostStoreBody = TypeOf<typeof PostBody>
 
 const post = newMutationHandler(PostBody, async (data, session) => {
-  const store = await insertStore(data, session.user.email)
+  if (!session?.user?.email) return { status: 403, body: {} }
+  const store = await insertStore(data, session.user?.email)
+
   return { status: 200, body: store }
 })
 

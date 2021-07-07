@@ -1,9 +1,17 @@
 import React from "react"
 import { findStoreWithProductsBySlug } from "@lib/db"
 import { getSession } from "next-auth/client"
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+  NextPage
+} from "next"
 import StoreAdminHeading from "@components/StoreAdminHeading"
 import NextLink from "next/link"
+import { ParsedUrlQuery } from "querystring"
+import { Store, Product } from "@prisma/client"
+import { Breadcrumb } from "@components/Breadcrumbs"
 
 const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
@@ -88,9 +96,20 @@ const Store: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
   )
 }
 
-export async function getServerSideProps(
+interface Props {
+  store: Store & { products: Product[] }
+  breadcrumbs: Breadcrumb[]
+  tabs: { name: string; href: string; current: boolean }[]
+}
+
+interface Query extends ParsedUrlQuery {
+  storeSlug: string
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Query> = async (
   context: GetServerSidePropsContext<{ storeSlug: string }>
-) {
+) => {
+  if (!context.params) return { notFound: true }
   const session = await getSession(context)
   if (session === null) {
     return {
@@ -103,6 +122,7 @@ export async function getServerSideProps(
 
   const { storeSlug } = context.params
   const store = await findStoreWithProductsBySlug(storeSlug)
+  if (!store) return { notFound: true }
 
   // Pass data to the page via props
   return {

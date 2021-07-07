@@ -98,7 +98,7 @@ model Session {
 model User {
   id            Int       @id @default(autoincrement())
   name          String    @default("")
-  email         String?   @unique
+  email         String    @unique
   emailVerified DateTime? @map(name: "email_verified")
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")

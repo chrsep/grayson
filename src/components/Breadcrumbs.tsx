@@ -1,14 +1,14 @@
 import NextLink from "next/link"
 import React, { FC } from "react"
 
-export interface BreadCrumb {
+export interface Breadcrumb {
   name: string
   href: string
   current: boolean
 }
 
 interface Props {
-  breadcrumbs: Array<BreadCrumb>
+  breadcrumbs: Array<Breadcrumb>
   className?: string
 }
 const Breadcrumbs: FC<Props> = ({ className, breadcrumbs }) => (

@@ -1,15 +1,16 @@
 import CategoryNavigation from "@components/CategoryNavigation"
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { findCategoryHighlights, findProductBySlug, findStoreHighlights } from "@lib/db"
 import Image from "@components/Image"
 import { useState } from "react"
 import { toIDR } from "@lib/currency"
 import Button from "@components/Button"
 import Breadcrumbs from "@components/Breadcrumbs"
-import categories from "@lib/categories"
+import categories, { findCategoryById } from "@lib/categories"
 import ProductList from "@components/ProductList"
 import type { Category } from "@prisma/client"
 import Divider from "@components/Divider"
+import { Await } from "@lib/ts-utils"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
@@ -187,22 +188,31 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   )
 }
 
-export async function getServerSideProps({
+interface Props {
+  category: typeof categories[0]
+  product: Exclude<Await<ReturnType<typeof findProductBySlug>>, null>
+  storeProducts: Await<ReturnType<typeof findStoreHighlights>>
+  categoryProducts: Await<ReturnType<typeof findCategoryHighlights>>
+}
+
+interface Query extends NodeJS.Dict<string> {
+  productSlug: string
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
   query: { productSlug }
-}: GetServerSidePropsContext<{ productSlug: string }>) {
+}) => {
   const product = await findProductBySlug(productSlug as string)
-  const category = categories.find((c) => c.id === product.category)
+  if (!product) return { notFound: true }
 
-  const storeProducts = await findStoreHighlights(product.store.slug, product.id)
-  const categoryProducts = await findCategoryHighlights(category.id as Category, product.id)
+  const category = findCategoryById(product.category)
 
-  // Pass data to the page via props
   return {
     props: {
       product,
       category,
-      storeProducts,
-      categoryProducts
+      storeProducts: await findStoreHighlights(product.store.slug, product.id),
+      categoryProducts: await findCategoryHighlights(category?.id as Category, product.id)
     }
   }
 }

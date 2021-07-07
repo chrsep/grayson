@@ -12,7 +12,7 @@ const UploadImageButton: FC<Props> = ({ children, variant, onChange, className }
   return (
     <>
       <input className="hidden" type="file" ref={ref} onChange={onChange} accept="image/*" />
-      <Button variant={variant} className={className} onClick={() => ref.current.click()}>
+      <Button variant={variant} className={className} onClick={() => ref.current?.click()}>
         {children}
       </Button>
     </>

@@ -1,10 +1,16 @@
 import CategoryNavigation from "@components/CategoryNavigation"
 import React from "react"
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
-import categories from "@lib/categories"
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+  NextPage
+} from "next"
+import categories, { findCategoryBySlug } from "@lib/categories"
 import { findProductsByCategory } from "@lib/db"
-import type { Category } from "@prisma/client"
+import type { Category, Product, ProductImage, Store } from "@prisma/client"
 import ProductList from "@components/ProductList"
+import { ParsedUrlQuery } from "querystring"
 
 const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   category,
@@ -20,11 +26,21 @@ const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
   )
 }
 
-export async function getServerSideProps(
+interface Props {
+  products: (Product & { images: ProductImage[]; store: Store })[]
+  category: typeof categories[0]
+}
+
+interface Query extends ParsedUrlQuery {
+  categorySlug: string
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Query> = async (
   context: GetServerSidePropsContext<{ categorySlug: string }>
-) {
+) => {
+  if (!context.params) return { notFound: true }
   const { categorySlug } = context.params
-  const category = categories.find(({ slug }) => slug === categorySlug)
+  const category = findCategoryBySlug(categorySlug)
 
   // Pass data to the page via props
   return {
