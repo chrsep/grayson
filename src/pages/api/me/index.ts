@@ -15,10 +15,20 @@ const PatchBody = partial({
   image: union([nullType, string])
 })
 const patch = newMutationHandler(PatchBody, async (data, session) => {
+  if (!session?.user?.email) {
+    return {
+      status: 401,
+      body: { message: "unauthorized" }
+    }
+  }
+
   const user = await findUserByEmail(session.user.email)
-  let updatedUser = {
-    ...user,
-    ...data
+  let updatedUser = { ...user, ...data }
+  if (!user) {
+    return {
+      status: 401,
+      body: { message: "unauthorized" }
+    }
   }
 
   updatedUser = await updateUser(user.id, updatedUser)

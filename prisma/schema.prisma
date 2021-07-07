@@ -59,6 +59,8 @@ model Product {
 
   store   Store  @relation(fields: [storeId], references: [id])
   storeId String
+
+  LineItem LineItem[]
 }
 
 model Account {
@@ -96,7 +98,7 @@ model Session {
 model User {
   id            Int       @id @default(autoincrement())
   name          String    @default("")
-  email         String?   @unique
+  email         String    @unique
   emailVerified DateTime? @map(name: "email_verified")
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
@@ -113,6 +115,7 @@ model User {
 
   stores Store[]
 
+  cart Cart[]
   @@map(name: "users")
 }
 
@@ -125,4 +128,25 @@ model VerificationRequest {
   updatedAt  DateTime @default(now()) @map(name: "updated_at")
 
   @@map(name: "verification_requests")
+}
+
+model Cart {
+  id String @id @default(cuid())
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  lineItems LineItem[]
+}
+
+model LineItem {
+  qty Int
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  cart   Cart   @relation(fields: [cartId], references: [id])
+  cartId String
+
+  @@id([productId, cartId])
 }

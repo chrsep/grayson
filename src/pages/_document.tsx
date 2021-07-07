@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from "next/document"
+import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document"
 
 const sentryInit = (env: string) => `Sentry.onLoad(function () {
   Sentry.init({
@@ -12,7 +12,7 @@ const sentryInit = (env: string) => `Sentry.onLoad(function () {
 `
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }

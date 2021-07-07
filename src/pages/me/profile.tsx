@@ -4,12 +4,13 @@ import Divider from "@components/Divider"
 import TextField from "@components/TextField"
 import { getSession } from "next-auth/client"
 import { findUserByEmail } from "@lib/db"
-import { InferGetServerSidePropsType, NextPage } from "next"
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { useForm } from "react-hook-form"
 import { PatchUserBody } from "@api/me"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image"
 import { mutate } from "swr"
+import { User } from "@prisma/client"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
@@ -38,7 +39,7 @@ const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> 
 const PersonalInfoForm: FC<{
   name: string
   email: string
-  image: string
+  image: string | null
 }> = ({ image, name, email }) => {
   const { register, handleSubmit, formState, setValue, setError, watch, reset } =
     useForm<PatchUserBody>({
@@ -62,6 +63,7 @@ const PersonalInfoForm: FC<{
   }
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.[0]) return
     const result = await uploadImage(e.target.files[0])
     if (result === null) {
       setError("image", {
@@ -235,8 +237,15 @@ const ContactForm: FC<{
   )
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
+interface Props {
+  user: Omit<User, "emailVerified" | "createdAt" | "updatedAt"> & {
+    emailVerified: string
+    createdAt: string
+    updatedAt: string
+  }
+}
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const session = await getSession(ctx)
   if (session === null) {
     return {
       redirect: {
@@ -246,14 +255,15 @@ export async function getServerSideProps(context) {
     }
   }
 
-  const user = await findUserByEmail(session.user.email)
+  const user = await findUserByEmail(session.user?.email || "")
+  if (user === null) return { notFound: true }
 
   // Pass data to the page via props
   return {
     props: {
       user: {
         ...user,
-        emailVerified: user?.emailVerified?.toISOString(),
+        emailVerified: user?.emailVerified?.toISOString() || "",
         createdAt: user.createdAt.toISOString(),
         updatedAt: user.updatedAt.toISOString()
       }

@@ -1,4 +1,4 @@
-import { ProductImage, Product, Store, Category } from "@prisma/client"
+import { ProductImage, Product, Store, Category, LineItem } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
@@ -290,5 +290,86 @@ export const findStoreHighlights = async (slug: string, excludedProductId?: stri
       store: true
     },
     take
+  })
+}
+
+export const findCartById = async (id: string) => {
+  if (!id) return null
+
+  return prisma.cart.findUnique({
+    where: { id },
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const findCartByUserEmail = async (email: string) => {
+  return prisma.cart.findFirst({
+    where: {
+      user: { email }
+    },
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const insertGuestCart = async () => {
+  return prisma.cart.create({
+    data: {},
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const insertUserCart = async (userEmail?: string) => {
+  return prisma.cart.create({
+    data: {
+      user: {
+        connect: {
+          email: userEmail
+        }
+      }
+    },
+    include: {
+      lineItems: true,
+      user: true
+    }
+  })
+}
+
+export const insertLineItemToCartById = async (
+  cartId: string,
+  data: { productId: string; qty: number }
+) => {
+  return prisma.cart.update({
+    where: {
+      id: cartId
+    },
+    data: {
+      lineItems: {
+        connectOrCreate: {
+          where: {
+            productId_cartId: {
+              cartId,
+              productId: data.productId
+            }
+          },
+          create: {
+            qty: data.qty,
+            product: {
+              connect: {
+                id: data.productId
+              }
+            }
+          }
+        }
+      }
+    }
   })
 }

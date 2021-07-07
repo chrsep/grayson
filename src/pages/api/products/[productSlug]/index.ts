@@ -15,11 +15,17 @@ const PatchBody = partial({
 const patch = newMutationHandler(PatchBody, async (body, session, { query: { productSlug } }) => {
   if (string.is(productSlug)) {
     const product = await findProductBySlugWithImages(productSlug)
+    if (!product) {
+      return {
+        status: 404,
+        body: { message: "product not found" }
+      }
+    }
 
     const updatedProduct = await updateProduct(
       product.id,
       { ...product, ...body },
-      body.images.map((image) => ({ objectName: image }))
+      body.images?.map((image) => ({ objectName: image })) || []
     )
 
     return {

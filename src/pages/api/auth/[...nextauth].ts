@@ -11,22 +11,13 @@ export default NextAuth({
     Providers.Email({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
-        port: parseInt(process.env.EMAIL_SERVER_PORT, 10),
+        port: parseInt(process.env.EMAIL_SERVER_PORT || "587", 10),
         auth: {
           user: process.env.EMAIL_SERVER_USER,
           pass: process.env.EMAIL_SERVER_PASSWORD
         }
       },
       from: process.env.EMAIL_FROM
-    }),
-    Providers.Apple({
-      clientId: process.env.APPLE_ID,
-      clientSecret: {
-        appleId: process.env.APPLE_ID,
-        teamId: process.env.APPLE_TEAM_ID,
-        privateKey: process.env.APPLE_PRIVATE_KEY,
-        keyId: process.env.APPLE_KEY_ID
-      }
     }),
     Providers.Facebook({
       clientId: process.env.FACEBOOK_ID,

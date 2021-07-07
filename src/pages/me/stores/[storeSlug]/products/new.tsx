@@ -1,6 +1,11 @@
-import Breadcrumbs from "@components/Breadcrumbs"
+import Breadcrumbs, { Breadcrumb } from "@components/Breadcrumbs"
 import React, { ChangeEventHandler, useState } from "react"
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+  NextPage
+} from "next"
 import { getSession } from "next-auth/client"
 import { findStoreWithProductsBySlug } from "@lib/db"
 import PageContainer from "@components/Container"
@@ -17,7 +22,8 @@ import UploadImageButton from "@components/UploadImageButton"
 import ProductImagePreviews from "@components/ProductImagePreviews"
 import categories from "@lib/categories"
 import Select from "@components/Select"
-import { Category } from "@prisma/client"
+import { Category, Product, Store } from "@prisma/client"
+import { ParsedUrlQuery } from "querystring"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
@@ -26,7 +32,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   store
 }) => {
   const router = useRouter()
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState<string[]>([])
   const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
       category: Category.LAINNYA
@@ -35,7 +41,6 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
-    if (typeof price !== "number") return
 
     const result = await fetch(`/api/stores/${store.slug}/products`, {
       method: "POST",
@@ -47,8 +52,11 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   }
 
   const handleImageUpload: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    if (!e.target.files?.[0]) return
     const result = await uploadImage(e.target.files[0])
-    setImages([...images, result])
+    if (result) {
+      setImages([...images, result])
+    }
   }
 
   return (
@@ -158,9 +166,19 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   )
 }
 
-export async function getServerSideProps(
+interface Props {
+  store: Store & { products: Product[] }
+  breadcrumbs: Breadcrumb[]
+}
+
+interface Query extends ParsedUrlQuery {
+  storeSlug: string
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Query> = async (
   context: GetServerSidePropsContext<{ storeSlug: string }>
-) {
+) => {
+  if (!context.params) return { notFound: true }
   const session = await getSession(context)
   if (session === null) {
     return {
@@ -173,6 +191,7 @@ export async function getServerSideProps(
 
   const { storeSlug } = context.params
   const store = await findStoreWithProductsBySlug(storeSlug)
+  if (store === null) return { notFound: true }
 
   // Pass data to the page via props
   return {

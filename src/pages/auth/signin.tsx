@@ -1,10 +1,11 @@
 import LogoStandalone from "@components/LogoStandalone"
-import Image from "@components/Image"
+import Image from "next/image"
 import TextField from "@components/TextField"
 import Button from "@components/Button"
 import Link from "@components/Link"
 import { useState } from "react"
-import useEmailSignIn from "@hooks/useSignIn"
+import useEmailSignIn from "@lib/auth/useSignIn"
+import Hero from "@public/signup-hero.jpeg"
 
 const SignIn = () => {
   return (
@@ -68,10 +69,11 @@ const SignIn = () => {
       <div className="hidden lg:block relative w-0 flex-1">
         <Image
           className="absolute inset-0 h-full w-full object-cover"
-          src="/sigin-hero.jpeg"
-          alt=""
+          placeholder="blur"
+          src={Hero}
           layout="fill"
           objectFit="cover"
+          alt=""
         />
       </div>
     </div>

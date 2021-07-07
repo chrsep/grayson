@@ -31,7 +31,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
                 id="current-tab"
                 name="current-tab"
                 className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-400 focus:border-primary-400 sm:text-sm rounded-md"
-                value={tabs.find((tab) => tab.current).name}
+                value={tabs.find((tab) => tab.current)?.name}
                 onChange={async (e) => {
                   await router.push(tabs[e.target.selectedIndex].href)
                 }}
@@ -43,7 +43,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
                 ))}
               </select>
             </label>
-            {actionText && (
+            {actionText && actionHref && (
               <div className="pt-4 w-full">
                 <NextLink href={actionHref}>
                   <Button className="w-full">{actionText}</Button>
@@ -71,7 +71,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
               ))}
             </nav>
 
-            {actionText && (
+            {actionText && actionHref && (
               <div className="pb-2 ml-auto">
                 <NextLink href={actionHref}>
                   <Button className="w-full">{actionText}</Button>

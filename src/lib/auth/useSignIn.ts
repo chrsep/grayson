@@ -9,7 +9,7 @@ const useEmailSignIn = () => {
   const emailSignIn = async (email: string) => {
     setLoading(true)
     const result = await signIn("email", { email, callbackUrl: "/", redirect: false })
-    if (result.ok) await router.push("/auth/verify-request")
+    if (result?.ok) await router.push("/auth/verify-request")
     setLoading(false)
   }
 

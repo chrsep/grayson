@@ -6,7 +6,7 @@ interface Props {
   label: string
   onChange: ChangeEventHandler<HTMLInputElement>
   placeholder: string
-  value?: string
+  value?: string | null
   className?: string
 }
 const ImageSelectorWIthSmallPreview: FC<Props> = ({
@@ -38,7 +38,7 @@ const ImageSelectorWIthSmallPreview: FC<Props> = ({
               className="h-full w-full text-gray-300"
             />
           </span>
-          <Button variant="outline" className="ml-4" onClick={() => ref.current.click()}>
+          <Button variant="outline" className="ml-4" onClick={() => ref.current?.click()}>
             Ubah
           </Button>
         </div>

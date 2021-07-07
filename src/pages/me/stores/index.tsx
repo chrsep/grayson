@@ -2,8 +2,9 @@ import Divider from "@components/Divider"
 import React from "react"
 import { findUserStores } from "@lib/db"
 import { getSession } from "next-auth/client"
-import { InferGetServerSidePropsType, NextPage } from "next"
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import Link from "@components/Link"
+import { Store } from "@prisma/client"
 
 const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ stores }) => {
   return (
@@ -48,9 +49,9 @@ const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
   )
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps<{ stores: Store[] }> = async (context) => {
   const session = await getSession(context)
-  if (session === null) {
+  if (!session?.user?.email) {
     return {
       redirect: {
         destination: "/auth/signin",

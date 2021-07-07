@@ -1,11 +1,11 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { getSession } from "next-auth/client"
 import { findProductBySlugWithImages, findStoreWithProductsBySlug } from "@lib/db"
 import { useForm } from "react-hook-form"
 import React, { ChangeEventHandler, FC, useState } from "react"
 import { uploadImage } from "@lib/image"
 import PageContainer from "@components/Container"
-import Breadcrumbs from "@components/Breadcrumbs"
+import Breadcrumbs, { Breadcrumb } from "@components/Breadcrumbs"
 import TextField from "@components/TextField"
 import Pricefield from "@components/Pricefield"
 import Textarea from "@components/Textarea"
@@ -17,6 +17,7 @@ import { PostProductBody } from "@api/stores/[storeSlug]/products"
 import categories from "@lib/categories"
 import Select from "@components/Select"
 import { useRouter } from "next/router"
+import { Product, ProductImage, Store } from "@prisma/client"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
@@ -38,8 +39,6 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
-    if (typeof price !== "number") return
-
     const result = await fetch(`/api/products/${product.slug}`, {
       method: "PATCH",
       credentials: "include",
@@ -59,9 +58,13 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   }
 
   const handleImageUpload: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    if (!e.target.files?.[0]) return
+
     const result = await uploadImage(e.target.files[0])
-    setImages([...images, result])
-    setImageChanged(true)
+    if (result) {
+      setImages([...images, result])
+      setImageChanged(true)
+    }
   }
 
   return (
@@ -216,9 +219,18 @@ const DangerZone: FC<{ slug: string; storeSlug: string }> = ({ slug, storeSlug }
   )
 }
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext<{ storeSlug: string; productSlug: string }>
-) {
+interface Props {
+  store: Store & { products: Product[] }
+  product: Product & { images: ProductImage[] }
+  breadcrumbs: Breadcrumb[]
+}
+
+interface Query extends NodeJS.Dict<string> {
+  storeSlug: string
+  productSlug: string
+}
+export const getServerSideProps: GetServerSideProps<Props, Query> = async (context) => {
+  if (!context.params) return { notFound: true }
   const session = await getSession(context)
   if (session === null) {
     return {
@@ -230,9 +242,12 @@ export async function getServerSideProps(
   }
 
   const { productSlug, storeSlug } = context.params
+
   const store = await findStoreWithProductsBySlug(storeSlug)
+  if (!store) return { notFound: true }
 
   const product = await findProductBySlugWithImages(productSlug)
+  if (!product) return { notFound: true }
 
   // Pass data to the page via props
   return {

@@ -3,7 +3,6 @@ version: "3"
 services:
   db:
     image: obserfy/postgres-dev:latest
-    container_name: grayson-postgres
     environment:
       POSTGRES_MULTIPLE_DATABASES: main
       POSTGRES_PASSWORD: postgres
@@ -14,7 +13,6 @@ services:
       - grayson-db:/var/lib/postgresql/data
   minio:
     image: minio/minio:latest
-    container_name: grayson-minio
     entrypoint: sh
     command: -c 'mkdir -p /data/grayson && /usr/bin/minio server /data'
     environment:

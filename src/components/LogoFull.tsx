@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 
-const LogoFull: FC<{ className }> = ({ className }) => (
+const LogoFull: FC<{ className: string }> = ({ className }) => (
   <img
     className={className}
     src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"

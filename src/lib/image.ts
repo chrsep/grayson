@@ -1,8 +1,4 @@
-interface Image {
-  title: string
-  key: string
-}
-export const uploadImage = async (image: File) => {
+export const uploadImage = async (image: File): Promise<string | null> => {
   const presignedUrl = await fetch("/api/images/presignedUrl", {
     method: "POST"
   })

@@ -1,3 +1,3 @@
 /// <reference types="next" />
 /// <reference types="next/types/global" />
-declare const Sentry: typeof import("@sentry/nextjs")
+/// <reference types="next/image-types/global" />

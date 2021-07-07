@@ -14,7 +14,13 @@ const PostBody = type({
 export type PostProductBody = TypeOf<typeof PostBody>
 
 const post = newMutationHandler(PostBody, async (data, session, { query: { storeSlug } }) => {
-  const user = await findUserByEmailWithStores(session.user.email)
+  const user = await findUserByEmailWithStores(session?.user?.email || "")
+  if (!user) {
+    return {
+      status: 403,
+      body: { error: "unauthorized", description: "You don't have access to this store" }
+    }
+  }
 
   if (user.stores.findIndex((store) => store.slug === storeSlug) === -1) {
     return {

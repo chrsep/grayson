@@ -1,7 +1,7 @@
 import Divider from "@components/Divider"
 import React, { ChangeEvent } from "react"
 import { getSession } from "next-auth/client"
-import { InferGetServerSidePropsType, NextPage } from "next"
+import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import TextField from "@components/TextField"
 import Button from "@components/Button"
 import Textarea from "@components/Textarea"
@@ -38,6 +38,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
   }
 
   const handleChangeLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.[0]) return
     const result = await uploadImage(e.target.files[0])
     if (result === null) {
       setError("logo", {
@@ -178,7 +179,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context)
   if (session === null) {
     return {
