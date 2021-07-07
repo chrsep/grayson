@@ -13,7 +13,7 @@ const minio = new Client({
   secretKey: S3_SECRET,
   port: S3_PORT ? parseInt(S3_PORT, 10) : undefined,
   useSSL: process.env.NODE_ENV !== "development",
-  region: "ap-southeast-1"
+  region: "sgp1"
 })
 
 // eslint-disable-next-line import/prefer-default-export
