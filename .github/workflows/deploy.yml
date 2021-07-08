@@ -28,7 +28,9 @@ jobs:
           echo defaults.org=$SENTRY_ORG >> sentry.properties
           echo defaults.project=$SENTRY_PROJECT >> sentry.properties
           echo auth.token=$SENTRY_AUTH_TOKEN >> sentry.properties
+          echo NEXT_PUBLIC_S3_PREFIX=$NEXT_PUBLIC_S3_PREFIX >> .env.local
         env:
+          NEXT_PUBLIC_S3_PREFIX: "https://grayson-media.sgp1.cdn.digitaloceanspaces.com"
           SENTRY_URL: https://sentry.io/
           SENTRY_ORG: grayson-ga
           SENTRY_PROJECT: grayson
