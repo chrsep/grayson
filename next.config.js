@@ -10,6 +10,6 @@ const plugins = [withPreact, withBundleAnalyzer, withSentryConfig]
 
 module.exports = withPlugins(plugins, {
   images: {
-    domains: ["localhost"]
+    domains: ["localhost", "grayson-media.sgp1.cdn.digitaloceanspaces.com"]
   }
 })
