@@ -17,7 +17,7 @@ jobs:
           access_token: ${{ github.token }}
 
   deploy:
-    name: Deploy proxy
+    name: Deploy grayson
     runs-on: ubuntu-latest
     steps:
       # This step checks out a copy of your repository.
