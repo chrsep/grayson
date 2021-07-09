@@ -158,22 +158,24 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
         <Divider />
 
-        <div className="mt-4 sm:mt-8 pb-4 sm:pb-8">
-          <h2 className="text-2xl px-4 sm:px-8 leading-tight mb-4">
-            Produk lainnya dari <b>{product.store.name}</b>
-          </h2>
-          <ProductList
-            products={storeProducts}
-            containerClassName="px-4 sm:px-8 grid-cols-2 md:!grid-cols-4 lg:!grid-cols-6"
-          />
-        </div>
+        {storeProducts.length > 0 && (
+          <div className="mt-4 sm:mt-8 pb-4 sm:pb-8">
+            <h2 className="text-2xl px-4 sm:px-8 leading-tight">
+              Produk lainnya dari <b>{product.store.name}</b>
+            </h2>
+            <ProductList
+              products={storeProducts}
+              containerClassName="px-4 sm:px-8 grid-cols-2 md:!grid-cols-4 lg:!grid-cols-6"
+            />
+          </div>
+        )}
 
         {categoryProducts.length > 0 && (
           <>
             <Divider />
 
             <div className="mt-8">
-              <h2 className="font-bold text-2xl px-4 sm:px-8 leading-tight mb-4">
+              <h2 className="font-bold text-2xl px-4 sm:px-8 leading-tight">
                 Produk lain dalam kategori <b>{category.name}</b>
               </h2>
               <ProductList
