@@ -56,7 +56,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 className="bg-black sm:rounded-xl"
               />
 
-              <div className="flex md:hidden py-4 pl-4 sm:pl-0 overflow-auto">
+              <div className="flex md:hidden py-4 pl-4 sm:pl-1 overflow-auto">
                 {product.images.map(({ objectName }, index) => {
                   const selected = selectedImage === objectName
                   return (
