@@ -126,17 +126,18 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
               <article className="mt-16">
                 <h3 className="mb-4 font-bold text-lg text-gray-700">Temui pendiri UMKM ini</h3>
                 <div className="flex items-center pb-2">
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 border rounded-xl">
                     <Image
                       src={product.store.owner.image || "/store-cover-placeholder.jpg"}
                       height={96}
                       width={96}
                       alt=""
                       className="rounded-xl"
+                      objectFit="cover"
                     />
                   </div>
 
-                  <div className="ml-4 text-gray-700 max-w-sm">
+                  <div className="ml-4 text-gray-700 max-w-sm overflow-hidden">
                     <p className="font-ui text-3xl font-light mb-1 line-clamp-2">
                       {product.store.owner.name}
                     </p>
