@@ -1,8 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import NextImage, { ImageProps } from "next/image"
 import { FC } from "react"
-
-const generateS3Url = (objectName: string) => `${process.env.NEXT_PUBLIC_S3_PREFIX}/${objectName}`
+import { generateS3Url } from "@lib/image"
 
 const Image: FC<ImageProps> = (props) => {
   if (typeof props.src === "string") {

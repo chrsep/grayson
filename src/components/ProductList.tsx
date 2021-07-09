@@ -1,28 +1,41 @@
-import Image from "@components/Image"
+import Image from "next/image"
 import Link from "@components/Link"
 import { toIDR } from "@lib/currency"
 import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
+import emptyImagePlaceholder from "@public/empty-image-placeholder.jpeg"
+import { generateS3Url } from "@lib/image"
 
 const ProductList: FC<{
   products: Array<Product & { images: ProductImage[]; store: Store }>
   containerClassName?: string
 }> = ({ containerClassName, products }) => (
   <ul
-    className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-8 p-4 ${containerClassName}`}
+    className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 xl:gap-x-8 sm:p-8 p-4 ${containerClassName}`}
   >
     {products.map(({ id, images, name, price, store, slug }) => (
       <Link href={`/products/${slug}`}>
         <li key={id} className="relative">
           <div className="group block w-full aspect-w-4 aspect-h-3 rounded-xl bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
             <div className="object-cover pointer-events-none group-hover:opacity-75">
-              <Image
-                layout="responsive"
-                width={400}
-                height={302}
-                src={images[0]?.objectName || "/empty-image-placeholder.jpeg"}
-                objectFit="cover"
-              />
+              {images[0]?.objectName ? (
+                <Image
+                  layout="responsive"
+                  width={400}
+                  height={302}
+                  objectFit="cover"
+                  src={generateS3Url(images[0].objectName)}
+                />
+              ) : (
+                <Image
+                  layout="responsive"
+                  width={400}
+                  height={302}
+                  objectFit="cover"
+                  src={emptyImagePlaceholder}
+                  placeholder="blur"
+                />
+              )}
             </div>
             <span className="sr-only">Lihat details untuk {name}</span>
           </div>

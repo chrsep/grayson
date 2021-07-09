@@ -20,3 +20,6 @@ export const uploadImage = async (image: File): Promise<string | null> => {
 
   return objectName
 }
+
+export const generateS3Url = (objectName: string) =>
+  `${process.env.NEXT_PUBLIC_S3_PREFIX}/${objectName}`
