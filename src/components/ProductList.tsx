@@ -9,7 +9,7 @@ const ProductList: FC<{
   containerClassName?: string
 }> = ({ containerClassName, products }) => (
   <ul
-    className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-4 ${containerClassName}`}
+    className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-8 xl:gap-x-8 sm:p-8 p-4 ${containerClassName}`}
   >
     {products.map(({ id, images, name, price, store, slug }) => (
       <Link href={`/products/${slug}`}>

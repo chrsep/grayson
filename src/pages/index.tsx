@@ -9,7 +9,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
     <div>
       <CategoryNavigation />
 
-      <main className="p-4">
+      <main>
         <ProductList products={products} />
       </main>
     </div>
