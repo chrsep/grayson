@@ -231,18 +231,16 @@ const SearchField = () => {
 }
 
 const UserProfile = () => {
-  const { error, data } = useGetUser()
-
-  if (!error && !data) {
-    return <div className="w-[32px] h-[32px]" />
-  }
+  const { data } = useGetUser()
 
   if (!data?.user?.email) {
     return (
       <Link href="/auth/signin">
-        <Button variant="outline" className="text-gray-400">
-          Masuk
-        </Button>
+        <a>
+          <Button variant="outline" className="text-gray-400">
+            Masuk
+          </Button>
+        </a>
       </Link>
     )
   }
@@ -278,36 +276,34 @@ const UserProfile = () => {
               static
               className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
-              <Link href="/me/profile">
-                <Menu.Item>
-                  {({ active }) => (
+              <Menu.Item>
+                {({ active }) => (
+                  <Link href="/me/profile">
                     <a
-                      href="/me/profile"
                       className={classNames(
                         active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-gray-700"
+                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       )}
                     >
                       Profil anda
                     </a>
-                  )}
-                </Menu.Item>
-              </Link>
-              <Link href="/me/stores">
-                <Menu.Item>
-                  {({ active }) => (
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link href="/me/stores">
                     <a
-                      href="/me/stores"
                       className={classNames(
                         active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-gray-700"
+                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       )}
                     >
                       Toko anda
                     </a>
-                  )}
-                </Menu.Item>
-              </Link>
+                  </Link>
+                )}
+              </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -315,7 +311,7 @@ const UserProfile = () => {
                     onClick={() => signout()}
                     className={classNames(
                       active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-red-600 !text-left w-full"
+                      "block px-4 py-2 text-sm text-red-600 !text-left w-full hover:bg-gray-100"
                     )}
                   >
                     Keluar
