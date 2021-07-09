@@ -14,7 +14,7 @@ const ProductList: FC<{
     {products.map(({ id, images, name, price, store, slug }) => (
       <Link href={`/products/${slug}`}>
         <li key={id} className="relative">
-          <div className="group block w-full aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
+          <div className="group block w-full aspect-w-4 aspect-h-3 rounded-xl bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden border bg-white">
             <div className="object-cover pointer-events-none group-hover:opacity-75">
               <Image
                 layout="responsive"
