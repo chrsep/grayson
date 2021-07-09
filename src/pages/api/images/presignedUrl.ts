@@ -4,13 +4,10 @@ import { NextApiHandler } from "next"
 import { v4 } from "uuid"
 
 const post: NextApiHandler = async (req, res) => {
-  const objectName = `S3-image/${v4()}`
-  const url = await newSignedUploadUrl(objectName)
+  const key = `S3-image/${v4()}`
+  const url = await newSignedUploadUrl(key)
 
-  res.status(200).json({
-    objectName,
-    url
-  })
+  res.status(200).json({ key, url })
 }
 
 export default newProtectedApi({ post })

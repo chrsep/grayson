@@ -252,13 +252,25 @@ const UserProfile = () => {
           <div>
             <Menu.Button className="bg-gray-100 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span className="sr-only">Open user menu</span>
-              <Image
-                width={32}
-                height={32}
-                className="h-8 w-8 rounded-full"
-                src={data.user?.image || "/icons/user-circle-light.svg"}
-                alt=""
-              />
+              <div className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100 border">
+                {data.user?.image ? (
+                  <Image
+                    width={100}
+                    height={100}
+                    src={data.user?.image}
+                    className="h-full w-full text-gray-300"
+                    objectFit="cover"
+                  />
+                ) : (
+                  <img
+                    width={100}
+                    height={100}
+                    src="/icons/user-circle.svg"
+                    className="h-full w-full text-gray-300"
+                    alt=""
+                  />
+                )}
+              </div>
             </Menu.Button>
           </div>
 

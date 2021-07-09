@@ -6,7 +6,7 @@ export const uploadImage = async (image: File): Promise<string | null> => {
     return null
   }
 
-  const { objectName, url } = await presignedUrl.json()
+  const { key, url } = await presignedUrl.json()
   const uploadImage = await fetch(url, {
     method: "PUT",
     body: image,
@@ -18,8 +18,7 @@ export const uploadImage = async (image: File): Promise<string | null> => {
     return null
   }
 
-  return objectName
+  return key
 }
 
-export const generateS3Url = (objectName: string) =>
-  `${process.env.NEXT_PUBLIC_S3_PREFIX}/${objectName}`
+export const generateS3Url = (key: string) => `${process.env.NEXT_PUBLIC_S3_PREFIX}/${key}`

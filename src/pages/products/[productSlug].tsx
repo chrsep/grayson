@@ -18,7 +18,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   storeProducts,
   categoryProducts
 }) => {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]?.objectName)
+  const [selectedImage, setSelectedImage] = useState(product.images[0]?.key)
 
   return (
     <div>
@@ -27,19 +27,19 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       <main className="">
         <div className="md:flex">
           <div className="hidden md:block my-8 ml-8 min-w-[60px]">
-            {product.images.map(({ objectName }, index) => {
-              const selected = selectedImage === objectName
+            {product.images.map(({ key }, index) => {
+              const selected = selectedImage === key
               return (
                 <button
-                  key={`${objectName}-vertical`}
+                  key={`${key}-vertical`}
                   type="button"
                   className={`mb-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
                     selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
                   }`}
-                  onClick={() => setSelectedImage(objectName)}
+                  onClick={() => setSelectedImage(key)}
                 >
                   <span className="sr-only">Gambar {index}</span>
-                  <Image src={objectName} layout="fixed" objectFit="cover" width={60} height={60} />
+                  <Image src={key} layout="fixed" objectFit="cover" width={60} height={60} />
                 </button>
               )
             })}
@@ -57,25 +57,19 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
               />
 
               <div className="flex md:hidden py-4 pl-4 sm:pl-1 overflow-auto">
-                {product.images.map(({ objectName }, index) => {
-                  const selected = selectedImage === objectName
+                {product.images.map(({ key }, index) => {
+                  const selected = selectedImage === key
                   return (
                     <button
-                      key={`${objectName}-horizontal`}
+                      key={`${key}-horizontal`}
                       type="button"
                       className={`mr-3 block leading-3 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
                         selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
                       }`}
-                      onClick={() => setSelectedImage(objectName)}
+                      onClick={() => setSelectedImage(key)}
                     >
                       <span className="sr-only">Gambar {index}</span>
-                      <Image
-                        src={objectName}
-                        layout="fixed"
-                        objectFit="cover"
-                        width={40}
-                        height={40}
-                      />
+                      <Image src={key} layout="fixed" objectFit="cover" width={40} height={40} />
                     </button>
                   )
                 })}

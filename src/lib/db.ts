@@ -58,7 +58,8 @@ export const findStoreWithProductsBySlug = async (slug: string) => {
 }
 
 export const insertProduct = async (
-  product: Omit<Product, "id" | "storeId" | "slug" | "images"> & { images: string[] },
+  product: Omit<Product, "id" | "storeId" | "slug" | "images">,
+  images: Omit<ProductImage, "productId">[],
   storeSlug: string
 ) => {
   return prisma.product.create({
@@ -71,9 +72,7 @@ export const insertProduct = async (
         }
       },
       images: {
-        create: product.images.map((image) => ({
-          objectName: image
-        }))
+        create: images.map(({ key, url }) => ({ key, url }))
       }
     }
   })
@@ -147,12 +146,13 @@ export const updateProduct = async (
       ...product,
       images: {
         disconnect: originalImages
-          .filter((image) => images.findIndex((i) => image.objectName === i.objectName) === -1)
-          .map((image) => ({ objectName: image.objectName })),
+          .filter((image) => images.findIndex((i) => image.key === i.key) === -1)
+          .map((image) => ({ key: image.key })),
         connectOrCreate: images.map((image) => ({
-          where: { objectName: image.objectName },
+          where: { key: image.key },
           create: {
-            objectName: image.objectName
+            key: image.key,
+            url: image.url
           }
         }))
       }

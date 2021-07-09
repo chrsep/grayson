@@ -34,9 +34,11 @@ model Store {
 }
 
 model ProductImage {
-  objectName String   @id
-  product    Product? @relation(fields: [productId], references: [id])
-  productId  String?
+  key String @id
+  url String
+
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?
 }
 
 enum Category {
@@ -100,10 +102,13 @@ model User {
   name          String    @default("")
   email         String    @unique
   emailVerified DateTime? @map(name: "email_verified")
-  image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
-  ownedStores   Store[]   @relation("owner")
+
+  image    String?
+  imageKey String?
+
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @default(now()) @map(name: "updated_at")
+  ownedStores Store[]  @relation("owner")
 
   phone    String @default("")
   whatsapp String @default("")

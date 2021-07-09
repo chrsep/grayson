@@ -4,6 +4,8 @@ import { deleteProductBySlug, findProductBySlugWithImages, updateProduct } from 
 import { createEnum } from "@lib/enum"
 import { Category } from "@prisma/client"
 import { NextApiHandler } from "next"
+import { getPlaiceholder } from "plaiceholder"
+import { generateS3Url } from "@lib/image"
 
 const PatchBody = partial({
   name: string,
@@ -25,7 +27,10 @@ const patch = newMutationHandler(PatchBody, async (body, session, { query: { pro
     const updatedProduct = await updateProduct(
       product.id,
       { ...product, ...body },
-      body.images?.map((image) => ({ objectName: image })) || []
+      body.images?.map((image) => ({
+        key: image,
+        url: generateS3Url(image)
+      })) || []
     )
 
     return {

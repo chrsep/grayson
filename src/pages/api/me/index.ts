@@ -1,6 +1,7 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { nullType, partial, string, TypeOf, union } from "io-ts"
 import { findUserByEmail, updateUser } from "@lib/db"
+import { generateS3Url } from "@lib/image"
 
 export type PatchUserBody = TypeOf<typeof PatchBody>
 const PatchBody = partial({
@@ -12,7 +13,7 @@ const PatchBody = partial({
   city: string,
   province: string,
   postcode: string,
-  image: union([nullType, string])
+  imageKey: union([nullType, string])
 })
 const patch = newMutationHandler(PatchBody, async (data, session) => {
   if (!session?.user?.email) {
@@ -29,6 +30,9 @@ const patch = newMutationHandler(PatchBody, async (data, session) => {
       status: 401,
       body: { message: "unauthorized" }
     }
+  }
+  if (data.imageKey) {
+    updatedUser.image = generateS3Url(data.imageKey)
   }
 
   updatedUser = await updateUser(user.id, updatedUser)

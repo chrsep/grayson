@@ -13,7 +13,8 @@
     "lint": "eslint --fix **/*.{ts,tsx}",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "studio": "prisma studio"
   },
   "dependencies": {
     "@fontsource/inria-sans": "4.5.0",

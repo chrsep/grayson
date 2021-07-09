@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from "react"
+import React, { ChangeEvent, ChangeEventHandler, FC, useRef } from "react"
 import Button from "@components/Button"
 import Divider from "@components/Divider"
 import TextField from "@components/TextField"
@@ -7,10 +7,11 @@ import { findUserByEmail } from "@lib/db"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { useForm } from "react-hook-form"
 import { PatchUserBody } from "@api/me"
-import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
-import { uploadImage } from "@lib/image"
+import { generateS3Url, uploadImage } from "@lib/image"
 import { mutate } from "swr"
 import { User } from "@prisma/client"
+import axios from "redaxios"
+import Image from "@components/Image"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
@@ -23,7 +24,12 @@ const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> 
     </div>
 
     <Divider />
-    <PersonalInfoForm name={user.name} image={user.image} email={user.email} />
+    <PersonalInfoForm
+      name={user.name}
+      image={user.image}
+      imageKey={user.imageKey}
+      email={user.email}
+    />
     <Divider className="hidden sm:block" />
     <ContactForm
       phone={user.phone}
@@ -40,40 +46,47 @@ const PersonalInfoForm: FC<{
   name: string
   email: string
   image: string | null
-}> = ({ image, name, email }) => {
-  const { register, handleSubmit, formState, setValue, setError, watch, reset } =
-    useForm<PatchUserBody>({
-      defaultValues: { name, email, image }
-    })
+  imageKey: string | null
+}> = ({ image, imageKey, name, email }) => {
+  const { register, handleSubmit, formState, setValue, setError, watch, reset } = useForm<
+    PatchUserBody & { image: string | null }
+  >({
+    defaultValues: { name, email, imageKey, image }
+  })
 
-  const submit = async (data: PatchUserBody) => {
-    const meResponse = await fetch("/api/me", {
+  const submit = handleSubmit(async (formData) => {
+    const { data, status } = await axios<{ updatedUser: User }>("/api/me", {
       method: "PATCH",
-      body: JSON.stringify(data)
+      data: JSON.stringify({
+        email: formData.email,
+        imageKey: formData.imageKey,
+        name: formData.name
+      })
     })
-    if (!meResponse.ok) return
+    if (status !== 200) return
 
-    const { updatedUser } = await meResponse.json()
     await mutate("/api/auth/session")
     reset({
-      name: updatedUser.name,
-      image: updatedUser.image,
-      email: updatedUser.email
+      name: data.updatedUser.name,
+      imageKey: data.updatedUser.imageKey,
+      image: data.updatedUser.image,
+      email: data.updatedUser.email
     })
-  }
+  })
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) return
     const result = await uploadImage(e.target.files[0])
     if (result === null) {
-      setError("image", {
+      setError("imageKey", {
         type: "fetch",
         message: "Oops, upload gambar gagal, tolong coba kembali."
       })
       return
     }
 
-    setValue("image", result, { shouldDirty: true })
+    setValue("imageKey", result, { shouldDirty: true })
+    setValue("image", generateS3Url(result), { shouldDirty: true })
   }
 
   return (
@@ -88,7 +101,7 @@ const PersonalInfoForm: FC<{
           </div>
         </div>
         <div className="mt-5 md:mt-0 md:col-span-2">
-          <form onSubmit={handleSubmit(submit)}>
+          <form onSubmit={submit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <TextField
@@ -108,14 +121,15 @@ const PersonalInfoForm: FC<{
                   {...register("email")}
                 />
 
-                <ImageSelectorWIthSmallPreview
+                <ImageSelector
                   label="Foto profil"
-                  value={watch("image")}
+                  image={watch("image")}
+                  imageKey={watch("imageKey")}
                   onChange={handleImageChange}
-                  placeholder="/icons/user-circle.svg"
                 />
-                {formState.errors.image && (
-                  <p className="text-red-800 text-xs !mt-4">{formState.errors.image.message}</p>
+
+                {formState.errors.imageKey && (
+                  <p className="text-red-800 text-xs !mt-4">{formState.errors.imageKey.message}</p>
                 )}
               </div>
 
@@ -233,6 +247,55 @@ const ContactForm: FC<{
           </form>
         </div>
       </div>
+    </div>
+  )
+}
+
+const ImageSelector: FC<{
+  label: string
+  onChange: ChangeEventHandler<HTMLInputElement>
+  image?: string | null
+  imageKey?: string | null
+  className?: string
+}> = ({ label, image, onChange, className }) => {
+  const ref = useRef<HTMLInputElement>(null)
+  return (
+    <div className={`flex items-start ${className}`}>
+      <label htmlFor="image-input" className="block text-sm  text-gray-700">
+        {label}
+        <input
+          id="image-input"
+          type="file"
+          className="hidden"
+          onChange={onChange}
+          ref={ref}
+          accept="image/*"
+        />
+        <div className="mt-1 flex items-center">
+          <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 border">
+            {image ? (
+              <Image
+                width={100}
+                height={100}
+                src={image}
+                className="h-full w-full text-gray-300"
+                objectFit="cover"
+              />
+            ) : (
+              <img
+                width={100}
+                height={100}
+                src="/icons/user-circle.svg"
+                className="h-full w-full text-gray-300"
+                alt=""
+              />
+            )}
+          </span>
+          <Button variant="outline" className="ml-4" onClick={() => ref.current?.click()}>
+            Ubah
+          </Button>
+        </div>
+      </label>
     </div>
   )
 }
