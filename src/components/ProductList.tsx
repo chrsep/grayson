@@ -4,7 +4,6 @@ import { toIDR } from "@lib/currency"
 import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
 import emptyImagePlaceholder from "@public/empty-image-placeholder.jpeg"
-import { generateS3Url } from "@lib/image-client"
 
 const ProductList: FC<{
   products: Array<Product & { images: ProductImage[]; store: Store }>
@@ -24,7 +23,9 @@ const ProductList: FC<{
                   width={400}
                   height={302}
                   objectFit="cover"
-                  src={generateS3Url(images[0].key)}
+                  src={images[0].url}
+                  placeholder="blur"
+                  blurDataURL={images[0].base64}
                 />
               ) : (
                 <Image
