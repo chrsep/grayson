@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import Adapters from "next-auth/adapters"
 import Providers from "next-auth/providers"
 import prisma from "@lib/prisma"
+import { User } from "@prisma/client"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -58,7 +59,12 @@ export default NextAuth({
   callbacks: {
     // async signIn(user, account, profile) { return true },
     // async redirect(url, baseUrl) { return baseUrl },
-    // async session(session, user) { return session },
+    async session(session, user: User) {
+      const s = { ...session }
+      s.user.imageBase64 = user.imageBase64
+
+      return s
+    }
     // async jwt(token, user, account, profile, isNewUser) { return token }
   },
 
