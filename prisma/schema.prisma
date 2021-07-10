@@ -34,11 +34,12 @@ model Store {
 }
 
 model ProductImage {
-  key String @id
-  url String
+  key    String @id
+  url    String
+  base64 String
 
-  product   Product? @relation(fields: [productId], references: [id])
-  productId String?
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
 }
 
 enum Category {
