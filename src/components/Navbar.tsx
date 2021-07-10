@@ -6,13 +6,13 @@ import { signout } from "next-auth/client"
 import LogoFull from "@components/LogoFull"
 import LogoStandalone from "@components/LogoStandalone"
 import Button from "@components/Button"
-import { classNames } from "@lib/ui"
 import CartSlideOver from "@components/CartSlideOver"
 import Image from "@components/Image"
 import TextField from "@components/TextField"
 import { useRouter } from "next/router"
 import categories from "@lib/categories"
 import useGetUser from "@lib/auth/useGetUser"
+import clsx from "clsx"
 
 const navigations = [
   {
@@ -61,7 +61,7 @@ const Navbar: FC = () => {
                       return (
                         <Link key={item.name} href={item.href}>
                           <a
-                            className={classNames(
+                            className={clsx(
                               current
                                 ? "bg-gray-900 text-white bg-opacity-20 "
                                 : "text-gray-300 hover:bg-white hover:bg-opacity-20  hover:text-white",
@@ -102,7 +102,7 @@ const Navbar: FC = () => {
                   return (
                     <Link href={item.href}>
                       <a
-                        className={classNames(
+                        className={clsx(
                           current
                             ? "bg-gray-900 text-white bg-opacity-20 "
                             : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
@@ -127,7 +127,7 @@ const Navbar: FC = () => {
                   return (
                     <Link href={`/categories/${item.slug}`}>
                       <a
-                        className={classNames(
+                        className={clsx(
                           current
                             ? "bg-gray-900 text-white bg-opacity-20 "
                             : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
@@ -266,7 +266,7 @@ const UserProfile = () => {
                     width={100}
                     height={100}
                     src="/icons/user-circle.svg"
-                    className="h-full w-full text-gray-300"
+                    className="h-full w-full text-gray-300 bg-gray-300"
                     alt=""
                   />
                 )}
@@ -292,7 +292,7 @@ const UserProfile = () => {
                 {({ active }) => (
                   <Link href="/me/profile">
                     <a
-                      className={classNames(
+                      className={clsx(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       )}
@@ -306,7 +306,7 @@ const UserProfile = () => {
                 {({ active }) => (
                   <Link href="/me/stores">
                     <a
-                      className={classNames(
+                      className={clsx(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       )}
@@ -321,7 +321,7 @@ const UserProfile = () => {
                   <button
                     type="button"
                     onClick={() => signout()}
-                    className={classNames(
+                    className={clsx(
                       active ? "bg-gray-100" : "",
                       "block px-4 py-2 text-sm text-red-600 !text-left w-full hover:bg-gray-100"
                     )}

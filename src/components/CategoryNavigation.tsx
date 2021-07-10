@@ -1,8 +1,8 @@
 import categories from "@lib/categories"
 import Link from "next/link"
-import { classNames } from "@lib/ui"
 import React from "react"
 import { useRouter } from "next/router"
+import clsx from "clsx"
 
 const CategoryNavigation = () => {
   const router = useRouter()
@@ -15,7 +15,7 @@ const CategoryNavigation = () => {
           return (
             <Link key={item.name} href={`/categories/${item.slug}`}>
               <a
-                className={classNames(
+                className={clsx(
                   current
                     ? "bg-primary-400 text-primary-600 bg-opacity-20 "
                     : "text-gray-900 hover:bg-gray-400 hover:bg-opacity-20  hover:text-primary-700",
