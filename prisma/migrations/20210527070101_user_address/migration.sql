@@ -1,5 +1,0 @@
--- AlterTable
-ALTER TABLE "users" ADD COLUMN     "address" TEXT NOT NULL DEFAULT E'',
-ADD COLUMN     "city" TEXT NOT NULL DEFAULT E'',
-ADD COLUMN     "postcode" TEXT NOT NULL DEFAULT E'',
-ADD COLUMN     "province" TEXT NOT NULL DEFAULT E'';

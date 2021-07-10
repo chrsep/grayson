@@ -1,4 +1,4 @@
-import { ProductImage, Product, Store, Category, LineItem } from "@prisma/client"
+import { Category, Product, ProductImage, Store } from "@prisma/client"
 import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
@@ -72,7 +72,7 @@ export const insertProduct = async (
         }
       },
       images: {
-        create: images.map(({ key, url }) => ({ key, url }))
+        create: images.map(({ key, url, base64 }) => ({ key, url, base64 }))
       }
     }
   })
@@ -139,33 +139,45 @@ export const updateProduct = async (
     }
   })
 
-  return prisma.product.update({
+  const imageToDelete = originalImages
+    .filter((image) => images.findIndex((i) => image.key === i.key) === -1)
+    .map((image) => ({ key: image.key }))
+
+  if (imageToDelete.length > 0) {
+    await prisma.productImage.deleteMany({
+      where: {
+        key: { in: imageToDelete.map(({ key }) => key) }
+      }
+    })
+  }
+
+  const updatedProduct = await prisma.product.update({
     where: { id },
     include: { images: true },
     data: {
       ...product,
       images: {
-        disconnect: originalImages
-          .filter((image) => images.findIndex((i) => image.key === i.key) === -1)
-          .map((image) => ({ key: image.key })),
-        connectOrCreate: images.map((image) => ({
-          where: { key: image.key },
-          create: {
-            key: image.key,
-            url: image.url
-          }
-        }))
+        connectOrCreate: images
+          .filter((image) => originalImages.findIndex((i) => image.key === i.key) === -1)
+          .map((image) => ({
+            where: { key: image.key },
+            create: {
+              key: image.key,
+              url: image.url,
+              base64: image.base64
+            }
+          }))
       }
     }
   })
+
+  return { deletedImage: imageToDelete, product: updatedProduct }
 }
 
 export const deleteStoreBySlug = async (slug: string) => {
   await prisma.product.deleteMany({
     where: {
-      store: {
-        slug
-      }
+      store: { slug }
     }
   })
 

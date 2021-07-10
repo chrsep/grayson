@@ -9,7 +9,7 @@ import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPre
 import Button from "@components/Button"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
-import { uploadImage } from "@lib/image"
+import { uploadImage } from "@lib/image-client"
 import PageContainer from "@components/Container"
 import Divider from "@components/Divider"
 import { useRouter } from "next/router"

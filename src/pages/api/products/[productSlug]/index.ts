@@ -4,8 +4,8 @@ import { deleteProductBySlug, findProductBySlugWithImages, updateProduct } from 
 import { createEnum } from "@lib/enum"
 import { Category } from "@prisma/client"
 import { NextApiHandler } from "next"
-import { getPlaiceholder } from "plaiceholder"
-import { generateS3Url } from "@lib/image"
+import { getImagesMetadata } from "@lib/image-server"
+import { deleteObjects } from "@lib/file-storage"
 
 const PatchBody = partial({
   name: string,
@@ -24,26 +24,20 @@ const patch = newMutationHandler(PatchBody, async (body, session, { query: { pro
       }
     }
 
-    const updatedProduct = await updateProduct(
-      product.id,
-      { ...product, ...body },
-      body.images?.map((image) => ({
-        key: image,
-        url: generateS3Url(image)
-      })) || []
-    )
-
-    return {
-      status: 200,
-      body: updatedProduct
+    const images = await getImagesMetadata(body.images)
+    const result = await updateProduct(product.id, { ...product, ...body }, images)
+    if (result.deletedImage.length > 0) {
+      await deleteObjects(result.deletedImage.map(({ key }) => key))
     }
+
+    return { status: 200, body: result.product }
   }
 
   return {
-    status: 400,
+    status: 404,
     body: {
-      error: "bad_request",
-      description: "The data provided does not adhere to the standard"
+      error: "not_found",
+      description: "product not found"
     }
   }
 })

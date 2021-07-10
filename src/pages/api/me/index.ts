@@ -1,7 +1,7 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { nullType, partial, string, TypeOf, union } from "io-ts"
 import { findUserByEmail, updateUser } from "@lib/db"
-import { generateS3Url } from "@lib/image"
+import { generateS3Url } from "@lib/image-client"
 import { getPlaiceholder } from "plaiceholder"
 
 export type PatchUserBody = TypeOf<typeof PatchBody>

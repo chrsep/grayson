@@ -3,7 +3,7 @@ import { array, number, string, type, TypeOf } from "io-ts"
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { createEnum } from "@lib/enum"
 import { Category } from "@prisma/client"
-import { generateS3Url } from "@lib/image"
+import { getImagesMetadata } from "@lib/image-server"
 
 const PostBody = type({
   name: string,
@@ -31,11 +31,8 @@ const post = newMutationHandler(PostBody, async (data, session, { query: { store
   }
 
   if (string.is(storeSlug)) {
-    const store = await insertProduct(
-      data,
-      data.images.map((image) => ({ key: image, url: generateS3Url(image) })),
-      storeSlug
-    )
+    const images = await getImagesMetadata(data.images)
+    const store = await insertProduct(data, images, storeSlug)
     return { status: 200, body: store }
   }
 

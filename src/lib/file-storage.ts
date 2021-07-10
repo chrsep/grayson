@@ -25,3 +25,14 @@ export const newSignedUploadUrl = (key: string) => {
     Key: key
   })
 }
+
+export const deleteObjects = async (keys: string[]) => {
+  return s3
+    .deleteObjects({
+      Bucket: S3_BUCKET,
+      Delete: {
+        Objects: keys.map((key) => ({ Key: key }))
+      }
+    })
+    .promise()
+}

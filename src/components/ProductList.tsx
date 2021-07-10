@@ -4,7 +4,7 @@ import { toIDR } from "@lib/currency"
 import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
 import emptyImagePlaceholder from "@public/empty-image-placeholder.jpeg"
-import { generateS3Url } from "@lib/image"
+import { generateS3Url } from "@lib/image-client"
 
 const ProductList: FC<{
   products: Array<Product & { images: ProductImage[]; store: Store }>

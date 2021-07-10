@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Store" ADD COLUMN     "address" TEXT NOT NULL DEFAULT E'',
-ADD COLUMN     "phone" TEXT NOT NULL DEFAULT E'';

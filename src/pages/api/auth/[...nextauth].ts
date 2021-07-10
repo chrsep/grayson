@@ -60,10 +60,12 @@ export default NextAuth({
     // async signIn(user, account, profile) { return true },
     // async redirect(url, baseUrl) { return baseUrl },
     async session(session, user: User) {
-      const s = { ...session }
-      s.user.imageBase64 = user.imageBase64
+      const newSession = { ...session }
+      if (newSession?.user) {
+        newSession.user.imageBase64 = user.imageBase64
+      }
 
-      return s
+      return newSession
     }
     // async jwt(token, user, account, profile, isNewUser) { return token }
   },

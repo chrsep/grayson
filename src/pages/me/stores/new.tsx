@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
-import { uploadImage } from "@lib/image"
+import { uploadImage } from "@lib/image-client"
 import Breadcrumbs from "@components/Breadcrumbs"
 
 const howToPayPlaceholder = `Contoh: 
