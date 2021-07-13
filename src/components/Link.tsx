@@ -5,6 +5,7 @@ interface Props extends HTMLProps<HTMLAnchorElement> {
   href: string
   className?: string
 }
+/** @deprecated  use next/link directly instead */
 const Link: FC<Props> = ({ href, className = "", children, ...props }) => (
   <NextLink href={href}>
     <a className={` text-primary-400 hover:text-primary-300 ${className}`} {...props}>

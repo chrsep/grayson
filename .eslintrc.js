@@ -2,12 +2,14 @@ module.exports = {
   parserOptions: {
     project: "./tsconfig.eslint.json"
   },
+  plugins: ["tailwindcss"],
   extends: [
     "next",
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:tailwindcss/recommended"
   ],
   rules: {
     "react/react-in-jsx-scope": 0,

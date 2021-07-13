@@ -14,10 +14,10 @@ import axios from "redaxios"
 import Image from "@components/Image"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
-  <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
-    <div className="px-4 sm:px-0 mt-2 md:flex md:items-center md:justify-between">
+  <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
+    <div className="md:flex md:justify-between md:items-center px-4 sm:px-0 mt-2">
       <div className="flex-1 min-w-0">
-        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+        <h2 className="text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">
           Profil anda
         </h2>
       </div>
@@ -94,16 +94,16 @@ const PersonalInfoForm: FC<{
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
-            <h3 className="text-lg font-bold leading-6 text-gray-900 mb-2">Data diri</h3>
+            <h3 className="mb-2 text-lg font-bold leading-6 text-gray-900">Data diri</h3>
             <p className="mt-1 text-sm text-gray-600">
               Data ini akan ditampilkan pada halaman profil dan pada listing produk anda.
             </p>
           </div>
         </div>
-        <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="md:col-span-2 mt-5 md:mt-0">
           <form onSubmit={submit}>
-            <div className="shadow sm:rounded-md sm:overflow-hidden">
-              <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+            <div className="sm:overflow-hidden sm:rounded-md shadow">
+              <div className="sm:p-6 py-5 px-4 space-y-6 bg-white">
                 <TextField
                   label="Nama"
                   autocomplete="full-name"
@@ -129,11 +129,11 @@ const PersonalInfoForm: FC<{
                 />
 
                 {formState.errors.imageKey && (
-                  <p className="text-red-800 text-xs !mt-4">{formState.errors.imageKey.message}</p>
+                  <p className="!mt-4 text-xs text-red-800">{formState.errors.imageKey.message}</p>
                 )}
               </div>
 
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <div className="py-3 px-4 sm:px-6 text-right bg-gray-50">
                 <Button type="submit" className="ml-auto" disabled={!formState.isDirty}>
                   Simpan
                 </Button>
@@ -181,16 +181,16 @@ const ContactForm: FC<{
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
-            <h3 className="text-lg font-bold leading-6 text-gray-900 mb-2">Data kontak</h3>
+            <h3 className="mb-2 text-lg font-bold leading-6 text-gray-900">Data kontak</h3>
             <p className="mt-1 text-sm text-gray-600">
               Berikan data kontak lengkap anda agar pengguna lain dapat menghubungi anda.
             </p>
           </div>
         </div>
-        <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="md:col-span-2 mt-5 md:mt-0">
           <form onSubmit={handleSubmit(submit)}>
-            <div className="shadow overflow-hidden sm:rounded-md">
-              <div className="px-4 py-5 bg-white sm:p-6">
+            <div className="overflow-hidden sm:rounded-md shadow">
+              <div className="sm:p-6 py-5 px-4 bg-white">
                 <div className="grid grid-cols-6 gap-6">
                   <TextField
                     label="Nomor telefon"
@@ -238,7 +238,7 @@ const ContactForm: FC<{
                 </div>
               </div>
 
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <div className="py-3 px-4 sm:px-6 text-right bg-gray-50">
                 <Button type="submit" className="ml-auto" disabled={!formState.isDirty}>
                   Simpan
                 </Button>
@@ -261,7 +261,7 @@ const ImageSelector: FC<{
   const ref = useRef<HTMLInputElement>(null)
   return (
     <div className={`flex items-start ${className}`}>
-      <label htmlFor="image-input" className="block text-sm  text-gray-700">
+      <label htmlFor="image-input" className="block text-sm text-gray-700">
         {label}
         <input
           id="image-input"
@@ -271,14 +271,14 @@ const ImageSelector: FC<{
           ref={ref}
           accept="image/*"
         />
-        <div className="mt-1 flex items-center">
-          <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 border">
+        <div className="flex items-center mt-1">
+          <span className="inline-block overflow-hidden w-12 h-12 bg-gray-100 rounded-full border">
             {image ? (
               <Image
                 width={100}
                 height={100}
                 src={image}
-                className="h-full w-full text-gray-300"
+                className="w-full h-full text-gray-300"
                 objectFit="cover"
               />
             ) : (
@@ -286,7 +286,7 @@ const ImageSelector: FC<{
                 width={100}
                 height={100}
                 src="/icons/user-circle.svg"
-                className="h-full w-full text-gray-300"
+                className="w-full h-full text-gray-300"
                 alt=""
               />
             )}

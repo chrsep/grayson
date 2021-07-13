@@ -35,13 +35,13 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
   return (
     <div className={`${containerClassName}`}>
       <label htmlFor={name} className="block text-sm text-gray-700">
-        {!hideLabel && <span className="mb-1 block">{label}</span>}
-        <div className="rounded-md relative">
+        {!hideLabel && <span className="block mb-1">{label}</span>}
+        <div className="relative rounded-md">
           {iconSrc && (
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <img
                 src={iconSrc}
-                className="h-5 w-5 text-gray-400 opacity-70"
+                className="w-5 h-5 text-gray-400 opacity-70"
                 aria-hidden="true"
                 alt=""
               />

@@ -13,9 +13,9 @@ const Notification: FC<Props> = ({ heading, description, show, onClose }) => (
     {/* Global notification live region, render this permanently at the end of the document */}
     <div
       aria-live="assertive"
-      className="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start z-40"
+      className="flex fixed inset-0 z-40 items-end sm:items-start sm:p-6 py-6 px-4 pointer-events-none"
     >
-      <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
+      <div className="flex flex-col items-center sm:items-end space-y-4 w-full">
         {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
         <Transition
           show={show}
@@ -27,29 +27,29 @@ const Notification: FC<Props> = ({ heading, description, show, onClose }) => (
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+          <div className="overflow-hidden w-full max-w-sm bg-white rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg pointer-events-auto">
             <div className="p-4">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
                   <img
                     src="/icons/check.svg"
-                    className="h-6 w-6 text-green-400"
+                    className="w-6 h-6 text-green-400"
                     aria-hidden="true"
                     alt=""
                   />
                 </div>
-                <div className="ml-3 w-0 flex-1 pt-0.5">
-                  <p className="text-sm  text-gray-900">{heading}</p>
+                <div className="flex-1 pt-0.5 ml-3 w-0">
+                  <p className="text-sm text-gray-900">{heading}</p>
                   <p className="mt-1 text-sm text-gray-500">{description}</p>
                 </div>
-                <div className="ml-4 flex-shrink-0 flex">
+                <div className="flex flex-shrink-0 ml-4">
                   <button
                     type="button"
-                    className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
+                    className="inline-flex text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:outline-none"
                     onClick={onClose}
                   >
                     <span className="sr-only">Tutup</span>
-                    <img src="/icons/x.svg" className="h-5 w-5" aria-hidden="true" alt="" />
+                    <img src="/icons/x.svg" className="w-5 h-5" aria-hidden="true" alt="" />
                   </button>
                 </div>
               </div>

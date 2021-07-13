@@ -7,7 +7,7 @@ const SearchPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   products
 }) => (
   <main>
-    <h1 className="font-bold text-2xl text-gray-900 px-4 sm:px-8 py-6 my-6 border-b">
+    <h1 className="py-6 px-4 sm:px-8 my-6 text-2xl font-bold text-gray-900 border-b">
       Hasil pencarian dari <br />
       <i className="text-primary-400">&rdquo;{query}&rdquo;</i>
     </h1>

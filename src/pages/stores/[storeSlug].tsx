@@ -1,0 +1,99 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from "next"
+import { FC } from "react"
+import Image from "next/image"
+import Hero from "@public/store-cover-placeholder.jpg"
+import Icon from "@components/Icon"
+import Button from "@components/Button"
+import { Product, ProductImage, Store } from "@prisma/client"
+import { findStoreWithProductsBySlug } from "@lib/db"
+import ProductItem from "@components/ProductItem"
+
+interface Query extends NodeJS.Dict<string> {
+  storeSlug: string
+}
+
+interface Props {
+  store: Store & {
+    products: Array<Product & { images: ProductImage[] }>
+  }
+}
+
+const StoreProfile: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ store }) => {
+  return <Heading store={store} />
+}
+
+const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
+  return (
+    <div>
+      <div>
+        <Image
+          className="object-cover w-full h-32 lg:h-48"
+          layout="responsive"
+          height={800}
+          src={Hero}
+          alt=""
+        />
+      </div>
+
+      <div className="relative px-4 sm:px-6 lg:px-8 mx-auto max-w-5xl">
+        <div className="sm:flex sm:items-end -mt-12 sm:-mt-16 sm:space-x-5">
+          <div className="flex overflow-hidden w-24 sm:w-32 h-24 sm:h-32 rounded-full ring-4 ring-white">
+            {store.logo ? (
+              <Image src={store.logo} width={150} height={150} alt="" />
+            ) : (
+              <Image src={Hero} width={150} height={150} alt="" />
+            )}
+          </div>
+
+          <div className="sm:flex sm:flex-1 sm:justify-end sm:items-center sm:pb-1 mt-6 sm:space-x-6 sm:min-w-0">
+            <div className="sm:hidden md:block flex-1 mt-6 min-w-0">
+              <h1 className="text-2xl font-bold text-gray-900 truncate">{store.name}</h1>
+            </div>
+
+            <div className="flex flex-col sm:flex-row mt-6 space-y-3 sm:space-y-0 sm:space-x-4">
+              <Button variant="outline">
+                <Icon src="/icons/mail.svg" className="mr-2 opacity-75" />
+                <span>Message</span>
+              </Button>
+
+              <Button variant="outline">
+                <Icon src="/icons/phone.svg" className="mr-2 opacity-75" />
+                <span>Call</span>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden sm:block md:hidden flex-1 mt-6 min-w-0">
+          <h1 className="text-2xl font-bold text-gray-900 truncate">{store.name}</h1>
+        </div>
+      </div>
+
+      <div className="p-4 sm:p-8 mx-auto max-w-5xl">
+        <h2 className=" my-4 mx-auto max-w-5xl font-ui text-2xl font-bold opacity-70">Produk</h2>
+
+        <ul className=" grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 sm:gap-x-6 xl:gap-x-8 gap-y-8">
+          {store.products.map((product) => (
+            <ProductItem key={product.id} product={product} store={store} />
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Query> = async ({ params }) => {
+  const storeSlug = params?.storeSlug
+  if (!storeSlug) return { notFound: true }
+
+  const store = await findStoreWithProductsBySlug(storeSlug)
+  if (!store) return { notFound: true }
+
+  return {
+    props: {
+      store
+    }
+  }
+}
+
+export default StoreProfile

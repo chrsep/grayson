@@ -16,7 +16,7 @@ function Grayson({ Component, pageProps }: AppProps) {
 
   return (
     <SessionContext.Provider value={pageProps.session}>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="min-h-screen bg-gray-100">
         {!router.asPath.startsWith("/auth") && <Navbar />}
         <Component {...pageProps} />
       </div>

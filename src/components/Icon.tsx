@@ -1,10 +1,26 @@
 import { FC } from "react"
 
-interface Props {
+const Icon: FC<{
   src: string
-}
-const Icon: FC<Props> = ({ src }) => {
-  return <img src={src} alt="" aria-hidden="true" className="block h-6 w-6" />
-}
+  className?: string
+}> = ({ src, className }) => (
+  <div
+    role="img"
+    aria-hidden="true"
+    className={`w-5 h-5 bg-black ${className}`}
+    style={{
+      maskImage: `url(${src})`,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      "-webkit-mask-image": `url(${src})`,
+
+      maskSize: "100%",
+      "-webkit-mask-size": "100%",
+
+      maskRepeat: "no-repeat",
+      "-webkit-mask-repeat": "no-repeat"
+    }}
+  />
+)
 
 export default Icon

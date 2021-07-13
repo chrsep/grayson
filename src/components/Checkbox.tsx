@@ -25,10 +25,10 @@ const Checkbox: FC<Props> = ({
       onChange={onChange}
       required={required}
       type="checkbox"
-      className="h-4 w-4 text-primary-500 focus:ring-primary-400 border-gray-300 rounded"
+      className="w-4 h-4 text-primary-500 rounded border-gray-300 focus:ring-primary-400"
       checked={checked}
     />
-    <label htmlFor={id} className="ml-2 block text-sm text-gray-900">
+    <label htmlFor={id} className="block ml-2 text-sm text-gray-900">
       {label}
     </label>
   </div>

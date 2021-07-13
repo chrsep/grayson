@@ -8,7 +8,7 @@ const CategoryNavigation = () => {
   const router = useRouter()
   return (
     <nav className="hidden sm:block sm:pl-6 bg-white border-b">
-      <div className="flex space-x-4 h-16 items-center">
+      <div className="flex items-center space-x-4 h-16">
         {categories.map((item) => {
           const current = router.asPath.endsWith(item.slug)
 
@@ -17,9 +17,9 @@ const CategoryNavigation = () => {
               <a
                 className={clsx(
                   current
-                    ? "bg-primary-400 text-primary-600 bg-opacity-20 "
-                    : "text-gray-900 hover:bg-gray-400 hover:bg-opacity-20  hover:text-primary-700",
-                  "px-3 py-2 rounded-md text-sm  "
+                    ? " text-primary-600 bg-primary-400 bg-opacity-20"
+                    : "text-gray-900 hover:bg-gray-400 hover:bg-opacity-20 hover:text-primary-700",
+                  " py-2 px-3 text-sm rounded-md"
                 )}
                 aria-current={current ? "page" : undefined}
               >

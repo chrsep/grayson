@@ -19,7 +19,7 @@ const Select: ForwardRefRenderFunction<HTMLSelectElement, Props> = (
     <select
       id={id}
       name={name}
-      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+      className="block py-2 pr-10 pl-3 mt-1 w-full text-base sm:text-sm rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
       ref={ref}
       onChange={onChange}
       value={value}

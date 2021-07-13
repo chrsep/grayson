@@ -18,8 +18,8 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
 
-      <div className="pb-5 border-b border-gray-200 sm:pb-0">
-        <h2 className="pt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+      <div className="pb-5 sm:pb-0 border-b border-gray-200">
+        <h2 className="pt-4 text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">
           {name}
         </h2>
 
@@ -30,7 +30,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
               <select
                 id="current-tab"
                 name="current-tab"
-                className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-400 focus:border-primary-400 sm:text-sm rounded-md"
+                className="block py-2 pr-10 pl-3 w-full text-base sm:text-sm rounded-md border-gray-300 focus:border-primary-400 focus:ring-primary-400 focus:outline-none"
                 value={tabs.find((tab) => tab.current)?.name}
                 onChange={async (e) => {
                   await router.push(tabs[e.target.selectedIndex].href)
@@ -53,7 +53,7 @@ const StoreAdminHeading: FC<Props> = ({ actionHref, actionText, breadcrumbs, nam
           </div>
 
           <div className="hidden sm:flex items-end h-[46px]">
-            <nav className="-mb-px flex space-x-8 ">
+            <nav className=" flex -mb-px space-x-8">
               {tabs.map((tab) => (
                 <NextLink href={tab.href} key={tab.name}>
                   <a

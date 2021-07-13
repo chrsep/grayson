@@ -9,12 +9,12 @@ import Hero from "@public/signup-hero.jpeg"
 
 const SignIn = () => {
   return (
-    <div className="min-h-screen bg-white flex">
-      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm lg:w-96">
+    <div className="flex min-h-screen bg-white">
+      <div className="flex flex-col flex-1 lg:flex-none justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
+        <div className="mx-auto w-full lg:w-96 max-w-sm">
           <div>
             <Link href="/">
-              <LogoStandalone className="h-12 w-auto" />
+              <LogoStandalone className="w-auto h-12" />
             </Link>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Masuk ke akun anda</h2>
           </div>
@@ -66,9 +66,9 @@ const SignIn = () => {
         </div>
       </div>
 
-      <div className="hidden lg:block relative w-0 flex-1">
+      <div className="hidden lg:block relative flex-1 w-0">
         <Image
-          className="absolute inset-0 h-full w-full object-cover"
+          className="object-cover absolute inset-0 w-full h-full"
           placeholder="blur"
           src={Hero}
           layout="fill"

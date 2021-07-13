@@ -31,7 +31,7 @@ const Button: FC<Props> = ({
       break
     case "outline":
       baseClassName =
-        "bg-white border border-gray-300 shadow-sm text-sm  text-gray-700 hover:bg-gray-50"
+        "bg-white border border-gray-300 shadow-sm text-sm  text-gray-700 hover:bg-gray-100"
       break
     default:
       baseClassName =
@@ -46,10 +46,10 @@ const Button: FC<Props> = ({
       className={clsx(
         className,
         baseClassName,
-        "flex items-center rounded-md py-2 px-4 justify-center ",
-        "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-300",
+        " flex justify-center items-center py-2 px-4 rounded-md",
+        "focus:ring-2 focus:ring-primary-300 focus:ring-offset-2 focus:outline-none",
         "disabled:opacity-40",
-        "transition-color"
+        "transition-colors"
       )}
     >
       {children}

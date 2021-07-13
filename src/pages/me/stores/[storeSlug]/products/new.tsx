@@ -64,7 +64,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
       <div className="px-4 sm:px-0">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <div className="pb-5 border-b border-gray-200">
-          <h2 className="pt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          <h2 className="pt-4 text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">
             Produk baru
           </h2>
         </div>
@@ -74,17 +74,17 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg  leading-6 text-gray-900">Data produk</h3>
+              <h3 className="text-lg leading-6 text-gray-900">Data produk</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Isi data produk atau jasa yang ingin anda pasang.
               </p>
             </div>
           </div>
 
-          <div className="mt-5 md:mt-0 md:col-span-2">
+          <div className="md:col-span-2 mt-5 md:mt-0">
             <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
-              <div className="shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-5 bg-white sm:p-6">
+              <div className="overflow-hidden sm:rounded-md shadow">
+                <div className="sm:p-6 py-5 px-4 bg-white">
                   <div className="grid grid-cols-6 gap-6">
                     <TextField
                       label="Nama produk*"
@@ -124,7 +124,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                   <div className="pt-12">
                     <div className="flex flex-col sm:flex-row sm:items-center">
                       <div className="">
-                        <h3 className="text-lg leading-6  text-gray-900">Gambar</h3>
+                        <h3 className="text-lg leading-6 text-gray-900">Gambar</h3>
                         <p className="mt-1 max-w-2xl text-sm text-gray-500">
                           Tambahkan gambar untuk produk anda.
                         </p>
@@ -132,7 +132,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
 
                       <UploadImageButton
                         variant="outline"
-                        className="ml-auto w-full sm:w-auto mt-4"
+                        className="mt-4 ml-auto w-full sm:w-auto"
                         onChange={handleImageUpload}
                       >
                         Tambah gambar
@@ -149,8 +149,8 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
                   </div>
                 </div>
 
-                <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
-                  <p className="text-sm text-gray-500 mr-4">
+                <div className="flex items-center py-3 px-4 sm:px-6 text-left bg-gray-50">
+                  <p className="mr-4 text-sm text-gray-500">
                     Data dengan tanda bintang (*) harus di-isi.
                   </p>
                   <Button type="submit" className="ml-auto">

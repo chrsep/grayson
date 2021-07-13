@@ -26,16 +26,16 @@ const Pricefield: ForwardRefRenderFunction<HTMLInputElement, Props> = (
   ref
 ) => (
   <div className={containerClassName}>
-    <label htmlFor={id} className="block text-sm  text-gray-700">
+    <label htmlFor={id} className="block text-sm text-gray-700">
       {label}
     </label>
-    <div className="mt-1 relative rounded-md shadow-sm">
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <span className="text-gray-500 sm:text-sm">Rp.</span>
+    <div className="relative mt-1 rounded-md shadow-sm">
+      <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+        <span className="sm:text-sm text-gray-500">Rp.</span>
       </div>
       <input
         type="text"
-        className="focus:ring-primary-400 focus:border-primary-400 block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md"
+        className="block pr-12 pl-10 w-full sm:text-sm rounded-md border-gray-300 focus:border-primary-400 focus:ring-primary-400"
         aria-describedby="price-currency"
         placeholder={placeholder}
         name={name}
@@ -46,8 +46,8 @@ const Pricefield: ForwardRefRenderFunction<HTMLInputElement, Props> = (
         onChange={onChange}
         value={value}
       />
-      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-        <span className="text-gray-500 sm:text-sm" id="price-currency">
+      <div className="flex absolute inset-y-0 right-0 items-center pr-3 pointer-events-none">
+        <span className="sm:text-sm text-gray-500" id="price-currency">
           IDR
         </span>
       </div>

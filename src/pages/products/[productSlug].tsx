@@ -56,7 +56,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 className="bg-black sm:rounded-xl"
               />
 
-              <div className="flex md:hidden py-4 pl-4 sm:pl-1 overflow-auto">
+              <div className="flex md:hidden overflow-auto py-4 pl-4 sm:pl-1">
                 {product.images.map(({ key }, index) => {
                   const selected = selectedImage === key
                   return (
@@ -77,8 +77,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
             </div>
           </div>
 
-          <div className="text-gray-900 flex-1 max-w-2xl">
-            <div className="p-4 sm:px-8 md:p-8">
+          <div className="flex-1 max-w-2xl text-gray-900">
+            <div className="p-4 md:p-8 sm:px-8">
               <Breadcrumbs
                 className="my-4"
                 breadcrumbs={[
@@ -95,10 +95,10 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 ]}
               />
 
-              <h1 className="text-4xl font-light mb-4 text-gray-700">{product.name}</h1>
-              <h2 className="text-2xl font-bold mb-4">{toIDR(product.price)}</h2>
+              <h1 className="mb-4 text-4xl font-light text-gray-700">{product.name}</h1>
+              <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
               <Button
-                className="w-full sm:text-lg py-4 my-4 rounded-xl"
+                className="py-4 my-4 w-full sm:text-lg rounded-xl"
                 onClick={async () => {
                   await fetch("/api/me/cart/line-items", {
                     method: "PUT",
@@ -115,7 +115,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
               </Button>
 
               {product.description && (
-                <article className="prose sm:prose-sm mt-16">
+                <article className="mt-16 prose sm:prose-sm">
                   <h3>Tentang Produk</h3>
                   {product.description.split("\n").map((text) => (
                     <p>{text}</p>
@@ -124,9 +124,9 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
               )}
 
               <article className="mt-16">
-                <h3 className="mb-4 font-bold text-lg text-gray-700">Temui pendiri UMKM ini</h3>
+                <h3 className="mb-4 text-lg font-bold text-gray-700">Temui pendiri UMKM ini</h3>
                 <div className="flex items-center pb-2">
-                  <div className="flex-shrink-0 border rounded-xl">
+                  <div className="flex-shrink-0 rounded-xl border">
                     <Image
                       src={product.store.owner.image || "/store-cover-placeholder.jpg"}
                       height={96}
@@ -137,13 +137,11 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                     />
                   </div>
 
-                  <div className="ml-4 text-gray-700 max-w-sm overflow-hidden">
-                    <p className="font-ui text-3xl font-light mb-1 line-clamp-2">
+                  <div className="overflow-hidden ml-4 max-w-sm text-gray-700">
+                    <p className="mb-1 font-ui text-3xl font-light line-clamp-2">
                       {product.store.owner.name}
                     </p>
-                    <p className="font-ui text-md text-sm ml-1">
-                      Pendiri dari {product.store.name}
-                    </p>
+                    <p className="ml-1 font-ui text-sm">Pendiri dari {product.store.name}</p>
                   </div>
                 </div>
               </article>
@@ -154,8 +152,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         <Divider />
 
         {storeProducts.length > 0 && (
-          <div className="mt-4 sm:mt-8 pb-4 sm:pb-8">
-            <h2 className="text-2xl px-4 sm:px-8 leading-tight">
+          <div className="pb-4 sm:pb-8 mt-4 sm:mt-8">
+            <h2 className="px-4 sm:px-8 text-2xl leading-tight">
               Produk lainnya dari <b>{product.store.name}</b>
             </h2>
             <ProductList
@@ -170,7 +168,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
             <Divider />
 
             <div className="mt-8">
-              <h2 className="font-bold text-2xl px-4 sm:px-8 leading-tight">
+              <h2 className="px-4 sm:px-8 text-2xl font-bold leading-tight">
                 Produk lain dalam kategori <b>{category.name}</b>
               </h2>
               <ProductList

@@ -72,7 +72,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       <div className="px-4 sm:px-0">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <div className="pb-5 border-b border-gray-200">
-          <h2 className="pt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          <h2 className="pt-4 text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">
             Ubah produk
           </h2>
         </div>
@@ -82,17 +82,17 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg  leading-6 text-gray-900 font-bold mb-1">Data produk</h3>
+              <h3 className="mb-1 text-lg font-bold leading-6 text-gray-900">Data produk</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Isi data produk atau jasa yang ingin anda pasang.
               </p>
             </div>
           </div>
 
-          <div className="mt-5 md:mt-0 md:col-span-2">
+          <div className="md:col-span-2 mt-5 md:mt-0">
             <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
-              <div className="shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-5 bg-white sm:p-6">
+              <div className="overflow-hidden sm:rounded-lg shadow">
+                <div className="sm:p-6 py-5 px-4 bg-white">
                   <div className="grid grid-cols-6 gap-6">
                     <TextField
                       label="Nama produk*"
@@ -132,7 +132,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   <div className="pt-12">
                     <div className="flex flex-col sm:flex-row sm:items-center">
                       <div className="">
-                        <h3 className="text-lg leading-6  text-gray-900">Gambar</h3>
+                        <h3 className="text-lg leading-6 text-gray-900">Gambar</h3>
                         <p className="mt-1 max-w-2xl text-sm text-gray-500">
                           Tambahkan gambar untuk produk anda.
                         </p>
@@ -140,7 +140,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
                       <UploadImageButton
                         variant="outline"
-                        className="ml-auto w-full sm:w-auto mt-4"
+                        className="mt-4 ml-auto w-full sm:w-auto"
                         onChange={handleImageUpload}
                       >
                         Tambah gambar
@@ -158,8 +158,8 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   </div>
                 </div>
 
-                <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
-                  <p className="text-sm text-gray-500 mr-4">
+                <div className="flex items-center py-3 px-4 sm:px-6 text-left bg-gray-50">
+                  <p className="mr-4 text-sm text-gray-500">
                     Data dengan tanda bintang (*) harus di-isi.
                   </p>
                   <Button
@@ -197,18 +197,18 @@ const DangerZone: FC<{ slug: string; storeSlug: string }> = ({ slug, storeSlug }
     <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
       <div className="md:col-span-1">
         <div className="px-4 sm:px-0">
-          <h3 className="text-lg  leading-6 text-gray-900 mb-4">Danger Zone</h3>
+          <h3 className="mb-4 text-lg leading-6 text-gray-900">Danger Zone</h3>
         </div>
       </div>
 
-      <div className="mt-5 md:mt-0 md:col-span-2">
-        <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
-          <p className="text-gray-500 text-sm">
+      <div className="md:col-span-2 mt-5 md:mt-0">
+        <div className="flex sm:overflow-hidden items-center py-4 px-6 bg-white sm:rounded-lg shadow">
+          <p className="text-sm text-gray-500">
             Data produk ini tak akan bisa dikembalikan setelah dihapus
           </p>
           <Button
             variant="outline"
-            className="ml-auto text-red-700 hover:bg-red-100 flex-shrink-0"
+            className="flex-shrink-0 ml-auto text-red-700 hover:bg-red-100"
             onClick={handleDelete}
           >
             Hapus produk

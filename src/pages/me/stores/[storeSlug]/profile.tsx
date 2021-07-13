@@ -94,7 +94,7 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-bold leading-6 text-gray-900 mb-2">Data kontak</h3>
+              <h3 className="mb-2 text-lg font-bold leading-6 text-gray-900">Data kontak</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Data kontak anda akan digunakan pembeli untuk menghubungi anda dan melanjutkan
                 transaksi saat checkout.
@@ -102,10 +102,10 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
             </div>
           </div>
 
-          <div className="mt-5 md:mt-0 md:col-span-2">
+          <div className="md:col-span-2 mt-5 md:mt-0">
             <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
-              <div className="shadow sm:rounded-md sm:overflow-hidden">
-                <div className="px-4 py-5 bg-white sm:p-6">
+              <div className="sm:overflow-hidden sm:rounded-md shadow">
+                <div className="sm:p-6 py-5 px-4 bg-white">
                   <div className="grid grid-cols-6 gap-6">
                     <ImageSelectorWIthSmallPreview
                       label="Logo toko"
@@ -181,14 +181,14 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
                         placeholder={howToPayPlaceholder}
                         {...register("howToPay")}
                       />
-                      <p className="text-sm text-gray-500 mt-2">
+                      <p className="mt-2 text-sm text-gray-500">
                         Instruksi pembayaran akan ditunjukan ke pembeli saat checkout
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center sticky sm:relative bottom-0 border-t">
+                <div className="flex sticky sm:relative bottom-0 items-center py-3 px-4 sm:px-6 text-left bg-gray-50 border-t">
                   <p className="text-sm text-gray-500">Data dengan bintang (*) perlu di-isi. </p>
                   <Button type="submit" className="ml-auto" disabled={!isDirty || !isValid}>
                     Simpan
@@ -220,18 +220,18 @@ const DangerZone: FC<{ slug: string }> = ({ slug }) => {
     <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 sm:mt-0">
       <div className="md:col-span-1">
         <div className="px-4 sm:px-0">
-          <h3 className="text-lg  leading-6 text-gray-900 mb-4">Danger Zone</h3>
+          <h3 className="mb-4 text-lg leading-6 text-gray-900">Danger Zone</h3>
         </div>
       </div>
 
-      <div className="mt-5 md:mt-0 md:col-span-2">
-        <div className="shadow sm:rounded-md sm:overflow-hidden bg-white px-6 py-4 flex items-center">
-          <p className="text-gray-500 text-sm">
+      <div className="md:col-span-2 mt-5 md:mt-0">
+        <div className="flex sm:overflow-hidden items-center py-4 px-6 bg-white sm:rounded-md shadow">
+          <p className="text-sm text-gray-500">
             Data toko tak akan bisa dikembalikan setelah dihapus
           </p>
           <Button
             variant="outline"
-            className="ml-auto text-red-700 hover:bg-red-100 flex-shrink-0"
+            className="flex-shrink-0 ml-auto text-red-700 hover:bg-red-100"
             onClick={handleDelete}
           >
             Hapus toko

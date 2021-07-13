@@ -52,12 +52,12 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
   }
 
   return (
-    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
+    <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
       <Breadcrumbs breadcrumbs={[{ name: "Toko anda", href: "/me/stores", current: false }]} />
 
-      <div className="px-4 sm:px-0 mt-2 md:flex md:items-center md:justify-between">
+      <div className="md:flex md:justify-between md:items-center px-4 sm:px-0 mt-2">
         <div className="flex-1 min-w-0">
-          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          <h2 className="text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">
             Buat toko baru
           </h2>
         </div>
@@ -69,7 +69,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg  leading-6 text-gray-900 font-bold">Data kontak</h3>
+              <h3 className="text-lg font-bold leading-6 text-gray-900">Data kontak</h3>
               <p className="mt-1 text-sm text-gray-600">
                 Data kontak anda akan digunakan pembeli untuk menghubungi anda dan melanjutkan
                 transaksi saat checkout.
@@ -77,10 +77,10 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
             </div>
           </div>
 
-          <div className="mt-5 md:mt-0 md:col-span-2">
+          <div className="md:col-span-2 mt-5 md:mt-0">
             <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
-              <div className="shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-5 bg-white sm:p-6">
+              <div className="overflow-hidden sm:rounded-md shadow">
+                <div className="sm:p-6 py-5 px-4 bg-white">
                   <div className="grid grid-cols-6 gap-6">
                     <ImageSelectorWIthSmallPreview
                       label="Logo toko"
@@ -162,7 +162,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                   </div>
                 </div>
 
-                <div className="px-4 py-3 bg-gray-50 text-left sm:px-6 flex items-center">
+                <div className="flex items-center py-3 px-4 sm:px-6 text-left bg-gray-50">
                   <p className="text-sm text-gray-500">
                     Data dengan tanda bintang (*) harus di-isi.
                   </p>

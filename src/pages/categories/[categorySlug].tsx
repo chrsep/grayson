@@ -19,7 +19,7 @@ const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
   return (
     <div>
       <CategoryNavigation />
-      <h1 className="font-bold px-4 sm:px-8 pt-8 text-4xl">{category.name}</h1>
+      <h1 className="px-4 sm:px-8 pt-8 text-4xl font-bold">{category.name}</h1>
 
       <ProductList products={products} />
     </div>

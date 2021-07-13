@@ -19,7 +19,7 @@ const ImageSelectorWIthSmallPreview: FC<Props> = ({
   const ref = useRef<HTMLInputElement>(null)
   return (
     <div className={`flex items-start ${className}`}>
-      <label htmlFor="image-input" className="block text-sm  text-gray-700">
+      <label htmlFor="image-input" className="block text-sm text-gray-700">
         {label}
         <input
           id="image-input"
@@ -29,13 +29,13 @@ const ImageSelectorWIthSmallPreview: FC<Props> = ({
           ref={ref}
           accept="image/*"
         />
-        <div className="mt-1 flex items-center">
-          <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 border">
+        <div className="flex items-center mt-1">
+          <span className="inline-block overflow-hidden w-12 h-12 bg-gray-100 rounded-full border">
             <Image
               width={48}
               height={48}
               src={value || placeholder}
-              className="h-full w-full text-gray-300"
+              className="w-full h-full text-gray-300"
             />
           </span>
           <Button variant="outline" className="ml-4" onClick={() => ref.current?.click()}>

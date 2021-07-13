@@ -6,15 +6,15 @@ const ProductImagePreviews: FC<{
   files: string[]
   onDeleteClick: (file: string) => void
 }> = ({ files, onDeleteClick }) => (
-  <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-6">
+  <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 xl:gap-x-6 gap-y-8">
     {files.map((file) => (
       <li key={file} className="relative">
-        <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-primary-400 overflow-hidden">
+        <div className="group block overflow-hidden w-full bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 aspect-w-10 aspect-h-7">
           <div>
             <Image
               layout="fill"
               src={file}
-              className="object-cover pointer-events-none group-hover:opacity-75"
+              className="object-cover group-hover:opacity-75 pointer-events-none"
               objectFit="cover"
               alt=""
             />
@@ -26,7 +26,7 @@ const ProductImagePreviews: FC<{
         </div>
         <Button
           variant="outline"
-          className="mt-2 w-full text-red-600 py-1"
+          className="py-1 mt-2 w-full text-red-600"
           onClick={() => onDeleteClick(file)}
         >
           Hapus
@@ -35,7 +35,7 @@ const ProductImagePreviews: FC<{
     ))}
 
     {files.length === 0 && (
-      <li className="relative col-span-full text-center text-gray-500 py-8">
+      <li className="relative col-span-full py-8 text-center text-gray-500">
         Belum ada gambar terpasang
       </li>
     )}

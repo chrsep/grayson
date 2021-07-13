@@ -17,14 +17,14 @@ const Example: FC<Props> = ({ open, setOpen }) => {
       <Dialog
         as="div"
         static
-        className="fixed inset-0 overflow-hidden z-40"
+        className="overflow-hidden fixed inset-0 z-40"
         open={open}
         onClose={setOpen}
       >
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="overflow-hidden absolute inset-0">
           <Dialog.Overlay className="absolute inset-0" />
 
-          <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+          <div className="flex fixed inset-y-0 right-0 pl-10 max-w-full">
             <Transition.Child
               as={Fragment}
               enter="transform transition ease-in-out duration-300"
@@ -35,31 +35,31 @@ const Example: FC<Props> = ({ open, setOpen }) => {
               leaveTo="translate-x-full"
             >
               <div className="w-screen max-w-md">
-                <div className="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl">
-                  <div className="min-h-0 flex-1 flex flex-col py-6 overflow-y-auto">
+                <div className="flex flex-col h-full bg-white divide-y divide-gray-200 shadow-xl">
+                  <div className="flex overflow-y-auto flex-col flex-1 py-6 min-h-0">
                     <div className="px-4 sm:px-6">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg  text-gray-900">
+                      <div className="flex justify-between items-start">
+                        <Dialog.Title className="text-lg text-gray-900">
                           Keranjang Anda
                         </Dialog.Title>
-                        <div className="ml-3 h-7 flex items-center">
+                        <div className="flex items-center ml-3 h-7">
                           <Button variant="icon" onClick={() => setOpen(false)}>
                             <span className="sr-only">Close panel</span>
-                            <img src="/icons/x.svg" className="h-6 w-6" aria-hidden="true" alt="" />
+                            <img src="/icons/x.svg" className="w-6 h-6" aria-hidden="true" alt="" />
                           </Button>
                         </div>
                       </div>
                     </div>
-                    <div className="mt-6 relative flex-1 px-4 sm:px-6">
+                    <div className="relative flex-1 px-4 sm:px-6 mt-6">
                       {/* Replace with your content */}
                       <div
-                        className="h-full border-2 border-dashed border-gray-200"
+                        className="h-full border-2 border-gray-200 border-dashed"
                         aria-hidden="true"
                       />
                       {/* /End replace */}
                     </div>
                   </div>
-                  <div className="flex-shrink-0 px-4 py-4 flex justify-end">
+                  <div className="flex flex-shrink-0 justify-end py-4 px-4">
                     <Button variant="outline" onClick={() => setOpen(false)}>
                       Kosongkan
                     </Button>

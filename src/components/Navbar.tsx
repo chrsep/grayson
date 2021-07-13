@@ -27,32 +27,37 @@ const Navbar: FC = () => {
   return (
     <Popover
       as="nav"
-      className="bg-gradient-to-tr from-primary-500 to-indigo-700 sticky top-0 z-30"
+      className="sticky top-0 z-30 bg-gradient-to-tr from-primary-500 to-indigo-700"
     >
       {({ open }) => (
         <>
-          <div className="mx-auto px-2 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className="px-2 sm:px-6 lg:px-8 mx-auto">
+            <div className="flex relative justify-between items-center h-16">
+              <div className="flex sm:hidden absolute inset-y-0 left-0 items-center">
                 {/* Mobile menu button */}
-                <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Popover.Button className="inline-flex justify-center items-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 hover:bg-opacity-20 rounded-md focus:ring-2 focus:ring-inset focus:ring-white focus:outline-none">
                   <span className="sr-only">Open main menu</span>
-                  {open ? <Icon src="/icons/x-light.svg" /> : <Icon src="/icons/menu-light.svg" />}
+                  {open ? (
+                    <Icon src="/icons/x.svg" className="!bg-white" />
+                  ) : (
+                    <Icon src="/icons/menu.svg" className="!bg-white" />
+                  )}
                 </Popover.Button>
                 <Link href="/">
-                  <a className="flex-shrink-0 flex items-center ml-4">
-                    <LogoStandalone className="block lg:hidden h-8 w-auto" />
+                  <a className="flex flex-shrink-0 items-center ml-4">
+                    <LogoStandalone className="block lg:hidden w-auto h-8" />
                   </a>
                 </Link>
               </div>
 
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start flex-shrink-0">
+              <div className="flex flex-1 flex-shrink-0 justify-center sm:justify-start items-center sm:items-stretch">
                 <Link href="/">
-                  <a className="flex-shrink-0 flex items-center hidden sm:block">
-                    <LogoStandalone className="hidden sm:block lg:hidden h-8 w-auto " />
-                    <LogoFull className="hidden lg:block h-8 w-auto" />
+                  <a className="flex-shrink-0 items-center">
+                    <LogoStandalone className=" hidden sm:block lg:hidden w-auto h-8" />
+                    <LogoFull className="hidden lg:block w-auto h-8" />
                   </a>
                 </Link>
+
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigations.map((item) => {
@@ -63,9 +68,9 @@ const Navbar: FC = () => {
                           <a
                             className={clsx(
                               current
-                                ? "bg-gray-900 text-white bg-opacity-20 "
-                                : "text-gray-300 hover:bg-white hover:bg-opacity-20  hover:text-white",
-                              "px-3 py-2 rounded-md text-sm  "
+                                ? " text-white bg-gray-900 bg-opacity-20"
+                                : "text-gray-300 hover:text-white hover:bg-white hover:bg-opacity-20",
+                              " py-2 px-3 text-sm rounded-md"
                             )}
                             aria-current={current ? "page" : undefined}
                           >
@@ -78,7 +83,7 @@ const Navbar: FC = () => {
                 </div>
               </div>
 
-              <div className="absolute ml-[91px] inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="flex absolute sm:static sm:inset-auto inset-y-0 right-0 items-center pr-2 sm:pr-0 ml-[91px] sm:ml-6">
                 <SearchField />
                 <Cart />
                 <UserProfile />
@@ -104,9 +109,9 @@ const Navbar: FC = () => {
                       <a
                         className={clsx(
                           current
-                            ? "bg-gray-900 text-white bg-opacity-20 "
-                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
-                          "block px-3 py-2 rounded-md text-base "
+                            ? " text-white bg-gray-900 bg-opacity-20"
+                            : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-20",
+                          " block py-2 px-3 text-base rounded-md"
                         )}
                         aria-current={current ? "page" : undefined}
                       >
@@ -118,7 +123,7 @@ const Navbar: FC = () => {
               </div>
 
               <div className="px-2 pt-2 pb-3 space-y-1">
-                <div className="text-white px-3 py-3 text-sm border-b border-white border-opacity-10">
+                <div className="py-3 px-3 text-sm text-white border-b border-white border-opacity-10">
                   Kategori
                 </div>
                 {categories.map((item) => {
@@ -129,9 +134,9 @@ const Navbar: FC = () => {
                       <a
                         className={clsx(
                           current
-                            ? "bg-gray-900 text-white bg-opacity-20 "
-                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-20  hover:text-white",
-                          "block px-3 py-2 rounded-md text-base "
+                            ? " text-white bg-gray-900 bg-opacity-20"
+                            : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-20",
+                          " block py-2 px-3 text-base rounded-md"
                         )}
                         aria-current={current ? "page" : undefined}
                       >
@@ -171,22 +176,22 @@ const SearchField = () => {
 
   return (
     <>
-      <div className="min-w-0 px-4 sm:px-6 ">
+      <div className=" px-4 sm:px-6 min-w-0">
         <Button
           variant="icon"
-          className="opacity-80 hover:opacity-100 transition-opacity block sm:hidden"
+          className="block sm:hidden opacity-80 hover:opacity-100 transition-opacity"
           onClick={handleShowSearchBar}
         >
-          <img src="/icons/search-light.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
+          <img src="/icons/search-light.svg" className=" m-2 w-5 h-5" alt="keranjang anda" />
         </Button>
         <button
           type="button"
-          className="w-full bg-white bg-opacity-20 py-2 px-3 pr-14 rounded-md leading-5 text-white text-sm truncate hidden sm:flex max-w-sm"
+          className="hidden sm:flex py-2 px-3 pr-14 w-full max-w-sm text-sm leading-5 text-white truncate bg-white bg-opacity-20 rounded-md"
           onClick={handleShowSearchBar}
         >
           <img
             src="/icons/search-light.svg"
-            className="h-5 w-5 opacity-70 mr-3"
+            className="mr-3 w-5 h-5 opacity-70"
             aria-hidden="true"
             alt=""
           />
@@ -195,12 +200,12 @@ const SearchField = () => {
       </div>
 
       {showSearch && (
-        <div className="fixed top-0 left-0 right-0 flex items-center z-20 bg-white border-b h-16 sm:px-4">
+        <div className="flex fixed top-0 right-0 left-0 z-20 items-center sm:px-4 h-16 bg-white border-b">
           <Button variant="icon" className="ml-4" onClick={() => setShowSearch(false)}>
             <img src="/icons/x.svg" className="w-6 h-6" alt="tutup input pencarian" />
           </Button>
 
-          <form className="flex  items-center w-full" onSubmit={searchProduct}>
+          <form className="flex items-center w-full" onSubmit={searchProduct}>
             <TextField
               type="search"
               iconSrc="/icons/search.svg"
@@ -218,7 +223,7 @@ const SearchField = () => {
             <Button
               type="submit"
               variant="outline"
-              className="text-primary-500 font-bold mr-4"
+              className="mr-4 font-bold text-primary-500"
               disabled={search === ""}
             >
               Cari
@@ -250,14 +255,14 @@ const UserProfile = () => {
       {({ open }) => (
         <>
           <div>
-            <Menu.Button className="bg-gray-100 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <Menu.Button className="flex text-sm bg-gray-100 rounded-full focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none">
               <span className="sr-only">Open user menu</span>
-              <div className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100 border">
+              <div className="inline-block overflow-hidden w-8 h-8 bg-gray-100 rounded-full border">
                 {data.user?.image && data.user?.imageBase64 ? (
                   <Image
                     width={100}
                     height={100}
-                    className="h-full w-full text-gray-300"
+                    className="w-full h-full text-gray-300"
                     objectFit="cover"
                     src={data.user.image}
                     placeholder="blur"
@@ -268,7 +273,7 @@ const UserProfile = () => {
                     width={100}
                     height={100}
                     src="/icons/user-circle.svg"
-                    className="h-full w-full text-gray-300 bg-gray-300"
+                    className="w-full h-full text-gray-300 bg-gray-300"
                     alt=""
                   />
                 )}
@@ -288,7 +293,7 @@ const UserProfile = () => {
           >
             <Menu.Items
               static
-              className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="absolute right-0 py-1 mt-2 w-48 bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right focus:outline-none"
             >
               <Menu.Item>
                 {({ active }) => (
@@ -296,7 +301,7 @@ const UserProfile = () => {
                     <a
                       className={clsx(
                         active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
                       )}
                     >
                       Profil anda
@@ -310,7 +315,7 @@ const UserProfile = () => {
                     <a
                       className={clsx(
                         active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
                       )}
                     >
                       Toko anda
@@ -325,7 +330,7 @@ const UserProfile = () => {
                     onClick={() => signout()}
                     className={clsx(
                       active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-red-600 !text-left w-full hover:bg-gray-100"
+                      "block py-2 px-4 w-full text-sm !text-left text-red-600 hover:bg-gray-100"
                     )}
                   >
                     Keluar
@@ -349,7 +354,7 @@ const Cart = () => {
         className="mr-4 opacity-80 hover:opacity-100 transition-opacity"
         onClick={() => setOpen(!open)}
       >
-        <img src="/icons/shopping-cart-white.svg" className="w-5 h-5 m-2 " alt="keranjang anda" />
+        <img src="/icons/shopping-cart-white.svg" className=" m-2 w-5 h-5" alt="keranjang anda" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
     </div>

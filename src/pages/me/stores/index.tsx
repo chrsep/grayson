@@ -8,10 +8,10 @@ import { Store } from "@prisma/client"
 
 const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ stores }) => {
   return (
-    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
-      <div className="px-4 sm:px-0 mt-2 md:flex md:items-center md:justify-between">
+    <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
+      <div className="md:flex md:justify-between md:items-center px-4 sm:px-0 mt-2">
         <div className="flex-1 min-w-0">
-          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          <h2 className="text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">
             Toko anda
           </h2>
         </div>
@@ -19,15 +19,15 @@ const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
 
       <Divider />
 
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {stores.map((store) => (
           <Link key={store.id} href={`/me/stores/${store.slug}`}>
-            <li className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 flex items-center p-6 mx-4 sm:mx-0 hover:bg-primary-100 min-h-[92px] transition-colors">
+            <li className="flex col-span-1 items-center p-6 mx-4 sm:mx-0 min-h-[92px] bg-white hover:bg-primary-100 rounded-lg divide-y divide-gray-200 shadow transition-colors">
               <div className="flex-1 truncate">
                 <div className="flex items-center space-x-3">
-                  <h3 className="text-gray-900 text-sm  truncate">{store.name}</h3>
+                  <h3 className="text-sm text-gray-900 truncate">{store.name}</h3>
                 </div>
-                <p className="mt-1 text-gray-500 text-sm truncate">{store.description}</p>
+                <p className="mt-1 text-sm text-gray-500 truncate">{store.description}</p>
               </div>
               <img className="w-6 h-6 opacity-70" src="/icons/chevron-right.svg" alt="" />
             </li>
@@ -35,10 +35,10 @@ const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
         ))}
 
         <Link href="/me/stores/new">
-          <li className="col-span-1 rounded-xl divide-y divide-gray-200 p-8 flex items-center border-2 border-dashed border-gray-300 hover:border-primary-400 mx-4 sm:mx-0">
+          <li className="flex col-span-1 items-center p-8 mx-4 sm:mx-0 rounded-xl border-2 border-gray-300 hover:border-primary-400 border-dashed divide-y divide-gray-200">
             <p className="text-lg text-black">Buat toko baru</p>
             <img
-              className="w-6 h-6 rounded-full flex-shrink-0 ml-auto opacity-40"
+              className="flex-shrink-0 ml-auto w-6 h-6 rounded-full opacity-40"
               src="/icons/plus.svg"
               alt=""
             />

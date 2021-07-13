@@ -19,7 +19,7 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
   store
 }) => {
   return (
-    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8 pb-32">
+    <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
       <div className="px-4 sm:px-0">
         <StoreAdminHeading
           breadcrumbs={breadcrumbs}
@@ -31,31 +31,31 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
       </div>
 
       <div className="flex flex-col mt-6">
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div className="overflow-x-auto -my-2 sm:-mx-6 lg:-mx-8">
+          <div className="inline-block py-2 sm:px-6 lg:px-8 min-w-full align-middle">
+            <div className="overflow-hidden sm:rounded-lg border-b border-gray-200 shadow">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs  text-gray-500 uppercase tracking-wider"
+                      className="py-3 px-6 text-xs tracking-wider text-left text-gray-500 uppercase"
                     >
                       Nama
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs  text-gray-500 uppercase tracking-wider"
+                      className="py-3 px-6 text-xs tracking-wider text-left text-gray-500 uppercase"
                     >
                       Deskripsi
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs  text-gray-500 uppercase tracking-wider"
+                      className="py-3 px-6 text-xs tracking-wider text-left text-gray-500 uppercase"
                     >
                       Harga
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
+                    <th scope="col" className="relative py-3 px-6">
                       <span className="sr-only">Ubah</span>
                     </th>
                   </tr>
@@ -63,17 +63,17 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                 <tbody>
                   {store.products.map((product) => (
                     <NextLink href={`/me/stores/${store.slug}/products/${product.slug}`}>
-                      <tr key={product.id} className="bg-white cursor-pointer hover:bg-primary-100">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm  text-gray-900">
+                      <tr key={product.id} className="bg-white hover:bg-primary-100 cursor-pointer">
+                        <td className="py-4 px-6 text-sm text-gray-900 whitespace-nowrap">
                           {product.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">
+                        <td className="py-4 px-6 text-sm text-gray-500 truncate whitespace-nowrap">
                           {product.description}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                           {product.price}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm ">
+                        <td className=" py-4 px-6 text-sm text-right whitespace-nowrap">
                           <a href="#" className="text-primary-400 hover:text-indigo-900">
                             Edit
                           </a>
@@ -84,7 +84,7 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                 </tbody>
               </table>
               {store.products.length === 0 && (
-                <div className="w-full text-center p-4 block bg-white border-t">
+                <div className="block p-4 w-full text-center bg-white border-t">
                   Belum ada product terpasang
                 </div>
               )}
