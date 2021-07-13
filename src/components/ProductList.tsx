@@ -40,7 +40,9 @@ const ProductList: FC<{
             </div>
             <span className="sr-only">Lihat details untuk {name}</span>
           </div>
-          <p className="font-ui mt-2 block text-sm text-gray-700 line-clamp-2 mb-2">{name}</p>
+          <p className="font-ui mt-2 block text-gray-700 line-clamp-2 mb-1 line-clamp-2 leading-tight">
+            {name}
+          </p>
           <p className="block text-sm text-gray-900 font-bold">{toIDR(price)}</p>
           <p className="font-ui block text-sm text-gray-700">{store.name}</p>
         </li>
