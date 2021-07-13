@@ -52,7 +52,13 @@ export const findStoreWithProductsBySlug = async (slug: string) => {
       slug
     },
     include: {
-      products: true
+      products: {
+        include: {
+          images: {
+            take: 1
+          }
+        }
+      }
     }
   })
 }
