@@ -23,7 +23,7 @@
     "@next/bundle-analyzer": "11.0.1",
     "@plaiceholder/next": "2.1.0",
     "@preact/compat": "0.0.4",
-    "@prisma/client": "2.26.0",
+    "@prisma/client": "2.27.0",
     "@sentry/nextjs": "6.9.0",
     "@tailwindcss/line-clamp": "0.2.1",
     "@types/react": "17.0.14",
@@ -75,7 +75,7 @@
     "lint-staged": "11.0.1",
     "postcss": "8.3.5",
     "prettier": "2.3.2",
-    "prisma": "2.26.0",
+    "prisma": "2.27.0",
     "tailwindcss": "2.2.4",
     "ts-node": "10.1.0",
     "typescript": "4.3.5"
