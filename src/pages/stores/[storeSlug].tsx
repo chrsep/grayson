@@ -7,6 +7,8 @@ import Button from "@components/Button"
 import { Product, ProductImage, Store } from "@prisma/client"
 import { findStoreWithProductsBySlug } from "@lib/db"
 import ProductItem from "@components/ProductItem"
+import { generateS3Url } from "@lib/image-client"
+import Link from "next/link"
 
 interface Query extends NodeJS.Dict<string> {
   storeSlug: string
@@ -29,8 +31,9 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
         <Image
           className="object-cover w-full h-32 lg:h-48"
           layout="responsive"
-          height={800}
+          height={1200}
           src={Hero}
+          placeholder="blur"
           alt=""
         />
       </div>
@@ -39,7 +42,13 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
         <div className="sm:flex sm:items-end -mt-12 sm:-mt-16 sm:space-x-5">
           <div className="flex overflow-hidden w-24 sm:w-32 h-24 sm:h-32 rounded-full ring-4 ring-white">
             {store.logo ? (
-              <Image src={store.logo} width={150} height={150} alt="" />
+              <Image
+                src={generateS3Url(store.logo)}
+                width={150}
+                height={150}
+                className="bg-white"
+                alt=""
+              />
             ) : (
               <Image src={Hero} width={150} height={150} alt="" />
             )}
@@ -51,15 +60,19 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
             </div>
 
             <div className="flex flex-col sm:flex-row mt-6 space-y-3 sm:space-y-0 sm:space-x-4">
-              <Button variant="outline">
-                <Icon src="/icons/mail.svg" className="mr-2 opacity-75" />
-                <span>Message</span>
-              </Button>
+              <Link href={`tel:${store.phone}`}>
+                <Button variant="outline">
+                  <Icon src="/icons/phone.svg" className="mr-2 opacity-75" />
+                  <span>Telpon</span>
+                </Button>
+              </Link>
 
-              <Button variant="outline">
-                <Icon src="/icons/phone.svg" className="mr-2 opacity-75" />
-                <span>Call</span>
-              </Button>
+              <Link href={`tel:${store.phone}`}>
+                <Button variant="outline">
+                  <Icon src="/icons/brand-whatsapp.svg" className="mr-2 opacity-75" />
+                  <span>WhatsApp</span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -70,9 +83,9 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
       </div>
 
       <div className="p-4 sm:p-8 mx-auto max-w-5xl">
-        <h2 className=" my-4 mx-auto max-w-5xl font-ui text-2xl font-bold opacity-70">Produk</h2>
+        <h2 className="my-4 mx-auto max-w-5xl font-ui text-2xl font-bold">Produk</h2>
 
-        <ul className=" grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 sm:gap-x-6 xl:gap-x-8 gap-y-8">
+        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 sm:gap-x-6 xl:gap-x-8 gap-y-8">
           {store.products.map((product) => (
             <ProductItem key={product.id} product={product} store={store} />
           ))}

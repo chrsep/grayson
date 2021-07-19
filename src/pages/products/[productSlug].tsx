@@ -86,7 +86,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                     current: false
                   },
                   {
-                    href: `/store/${product.store.slug}`,
+                    href: `/stores/${product.store.slug}`,
                     name: product.store.name,
                     current: true
                   }
