@@ -12,13 +12,13 @@ const ProductItem: FC<{
   <li className="relative">
     <Link href={`/products/${slug}`}>
       <a className="group">
-        <div className="block overflow-hidden w-full bg-gray-100 rounded-xl border focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 aspect-w-4 aspect-h-3">
+        <div className="block overflow-hidden w-full bg-gray-100 rounded-xl border focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 aspect-w-1 aspect-h-1">
           <div className="object-cover hover:opacity-80 pointer-events-none">
             {images?.[0]?.key ? (
               <Image
                 layout="responsive"
                 width={400}
-                height={302}
+                height={404}
                 objectFit="cover"
                 src={images?.[0]?.url}
                 placeholder="blur"
@@ -28,7 +28,7 @@ const ProductItem: FC<{
               <Image
                 layout="responsive"
                 width={400}
-                height={302}
+                height={404}
                 objectFit="cover"
                 src={emptyImagePlaceholder}
                 placeholder="blur"

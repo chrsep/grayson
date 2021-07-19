@@ -4,12 +4,10 @@ import { findCategoryHighlights, findProductBySlug, findStoreHighlights } from "
 import Image from "@components/Image"
 import { useState } from "react"
 import { toIDR } from "@lib/currency"
-import Button from "@components/Button"
 import Breadcrumbs from "@components/Breadcrumbs"
 import categories, { findCategoryById } from "@lib/categories"
 import ProductList from "@components/ProductList"
 import type { Category } from "@prisma/client"
-import Divider from "@components/Divider"
 import { Await } from "@lib/ts-utils"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
@@ -24,7 +22,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
     <div>
       <CategoryNavigation />
 
-      <main className="">
+      <main className="mx-auto max-w-7xl">
         <div className="md:flex">
           <div className="hidden md:block my-8 ml-8 min-w-[60px]">
             {product.images.map(({ key }, index) => {
@@ -52,7 +50,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 layout="responsive"
                 objectFit="contain"
                 width={400}
-                height={300}
+                height={400}
                 className="bg-black sm:rounded-xl"
               />
 
@@ -97,25 +95,25 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
               <h1 className="mb-4 text-4xl font-light text-gray-700">{product.name}</h1>
               <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
-              <Button
-                className="py-4 my-4 w-full sm:text-lg rounded-xl"
-                onClick={async () => {
-                  await fetch("/api/me/cart/line-items", {
-                    method: "PUT",
-                    credentials: "include",
-                    body: JSON.stringify({
-                      productId: product.id,
-                      qty: 1
-                    })
-                  })
-                }}
-              >
-                <img src="/icons/shopping-cart-plus-light.svg" alt="" className="mr-4 opacity-90" />
-                Masukan ke keranjang
-              </Button>
+              {/* <Button */}
+              {/*  className="py-4 my-4 w-full sm:text-lg rounded-xl" */}
+              {/*  onClick={async () => { */}
+              {/*    await fetch("/api/me/cart/line-items", { */}
+              {/*      method: "PUT", */}
+              {/*      credentials: "include", */}
+              {/*      body: JSON.stringify({ */}
+              {/*        productId: product.id, */}
+              {/*        qty: 1 */}
+              {/*      }) */}
+              {/*    }) */}
+              {/*  }} */}
+              {/* > */}
+              {/*  <img src="/icons/shopping-cart-plus-light.svg" alt="" className="mr-4 opacity-90" /> */}
+              {/*  Masukan ke keranjang */}
+              {/* </Button> */}
 
               {product.description && (
-                <article className="mt-16 prose sm:prose-sm">
+                <article className="mt-8 prose sm:prose-sm">
                   <h3>Tentang Produk</h3>
                   {product.description.split("\n").map((text) => (
                     <p>{text}</p>
@@ -123,25 +121,26 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 </article>
               )}
 
-              <article className="mt-16">
-                <h3 className="mb-4 text-lg font-bold text-gray-700">Temui pendiri UMKM ini</h3>
+              <article className="mt-8">
+                <h3 className="mb-4 text-lg font-bold">Temui pendiri UMKM ini</h3>
+
                 <div className="flex items-center pb-2">
-                  <div className="flex-shrink-0 rounded-xl border">
+                  <div>
                     <Image
                       src={product.store.owner.image || "/store-cover-placeholder.jpg"}
-                      height={96}
-                      width={96}
+                      height={80}
+                      width={80}
                       alt=""
-                      className="rounded-xl"
+                      className="rounded-full"
                       objectFit="cover"
                     />
                   </div>
 
-                  <div className="overflow-hidden ml-4 max-w-sm text-gray-700">
-                    <p className="mb-1 font-ui text-3xl font-light line-clamp-2">
-                      {product.store.owner.name}
+                  <div className=" overflow-hidden ml-4 max-w-sm">
+                    <p className="ml-1 font-ui text-xl line-clamp-2">{product.store.owner.name}</p>
+                    <p className="ml-1 font-ui text-sm text-gray-700">
+                      Pendiri dari {product.store.name}
                     </p>
-                    <p className="ml-1 font-ui text-sm">Pendiri dari {product.store.name}</p>
                   </div>
                 </div>
               </article>
@@ -149,34 +148,29 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
           </div>
         </div>
 
-        <Divider />
-
         {storeProducts.length > 0 && (
-          <div className="pb-4 sm:pb-8 mt-4 sm:mt-8">
-            <h2 className="px-4 sm:px-8 text-2xl leading-tight">
-              Produk lainnya dari <b>{product.store.name}</b>
+          <div className="px-4 sm:px-0 pb-16 mt-8 border-t">
+            <h2 className="py-4 text-2xl leading-tight">
+              Lainnya dari <b>{product.store.name}</b>
             </h2>
+
             <ProductList
               products={storeProducts}
-              containerClassName="px-4 sm:px-8 grid-cols-2 md:!grid-cols-4 lg:!grid-cols-6"
+              containerClassName="!p-0 grid-cols-2 md:!grid-cols-4 lg:!grid-cols-6"
             />
           </div>
         )}
 
         {categoryProducts.length > 0 && (
-          <>
-            <Divider />
-
-            <div className="mt-8">
-              <h2 className="px-4 sm:px-8 text-2xl font-bold leading-tight">
-                Produk lain dalam kategori <b>{category.name}</b>
-              </h2>
-              <ProductList
-                products={categoryProducts}
-                containerClassName="px-4 sm:px-8 grid-cols-2 sm:!grid-cols-6"
-              />
-            </div>
-          </>
+          <div className="px-4 sm:px-0 pb-16 border-t">
+            <h2 className="py-4 text-2xl leading-tight">
+              Produk kategori <b>{category.name}</b>
+            </h2>
+            <ProductList
+              products={categoryProducts}
+              containerClassName="!p-0 grid-cols-2 sm:!grid-cols-6"
+            />
+          </div>
         )}
       </main>
     </div>
