@@ -17,11 +17,6 @@ import { Store } from "@prisma/client"
 import { Breadcrumb } from "@components/Breadcrumbs"
 import { ParsedUrlQuery } from "querystring"
 
-const howToPayPlaceholder = `Contoh: 
-- Pembayaran dapat dilakukan dengan transfer 
-- Pembayaran dapat dilakukan saat saya sampai di lokasi
-`
-
 const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   tabs,
@@ -174,17 +169,18 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
                       {...register("postcode")}
                     />
 
-                    <div className="col-span-6">
-                      <Textarea
-                        rows={6}
-                        label="Cara pembayaran"
-                        placeholder={howToPayPlaceholder}
-                        {...register("howToPay")}
-                      />
-                      <p className="mt-2 text-sm text-gray-500">
-                        Instruksi pembayaran akan ditunjukan ke pembeli saat checkout
-                      </p>
-                    </div>
+                    {/* TODO(cart): Enable when we start working on cart */}
+                    {/* <div className="col-span-6"> */}
+                    {/*  <Textarea */}
+                    {/*    rows={6} */}
+                    {/*    label="Cara pembayaran" */}
+                    {/*    placeholder={howToPayPlaceholder} */}
+                    {/*    {...register("howToPay")} */}
+                    {/*  /> */}
+                    {/*  <p className="mt-2 text-sm text-gray-500"> */}
+                    {/*    Instruksi pembayaran akan ditunjukan ke pembeli saat checkout */}
+                    {/*  </p> */}
+                    {/* </div> */}
                   </div>
                 </div>
 

@@ -12,11 +12,6 @@ import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPre
 import { uploadImage } from "@lib/image-client"
 import Breadcrumbs from "@components/Breadcrumbs"
 
-const howToPayPlaceholder = `Contoh: 
-- Pembayaran dapat dilakukan dengan transfer ke .... 
-- Pembayaran dapat dilakukan saat saya sampai di lokasi anda...
-`
-
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
   const { watch, setValue, setError, register, handleSubmit, formState } = useForm<PostStoreBody>({
     mode: "onChange",
@@ -149,16 +144,17 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
                       {...register("postcode")}
                     />
 
-                    <Textarea
-                      rows={6}
-                      label="Cara pembayaran"
-                      containerClassName="col-span-6"
-                      placeholder={howToPayPlaceholder}
-                      {...register("howToPay")}
-                    />
-                    <p className="col-span-4 text-sm text-gray-500">
-                      Berikan instruksi cara pembayaran setelah pembeli checkout
-                    </p>
+                    {/* TODO(cart): Enable when we start working on cart */}
+                    {/* <Textarea */}
+                    {/*  rows={6} */}
+                    {/*  label="Cara pembayaran" */}
+                    {/*  containerClassName="col-span-6" */}
+                    {/*  placeholder={howToPayPlaceholder} */}
+                    {/*  {...register("howToPay")} */}
+                    {/* /> */}
+                    {/* <p className="col-span-4 text-sm text-gray-500"> */}
+                    {/*  Berikan instruksi cara pembayaran setelah pembeli checkout */}
+                    {/* </p> */}
                   </div>
                 </div>
 
