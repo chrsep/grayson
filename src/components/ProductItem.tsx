@@ -38,11 +38,9 @@ const ProductItem: FC<{
           <span className="sr-only">Lihat details untuk {name}</span>
         </div>
 
-        <Link href={`/products/${slug}`}>
-          <a className="block mt-2 mb-1 font-ui leading-tight text-gray-700 group-hover:text-black line-clamp-2">
-            {name}
-          </a>
-        </Link>
+        <p className="block mt-2 mb-1 font-ui leading-tight text-gray-700 group-hover:text-black line-clamp-2">
+          {name}
+        </p>
       </a>
     </Link>
 
