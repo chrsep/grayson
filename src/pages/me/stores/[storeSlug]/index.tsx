@@ -12,6 +12,7 @@ import NextLink from "next/link"
 import { ParsedUrlQuery } from "querystring"
 import { Store, Product } from "@prisma/client"
 import { Breadcrumb } from "@components/Breadcrumbs"
+import { toIDR } from "@lib/currency"
 
 const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
@@ -47,7 +48,7 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                       scope="col"
                       className="py-3 px-6 text-xs tracking-wider text-left text-gray-500 uppercase"
                     >
-                      Deskripsi
+                      Kategori
                     </th>
                     <th
                       scope="col"
@@ -60,6 +61,7 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                     </th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {store.products.map((product) => (
                     <NextLink href={`/me/stores/${store.slug}/products/${product.slug}`}>
@@ -68,10 +70,10 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                           {product.name}
                         </td>
                         <td className="py-4 px-6 text-sm text-gray-500 truncate whitespace-nowrap">
-                          {product.description}
+                          {product.category}
                         </td>
                         <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                          {product.price}
+                          {toIDR(product.price)}
                         </td>
                         <td className=" py-4 px-6 text-sm text-right whitespace-nowrap">
                           <a href="#" className="text-primary-400 hover:text-indigo-900">
@@ -83,6 +85,7 @@ const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                   ))}
                 </tbody>
               </table>
+
               {store.products.length === 0 && (
                 <div className="block p-4 w-full text-center bg-white border-t">
                   Belum ada product terpasang

@@ -85,7 +85,8 @@ const Navbar: FC = () => {
 
               <div className="flex absolute sm:static sm:inset-auto inset-y-0 right-0 items-center pr-2 sm:pr-0 ml-[91px] sm:ml-6">
                 <SearchField />
-                <Cart />
+                {/* TODO(cart): Enable back when we are dealing with cart again */}
+                {/* <Cart /> */}
                 <UserProfile />
               </div>
             </div>

@@ -95,6 +95,9 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
               <h1 className="mb-4 text-4xl font-light text-gray-700">{product.name}</h1>
               <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
+
+              {/* TODO(cart): Enable back when we are dealing with cart again */}
+
               {/* <Button */}
               {/*  className="py-4 my-4 w-full sm:text-lg rounded-xl" */}
               {/*  onClick={async () => { */}
