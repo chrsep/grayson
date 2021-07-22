@@ -3,5 +3,6 @@
   "extends": ["config:base"],
   "stabilityDays": 5,
   "prCreation": "not-pending",
-  "dependencyDashboard": true
+  "dependencyDashboard": true,
+  "automergeType": "branch"
 }
