@@ -34,7 +34,7 @@
     "io-ts": "2.2.16",
     "jotai": "1.2.1",
     "nanoid": "3.1.23",
-    "next": "11.0.1",
+    "next": "^11.0.2-canary.20",
     "next-auth": "3.27.3",
     "next-compose-plugins": "2.2.1",
     "next-plugin-preact": "3.0.6",
@@ -46,7 +46,7 @@
     "react-hook-form": "7.11.1",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "redaxios": "0.4.1",
-    "sharp": "0.28.3",
+    "sharp": "^0.28.3",
     "slugify": "1.6.0",
     "swr": "0.5.6",
     "uuid": "8.3.2"
