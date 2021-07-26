@@ -138,7 +138,6 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                       objectFit="cover"
                     />
                   </div>
-
                   <div className=" overflow-hidden ml-4 max-w-sm">
                     <p className="ml-1 font-ui text-xl line-clamp-2">{product.store.owner.name}</p>
                     <p className="ml-1 font-ui text-sm text-gray-700">

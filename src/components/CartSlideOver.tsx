@@ -2,7 +2,6 @@
 import { FC, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
-import useGetCart from "@lib/cart/useGetCart"
 
 interface Props {
   open: boolean
@@ -10,8 +9,6 @@ interface Props {
 }
 
 const Example: FC<Props> = ({ open, setOpen }) => {
-  const cart = useGetCart()
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
