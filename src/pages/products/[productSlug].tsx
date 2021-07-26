@@ -18,7 +18,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   storeProducts,
   categoryProducts
 }) => {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]?.key)
+  const [selectedImage, setSelectedImage] = useState(product.images[0])
 
   return (
     <div>
@@ -26,50 +26,37 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
       <main className="mx-auto max-w-7xl">
         <div className="md:flex">
-          <div className="hidden md:block my-8 ml-8 min-w-[60px]">
-            {product.images.map(({ key }, index) => {
-              const selected = selectedImage === key
-              return (
-                <button
-                  key={`${key}-vertical`}
-                  type="button"
-                  className={`mb-4 block leading-3 rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
-                    selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
-                  }`}
-                  onClick={() => setSelectedImage(key)}
-                >
-                  <span className="sr-only">Gambar {index}</span>
-                  <Image src={key} layout="fixed" objectFit="cover" width={60} height={60} />
-                </button>
-              )
-            })}
-          </div>
-
           <div className="flex-1">
-            <div className="sm:p-8">
+            <div className="sm:p-8 sm:pr-0">
               <Image
-                src={selectedImage || "/empty-image-placeholder.jpeg"}
+                src={selectedImage?.key || "/empty-image-placeholder.jpeg"}
                 layout="responsive"
                 objectFit="contain"
                 width={400}
                 height={400}
-                className="bg-black sm:rounded-xl"
+                className="bg-black sm:rounded-2xl"
               />
 
-              <div className="flex md:hidden overflow-auto py-4 pl-4 sm:pl-1">
-                {product.images.map(({ key }, index) => {
-                  const selected = selectedImage === key
+              <div className="flex overflow-auto py-4 pl-4 sm:pl-1">
+                {product.images.map((image, index) => {
+                  const selected = selectedImage?.key === image.key
                   return (
                     <button
-                      key={`${key}-horizontal`}
+                      key={`${image.key}-horizontal`}
                       type="button"
                       className={`mr-3 block leading-3 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
                         selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
                       }`}
-                      onClick={() => setSelectedImage(key)}
+                      onClick={() => setSelectedImage(image)}
                     >
                       <span className="sr-only">Gambar {index}</span>
-                      <Image src={key} layout="fixed" objectFit="cover" width={40} height={40} />
+                      <Image
+                        src={image.key}
+                        layout="fixed"
+                        objectFit="cover"
+                        width={60}
+                        height={60}
+                      />
                     </button>
                   )
                 })}
@@ -99,7 +86,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
               <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
 
-              <Button className="py-3 my-4 w-full rounded-xl">
+              <Button className="py-3 my-6 w-full rounded-xl">
                 <Icon src="/icons/plus.svg" className="mr-4 !bg-white" />
                 Masukan ke catatan
               </Button>
@@ -113,7 +100,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 </article>
               )}
 
-              <article className="mt-8">
+              <article className="pt-6 mt-8 border-t">
                 <h3 className="mb-4 text-lg font-bold">Temui pendiri UMKM ini</h3>
 
                 <div className="flex items-center pb-2">
@@ -140,9 +127,9 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         </div>
 
         {storeProducts.length > 0 && (
-          <div className="px-4 pb-16 mt-8 border-t">
-            <h2 className="py-4 text-2xl leading-tight">
-              Lainnya dari <b>{product.store.name}</b>
+          <div className="px-4 sm:px-8 pb-16 mt-8 border-t">
+            <h2 className="py-8 text-2xl leading-tight">
+              Produk lain <b>{product.store.name}</b>
             </h2>
 
             <ProductList
@@ -153,9 +140,9 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         )}
 
         {categoryProducts.length > 0 && (
-          <div className="px-4 pb-16 border-t">
-            <h2 className="py-4 text-2xl leading-tight">
-              Produk kategori <b>{category.name}</b>
+          <div className="px-4 sm:px-8 pb-16 border-t">
+            <h2 className="py-8 text-2xl leading-tight">
+              Produk dalam kategori <b>{category.name}</b>
             </h2>
 
             <ProductList
