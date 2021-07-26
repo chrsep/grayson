@@ -24,6 +24,7 @@ const ProductItem: FC<{
                 placeholder="blur"
                 blurDataURL={images?.[0]?.base64}
                 sizes="(min-width: 1536px) 15vw, (min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 60vw"
+                alt={name}
               />
             ) : (
               <Image
@@ -34,6 +35,7 @@ const ProductItem: FC<{
                 src={emptyImagePlaceholder}
                 placeholder="blur"
                 sizes="(min-width: 1536px) 15vw, (min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 60vw"
+                alt="no image available"
               />
             )}
           </div>
