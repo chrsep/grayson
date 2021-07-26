@@ -9,6 +9,8 @@ import categories, { findCategoryById } from "@lib/categories"
 import ProductList from "@components/ProductList"
 import type { Category } from "@prisma/client"
 import { Await } from "@lib/ts-utils"
+import Button from "@components/Button"
+import Icon from "@components/Icon"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
@@ -81,39 +83,26 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 className="my-4"
                 breadcrumbs={[
                   {
-                    href: `/categories/${category.slug}`,
-                    name: category.name,
+                    href: `/stores/${product.store.slug}`,
+                    name: product.store.name,
                     current: false
                   },
                   {
-                    href: `/stores/${product.store.slug}`,
-                    name: product.store.name,
+                    href: `/categories/${category.slug}`,
+                    name: category.name,
                     current: true
                   }
                 ]}
               />
 
               <h1 className="mb-4 text-4xl font-light text-gray-700">{product.name}</h1>
+
               <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
 
-              {/* TODO(cart): Enable back when we are dealing with cart again */}
-
-              {/* <Button */}
-              {/*  className="py-4 my-4 w-full sm:text-lg rounded-xl" */}
-              {/*  onClick={async () => { */}
-              {/*    await fetch("/api/me/cart/line-items", { */}
-              {/*      method: "PUT", */}
-              {/*      credentials: "include", */}
-              {/*      body: JSON.stringify({ */}
-              {/*        productId: product.id, */}
-              {/*        qty: 1 */}
-              {/*      }) */}
-              {/*    }) */}
-              {/*  }} */}
-              {/* > */}
-              {/*  <img src="/icons/shopping-cart-plus-light.svg" alt="" className="mr-4 opacity-90" /> */}
-              {/*  Masukan ke keranjang */}
-              {/* </Button> */}
+              <Button className="py-3 my-4 w-full rounded-xl">
+                <Icon src="/icons/plus.svg" className="mr-4 !bg-white" />
+                Masukan ke catatan
+              </Button>
 
               {product.description && (
                 <article className="mt-8 prose sm:prose-sm">

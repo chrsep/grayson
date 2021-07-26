@@ -85,8 +85,7 @@ const Navbar: FC = () => {
 
               <div className="flex absolute sm:static sm:inset-auto inset-y-0 right-0 items-center pr-2 sm:pr-0 ml-[91px] sm:ml-6">
                 <SearchField />
-                {/* TODO(cart): Enable back when we are dealing with cart again */}
-                {/* <Cart /> */}
+                <Cart />
                 <UserProfile />
               </div>
             </div>
@@ -183,7 +182,7 @@ const SearchField = () => {
           className="block sm:hidden opacity-80 hover:opacity-100 transition-opacity"
           onClick={handleShowSearchBar}
         >
-          <img src="/icons/search-light.svg" className=" m-2 w-5 h-5" alt="keranjang anda" />
+          <img src="/icons/search-light.svg" className=" m-2 w-5 h-5" alt="" />
         </Button>
         <button
           type="button"
@@ -355,7 +354,7 @@ const Cart = () => {
         className="mr-4 opacity-80 hover:opacity-100 transition-opacity"
         onClick={() => setOpen(!open)}
       >
-        <img src="/icons/shopping-cart-white.svg" className=" m-2 w-5 h-5" alt="keranjang anda" />
+        <Icon src="/icons/notes.svg" className="m-2 w-5 h-5 !bg-white" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
     </div>

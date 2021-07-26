@@ -2,6 +2,7 @@
 import { FC, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
+import Icon from "@components/Icon"
 
 interface Props {
   open: boolean
@@ -37,12 +38,12 @@ const Example: FC<Props> = ({ open, setOpen }) => {
                     <div className="px-4 sm:px-6">
                       <div className="flex justify-between items-start">
                         <Dialog.Title className="text-lg text-gray-900">
-                          Keranjang Anda
+                          Catatan belanja anda
                         </Dialog.Title>
                         <div className="flex items-center ml-3 h-7">
                           <Button variant="icon" onClick={() => setOpen(false)}>
                             <span className="sr-only">Close panel</span>
-                            <img src="/icons/x.svg" className="w-6 h-6" aria-hidden="true" alt="" />
+                            <Icon src="/icons/x.svg" className="w-6 h-6" />
                           </Button>
                         </div>
                       </div>
