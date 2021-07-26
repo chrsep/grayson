@@ -34,20 +34,20 @@ const Example: FC<Props> = ({ open, setOpen }) => {
             >
               <div className="w-screen max-w-md">
                 <div className="flex flex-col h-full bg-white divide-y divide-gray-200 shadow-xl">
-                  <div className="flex overflow-y-auto flex-col flex-1 py-6 min-h-0">
-                    <div className="px-4 sm:px-6">
-                      <div className="flex justify-between items-start">
-                        <Dialog.Title className="text-lg text-gray-900">
-                          Catatan belanja anda
-                        </Dialog.Title>
-                        <div className="flex items-center ml-3 h-7">
-                          <Button variant="icon" onClick={() => setOpen(false)}>
-                            <span className="sr-only">Close panel</span>
-                            <Icon src="/icons/x.svg" className="w-6 h-6" />
-                          </Button>
-                        </div>
+                  <div className="flex overflow-y-auto flex-col flex-1 pb-4 min-h-0">
+                    <div className="flex items-center px-4 sm:px-6 h-[64px] border-b">
+                      <Dialog.Title className="text-lg text-gray-900">
+                        Catatan belanja anda
+                      </Dialog.Title>
+
+                      <div className="flex items-center ml-auto h-7">
+                        <Button variant="icon" onClick={() => setOpen(false)}>
+                          <span className="sr-only">Close panel</span>
+                          <Icon src="/icons/x.svg" />
+                        </Button>
                       </div>
                     </div>
+
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
                       {/* Replace with your content */}
                       <div
@@ -57,6 +57,7 @@ const Example: FC<Props> = ({ open, setOpen }) => {
                       {/* /End replace */}
                     </div>
                   </div>
+
                   <div className="flex flex-shrink-0 justify-end py-4 px-4">
                     <Button variant="outline" onClick={() => setOpen(false)}>
                       Kosongkan
