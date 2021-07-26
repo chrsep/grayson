@@ -1,7 +1,6 @@
 import CategoryNavigation from "@components/CategoryNavigation"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { findCategoryHighlights, findProductBySlug, findStoreHighlights } from "@lib/db"
-import Image from "@components/Image"
 import { useState } from "react"
 import { toIDR } from "@lib/currency"
 import Breadcrumbs from "@components/Breadcrumbs"
@@ -11,6 +10,8 @@ import type { Category } from "@prisma/client"
 import { Await } from "@lib/ts-utils"
 import Button from "@components/Button"
 import Icon from "@components/Icon"
+import Image from "next/image"
+import PlaceholderImage from "@public/empty-image-placeholder.jpeg"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
@@ -28,14 +29,28 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         <div className="md:flex">
           <div className="flex-1">
             <div className="sm:p-8 sm:pr-0">
-              <Image
-                src={selectedImage?.key || "/empty-image-placeholder.jpeg"}
-                layout="responsive"
-                objectFit="contain"
-                width={400}
-                height={400}
-                className="bg-black sm:rounded-2xl"
-              />
+              {selectedImage ? (
+                <Image
+                  src={selectedImage.url}
+                  layout="responsive"
+                  objectFit="contain"
+                  width={400}
+                  height={400}
+                  className="bg-black sm:rounded-2xl"
+                  placeholder="blur"
+                  blurDataURL={selectedImage.base64}
+                />
+              ) : (
+                <Image
+                  src={PlaceholderImage}
+                  layout="responsive"
+                  objectFit="contain"
+                  width={400}
+                  height={400}
+                  className="bg-black sm:rounded-2xl"
+                  placeholder="blur"
+                />
+              )}
 
               <div className="flex overflow-auto py-4 pl-4 sm:pl-1">
                 {product.images.map((image, index) => {
@@ -51,11 +66,13 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                     >
                       <span className="sr-only">Gambar {index}</span>
                       <Image
-                        src={image.key}
+                        src={image.url}
                         layout="fixed"
                         objectFit="cover"
                         width={60}
                         height={60}
+                        placeholder="blur"
+                        blurDataURL={image.base64}
                       />
                     </button>
                   )
