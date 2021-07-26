@@ -1,7 +1,7 @@
 import CategoryNavigation from "@components/CategoryNavigation"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { findCategoryHighlights, findProductBySlug, findStoreHighlights } from "@lib/db"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toIDR } from "@lib/currency"
 import Breadcrumbs from "@components/Breadcrumbs"
 import categories, { findCategoryById } from "@lib/categories"
@@ -19,7 +19,12 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   storeProducts,
   categoryProducts
 }) => {
-  const [selectedImage, setSelectedImage] = useState(product.images[0])
+  const firstImage = product.images[0]
+  const [selectedImage, setSelectedImage] = useState(firstImage)
+
+  useEffect(() => {
+    setSelectedImage(firstImage)
+  }, [firstImage])
 
   return (
     <div>
@@ -28,7 +33,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       <main className="mx-auto max-w-7xl">
         <div className="md:flex">
           <div className="flex-1">
-            <div className="sm:p-8 sm:pr-0">
+            <div className="sm:p-8 md:pr-0">
               {selectedImage ? (
                 <Image
                   src={selectedImage.url}
@@ -52,32 +57,34 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                 />
               )}
 
-              <div className="flex overflow-auto py-4 pl-4 sm:pl-1">
-                {product.images.map((image, index) => {
-                  const selected = selectedImage?.key === image.key
-                  return (
-                    <button
-                      key={`${image.key}-horizontal`}
-                      type="button"
-                      className={`mr-3 block leading-3 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
-                        selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
-                      }`}
-                      onClick={() => setSelectedImage(image)}
-                    >
-                      <span className="sr-only">Gambar {index}</span>
-                      <Image
-                        src={image.url}
-                        layout="fixed"
-                        objectFit="cover"
-                        width={60}
-                        height={60}
-                        placeholder="blur"
-                        blurDataURL={image.base64}
-                      />
-                    </button>
-                  )
-                })}
-              </div>
+              {product.images.length > 0 && (
+                <div className="flex overflow-auto py-4 pl-4 sm:pl-1">
+                  {product.images.map((image, index) => {
+                    const selected = selectedImage?.key === image.key
+                    return (
+                      <button
+                        key={`${image.key}-horizontal`}
+                        type="button"
+                        className={`mr-3 block leading-3 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
+                          selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
+                        }`}
+                        onClick={() => setSelectedImage(image)}
+                      >
+                        <span className="sr-only">Gambar {index}</span>
+                        <Image
+                          src={image.url}
+                          layout="fixed"
+                          objectFit="cover"
+                          width={60}
+                          height={60}
+                          placeholder="blur"
+                          blurDataURL={image.base64}
+                        />
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </div>
 
@@ -144,7 +151,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         </div>
 
         {storeProducts.length > 0 && (
-          <div className="px-4 sm:px-8 pb-16 mt-8 border-t">
+          <div className="px-4 sm:px-8 pb-16 sm:mt-4 border-t">
             <h2 className="py-8 text-2xl leading-tight">
               Produk lain <b>{product.store.name}</b>
             </h2>
