@@ -152,7 +152,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         </div>
 
         {storeProducts.length > 0 && (
-          <div className="px-4 sm:px-0 pb-16 mt-8 border-t">
+          <div className="px-4 pb-16 mt-8 border-t">
             <h2 className="py-4 text-2xl leading-tight">
               Lainnya dari <b>{product.store.name}</b>
             </h2>
@@ -165,13 +165,14 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         )}
 
         {categoryProducts.length > 0 && (
-          <div className="px-4 sm:px-0 pb-16 border-t">
+          <div className="px-4 pb-16 border-t">
             <h2 className="py-4 text-2xl leading-tight">
               Produk kategori <b>{category.name}</b>
             </h2>
+
             <ProductList
               products={categoryProducts}
-              containerClassName="!p-0 grid-cols-2 sm:!grid-cols-6"
+              containerClassName="!p-0 grid-cols-2 md:!grid-cols-4 lg:!grid-cols-6 "
             />
           </div>
         )}
