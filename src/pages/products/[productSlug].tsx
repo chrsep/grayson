@@ -77,8 +77,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                           src={image.url}
                           layout="fixed"
                           objectFit="cover"
-                          width={60}
-                          height={60}
+                          width={61}
+                          height={61}
                           placeholder="blur"
                           blurDataURL={image.base64}
                         />

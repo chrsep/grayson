@@ -3,6 +3,7 @@ import { FC, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
 import Icon from "@components/Icon"
+import { useCart } from "@lib/cart"
 
 interface Props {
   open: boolean
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const Example: FC<Props> = ({ open, setOpen }) => {
+  const cart = useCart()
+  // const itemsByStore = lodash.groupBy(cart.lineItems, "storeId")
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -49,12 +52,14 @@ const Example: FC<Props> = ({ open, setOpen }) => {
                     </div>
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
-                      {/* Replace with your content */}
-                      <div
-                        className="h-full border-2 border-gray-200 border-dashed"
-                        aria-hidden="true"
-                      />
-                      {/* /End replace */}
+                      {/* {Object.keys(itemsByStore).map((store) => ( */}
+                      {/*  <div key={store}> */}
+                      {/*    <StoreData storeId={store} /> */}
+                      {/*    {itemsByStore[store].map(({ productId, qty }) => { */}
+                      {/*      return <Items key={productId} productId={productId} qty={qty} /> */}
+                      {/*    })} */}
+                      {/*  </div> */}
+                      {/* ))} */}
                     </div>
                   </div>
 
@@ -71,6 +76,21 @@ const Example: FC<Props> = ({ open, setOpen }) => {
         </div>
       </Dialog>
     </Transition.Root>
+  )
+}
+
+const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
+  return <div>{storeId}</div>
+}
+
+const Items: FC<{ productId: string; qty: number }> = ({ productId, qty }) => {
+  const cart = useCart()
+
+  return (
+    <div>
+      <div>{productId}</div>
+      <div>{qty}</div>
+    </div>
   )
 }
 
