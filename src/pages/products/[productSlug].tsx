@@ -13,6 +13,8 @@ import Icon from "@components/Icon"
 import Image from "next/image"
 import PlaceholderImage from "@public/empty-image-placeholder.jpeg"
 import { useCart } from "@lib/cart"
+import UserImagePlaceholder from "@public/store-cover-placeholder.jpg"
+import clsx from "clsx"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
@@ -35,7 +37,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       <main className="mx-auto max-w-7xl">
         <div className="md:flex">
           <div className="flex-1">
-            <div key={selectedImage?.key || "empty"} className="sm:p-8 md:pr-0">
+            <div key={product.id} className="sm:p-8 md:pr-0">
               {selectedImage ? (
                 <Image
                   src={selectedImage.url}
@@ -60,17 +62,18 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
               )}
 
               {product.images.length > 0 && (
-                <div className="flex overflow-auto py-4 pl-4 sm:pl-1">
+                <div className="flex overflow-auto py-4 pb-[29px] pl-4 sm:pl-1">
                   {product.images.map((image, index) => {
                     const selected = selectedImage?.key === image.key
                     return (
                       <button
-                        key={`${image.key}-horizontal`}
+                        key={image.key}
                         type="button"
-                        className={`mr-3 block leading-3 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 ring-offset-2 ring-primary-500 hover:opacity-100 ${
-                          selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
-                        }`}
                         onClick={() => setSelectedImage(image)}
+                        className={clsx(
+                          "block overflow-hidden mr-3 w-10 md:w-12 h-10 md:h-12 leading-3 rounded-lg focus:ring-2 ring-primary-500 focus:ring-indigo-400 ring-offset-2 hover:opacity-100 transition-opacity focus:outline-none",
+                          selected ? "ring-2 opacity-100" : "ring-0 opacity-60"
+                        )}
                       >
                         <span className="sr-only">Gambar {index}</span>
                         <Image
@@ -81,6 +84,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                           height={61}
                           placeholder="blur"
                           blurDataURL={image.base64}
+                          className="rounded-lg"
                         />
                       </button>
                     )
@@ -136,14 +140,28 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
                 <div className="flex items-center pb-2">
                   <div>
-                    <Image
-                      src={product.store.owner.image || "/store-cover-placeholder.jpg"}
-                      height={80}
-                      width={80}
-                      alt=""
-                      className="rounded-full"
-                      objectFit="cover"
-                    />
+                    {product.store.owner.image ? (
+                      <Image
+                        src={product.store.owner.image}
+                        height={72}
+                        width={72}
+                        alt=""
+                        className="rounded-full"
+                        objectFit="cover"
+                        placeholder={product.store.owner.imageBase64 ? "blur" : "empty"}
+                        blurDataURL={product.store.owner.imageBase64 || ""}
+                      />
+                    ) : (
+                      <Image
+                        src={UserImagePlaceholder}
+                        height={72}
+                        width={72}
+                        alt=""
+                        className="rounded-full"
+                        objectFit="cover"
+                        placeholder="blur"
+                      />
+                    )}
                   </div>
                   <div className=" overflow-hidden ml-4 max-w-sm">
                     <p className="ml-1 font-ui text-xl line-clamp-2">{product.store.owner.name}</p>

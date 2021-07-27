@@ -256,8 +256,9 @@ export const findProductBySlug = (slug: string) => {
         include: {
           owner: {
             select: {
-              whatsapp: true,
+              imageBase64: true,
               image: true,
+              whatsapp: true,
               email: true,
               name: true
             }
