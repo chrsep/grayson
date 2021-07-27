@@ -112,7 +112,12 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
               <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
 
-              <Button className="py-3 my-6 w-full rounded-xl">
+              <Button
+                className="py-3 my-6 w-full rounded-xl"
+                onClick={() => {
+                  cart.addItem({ productId: product.id, storeId: product.storeId, qty: 1 })
+                }}
+              >
                 <Icon src="/icons/plus.svg" className="mr-4 !bg-white" />
                 Masukan ke catatan
               </Button>
