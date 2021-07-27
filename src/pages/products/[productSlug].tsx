@@ -12,6 +12,7 @@ import Button from "@components/Button"
 import Icon from "@components/Icon"
 import Image from "next/image"
 import PlaceholderImage from "@public/empty-image-placeholder.jpeg"
+import { useCart } from "@lib/cart"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
@@ -19,6 +20,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   storeProducts,
   categoryProducts
 }) => {
+  const cart = useCart()
   const firstImage = product.images[0]
   const [selectedImage, setSelectedImage] = useState(firstImage)
 
@@ -33,7 +35,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
       <main className="mx-auto max-w-7xl">
         <div className="md:flex">
           <div className="flex-1">
-            <div className="sm:p-8 md:pr-0">
+            <div key={selectedImage?.key || "empty"} className="sm:p-8 md:pr-0">
               {selectedImage ? (
                 <Image
                   src={selectedImage.url}
