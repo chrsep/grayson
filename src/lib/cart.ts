@@ -23,9 +23,7 @@ const stateCreator = persist<CartState>(
             storeId === lineItem.storeId && productId === lineItem.productId
         )
 
-        if (idx !== -1) {
-          return { lineItems: [...lineItems, lineItem] }
-        }
+        if (idx === -1) return { lineItems: [...lineItems, lineItem] }
 
         const newLineItems = [...lineItems]
         newLineItems[idx].qty += 1
