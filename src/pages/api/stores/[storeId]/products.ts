@@ -14,7 +14,7 @@ const PostBody = type({
 })
 export type PostProductBody = TypeOf<typeof PostBody>
 
-const post = newMutationHandler(PostBody, async (data, session, { query: { storeSlug } }) => {
+const post = newMutationHandler(PostBody, async (data, session, { query: { storeId } }) => {
   const user = await findUserByEmailWithStores(session?.user?.email || "")
   if (!user) {
     return {
@@ -23,16 +23,16 @@ const post = newMutationHandler(PostBody, async (data, session, { query: { store
     }
   }
 
-  if (user.stores.findIndex((store) => store.slug === storeSlug) === -1) {
+  if (user.stores.findIndex((store) => store.id === storeId) === -1) {
     return {
       status: 403,
       body: { error: "unauthorized", description: "You don't have access to this store" }
     }
   }
 
-  if (string.is(storeSlug)) {
+  if (string.is(storeId)) {
     const images = await getImagesMetadata(data.images)
-    const store = await insertProduct(data, images, storeSlug)
+    const store = await insertProduct(data, images, storeId)
     return { status: 200, body: store }
   }
 

@@ -14,7 +14,7 @@ import Textarea from "@components/Textarea"
 import Button from "@components/Button"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
-import { PostProductBody } from "@api/stores/[storeSlug]/products"
+import { PostProductBody } from "@api/stores/[storeId]/products"
 import Pricefield from "@components/Pricefield"
 import Divider from "@components/Divider"
 import { uploadImage } from "@lib/image-client"
@@ -42,7 +42,7 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
 
-    const result = await fetch(`/api/stores/${store.slug}/products`, {
+    const result = await fetch(`/api/stores/${store.id}/products`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ ...data, price, images })

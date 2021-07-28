@@ -17,7 +17,7 @@ export const findUserStores = async (userEmail: string) => {
 }
 
 export const insertStore = async (
-  store: Omit<Store, "id" | "owner" | "ownerId" | "slug" | "address">,
+  store: Omit<Store, "id" | "owner" | "ownerId" | "slug" | "address" | "howToPay">,
   ownerEmail: string
 ) => {
   return prisma.store.create({
@@ -44,6 +44,10 @@ export const findStoreBySlug = async (slug: string) => {
       slug
     }
   })
+}
+
+export const findStoreById = async (id: string) => {
+  return prisma.store.findUnique({ where: { id } })
 }
 
 export const findStoreWithProductsBySlug = async (slug: string) => {
@@ -191,14 +195,18 @@ export const updateProduct = async (
 
 export const deleteStoreBySlug = async (slug: string) => {
   await prisma.product.deleteMany({
-    where: {
-      store: { slug }
-    }
+    where: { store: { slug } }
   })
 
-  return prisma.store.delete({
-    where: { slug }
+  return prisma.store.delete({ where: { slug } })
+}
+
+export const deleteStoreById = async (id: string) => {
+  await prisma.product.deleteMany({
+    where: { store: { id } }
   })
+
+  return prisma.store.delete({ where: { id } })
 }
 
 export const findProductsWithPrimaryImagesAndStore = () => {

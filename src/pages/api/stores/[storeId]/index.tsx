@@ -1,6 +1,6 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { nullType, partial, string, union } from "io-ts"
-import { deleteStoreBySlug, findStoreBySlug, updateStore } from "@lib/db"
+import { deleteStoreById, findStoreById, updateStore } from "@lib/db"
 import { NextApiHandler } from "next"
 
 const PatchBody = partial({
@@ -15,9 +15,9 @@ const PatchBody = partial({
   howToPay: string,
   logo: union([nullType, string])
 })
-const patch = newMutationHandler(PatchBody, async (data, session, { query: { storeSlug } }) => {
-  if (string.is(storeSlug)) {
-    const store = await findStoreBySlug(storeSlug)
+const patch = newMutationHandler(PatchBody, async (data, session, { query: { storeId } }) => {
+  if (string.is(storeId)) {
+    const store = await findStoreById(storeId)
     if (!store) {
       return {
         status: 404,
@@ -42,9 +42,9 @@ const patch = newMutationHandler(PatchBody, async (data, session, { query: { sto
   }
 })
 
-const del: NextApiHandler = async ({ query: { storeSlug } }, res) => {
-  if (string.is(storeSlug)) {
-    await deleteStoreBySlug(storeSlug)
+const del: NextApiHandler = async ({ query: { storeId } }, res) => {
+  if (string.is(storeId)) {
+    await deleteStoreById(storeId)
     res.status(201).json({})
   } else {
     res.status(400).json({

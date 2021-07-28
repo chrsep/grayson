@@ -34,15 +34,15 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         province: store.province,
         city: store.city,
         address: store.address,
-        phone: store.phone,
-        howToPay: store.howToPay
+        phone: store.phone
+        // howToPay: store.howToPay
       }
     })
 
   const { isDirty, isValid } = formState
 
   const onSubmit = async (data: PostStoreBody) => {
-    const result = await fetch(`/api/stores/${store.slug}`, {
+    const result = await fetch(`/api/stores/${store.id}`, {
       method: "PATCH",
       credentials: "include",
       body: JSON.stringify(data)
@@ -59,8 +59,8 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         province: updatedStore.province,
         city: updatedStore.city,
         address: updatedStore.address,
-        phone: updatedStore.phone,
-        howToPay: updatedStore.howToPay
+        phone: updatedStore.phone
+        // howToPay: updatedStore.howToPay
       })
     }
   }
@@ -196,16 +196,16 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         </div>
 
         <Divider className="hidden sm:block" />
-        <DangerZone slug={store.slug} />
+        <DangerZone storeId={store.id} />
       </div>
     </PageContainer>
   )
 }
 
-const DangerZone: FC<{ slug: string }> = ({ slug }) => {
+const DangerZone: FC<{ storeId: string }> = ({ storeId }) => {
   const router = useRouter()
   const handleDelete = async () => {
-    const deleteResponse = await fetch(`/api/stores/${slug}`, {
+    const deleteResponse = await fetch(`/api/stores/${storeId}`, {
       method: "DELETE",
       credentials: "include"
     })

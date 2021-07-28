@@ -11,7 +11,7 @@ const PostBody = type({
   city: string,
   province: string,
   postcode: string,
-  howToPay: string,
+  // howToPay: string,
   logo: union([nullType, string])
 })
 export type PostStoreBody = TypeOf<typeof PostBody>
