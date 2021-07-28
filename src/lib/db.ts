@@ -122,6 +122,15 @@ export const findProductBySlugWithImages = async (slug: string) => {
   })
 }
 
+export const findProductByIdWithImages = async (id: string) => {
+  return prisma.product.findUnique({
+    where: { id },
+    include: {
+      images: true
+    }
+  })
+}
+
 export const findProductsByCategory = async (category: Category) => {
   return prisma.product.findMany({
     where: { category },
@@ -242,9 +251,9 @@ export const findProductsByNameStoreOrOwner = (query: string) => {
   })
 }
 
-export const deleteProductBySlug = (slug: string) => {
+export const deleteProductById = (id: string) => {
   return prisma.product.delete({
-    where: { slug }
+    where: { id }
   })
 }
 

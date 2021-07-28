@@ -39,7 +39,7 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
   const onSubmit = async (data: FormData) => {
     const price = parseInt(data.price, 10)
-    const result = await fetch(`/api/products/${product.slug}`, {
+    const result = await fetch(`/api/products/${product.id}`, {
       method: "PATCH",
       credentials: "include",
       body: JSON.stringify({ ...data, price, images })
@@ -176,16 +176,16 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
         </div>
 
         <Divider className="hidden sm:block" />
-        <DangerZone slug={product.slug} storeSlug={store.slug} />
+        <DangerZone productId={product.id} storeSlug={store.slug} />
       </div>
     </PageContainer>
   )
 }
 
-const DangerZone: FC<{ slug: string; storeSlug: string }> = ({ slug, storeSlug }) => {
+const DangerZone: FC<{ productId: string; storeSlug: string }> = ({ productId, storeSlug }) => {
   const router = useRouter()
   const handleDelete = async () => {
-    const deleteResponse = await fetch(`/api/products/${slug}`, {
+    const deleteResponse = await fetch(`/api/products/${productId}`, {
       method: "DELETE",
       credentials: "include"
     })

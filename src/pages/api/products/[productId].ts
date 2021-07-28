@@ -1,6 +1,6 @@
 import { newMutationHandler, newProtectedApi } from "@lib/rest"
 import { array, number, partial, string } from "io-ts"
-import { deleteProductBySlug, findProductBySlugWithImages, updateProduct } from "@lib/db"
+import { deleteProductById, findProductByIdWithImages, updateProduct } from "@lib/db"
 import { createEnum } from "@lib/enum"
 import { Category } from "@prisma/client"
 import { NextApiHandler } from "next"
@@ -14,9 +14,9 @@ const PatchBody = partial({
   images: array(string),
   category: createEnum<Category>(Category, "Category")
 })
-const patch = newMutationHandler(PatchBody, async (body, session, { query: { productSlug } }) => {
-  if (string.is(productSlug)) {
-    const product = await findProductBySlugWithImages(productSlug)
+const patch = newMutationHandler(PatchBody, async (body, session, { query: { productId } }) => {
+  if (string.is(productId)) {
+    const product = await findProductByIdWithImages(productId)
     if (!product) {
       return {
         status: 404,
@@ -42,9 +42,9 @@ const patch = newMutationHandler(PatchBody, async (body, session, { query: { pro
   }
 })
 
-const del: NextApiHandler = async ({ query: { productSlug } }, res) => {
-  if (string.is(productSlug)) {
-    await deleteProductBySlug(productSlug)
+const del: NextApiHandler = async ({ query: { productId } }, res) => {
+  if (string.is(productId)) {
+    await deleteProductById(productId)
     res.status(201).json({})
   } else {
     res.status(400).json({
