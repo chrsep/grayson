@@ -4,6 +4,10 @@ import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
 import Icon from "@components/Icon"
 import { useCart } from "@lib/cart"
+import { useGetProduct, useGetStore } from "@lib/api-hooks"
+import Image from "next/image"
+import { toIDR } from "@lib/currency"
+import { generateS3Url } from "@lib/image-client"
 
 interface Props {
   open: boolean
@@ -54,13 +58,13 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
                       {cart.storeIds.map((id) => (
-                        <div key={id}>
+                        <div key={id} className="mb-8">
                           <StoreData storeId={id} />
                           {cart.items
                             .filter(({ storeId }) => storeId === id)
-                            .map(({ productId, qty }) => {
-                              return <Items key={productId} productId={productId} qty={qty} />
-                            })}
+                            .map(({ productId, qty }) => (
+                              <Items key={productId} productId={productId} qty={qty} />
+                            ))}
                         </div>
                       ))}
                     </div>
@@ -83,14 +87,42 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 }
 
 const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
-  return <div>{storeId}</div>
+  const { data } = useGetStore(storeId)
+
+  if (!data) return <div className="opacity-70">Produk telah dihapus</div>
+
+  return (
+    <div className="flex justify-center items-center py-2 text-sm bg-gray-50 rounded-lg border">
+      {data && data.logo && (
+        <div className="flex items-center w-6 h-6 rounded-full border">
+          <Image width={24} height={24} src={generateS3Url(data.logo)} className="rounded-full" />
+        </div>
+      )}
+      <p className="ml-3 font-ui font-bold">{data?.name}</p>
+    </div>
+  )
 }
 
 const Items: FC<{ productId: string; qty: number }> = ({ productId, qty }) => {
+  const { data } = useGetProduct(productId)
+
+  if (!data) return <div />
+
   return (
-    <div>
-      <div>{productId}</div>
-      <div>{qty}</div>
+    <div className="flex pb-4 mt-4">
+      <div className="flex items-center w-8 h-8 rounded-lg border">
+        {data && data.images[0] && (
+          <Image width={40} height={40} src={data.images[0].url} className="rounded-lg" />
+        )}
+      </div>
+
+      <div className="ml-3">
+        <p className="font-ui">{data.name}</p>
+        <p className="font-ui text-sm opacity-70">
+          {toIDR(data.price || 0)} x {qty}
+        </p>
+        <p className="font-ui text-sm">{toIDR(data.price * qty || 0)}</p>
+      </div>
     </div>
   )
 }
