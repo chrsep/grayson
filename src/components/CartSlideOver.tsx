@@ -13,6 +13,7 @@ interface Props {
 const Example: FC<Props> = ({ open, setOpen }) => {
   const cart = useCart()
   // const itemsByStore = lodash.groupBy(cart.lineItems, "storeId")
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -52,14 +53,16 @@ const Example: FC<Props> = ({ open, setOpen }) => {
                     </div>
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
-                      {/* {Object.keys(itemsByStore).map((store) => ( */}
-                      {/*  <div key={store}> */}
-                      {/*    <StoreData storeId={store} /> */}
-                      {/*    {itemsByStore[store].map(({ productId, qty }) => { */}
-                      {/*      return <Items key={productId} productId={productId} qty={qty} /> */}
-                      {/*    })} */}
-                      {/*  </div> */}
-                      {/* ))} */}
+                      {cart.storeIds.map((id) => (
+                        <div key={id}>
+                          <StoreData storeId={id} />
+                          {cart.items
+                            .filter(({ storeId }) => storeId === id)
+                            .map(({ productId, qty }) => {
+                              return <Items key={productId} productId={productId} qty={qty} />
+                            })}
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -84,8 +87,6 @@ const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
 }
 
 const Items: FC<{ productId: string; qty: number }> = ({ productId, qty }) => {
-  const cart = useCart()
-
   return (
     <div>
       <div>{productId}</div>

@@ -22,7 +22,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
   storeProducts,
   categoryProducts
 }) => {
-  const cart = useCart()
+  const incrementQty = useCart((state) => state.incrementQty)
   const firstImage = product.images[0]
   const [selectedImage, setSelectedImage] = useState(firstImage)
 
@@ -118,9 +118,7 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
               <Button
                 className="py-3 my-6 w-full rounded-xl"
-                onClick={() => {
-                  cart.addItem({ productId: product.id, storeId: product.storeId, qty: 1 })
-                }}
+                onClick={() => incrementQty(product.storeId, product.id)}
               >
                 <Icon src="/icons/plus.svg" className="mr-4 !bg-white" />
                 Masukan ke catatan
