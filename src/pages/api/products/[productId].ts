@@ -1,4 +1,4 @@
-import { newMutationHandler, newProtectedApi } from "@lib/rest"
+import { createApi, newMutationHandler, withAuth } from "@lib/rest"
 import { array, number, partial, string } from "io-ts"
 import { deleteProductById, findProductByIdWithImages, updateProduct } from "@lib/db"
 import { createEnum } from "@lib/enum"
@@ -54,4 +54,21 @@ const del: NextApiHandler = async ({ query: { productId } }, res) => {
   }
 }
 
-export default newProtectedApi({ patch, del })
+const get: NextApiHandler = async (req, res) => {
+  const { productId } = req.query
+  if (string.is(productId)) {
+    const product = await findProductByIdWithImages(productId)
+    res.json(product)
+  } else {
+    res.status(404).json({
+      error: "not_found",
+      description: "can't find the given product"
+    })
+  }
+}
+
+export default createApi({
+  get,
+  patch: withAuth(patch),
+  del: withAuth(del)
+})

@@ -1,4 +1,4 @@
-import { newMutationHandler, newProtectedApi } from "@lib/rest"
+import { createApi, newMutationHandler, withAuth } from "@lib/rest"
 import { nullType, partial, string, union } from "io-ts"
 import { deleteStoreById, findStoreById, updateStore } from "@lib/db"
 import { NextApiHandler } from "next"
@@ -54,4 +54,21 @@ const del: NextApiHandler = async ({ query: { storeId } }, res) => {
   }
 }
 
-export default newProtectedApi({ patch, del })
+const get: NextApiHandler = async (req, res) => {
+  const { storeId } = req.query
+  if (string.is(storeId)) {
+    const product = await findStoreById(storeId)
+    res.json(product)
+  } else {
+    res.status(404).json({
+      error: "not_found",
+      description: "can't find the given product"
+    })
+  }
+}
+
+export default createApi({
+  get,
+  patch: withAuth(patch),
+  del: withAuth(del)
+})

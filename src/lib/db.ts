@@ -70,7 +70,7 @@ export const findStoreWithProductsBySlug = async (slug: string) => {
 export const insertProduct = async (
   product: Omit<Product, "id" | "storeId" | "slug" | "images">,
   images: Omit<ProductImage, "productId">[],
-  storeSlug: string
+  storeId: string
 ) => {
   return prisma.product.create({
     data: {
@@ -78,7 +78,7 @@ export const insertProduct = async (
       slug: `${slugify(product.name)}-${nanoid(3)}`,
       store: {
         connect: {
-          slug: storeSlug
+          id: storeId
         }
       },
       images: {

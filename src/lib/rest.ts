@@ -54,12 +54,20 @@ function handleMethod(handler: Handler): NextApiHandler {
   }
 }
 
+/**
+ * @deprecated this is design to wrap every method in a path with as public. Replaced with withAuth and
+ * createApi that can be used to wrap each method independently.
+ * */
 export function newPublicApi(handler: Handler): NextApiHandler {
   return withSentry(async (req, res) => {
     await handleMethod(handler)(req, res)
   })
 }
 
+/**
+ * @deprecated this is design to wrap every method in a path with auth. Replaced with withAuth and
+ * createApi that can be used to wrap each method independently.
+ * */
 export function newProtectedApi(handler: Handler): NextApiHandler {
   return withSentry(async (req, res) => {
     const session = await getSession({ req })
@@ -107,4 +115,59 @@ export function newMutationHandler<T extends Any>(
       })
     }
   }
+}
+
+/* V2 of our API */
+export function withAuth(handler: NextApiHandler): NextApiHandler {
+  return async (req, res) => {
+    const session = await getSession({ req })
+
+    if (!session || !session.user) {
+      res.status(401).json({
+        error: "not_authenticated",
+        description: "The user does not have an active session or is not authenticated"
+      })
+      return
+    }
+
+    await handler(req, res)
+  }
+}
+
+export function createApi(handler: Handler): NextApiHandler {
+  return withSentry(async (req, res) => {
+    switch (req.method) {
+      case "POST":
+        if (handler.post) {
+          await handler.post(req, res)
+          break
+        }
+      case "GET":
+        if (handler.get) {
+          await handler.get(req, res)
+          break
+        }
+      case "PUT":
+        if (handler.put) {
+          await handler.put(req, res)
+          break
+        }
+      case "PATCH":
+        if (handler.patch) {
+          await handler.patch(req, res)
+          break
+        }
+      case "DELETE":
+        if (handler.del) {
+          await handler.del(req, res)
+          break
+        }
+      default: {
+        res.status(405).json({
+          error: "method_not_allowed",
+          description: "this method is not allowed"
+        })
+      }
+    }
+  })
 }
