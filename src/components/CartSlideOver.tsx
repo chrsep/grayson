@@ -4,10 +4,11 @@ import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
 import Icon from "@components/Icon"
 import { useCart } from "@lib/cart"
-import { useGetProduct, useGetStore } from "@lib/api-hooks"
+import { useWhatsappLink, useGetProduct, useGetStore } from "@lib/api-hooks"
 import Image from "next/image"
 import { toIDR } from "@lib/currency"
 import { generateS3Url } from "@lib/image-client"
+import { LineItem } from "@lib/domain"
 
 interface Props {
   open: boolean
@@ -58,23 +59,15 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
                       {cart.storeIds.map((id) => (
-                        <div key={id} className="mb-8">
-                          <StoreData storeId={id} />
-                          {cart.items
-                            .filter(({ storeId }) => storeId === id)
-                            .map(({ productId, qty }) => (
-                              <Items key={productId} productId={productId} qty={qty} />
-                            ))}
-                        </div>
+                        <StoreItem key={id} storeId={id} items={cart.items} />
                       ))}
                     </div>
                   </div>
 
                   <div className="flex flex-shrink-0 justify-end py-4 px-4">
                     <Button variant="outline" onClick={() => setOpen(false)}>
-                      Kosongkan
+                      Kosongkan catatan
                     </Button>
-                    <Button className="ml-4">Lanjut</Button>
                   </div>
                 </div>
               </div>
@@ -83,6 +76,36 @@ const Example: FC<Props> = ({ open, setOpen }) => {
         </div>
       </Dialog>
     </Transition.Root>
+  )
+}
+
+const StoreItem: FC<{
+  storeId: string
+  items: LineItem[]
+}> = ({ items, storeId }) => {
+  const { whatsappLink } = useWhatsappLink(items)
+
+  return (
+    <div className="pb-4 mb-8 border-b">
+      <StoreData storeId={storeId} />
+      {items
+        .filter((store) => store.storeId === storeId)
+        .map(({ productId, qty }) => (
+          <Items key={productId} productId={productId} qty={qty} />
+        ))}
+
+      <div className="flex mt-4">
+        <Button variant="outline" className="flex-shrink-0 mr-3 ml-auto">
+          Hapus
+        </Button>
+        <a href={whatsappLink} className="w-full">
+          <Button className="w-full">
+            <Icon src="/icons/brand-whatsapp.svg" className="mr-2 !bg-white" />
+            Hubungi lewat WA
+          </Button>
+        </a>
+      </div>
+    </div>
   )
 }
 

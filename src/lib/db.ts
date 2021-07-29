@@ -3,6 +3,7 @@ import slugify from "slugify"
 import { nanoid } from "nanoid"
 import { User } from "next-auth"
 import prisma from "@lib/prisma"
+import { LineItem } from "./domain"
 
 export const findUserStores = async (userEmail: string) => {
   return prisma.store.findMany({
@@ -326,5 +327,23 @@ export const findStoreHighlights = async (slug: string, excludedProductId?: stri
       store: true
     },
     take
+  })
+}
+
+export const findLineItemsData = async (items: LineItem[]) => {
+  const products = await prisma.product.findMany({
+    where: {
+      id: {
+        in: items.map((item) => item.productId)
+      }
+    },
+    orderBy: {
+      id: "desc"
+    }
+  })
+
+  return products.map((product) => {
+    const item = items.find((item) => item.productId === product.id)
+    return { ...product, qty: item?.qty || 0 }
   })
 }

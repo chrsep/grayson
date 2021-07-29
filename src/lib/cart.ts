@@ -1,17 +1,6 @@
 import create from "zustand"
 import { persist } from "zustand/middleware"
-
-interface LineItem {
-  storeId: string
-  productId: string
-  qty: number
-}
-
-interface LineItem {
-  storeId: string
-  productId: string
-  qty: number
-}
+import { LineItem } from "./domain"
 
 interface CartState {
   storeIds: string[]

@@ -45,7 +45,7 @@
     "react-dom": "npm:@preact/compat",
     "react-hook-form": "7.12.0",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
-    "redaxios": "0.4.1",
+    "redaxios": "^0.4.1",
     "sharp": "^0.28.3",
     "slugify": "1.6.0",
     "swr": "0.5.6",
