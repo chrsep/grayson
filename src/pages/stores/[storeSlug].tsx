@@ -27,16 +27,15 @@ const StoreProfile: FC<InferGetServerSidePropsType<typeof getServerSideProps>> =
 const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
   return (
     <div>
-      <div>
-        <Image
-          className="object-cover w-full h-32 lg:h-48"
-          layout="responsive"
-          height={1200}
-          src={Hero}
-          placeholder="blur"
-          alt=""
-        />
-      </div>
+      <Image
+        layout="responsive"
+        src={Hero}
+        height={200}
+        width={1200}
+        placeholder="blur"
+        objectFit="cover"
+        alt=""
+      />
 
       <div className="relative px-4 sm:px-6 lg:px-8 mx-auto max-w-5xl">
         <div className="sm:flex sm:items-end -mt-12 sm:-mt-16 sm:space-x-5">
