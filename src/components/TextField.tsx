@@ -13,6 +13,7 @@ interface Props {
   placeholder?: string
   hideLabel?: boolean
   inputClassName?: string
+  onBlur?: ChangeEventHandler<HTMLInputElement>
 }
 
 const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -27,6 +28,7 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
     iconSrc,
     placeholder,
     inputClassName,
+    onBlur,
     type = "text",
     hideLabel = false
   },
@@ -57,6 +59,7 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, Props> = (
             value={value}
             placeholder={placeholder}
             ref={ref}
+            onBlur={onBlur}
             className={`${inputClassName} focus:ring-primary-500 focus:border-primary-500 block w-full ${
               iconSrc ? "pl-10" : ""
             } sm:text-sm border-gray-300 rounded-md shadow-sm `}

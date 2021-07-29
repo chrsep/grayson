@@ -72,8 +72,8 @@ const changeQty = (items: LineItem[], storeId: string, productId: string, amount
   const idx = newItems.findIndex((item) => item.productId === productId)
   const found = idx !== -1
 
+  if (found && newItems[idx].qty + amount < 1) return items
   if (found) newItems[idx].qty += amount
-  if (found && newItems[idx].qty < 0) newItems.splice(idx, 1)
   if (!found && amount > 0) newItems.push({ productId, storeId, qty: amount })
 
   return newItems
@@ -84,8 +84,8 @@ const setQty = (items: LineItem[], storeId: string, productId: string, newQty: n
   const idx = newItems.findIndex((item) => item.productId === productId)
   const found = idx !== -1
 
+  if (newQty < 1) return items
   if (found) newItems[idx].qty = newQty
-  if (found && newItems[idx].qty < 0) newItems.splice(idx, 1)
   if (!found && newQty > 0) newItems.push({ productId, storeId, qty: newQty })
 
   return newItems

@@ -19,11 +19,14 @@ const post: NextApiHandler = async (req, res) => {
     const completeData = await findLineItemsData(items)
 
     let text = message
+    let total = 0
     completeData.forEach((item) => {
+      total += item.qty * item.price
       text = `${text}\n${item.qty} x ${item.name}`
     })
 
     res.json({
+      total,
       whatsappLink: `https://wa.me/${completeData?.[0].store?.whatsapp}?text=${encodeURIComponent(
         text
       )}`
@@ -31,6 +34,4 @@ const post: NextApiHandler = async (req, res) => {
   }
 }
 
-export default createApi({
-  post
-})
+export default createApi({ post })

@@ -4,11 +4,11 @@ import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
 import Icon from "@components/Icon"
 import { useCart } from "@lib/cart"
-import { useWhatsappLink, useGetProduct, useGetStore } from "@lib/api-hooks"
+import { useGetCartDetails, useGetProduct, useGetStore } from "@lib/api-hooks"
 import Image from "next/image"
 import { toIDR } from "@lib/currency"
 import { generateS3Url } from "@lib/image-client"
-import { LineItem } from "@lib/domain"
+import TextField from "@components/TextField"
 
 interface Props {
   open: boolean
@@ -60,7 +60,7 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
                       {storeIds.map((id) => (
-                        <StoreItem key={id} storeId={id} />
+                        <StoreLineItems key={id} storeId={id} />
                       ))}
                     </div>
                   </div>
@@ -86,13 +86,13 @@ const Example: FC<Props> = ({ open, setOpen }) => {
   )
 }
 
-const StoreItem: FC<{
+const StoreLineItems: FC<{
   storeId: string
 }> = ({ storeId }) => {
   const { data } = useGetStore(storeId)
   const items = useCart(({ items }) => items)
   const deleteByStoreId = useCart(({ deleteByStoreId }) => deleteByStoreId)
-  const { whatsappLink } = useWhatsappLink(items)
+  const { isLoading, whatsappLink, total } = useGetCartDetails(items)
 
   return (
     <div className="pb-4 mb-8 border-b">
@@ -100,8 +100,12 @@ const StoreItem: FC<{
       {items
         .filter((store) => store.storeId === storeId)
         .map(({ productId, qty }) => (
-          <Items key={productId} productId={productId} qty={qty} />
+          <ProductData key={productId} productId={productId} qty={qty} />
         ))}
+
+      <p className="w-full font-ui text-xl font-bold text-right">
+        {total && !isLoading ? `Total ~${toIDR(total)}` : `loading`}
+      </p>
 
       <div className="flex mt-4">
         <Button
@@ -113,7 +117,7 @@ const StoreItem: FC<{
         </Button>
         {data?.whatsapp && (
           <a href={whatsappLink} className="w-full">
-            <Button className="w-full">
+            <Button className="w-full" disabled={isLoading}>
               <Icon src="/icons/brand-whatsapp.svg" className="mr-2 !bg-white" />
               Hubungi lewat WA
             </Button>
@@ -141,11 +145,14 @@ const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
   )
 }
 
-const Items: FC<{
+const ProductData: FC<{
   productId: string
   qty: number
 }> = ({ productId, qty }) => {
+  const setQty = useCart(({ setQty }) => setQty)
   const deleteItem = useCart(({ deleteItem }) => deleteItem)
+  const incrementQty = useCart(({ incrementQty }) => incrementQty)
+  const decrementQty = useCart(({ decrementQty }) => decrementQty)
   const { data, error } = useGetProduct(productId)
 
   if (error) return <div />
@@ -154,23 +161,66 @@ const Items: FC<{
 
   return (
     <div className="flex items-start pb-4 mt-4">
-      <div className="flex items-center w-8 h-8 rounded-lg border">
+      <div className="flex flex-shrink-0 items-center w-8 h-8 rounded-lg border">
         {data && data.images[0] && (
           <Image width={40} height={40} src={data.images[0].url} className="rounded-lg" />
         )}
       </div>
 
-      <div className="ml-3">
-        <p className="font-ui">{data.name}</p>
+      <div className="ml-3 w-full">
+        <div className="flex items-baseline">
+          <p className="font-ui">{data.name}</p>
+          <button
+            type="button"
+            className="ml-auto text-sm text-red-700 underline opacity-70"
+            onClick={() => deleteItem(productId)}
+          >
+            Hapus
+          </button>
+        </div>
         <p className="font-ui text-sm opacity-70">
           {toIDR(data.price || 0)} x {qty}
         </p>
-        <p className="font-ui text-sm">{toIDR(data.price * qty || 0)}</p>
-      </div>
 
-      <Button variant="icon" className=" !p-2 ml-auto" onClick={() => deleteItem(productId)}>
-        <Icon src="/icons/trash.svg" className="!bg-red-700" />
-      </Button>
+        <div className="flex items-center w-full">
+          <p className="block mr-auto font-ui">{toIDR(data.price * qty || 0)}</p>
+
+          <Button
+            variant="outline"
+            className="!p-0 w-9 h-9"
+            onClick={() => incrementQty(data.storeId, productId)}
+          >
+            <Icon src="/icons/plus.svg" className="w-4 h-4 !bg-gray-700" />
+          </Button>
+          <TextField
+            name="jumlah"
+            hideLabel
+            label="Jumlah"
+            value={qty.toString()}
+            containerClassName="w-9 mx-1"
+            inputClassName="h-9 p-0 flex text-center"
+            onChange={(e) => {
+              const qty = parseInt(e.target.value, 10) || 0
+              if (qty > 0) {
+                setQty(data.storeId, productId, qty)
+              }
+            }}
+            onBlur={(e) => {
+              const qty = parseInt(e.target.value, 10) || 0
+              if (e.target.value === "" || qty < 1) {
+                setQty(data.storeId, productId, 1)
+              }
+            }}
+          />
+          <Button
+            variant="outline"
+            className="!p-0 w-9 h-9"
+            onClick={() => decrementQty(data.storeId, productId)}
+          >
+            <Icon src="/icons/minus.svg" className="w-4 h-4 !bg-gray-700" />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -12,17 +12,18 @@ export const useGetStore = (id: string) => {
 }
 
 /** Create whatsapp link containing the message of items in cart. */
-export const useWhatsappLink = (lineItems: LineItem[]) => {
-  const { data, error } = useSWR([`/api/whatsapp`, lineItems], fetchWhatsappLink)
+export const useGetCartDetails = (lineItems: LineItem[]) => {
+  const { data, error } = useSWR([`/api/cart`, lineItems], fetchWhatsappLink)
 
   return {
     whatsappLink: data?.whatsappLink,
+    total: data?.total,
     isLoading: !error && !data,
     isError: error
   }
 }
 
 const fetchWhatsappLink = async (url: string, lineItems: LineItem[]) => {
-  const result = await axios.post<{ whatsappLink: string }>(url, lineItems)
+  const result = await axios.post<{ whatsappLink: string; total: number }>(url, lineItems)
   return result.data
 }
