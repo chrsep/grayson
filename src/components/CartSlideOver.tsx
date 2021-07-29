@@ -113,7 +113,7 @@ const StoreLineItems: FC<{
           className="flex-shrink-0 mr-3 ml-auto"
           onClick={() => deleteByStoreId(storeId)}
         >
-          Hapus
+          Hapus semua
         </Button>
         {data?.whatsapp && (
           <a href={whatsappLink} className="w-full">
