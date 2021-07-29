@@ -126,13 +126,17 @@ const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
   )
 }
 
-const Items: FC<{ productId: string; qty: number }> = ({ productId, qty }) => {
+const Items: FC<{
+  productId: string
+  qty: number
+}> = ({ productId, qty }) => {
+  const deleteItem = useCart(({ deleteItem }) => deleteItem)
   const { data } = useGetProduct(productId)
 
   if (!data) return <div />
 
   return (
-    <div className="flex pb-4 mt-4">
+    <div className="flex items-start pb-4 mt-4">
       <div className="flex items-center w-8 h-8 rounded-lg border">
         {data && data.images[0] && (
           <Image width={40} height={40} src={data.images[0].url} className="rounded-lg" />
@@ -146,6 +150,10 @@ const Items: FC<{ productId: string; qty: number }> = ({ productId, qty }) => {
         </p>
         <p className="font-ui text-sm">{toIDR(data.price * qty || 0)}</p>
       </div>
+
+      <Button variant="icon" className=" !p-2 ml-auto" onClick={() => deleteItem(productId)}>
+        <Icon src="/icons/trash.svg" className="!bg-red-700" />
+      </Button>
     </div>
   )
 }
