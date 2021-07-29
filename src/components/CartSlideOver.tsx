@@ -91,6 +91,7 @@ const StoreItem: FC<{
 }> = ({ storeId }) => {
   const { data } = useGetStore(storeId)
   const items = useCart(({ items }) => items)
+  const deleteByStoreId = useCart(({ deleteByStoreId }) => deleteByStoreId)
   const { whatsappLink } = useWhatsappLink(items)
 
   return (
@@ -103,7 +104,11 @@ const StoreItem: FC<{
         ))}
 
       <div className="flex mt-4">
-        <Button variant="outline" className="flex-shrink-0 mr-3 ml-auto">
+        <Button
+          variant="outline"
+          className="flex-shrink-0 mr-3 ml-auto"
+          onClick={() => deleteByStoreId(storeId)}
+        >
           Hapus
         </Button>
         {data?.whatsapp && (
