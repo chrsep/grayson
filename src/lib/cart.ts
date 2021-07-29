@@ -10,6 +10,7 @@ interface CartState {
   decrementQty: (storeId: string, productId: string) => void
   incrementQty: (storeId: string, productId: string) => void
   deleteItem: (productId: string) => void
+  deleteByStoreId: (storeId: string) => void
 }
 
 export const useCart = create<CartState>(
@@ -46,6 +47,18 @@ export const useCart = create<CartState>(
           const items = state.items.filter((lineItem) => lineItem.productId !== productId)
           const storeIds = getUniqueStoreIds(items)
           return { storeIds, items }
+        })
+      },
+      deleteByStoreId: (storeId: string) => {
+        return set((state) => {
+          const items = state.items.filter((lineItem) => lineItem.storeId !== storeId)
+          const storeIds = getUniqueStoreIds(items)
+          return { storeIds, items }
+        })
+      },
+      deleteAll: () => {
+        return set(() => {
+          return { storeIds: [], items: [] }
         })
       }
     }),
