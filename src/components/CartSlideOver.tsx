@@ -89,6 +89,7 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 const StoreItem: FC<{
   storeId: string
 }> = ({ storeId }) => {
+  const { data } = useGetStore(storeId)
   const items = useCart(({ items }) => items)
   const { whatsappLink } = useWhatsappLink(items)
 
@@ -105,12 +106,14 @@ const StoreItem: FC<{
         <Button variant="outline" className="flex-shrink-0 mr-3 ml-auto">
           Hapus
         </Button>
-        <a href={whatsappLink} className="w-full">
-          <Button className="w-full">
-            <Icon src="/icons/brand-whatsapp.svg" className="mr-2 !bg-white" />
-            Hubungi lewat WA
-          </Button>
-        </a>
+        {data?.whatsapp && (
+          <a href={whatsappLink} className="w-full">
+            <Button className="w-full">
+              <Icon src="/icons/brand-whatsapp.svg" className="mr-2 !bg-white" />
+              Hubungi lewat WA
+            </Button>
+          </a>
+        )}
       </div>
     </div>
   )

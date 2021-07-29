@@ -23,7 +23,11 @@ const post: NextApiHandler = async (req, res) => {
       text = `${text}\n${item.qty} x ${item.name}`
     })
 
-    res.json({ whatsappLink: `https://wa.me/?text=${encodeURIComponent(text)}` })
+    res.json({
+      whatsappLink: `https://wa.me/${completeData?.[0].store?.whatsapp}?text=${encodeURIComponent(
+        text
+      )}`
+    })
   }
 }
 

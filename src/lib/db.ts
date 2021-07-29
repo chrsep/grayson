@@ -339,6 +339,13 @@ export const findLineItemsData = async (items: LineItem[]) => {
     },
     orderBy: {
       id: "desc"
+    },
+    include: {
+      store: {
+        select: {
+          whatsapp: true
+        }
+      }
     }
   })
 
