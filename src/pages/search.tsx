@@ -12,7 +12,9 @@ const SearchPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
       <i className="text-primary-400">&rdquo;{query}&rdquo;</i>
     </h1>
 
-    {products.length === 0 && <p className="text-gray-700">Tidak ada produk ditemukan</p>}
+    {products.length === 0 && (
+      <p className="px-4 md:px-8 text-gray-700">Tidak ada produk ditemukan</p>
+    )}
 
     <ProductList products={products} />
   </main>
