@@ -11,6 +11,7 @@ interface CartState {
   incrementQty: (storeId: string, productId: string) => void
   deleteItem: (productId: string) => void
   deleteByStoreId: (storeId: string) => void
+  deleteAll: () => void
 }
 
 export const useCart = create<CartState>(

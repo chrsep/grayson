@@ -16,7 +16,8 @@ interface Props {
 }
 
 const Example: FC<Props> = ({ open, setOpen }) => {
-  const cart = useCart()
+  const storeIds = useCart(({ storeIds }) => storeIds)
+  const deleteAll = useCart(({ deleteAll }) => deleteAll)
   // const itemsByStore = lodash.groupBy(cart.lineItems, "storeId")
 
   return (
@@ -58,14 +59,20 @@ const Example: FC<Props> = ({ open, setOpen }) => {
                     </div>
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
-                      {cart.storeIds.map((id) => (
-                        <StoreItem key={id} storeId={id} items={cart.items} />
+                      {storeIds.map((id) => (
+                        <StoreItem key={id} storeId={id} />
                       ))}
                     </div>
                   </div>
 
                   <div className="flex flex-shrink-0 justify-end py-4 px-4">
-                    <Button variant="outline" onClick={() => setOpen(false)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        deleteAll()
+                        setOpen(false)
+                      }}
+                    >
                       Kosongkan catatan
                     </Button>
                   </div>
@@ -81,8 +88,8 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 
 const StoreItem: FC<{
   storeId: string
-  items: LineItem[]
-}> = ({ items, storeId }) => {
+}> = ({ storeId }) => {
+  const items = useCart(({ items }) => items)
   const { whatsappLink } = useWhatsappLink(items)
 
   return (
@@ -112,7 +119,7 @@ const StoreItem: FC<{
 const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
   const { data } = useGetStore(storeId)
 
-  if (!data) return <div className="opacity-70">Produk telah dihapus</div>
+  if (!data) return <div>Loading</div>
 
   return (
     <div className="flex justify-center items-center py-2 text-sm bg-gray-50 rounded-lg border">
@@ -131,9 +138,11 @@ const Items: FC<{
   qty: number
 }> = ({ productId, qty }) => {
   const deleteItem = useCart(({ deleteItem }) => deleteItem)
-  const { data } = useGetProduct(productId)
+  const { data, error } = useGetProduct(productId)
 
-  if (!data) return <div />
+  if (error) return <div />
+
+  if (!data) return <div>Loading</div>
 
   return (
     <div className="flex items-start pb-4 mt-4">
