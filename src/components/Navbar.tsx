@@ -100,52 +100,60 @@ const Navbar: FC = () => {
             leaveTo="transform scale-95 opacity-0"
           >
             <Popover.Panel className="sm:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigations.map((item) => {
-                  const current = router.asPath === item.href
+              {({ close }) => (
+                <>
+                  <div className="px-2 pt-2 pb-3 space-y-1">
+                    {navigations.map((item) => {
+                      const current = router.asPath === item.href
 
-                  return (
-                    <Link href={item.href}>
-                      <a
-                        className={clsx(
-                          current
-                            ? " text-white bg-gray-900 bg-opacity-20"
-                            : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-20",
-                          " block py-2 px-3 text-base rounded-md"
-                        )}
-                        aria-current={current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    </Link>
-                  )
-                })}
-              </div>
+                      return (
+                        <Link href={item.href}>
+                          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+                          <a
+                            onClick={() => close()}
+                            className={clsx(
+                              current
+                                ? " text-white bg-gray-900 bg-opacity-20"
+                                : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-20",
+                              " block py-2 px-3 text-base rounded-md"
+                            )}
+                            aria-current={current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </a>
+                        </Link>
+                      )
+                    })}
+                  </div>
 
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                <div className="py-3 px-3 text-sm text-white border-b border-white border-opacity-10">
-                  Kategori
-                </div>
-                {categories.map((item) => {
-                  const current = router.asPath.endsWith(item.slug)
+                  <div className="px-2 pt-2 pb-3 space-y-1">
+                    <div className="py-3 px-3 text-sm text-white border-b border-white border-opacity-10">
+                      Kategori
+                    </div>
+                    {categories.map((item) => {
+                      const current = router.asPath.endsWith(item.slug)
 
-                  return (
-                    <Link href={`/categories/${item.slug}`}>
-                      <a
-                        className={clsx(
-                          current
-                            ? " text-white bg-gray-900 bg-opacity-20"
-                            : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-20",
-                          " block py-2 px-3 text-base rounded-md"
-                        )}
-                        aria-current={current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    </Link>
-                  )
-                })}
-              </div>
+                      return (
+                        <Link href={`/categories/${item.slug}`}>
+                          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+                          <a
+                            onClick={() => close()}
+                            className={clsx(
+                              current
+                                ? " text-white bg-gray-900 bg-opacity-20"
+                                : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-20",
+                              " block py-2 px-3 text-base rounded-md"
+                            )}
+                            aria-current={current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </a>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </>
+              )}
             </Popover.Panel>
           </Transition>
         </>
