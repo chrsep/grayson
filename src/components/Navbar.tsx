@@ -303,47 +303,32 @@ const UserProfile = () => {
               static
               className="absolute right-0 py-1 mt-2 w-48 bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right focus:outline-none"
             >
+              <Link href="/me/profile" passHref>
+                <Menu.Item
+                  as="a"
+                  className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Profil anda
+                </Menu.Item>
+              </Link>
+              <Link href="/me/stores" passHref>
+                <Menu.Item
+                  as="a"
+                  className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Toko anda
+                </Menu.Item>
+              </Link>
               <Menu.Item>
-                {({ active }) => (
-                  <Link href="/me/profile">
-                    <a
-                      className={clsx(
-                        active ? "bg-gray-100" : "",
-                        "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                      )}
-                    >
-                      Profil anda
-                    </a>
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <Link href="/me/stores">
-                    <a
-                      className={clsx(
-                        active ? "bg-gray-100" : "",
-                        "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                      )}
-                    >
-                      Toko anda
-                    </a>
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="button"
-                    onClick={() => signout()}
-                    className={clsx(
-                      active ? "bg-gray-100" : "",
-                      "block py-2 px-4 w-full text-sm !text-left text-red-600 hover:bg-gray-100"
-                    )}
-                  >
-                    Keluar
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => signout()}
+                  className={clsx(
+                    "block py-2 px-4 w-full text-sm !text-left text-red-600 hover:bg-gray-100"
+                  )}
+                >
+                  Keluar
+                </button>
               </Menu.Item>
             </Menu.Items>
           </Transition>
