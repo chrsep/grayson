@@ -4074,7 +4074,7 @@ next-plugin-preact@3.0.6:
     "@prefresh/webpack" "^3.3.0"
     module-alias "^2.0.0"
 
-next@^11.0.2-canary.24:
+next@11.0.2-canary.24:
   version "11.0.2-canary.24"
   resolved "https://registry.yarnpkg.com/next/-/next-11.0.2-canary.24.tgz#91202f27e5d49d2bb27ff3c7134c033ad5fd10f4"
   integrity sha512-C7hic1IuxRc5gShyXHNdcpubD4l4XKN9mPLJtAmgzYpu4WsHWPY9DyRmlH9ydSRPFSbK8C4+NrEML35PGWQ4QA==
