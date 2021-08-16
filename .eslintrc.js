@@ -4,7 +4,7 @@ module.exports = {
   },
   plugins: ["tailwindcss"],
   extends: [
-    "next",
+    "plugin:@next/next/recommended",
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",

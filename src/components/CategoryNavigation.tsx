@@ -18,7 +18,7 @@ const CategoryNavigation = () => {
                 className={clsx(
                   current
                     ? " text-primary-600 bg-primary-400 bg-opacity-20"
-                    : "text-gray-900 hover:bg-gray-400 hover:bg-opacity-20 hover:text-primary-700",
+                    : "text-gray-900 hover:text-primary-700 hover:bg-gray-400 hover:bg-opacity-20",
                   " py-2 px-3 text-sm rounded-md"
                 )}
                 aria-current={current ? "page" : undefined}
