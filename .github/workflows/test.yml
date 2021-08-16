@@ -40,7 +40,7 @@ jobs:
       - name: Setup Wireguard
         run: |
           sudo apt install -y wireguard
-          echo $WIREGUARD >> gh-action
+          echo $WIREGUARD >> /etc/wireguard/gh-action.conf
           wg-quick up gh-action
         env:
           WIREGUARD: ${{ secrets.WIREGUARD  }}
