@@ -38,7 +38,7 @@ jobs:
       - name: Setup Wireguard
         run: |
           sudo mkdir /etc/wireguard
-          sudo echo $WIREGUARD >> /etc/wireguard/gh-action.conf
+          sudo sh -c 'echo $WIREGUARD >> /etc/wireguard/gh-action.conf'
           sudo apt install -y wireguard
           sudo wg-quick up gh-action
         env:
