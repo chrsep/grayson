@@ -37,6 +37,7 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: Setup Wireguard
         run: |
+          sudo mkdir /etc/wireguard
           sudo echo $WIREGUARD >> /etc/wireguard/gh-action.conf
           sudo apt install -y wireguard
           sudo wg-quick up gh-action
