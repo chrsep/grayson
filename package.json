@@ -53,8 +53,6 @@
     "zustand": "3.5.8"
   },
   "devDependencies": {
-    "@babel/core": "7.15.0",
-    "@babel/plugin-proposal-logical-assignment-operators": "7.14.5",
     "@tailwindcss/aspect-ratio": "0.2.1",
     "@tailwindcss/forms": "0.3.3",
     "@tailwindcss/typography": "0.4.1",
