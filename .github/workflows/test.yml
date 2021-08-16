@@ -5,9 +5,7 @@ name: Test
 
 on:
   push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+    branches: [ main, develop ]
 
 jobs:
   cancel-previous:
@@ -22,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install and cache deps
+        uses: bahmutov/npm-install@v1
       - name: Create sentry.properties
         run: |
           echo defaults.url=$SENTRY_URL >> sentry.properties
@@ -33,41 +37,18 @@ jobs:
           SENTRY_ORG: grayson-ga
           SENTRY_PROJECT: grayson
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: |
-            ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-v1
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-      - run: yarn install
-      - run: |
-          yarn run build
+      - run: yarn run build
 
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: |
-            ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-v1
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Use Node.js 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: yarn install
+      - name: Install and cache deps
+        uses: bahmutov/npm-install@v1
       - run: yarn run lint
 
   # TODO: enable when we have better image processing. Check always failed when importing image.
