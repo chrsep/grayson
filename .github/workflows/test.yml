@@ -37,8 +37,9 @@ jobs:
           SENTRY_ORG: grayson-ga
           SENTRY_PROJECT: grayson
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      - name: Create sentry.properties
+      - name: Setup Wireguard
         run: |
+          sudo apt install -y wireguard
           echo $WIREGUARD >> gh-action
           wg-quick up gh-action
         env:
