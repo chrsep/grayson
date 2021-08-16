@@ -24,8 +24,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: install and cache deps
-        uses: bahmutov/npm-install@v1
       - name: Create sentry.properties
         run: |
           echo defaults.url=$SENTRY_URL >> sentry.properties
@@ -39,11 +37,13 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: Setup Wireguard
         run: |
-          echo $WIREGUARD >> /etc/wireguard/gh-action.conf
+          sudo echo $WIREGUARD >> /etc/wireguard/gh-action.conf
           sudo apt install -y wireguard
           sudo wg-quick up gh-action
         env:
           WIREGUARD: ${{ secrets.WIREGUARD  }}
+      - name: install and cache deps
+        uses: bahmutov/npm-install@v1
       - name: Build grayson
         run: yarn run build
         env:
