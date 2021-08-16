@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 16
+      - name: use node.js 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: Install and cache deps
+      - name: install and cache deps
         uses: bahmutov/npm-install@v1
       - name: Create sentry.properties
         run: |
@@ -37,7 +37,16 @@ jobs:
           SENTRY_ORG: grayson-ga
           SENTRY_PROJECT: grayson
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      - run: yarn run build
+      - name: Create sentry.properties
+        run: |
+          echo $WIREGUARD >> gh-action
+          wg-quick up gh-action
+        env:
+          WIREGUARD: ${{ secrets.WIREGUARD  }}
+      - name: Build grayson
+        run: yarn run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
   lint:
     runs-on: ubuntu-latest
