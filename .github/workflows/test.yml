@@ -39,9 +39,9 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: Setup Wireguard
         run: |
-          sudo apt install -y wireguard
           echo $WIREGUARD >> /etc/wireguard/gh-action.conf
-          wg-quick up gh-action
+          sudo apt install -y wireguard
+          sudo wg-quick up gh-action
         env:
           WIREGUARD: ${{ secrets.WIREGUARD  }}
       - name: Build grayson
