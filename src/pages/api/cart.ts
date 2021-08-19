@@ -35,7 +35,7 @@ const post: NextApiHandler = async (req, res) => {
 const createWhatsappLink = (wa: string, text: string) => {
   // make sure number includes a country code
   let properWa = wa
-  const usesCountryCode = !properWa.startsWith("+")
+  const usesCountryCode = properWa.startsWith("+")
   if (!usesCountryCode) {
     properWa = `+62${properWa}`
   }
