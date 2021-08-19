@@ -31,7 +31,17 @@ const CartSlideOver: FC<Props> = ({ open, setOpen }) => {
         onClose={setOpen}
       >
         <div className="overflow-hidden absolute inset-0">
-          <Dialog.Overlay className="absolute inset-0" />
+          <Transition.Child
+            as={Fragment}
+            enter="transition-opacity ease-linear duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity ease-linear duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-75" />
+          </Transition.Child>
 
           <div className="flex fixed inset-y-0 right-0 pl-10 max-w-full">
             <Transition.Child
@@ -125,7 +135,7 @@ const StoreLineItems: FC<{
           <a href={whatsappLink} className="w-full">
             <Button className="w-full" disabled={isLoading}>
               <Icon src="/icons/brand-whatsapp.svg" className="mr-2 !bg-white" />
-              Hubungi lewat WA
+              Kirim Pesan
             </Button>
           </a>
         )}
