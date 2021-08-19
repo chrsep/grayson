@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { FC, Fragment } from "react"
+import { FC, Fragment, ReactNode } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/Button"
 import Icon from "@components/Icon"
@@ -9,13 +9,14 @@ import Image from "next/image"
 import { toIDR } from "@lib/currency"
 import { generateS3Url } from "@lib/image-client"
 import TextField from "@components/TextField"
+import Link from "next/link"
 
 interface Props {
   open: boolean
   setOpen: (open: boolean) => void
 }
 
-const Example: FC<Props> = ({ open, setOpen }) => {
+const CartSlideOver: FC<Props> = ({ open, setOpen }) => {
   const storeIds = useCart(({ storeIds }) => storeIds)
   const deleteAll = useCart(({ deleteAll }) => deleteAll)
   // const itemsByStore = lodash.groupBy(cart.lineItems, "storeId")
@@ -60,7 +61,11 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 
                     <div className="relative flex-1 px-4 sm:px-6 mt-6">
                       {storeIds.map((id) => (
-                        <StoreLineItems key={id} storeId={id} />
+                        <StoreLineItems
+                          key={id}
+                          storeId={id}
+                          storeLink={<StoreLink storeId={id} onClick={() => setOpen(false)} />}
+                        />
                       ))}
                     </div>
                   </div>
@@ -88,7 +93,8 @@ const Example: FC<Props> = ({ open, setOpen }) => {
 
 const StoreLineItems: FC<{
   storeId: string
-}> = ({ storeId }) => {
+  storeLink: ReactNode
+}> = ({ storeId, storeLink }) => {
   const { data } = useGetStore(storeId)
   const items = useCart(({ items }) => items)
   const deleteByStoreId = useCart(({ deleteByStoreId }) => deleteByStoreId)
@@ -96,7 +102,7 @@ const StoreLineItems: FC<{
 
   return (
     <div className="pb-4 mb-8 border-b">
-      <StoreData storeId={storeId} />
+      {storeLink}
       {items
         .filter((store) => store.storeId === storeId)
         .map(({ productId, qty }) => (
@@ -128,20 +134,29 @@ const StoreLineItems: FC<{
   )
 }
 
-const StoreData: FC<{ storeId: string }> = ({ storeId }) => {
+const StoreLink: FC<{
+  storeId: string
+  onClick: () => void
+}> = ({ storeId, onClick }) => {
   const { data } = useGetStore(storeId)
 
   if (!data) return <div>Loading</div>
 
   return (
-    <div className="flex justify-center items-center py-2 text-sm bg-gray-50 rounded-lg border">
-      {data && data.logo && (
-        <div className="flex items-center w-6 h-6 rounded-full border">
-          <Image width={24} height={24} src={generateS3Url(data.logo)} className="rounded-full" />
-        </div>
-      )}
-      <p className="ml-3 font-ui font-bold">{data?.name}</p>
-    </div>
+    <Link href={`/stores/${data.slug}`}>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+      <a
+        className="flex justify-center items-center py-2 text-sm bg-gray-50 rounded-lg border"
+        onClick={onClick}
+      >
+        {data && data.logo && (
+          <div className="flex items-center w-6 h-6 rounded-full border">
+            <Image width={24} height={24} src={generateS3Url(data.logo)} className="rounded-full" />
+          </div>
+        )}
+        <p className="ml-3 font-ui font-bold">{data?.name}</p>
+      </a>
+    </Link>
   )
 }
 
@@ -225,4 +240,4 @@ const ProductData: FC<{
   )
 }
 
-export default Example
+export default CartSlideOver
