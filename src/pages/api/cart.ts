@@ -27,11 +27,20 @@ const post: NextApiHandler = async (req, res) => {
 
     res.json({
       total,
-      whatsappLink: `https://wa.me/${completeData?.[0].store?.whatsapp}?text=${encodeURIComponent(
-        text
-      )}`
+      whatsappLink: createWhatsappLink(completeData?.[0].store?.whatsapp, text)
     })
   }
+}
+
+const createWhatsappLink = (wa: string, text: string) => {
+  // make sure number includes a country code
+  let properWa = wa
+  const usesCountryCode = !properWa.startsWith("+")
+  if (!usesCountryCode) {
+    properWa = `+62${properWa}`
+  }
+
+  return `https://wa.me/${properWa}?text=${encodeURIComponent(text)}`
 }
 
 export default createApi({ post })
