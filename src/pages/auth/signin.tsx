@@ -117,10 +117,6 @@ const EmailLogin = () => {
           />
           Masuk
         </Button>
-
-        <div className="text-sm text-center">
-          Belum punya akun? <Link href="/auth/signup">Daftar sekarang</Link>
-        </div>
       </form>
     </div>
   )
