@@ -218,7 +218,7 @@ const ContactForm: FC<{
                   />
 
                   <TextField
-                    label="Kota / Kecamatan"
+                    label="Kota"
                     containerClassName="col-span-6 md:col-span-2"
                     {...register("city")}
                   />
