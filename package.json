@@ -50,7 +50,7 @@
     "slugify": "1.6.0",
     "swr": "0.5.6",
     "uuid": "8.3.2",
-    "zustand": "3.5.8"
+    "zustand": "3.5.9"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "0.2.1",
