@@ -19,7 +19,7 @@
   "dependencies": {
     "@fontsource/inria-sans": "4.5.0",
     "@fontsource/noto-sans": "4.5.0",
-    "@headlessui/react": "1.4.0",
+    "@headlessui/react": "1.4.1",
     "@next/bundle-analyzer": "11.1.0",
     "@plaiceholder/next": "2.1.0",
     "@preact/compat": "17.0.2",
