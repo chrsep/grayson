@@ -57,7 +57,7 @@
     "@tailwindcss/forms": "0.3.3",
     "@tailwindcss/typography": "0.4.1",
     "@typescript-eslint/eslint-plugin": "4.30.0",
-    "autoprefixer": "10.3.3",
+    "autoprefixer": "10.3.4",
     "cypress": "8.3.1",
     "eslint": "7.32.0",
     "eslint-config-airbnb-typescript": "14.0.0",
