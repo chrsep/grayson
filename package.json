@@ -46,7 +46,7 @@
     "react-hook-form": "7.13.0",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "redaxios": "0.4.1",
-    "sharp": "0.29.0",
+    "sharp": "0.29.1",
     "slugify": "1.6.0",
     "swr": "1.0.0",
     "uuid": "8.3.2",
