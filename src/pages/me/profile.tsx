@@ -124,7 +124,7 @@ const PersonalInfoForm: FC<{
                 <ImageSelector
                   label="Foto profil"
                   image={watch("image")}
-                  imageKey={watch("imageKey")}
+                  // imageKey={watch("imageKey")}
                   onChange={handleImageChange}
                 />
 
@@ -255,7 +255,7 @@ const ImageSelector: FC<{
   label: string
   onChange: ChangeEventHandler<HTMLInputElement>
   image?: string | null
-  imageKey?: string | null
+  // imageKey?: string | null
   className?: string
 }> = ({ label, image, onChange, className }) => {
   const ref = useRef<HTMLInputElement>(null)

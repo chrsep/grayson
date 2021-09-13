@@ -25,9 +25,13 @@ const post: NextApiHandler = async (req, res) => {
       text = `${text}\n${item.qty} x ${item.name}`
     })
 
-    res.json({
+    res.status(200).json({
       total,
       whatsappLink: createWhatsappLink(completeData?.[0].store?.whatsapp, text)
+    })
+  } else {
+    res.status(403).json({
+      message: "message body is not valid"
     })
   }
 }

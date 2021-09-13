@@ -7,7 +7,11 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true"
 })
 
-const plugins = [withPreact, withBundleAnalyzer, withSentryConfig, withPlaiceholder]
+const plugins = [withPreact, withBundleAnalyzer, withPlaiceholder]
+
+if (process.env.NODE_ENV === "production") {
+  plugins.push(withSentryConfig)
+}
 
 module.exports = withPlugins(plugins, {
   images: {

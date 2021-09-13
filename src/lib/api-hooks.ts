@@ -3,12 +3,14 @@ import useSWR from "swr"
 import axios from "redaxios"
 import { LineItem, ProductWithImages } from "@lib/domain"
 
+const fetcher = (...args: [string]) => fetch(...args).then((res) => res.json())
+
 export const useGetProduct = (id: string) => {
-  return useSWR<ProductWithImages>(`/api/products/${id}`)
+  return useSWR<ProductWithImages>(`/api/products/${id}`, fetcher)
 }
 
 export const useGetStore = (id: string) => {
-  return useSWR<Store>(`/api/stores/${id}`)
+  return useSWR<Store>(`/api/stores/${id}`, fetcher)
 }
 
 /** Create whatsapp link containing the message of items in cart. */
