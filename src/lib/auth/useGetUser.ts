@@ -7,9 +7,9 @@ import axios from "redaxios"
 const fetcher = (url: string) => axios.get(url).then(({ data }) => data)
 
 const useGetUser = () => {
-  const initialData = useContext(SessionContext)
+  const fallbackData = useContext(SessionContext)
 
-  return useSWR<Session | null>("/api/auth/session", fetcher, { initialData })
+  return useSWR<Session | null>("/api/auth/session", fetcher, { fallbackData })
 }
 
 export default useGetUser
