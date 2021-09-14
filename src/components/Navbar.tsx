@@ -2,7 +2,6 @@ import React, { FC, Fragment, SyntheticEvent, useRef, useState } from "react"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import Icon from "@components/Icon"
 import Link from "next/link"
-import { signout } from "next-auth/client"
 import LogoFull from "@components/LogoFull"
 import LogoStandalone from "@components/LogoStandalone"
 import Button from "@components/Button"
@@ -31,7 +30,7 @@ const Navbar: FC = () => {
     >
       {({ open }) => (
         <>
-          <div className="px-2 sm:px-6 lg:px-8 mx-auto">
+          <div className="sm:px-6 lg:px-8 pl-2 mx-auto">
             <div className="flex relative justify-between items-center h-16">
               <div className="flex sm:hidden absolute inset-y-0 left-0 items-center">
                 {/* Mobile menu button */}
@@ -83,7 +82,7 @@ const Navbar: FC = () => {
                 </div>
               </div>
 
-              <div className="flex absolute sm:static sm:inset-auto inset-y-0 right-0 items-center pr-2 sm:pr-0 ml-[91px] sm:ml-6">
+              <div className="flex absolute sm:static sm:inset-auto inset-y-0 right-0 items-center pr-0 sm:pr-0 ml-[91px] sm:ml-6">
                 <SearchField />
                 <Cart />
                 <UserProfile />
@@ -246,14 +245,18 @@ const SearchField = () => {
 const UserProfile = () => {
   const { data } = useGetUser()
 
+  if (!data) {
+    return (
+      <div className="flex flex-col justify-center items-center w-20 border-l border-opacity-20">
+        <div className="w-8 h-8 bg-white rounded-full opacity-10 animate-pulse" />
+      </div>
+    )
+  }
+
   if (!data?.user?.email) {
     return (
       <Link href="/auth/signin">
-        <a>
-          <Button variant="outline" className="text-gray-400">
-            Masuk
-          </Button>
-        </a>
+        <a className="py-2 w-20 text-sm text-center text-white border-l border-opacity-20">Masuk</a>
       </Link>
     )
   }
@@ -262,7 +265,7 @@ const UserProfile = () => {
     <Menu as="div" className="relative flex-shrink-0">
       {({ open }) => (
         <>
-          <div>
+          <div className="flex flex-col justify-center items-center w-20 border-l border-opacity-20">
             <Menu.Button className="flex text-sm bg-gray-100 rounded-full focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none">
               <span className="sr-only">Open user menu</span>
               <div className="inline-block overflow-hidden w-8 h-8 bg-gray-100 rounded-full border">
@@ -320,15 +323,14 @@ const UserProfile = () => {
                 </Menu.Item>
               </Link>
               <Menu.Item>
-                <button
-                  type="button"
-                  onClick={() => signout()}
-                  className={clsx(
-                    "block py-2 px-4 w-full text-sm !text-left text-red-600 hover:bg-gray-100"
-                  )}
-                >
-                  Keluar
-                </button>
+                <Link href="/api/auth/signout" passHref>
+                  <button
+                    type="button"
+                    className="block py-2 px-4 w-full text-sm !text-left text-red-600 hover:bg-gray-100"
+                  >
+                    Keluar
+                  </button>
+                </Link>
               </Menu.Item>
             </Menu.Items>
           </Transition>
