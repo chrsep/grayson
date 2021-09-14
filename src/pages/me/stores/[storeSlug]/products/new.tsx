@@ -20,9 +20,9 @@ import Divider from "@components/Divider"
 import { uploadImage } from "@lib/image-client"
 import UploadImageButton from "@components/UploadImageButton"
 import ProductImagePreviews from "@components/ProductImagePreviews"
-import categories from "@lib/categories"
+import categories, { Category } from "@lib/categories"
 import Select from "@components/Select"
-import { Category, Product, Store } from "@prisma/client"
+import { Product, Store } from "@prisma/client"
 import { ParsedUrlQuery } from "querystring"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }

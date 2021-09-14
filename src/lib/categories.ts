@@ -1,11 +1,11 @@
-const Category = {
+export const Category = {
   MAKANAN: "MAKANAN",
   SENI: "SENI",
   PAKAIAN: "PAKAIAN",
   JASA: "JASA",
   EDUKASI: "EDUKASI",
   LAINNYA: "LAINNYA"
-}
+} as const
 
 const categories = [
   {
