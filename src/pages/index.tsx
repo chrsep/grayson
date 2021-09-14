@@ -16,11 +16,13 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
   )
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps = async () => {
   const products = await findProductsWithPrimaryImagesAndStore()
 
   // Pass data to the page via props
-  return { props: { products } }
+  return {
+    props: { products }
+  }
 }
 
 export default Home

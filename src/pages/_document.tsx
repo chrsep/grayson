@@ -40,11 +40,6 @@ class MyDocument extends Document {
           <script dangerouslySetInnerHTML={{ __html: lazyLoadSentry }} />
           {/* eslint-disable-next-line react/no-danger */}
           <script dangerouslySetInnerHTML={{ __html: sentryInit(process.env.NODE_ENV) }} />
-          <script
-            defer
-            src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon='{"token": "2ece74c7bd54443eb949e08561bf65cb"}'
-          />
         </body>
       </Html>
     )
