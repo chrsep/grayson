@@ -189,18 +189,18 @@ const SearchField = () => {
           className="block sm:hidden opacity-80 hover:opacity-100 transition-opacity"
           onClick={handleShowSearchBar}
         >
-          <img src="/icons/search-light.svg" className=" m-2 w-5 h-5" alt="" />
+          <Icon src="/icons/search-light.svg" className=" m-2 w-5 h-5" color="bg-white" />
         </Button>
         <button
           type="button"
           className="hidden sm:flex py-2 px-3 pr-14 w-full max-w-sm text-sm leading-5 text-white truncate bg-white bg-opacity-20 rounded-md"
           onClick={handleShowSearchBar}
         >
-          <img
+          <Icon
             src="/icons/search-light.svg"
             className="mr-3 w-5 h-5 opacity-70"
+            color="bg-white"
             aria-hidden="true"
-            alt=""
           />
           <span className="-pb-6">{search || "Cari produk"}</span>
         </button>
