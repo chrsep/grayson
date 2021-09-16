@@ -9,8 +9,8 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
   return (
     <div>
       <SEO
-        title="Temukan UMKM di sekitarmu"
-        description="Sekitarmu.id membantu-mu untuk meng-eksplor bisnis UMKM di sekitar-mu"
+        title="Temukan UMKM di sekitar-mu"
+        description="Sekitarmu membantu-mu untuk meng-eksplor bisnis UMKM di sekitar-mu"
       />
       <CategoryNavigation />
 

@@ -7,7 +7,7 @@ const SEO: FC<{
 }> = ({ title, description = "" }) => {
   return (
     <Head>
-      <title> {`${title} |`} Sekitarmu.id</title>
+      <title> {`${title} |`} Sekitarmu</title>
       <meta name="description" content={description} />
 
       <meta name="twitter:title" content={title} />
