@@ -34,3 +34,5 @@ yarn-error.log*
 .vercel
 .eslintcache
 sentry.properties
+public/sw.js*
+public/workbox*

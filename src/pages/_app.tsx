@@ -9,12 +9,17 @@ import "@fontsource/inria-sans/700.css"
 import "@fontsource/inria-sans/700-italic.css"
 import "@fontsource/noto-sans/index.css"
 import "../global.css"
+import Head from "next/head"
 
 function Grayson({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <Script
         src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "2ece74c7bd54443eb949e08561bf65cb"}'
