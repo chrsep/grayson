@@ -53,8 +53,8 @@ const CartSlideOver: FC<Props> = ({ open, setOpen }) => {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="w-screen max-w-md">
-                <div className="flex flex-col h-full bg-white divide-y divide-gray-200 shadow-xl">
+              <div className="md:p-8 w-screen max-w-xl">
+                <div className="flex flex-col h-full bg-white md:rounded-3xl divide-y divide-gray-200 shadow-xl">
                   <div className="flex overflow-y-auto flex-col flex-1 pb-4 min-h-0">
                     <div className="flex flex-shrink-0 items-center px-4 sm:px-6 h-[64px] border-b">
                       <Dialog.Title className="text-lg text-gray-900">
