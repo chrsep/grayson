@@ -40,7 +40,10 @@ const Navbar: FC = () => {
                   )}
                 </Popover.Button>
                 <Link href="/">
-                  <a className="flex flex-shrink-0 items-center ml-4">
+                  <a
+                    className="flex flex-shrink-0 items-center ml-4"
+                    aria-label="Kembali ke beranda"
+                  >
                     <LogoStandalone className="block lg:hidden w-auto h-8" />
                   </a>
                 </Link>
@@ -48,7 +51,7 @@ const Navbar: FC = () => {
 
               <div className="flex flex-1 flex-shrink-0 justify-center sm:justify-start items-center sm:items-stretch">
                 <Link href="/">
-                  <a className="flex-shrink-0 items-center">
+                  <a className="flex-shrink-0 items-center" aria-label="Kembali ke beranda">
                     <LogoStandalone className=" hidden sm:block lg:hidden w-auto h-8" />
                     <LogoFull className="hidden lg:block w-auto h-8" />
                   </a>
@@ -192,6 +195,7 @@ const SearchField = () => {
           type="button"
           className="hidden sm:flex py-2 px-3 pr-14 w-full max-w-sm text-sm leading-5 text-white truncate bg-white bg-opacity-20 rounded-md"
           onClick={handleShowSearchBar}
+          aria-label="Cari"
         >
           <Icon
             src="/icons/search-light.svg"
@@ -346,6 +350,7 @@ const Cart = () => {
         className="mr-4 opacity-80 hover:opacity-100 transition-opacity"
         onClick={() => setOpen(!open)}
       >
+        <span className="sr-only">Buka catatan belanja</span>
         <Icon src="/icons/notes.svg" className="m-2 w-5 h-5 !bg-white" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
