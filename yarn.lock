@@ -2986,6 +2986,17 @@ eslint-import-resolver-node@0.3.6, eslint-import-resolver-node@^0.3.4, eslint-im
     debug "^3.2.7"
     resolve "^1.20.0"
 
+eslint-import-resolver-typescript@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.5.0.tgz#07661966b272d14ba97f597b51e1a588f9722f0a"
+  integrity sha512-qZ6e5CFr+I7K4VVhQu3M/9xGv9/YmwsEXrsm3nimw8vWaVHRDrQRp26BgCypTxBp3vUp4o5aVEJRiy0F2DFddQ==
+  dependencies:
+    debug "^4.3.1"
+    glob "^7.1.7"
+    is-glob "^4.0.1"
+    resolve "^1.20.0"
+    tsconfig-paths "^3.9.0"
+
 eslint-import-resolver-typescript@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.4.0.tgz#ec1e7063ebe807f0362a7320543aaed6fe1100e1"
@@ -2995,17 +3006,6 @@ eslint-import-resolver-typescript@^2.4.0:
     glob "^7.1.6"
     is-glob "^4.0.1"
     resolve "^1.17.0"
-    tsconfig-paths "^3.9.0"
-
-eslint-import-resolver-typescript@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.5.0.tgz#07661966b272d14ba97f597b51e1a588f9722f0a"
-  integrity sha512-qZ6e5CFr+I7K4VVhQu3M/9xGv9/YmwsEXrsm3nimw8vWaVHRDrQRp26BgCypTxBp3vUp4o5aVEJRiy0F2DFddQ==
-  dependencies:
-    debug "^4.3.1"
-    glob "^7.1.7"
-    is-glob "^4.0.1"
-    resolve "^1.20.0"
     tsconfig-paths "^3.9.0"
 
 eslint-module-utils@^2.6.2:
@@ -4679,7 +4679,7 @@ next-plugin-preact@3.0.6:
     "@prefresh/webpack" "^3.3.0"
     module-alias "^2.0.0"
 
-next-pwa@^5.3.1:
+next-pwa@5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.3.1.tgz#5bcd854422a452fd1fd56500d1c483664d9733d9"
   integrity sha512-Os6bf/lEYoztvsILYkAhDjiYfLNTprqEumxuv5DjhoFh4OpIzO7U0GKRI6MZluH4SfAoe0IdHz9knnZxybSnag==
