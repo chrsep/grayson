@@ -3,7 +3,7 @@ import { ComponentChildren } from "preact"
 
 interface Props {
   children: ComponentChildren
-  label: string
+  label?: string
   id: string
   name?: string
   containerClassName?: string

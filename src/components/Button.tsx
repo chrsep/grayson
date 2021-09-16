@@ -2,7 +2,7 @@
 import { FC } from "react"
 import clsx from "clsx"
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "icon"
+export type ButtonVariant = "primary" | "secondary" | "outline" | "icon" | "text"
 
 interface Props {
   type?: "submit" | "reset" | "button"
@@ -26,8 +26,12 @@ const Button: FC<Props> = ({
       baseClassName =
         "!p-0 text-gray-200 hover:text-gray-500  hover:bg-gray-900 hover:bg-opacity-20"
       break
+    // @deprecated: use text not secondary
     case "secondary":
-      baseClassName = "text-gray-200 hover:text-gray-500"
+      baseClassName = "text-gray-200 hover:text-gray-500 text-sm"
+      break
+    case "text":
+      baseClassName = "text-gray-700 hover:text-gray-500 text-sm"
       break
     case "outline":
       baseClassName =
@@ -35,7 +39,7 @@ const Button: FC<Props> = ({
       break
     default:
       baseClassName =
-        "border border-transparent shadow-sm text-sm  text-white bg-primary-400 hover:bg-primary-500"
+        "border border-transparent shadow-sm text-white bg-primary-400 hover:bg-primary-500 text-sm"
   }
 
   return (
