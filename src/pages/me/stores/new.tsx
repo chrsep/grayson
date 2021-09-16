@@ -1,16 +1,16 @@
-import Divider from "@components/Divider"
+import Divider from "@components/divider"
 import React, { ChangeEvent } from "react"
 import { getSession } from "next-auth/client"
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
-import TextField from "@components/TextField"
-import Button from "@components/Button"
-import Textarea from "@components/Textarea"
+import TextField from "@components/text-field"
+import Button from "@components/button"
+import Textarea from "@components/textarea"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image-client"
-import Breadcrumbs from "@components/Breadcrumbs"
+import Breadcrumbs from "@components/breadcrumbs"
 
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
   const { watch, setValue, setError, register, handleSubmit, formState } = useForm<PostStoreBody>({

@@ -1,13 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { FC, Fragment, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
-import Button from "@components/Button"
-import Icon from "@components/Icon"
+import Button from "@components/button"
+import Icon from "@components/icon"
 import { useCart } from "@lib/cart"
 import { useGetCartDetails, useGetProduct, useGetStore } from "@lib/api-hooks"
 import Image from "next/image"
 import { toIDR } from "@lib/currency"
-import StoreSelector from "@components/StoreSelector"
+import StoreSelector from "@components/store-selector"
 
 interface Props {
   open: boolean

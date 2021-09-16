@@ -1,9 +1,9 @@
-import Divider from "@components/Divider"
+import Divider from "@components/divider"
 import React from "react"
 import { findUserStores } from "@lib/db"
 import { getSession } from "next-auth/client"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
-import Link from "@components/Link"
+import Link from "@components/link"
 import { Store } from "@prisma/client"
 
 const Stores: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ stores }) => {

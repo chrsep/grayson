@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { AppProps } from "next/app"
-import Navbar from "@components/Navbar"
+import Navbar from "@components/navbar"
 import { useRouter } from "next/router"
 import Script from "next/script"
 import "@fontsource/inria-sans/300.css"

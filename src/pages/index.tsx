@@ -1,8 +1,8 @@
 import { findProductsWithPrimaryImagesAndStore } from "@lib/db"
 import { InferGetServerSidePropsType, NextPage } from "next"
-import ProductList from "@components/ProductList"
+import ProductList from "@components/product-list"
 import React from "react"
-import CategoryNavigation from "@components/CategoryNavigation"
+import CategoryNavigation from "@components/category-navigation"
 
 const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ products }) => {
   return (

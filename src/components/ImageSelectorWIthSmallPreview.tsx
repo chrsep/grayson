@@ -1,5 +1,5 @@
-import Image from "@components/Image"
-import Button from "@components/Button"
+import Image from "@components/image"
+import Button from "@components/button"
 import React, { ChangeEventHandler, FC, useRef } from "react"
 
 interface Props {

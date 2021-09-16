@@ -1,6 +1,6 @@
 import React, { FC } from "react"
-import Image from "@components/Image"
-import Button from "@components/Button"
+import Image from "@components/image"
+import Button from "@components/button"
 
 const ProductImagePreviews: FC<{
   files: string[]

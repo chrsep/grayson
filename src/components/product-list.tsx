@@ -1,6 +1,6 @@
 import type { Product, ProductImage, Store } from "@prisma/client"
 import { FC } from "react"
-import ProductItem from "@components/ProductItem"
+import ProductItem from "@components/product-item"
 
 const ProductList: FC<{
   products: Array<Product & { images: ProductImage[]; store: Store }>

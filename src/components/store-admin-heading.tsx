@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { useRouter } from "next/router"
-import Breadcrumbs from "@components/Breadcrumbs"
-import Button from "@components/Button"
+import Breadcrumbs from "@components/breadcrumbs"
+import Button from "@components/button"
 import NextLink from "next/link"
 
 interface Props {

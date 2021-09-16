@@ -1,4 +1,4 @@
-import CategoryNavigation from "@components/CategoryNavigation"
+import CategoryNavigation from "@components/category-navigation"
 import React from "react"
 import {
   GetServerSideProps,
@@ -9,7 +9,7 @@ import {
 import categories, { findCategoryBySlug } from "@lib/categories"
 import { findProductsByCategory } from "@lib/db"
 import type { Category, Product, ProductImage, Store } from "@prisma/client"
-import ProductList from "@components/ProductList"
+import ProductList from "@components/product-list"
 import { ParsedUrlQuery } from "querystring"
 
 const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({

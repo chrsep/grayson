@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ChangeEventHandler, FC, useRef } from "react"
-import Button from "@components/Button"
-import Divider from "@components/Divider"
-import TextField from "@components/TextField"
+import Button from "@components/button"
+import Divider from "@components/divider"
+import TextField from "@components/text-field"
 import { getSession } from "next-auth/client"
 import { findUserByEmail } from "@lib/db"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
@@ -11,7 +11,7 @@ import { generateS3Url, uploadImage } from "@lib/image-client"
 import { mutate } from "swr"
 import { User } from "@prisma/client"
 import axios from "redaxios"
-import Image from "@components/Image"
+import Image from "@components/image"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">

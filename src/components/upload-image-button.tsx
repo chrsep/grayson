@@ -1,4 +1,4 @@
-import Button, { ButtonVariant } from "@components/Button"
+import Button, { ButtonVariant } from "@components/button"
 import React, { ChangeEventHandler, FC, useRef } from "react"
 
 interface Props {

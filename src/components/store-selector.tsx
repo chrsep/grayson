@@ -1,9 +1,9 @@
 import { Listbox, Transition } from "@headlessui/react"
 import clsx from "clsx"
 import { FC, Fragment } from "react"
-import Image from "@components/Image"
+import Image from "@components/image"
 import { useGetStore } from "@lib/api-hooks"
-import Icon from "@components/Icon"
+import Icon from "@components/icon"
 
 const StoreSelector: FC<{
   selected: string

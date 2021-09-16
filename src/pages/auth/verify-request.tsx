@@ -1,7 +1,7 @@
-import LogoStandalone from "@components/LogoStandalone"
+import LogoStandalone from "@components/logo-standalone"
 import Image from "next/image"
-import Link from "@components/Link"
-import Button from "@components/Button"
+import Link from "@components/link"
+import Button from "@components/button"
 import Hero from "@public/signup-hero.jpeg"
 
 const VerifyRequest = () => (

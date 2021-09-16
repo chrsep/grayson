@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { findProductsByNameStoreOrOwner } from "@lib/db"
-import ProductList from "@components/ProductList"
+import ProductList from "@components/product-list"
 
 const SearchPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   query,

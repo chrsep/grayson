@@ -7,11 +7,11 @@ import {
   InferGetServerSidePropsType,
   NextPage
 } from "next"
-import StoreAdminHeading from "@components/StoreAdminHeading"
+import StoreAdminHeading from "@components/store-admin-heading"
 import NextLink from "next/link"
 import { ParsedUrlQuery } from "querystring"
 import { Store, Product } from "@prisma/client"
-import { Breadcrumb } from "@components/Breadcrumbs"
+import { Breadcrumb } from "@components/breadcrumbs"
 import { toIDR } from "@lib/currency"
 
 const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
