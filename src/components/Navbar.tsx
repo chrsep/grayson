@@ -24,10 +24,7 @@ const Navbar: FC = () => {
   const router = useRouter()
 
   return (
-    <Popover
-      as="nav"
-      className="sticky top-0 z-30 bg-gradient-to-tr from-primary-500 to-indigo-700"
-    >
+    <Popover as="nav" className="sticky top-0 z-30 bg-primary-500">
       {({ open }) => (
         <>
           <div className="sm:px-6 lg:px-8 pl-2 mx-auto">
