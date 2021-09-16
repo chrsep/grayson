@@ -11,6 +11,7 @@ import { findProductsByCategory } from "@lib/db"
 import type { Category, Product, ProductImage, Store } from "@prisma/client"
 import ProductList from "@components/product-list"
 import { ParsedUrlQuery } from "querystring"
+import SEO from "@components/seo"
 
 const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   category,
@@ -18,6 +19,8 @@ const CategoryPage: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
 }) => {
   return (
     <div>
+      <SEO title={category.name} />
+
       <CategoryNavigation />
       <h1 className="px-4 sm:px-8 pt-8 text-4xl font-bold">{category.name}</h1>
 

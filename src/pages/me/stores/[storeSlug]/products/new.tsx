@@ -24,6 +24,7 @@ import categories, { Category } from "@lib/categories"
 import Select from "@components/select"
 import { Product, Store } from "@prisma/client"
 import { ParsedUrlQuery } from "querystring"
+import SEO from "@components/seo"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
@@ -61,6 +62,8 @@ const NewProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProps
 
   return (
     <PageContainer>
+      <SEO title="Produk baru" />
+
       <div className="px-4 sm:px-0">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <div className="pb-5 border-b border-gray-200">

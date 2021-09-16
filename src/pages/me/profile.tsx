@@ -12,9 +12,12 @@ import { mutate } from "swr"
 import { User } from "@prisma/client"
 import axios from "redaxios"
 import Image from "@components/image"
+import SEO from "@components/seo"
 
 const Profile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ user }) => (
   <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
+    <SEO title="Profil anda" />
+
     <div className="md:flex md:justify-between md:items-center px-4 sm:px-0 mt-2">
       <div className="flex-1 min-w-0">
         <h2 className="text-2xl sm:text-3xl font-bold leading-7 text-gray-900 sm:truncate">

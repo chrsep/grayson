@@ -18,6 +18,7 @@ import categories from "@lib/categories"
 import Select from "@components/select"
 import { useRouter } from "next/router"
 import { Product, ProductImage, Store } from "@prisma/client"
+import SEO from "@components/seo"
 
 type FormData = Omit<PostProductBody, "storeSlug" | "price" | "images"> & { price: string }
 
@@ -69,6 +70,8 @@ const EditProduct: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
   return (
     <PageContainer>
+      <SEO title={`Edit ${product.name}`} />
+
       <div className="px-4 sm:px-0">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <div className="pb-5 border-b border-gray-200">

@@ -1,12 +1,16 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from "next"
 import { findProductsByNameStoreOrOwner } from "@lib/db"
 import ProductList from "@components/product-list"
+import SEO from "@components/seo"
+import React from "react"
 
 const SearchPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   query,
   products
 }) => (
   <main>
+    <SEO title={`Cari ${query}`} />
+
     <h1 className="py-6 px-4 sm:px-8 my-6 text-2xl font-bold text-gray-900 border-b">
       Hasil pencarian dari <br />
       <i className="text-primary-400">&rdquo;{query}&rdquo;</i>

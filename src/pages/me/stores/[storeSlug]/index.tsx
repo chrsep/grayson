@@ -13,14 +13,17 @@ import { ParsedUrlQuery } from "querystring"
 import { Store, Product } from "@prisma/client"
 import { Breadcrumb } from "@components/breadcrumbs"
 import { toIDR } from "@lib/currency"
+import SEO from "@components/seo"
 
-const StorePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
+const StoreProductsPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
   tabs,
   store
 }) => {
   return (
     <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
+      <SEO title={`Atur produk ${store.name}`} />
+
       <div className="px-4 sm:px-0">
         <StoreAdminHeading
           breadcrumbs={breadcrumbs}
@@ -140,4 +143,4 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (
   }
 }
 
-export default StorePage
+export default StoreProductsPage

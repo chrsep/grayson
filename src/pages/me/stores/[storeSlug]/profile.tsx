@@ -16,6 +16,7 @@ import { useRouter } from "next/router"
 import { Store } from "@prisma/client"
 import { Breadcrumb } from "@components/breadcrumbs"
 import { ParsedUrlQuery } from "querystring"
+import SEO from "@components/seo"
 
 const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   breadcrumbs,
@@ -81,6 +82,8 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
 
   return (
     <PageContainer>
+      <SEO title={`Ubah informasi ${store.name}`} />
+
       <div className="px-4 sm:px-0">
         <StoreAdminHeading breadcrumbs={breadcrumbs} name={store.name} tabs={tabs} />
       </div>

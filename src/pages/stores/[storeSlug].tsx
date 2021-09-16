@@ -1,5 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
-import { FC } from "react"
+import React, { FC } from "react"
 import Image from "next/image"
 import Hero from "@public/store-cover-placeholder.jpg"
 import Icon from "@components/icon"
@@ -9,6 +9,7 @@ import { findStoreWithProductsBySlug } from "@lib/db"
 import ProductItem from "@components/product-item"
 import { generateS3Url } from "@lib/image-client"
 import Link from "next/link"
+import SEO from "@components/seo"
 
 interface Query extends NodeJS.Dict<string> {
   storeSlug: string
@@ -27,6 +28,8 @@ const StoreProfile: FC<InferGetServerSidePropsType<typeof getServerSideProps>> =
 const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
   return (
     <div>
+      <SEO title={store.name} description={store.description} />
+
       <Image
         layout="responsive"
         src={Hero}

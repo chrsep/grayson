@@ -3,10 +3,15 @@ import { InferGetServerSidePropsType, NextPage } from "next"
 import ProductList from "@components/product-list"
 import React from "react"
 import CategoryNavigation from "@components/category-navigation"
+import SEO from "@components/seo"
 
 const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ products }) => {
   return (
     <div>
+      <SEO
+        title="Temukan UMKM di sekitarmu"
+        description="Sekitarmu.id membantu-mu untuk meng-eksplor bisnis UMKM di sekitar-mu"
+      />
       <CategoryNavigation />
 
       <main>

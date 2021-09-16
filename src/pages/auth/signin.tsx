@@ -3,13 +3,16 @@ import Image from "next/image"
 import TextField from "@components/text-field"
 import Button from "@components/button"
 import Link from "@components/link"
-import { useState } from "react"
+import React, { useState } from "react"
 import useEmailSignIn from "@lib/auth/useSignIn"
 import Hero from "@public/signup-hero.jpeg"
+import SEO from "@components/seo"
 
 const SignIn = () => {
   return (
     <div className="flex min-h-screen bg-white">
+      <SEO title="Masuk" />
+
       <div className="flex flex-col flex-1 lg:flex-none justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
         <div className="mx-auto w-full lg:w-96 max-w-sm">
           <div>

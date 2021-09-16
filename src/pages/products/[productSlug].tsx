@@ -1,7 +1,7 @@
 import CategoryNavigation from "@components/category-navigation"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import { findCategoryHighlights, findProductBySlug, findStoreHighlights } from "@lib/db"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { toIDR } from "@lib/currency"
 import Breadcrumbs from "@components/breadcrumbs"
 import categories, { findCategoryById } from "@lib/categories"
@@ -15,6 +15,7 @@ import PlaceholderImage from "@public/empty-image-placeholder.jpeg"
 import { useCart } from "@lib/cart"
 import UserImagePlaceholder from "@public/store-cover-placeholder.jpg"
 import clsx from "clsx"
+import SEO from "@components/seo"
 
 const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
@@ -32,6 +33,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
 
   return (
     <div>
+      <SEO title={product.name} description={product.description} />
+
       <CategoryNavigation />
 
       <main className="mx-auto max-w-7xl">

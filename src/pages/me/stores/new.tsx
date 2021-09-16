@@ -11,6 +11,7 @@ import { useRouter } from "next/router"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
 import { uploadImage } from "@lib/image-client"
 import Breadcrumbs from "@components/breadcrumbs"
+import SEO from "@components/seo"
 
 const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
   const { watch, setValue, setError, register, handleSubmit, formState } = useForm<PostStoreBody>({
@@ -48,6 +49,8 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
 
   return (
     <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">
+      <SEO title="Toko baru" />
+
       <Breadcrumbs breadcrumbs={[{ name: "Toko anda", href: "/me/stores", current: false }]} />
 
       <div className="md:flex md:justify-between md:items-center px-4 sm:px-0 mt-2">
