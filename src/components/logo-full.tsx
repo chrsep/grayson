@@ -1,11 +1,7 @@
-import React, { FC } from "react"
+import { FC } from "react"
 
 const LogoFull: FC<{ className: string }> = ({ className }) => (
-  <img
-    className={className}
-    src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-    alt="Sekitarmu"
-  />
+  <img className={className} src="/logo-full.svg" alt="Sekitarmu" />
 )
 
 export default LogoFull

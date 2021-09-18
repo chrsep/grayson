@@ -1,4 +1,3 @@
-import LogoStandalone from "@components/logo-standalone"
 import Image from "next/image"
 import TextField from "@components/text-field"
 import Button from "@components/button"
@@ -7,6 +6,7 @@ import React, { useState } from "react"
 import useEmailSignIn from "@lib/auth/useSignIn"
 import Hero from "@public/signup-hero.jpeg"
 import SEO from "@components/seo"
+import LogoStandaloneBlack from "@components/logo-standalone-black"
 
 const SignIn = () => {
   return (
@@ -17,7 +17,7 @@ const SignIn = () => {
         <div className="mx-auto w-full lg:w-96 max-w-sm">
           <div>
             <Link href="/">
-              <LogoStandalone className="w-auto h-12" />
+              <LogoStandaloneBlack className="w-auto h-12 opacity-80" />
             </Link>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Masuk ke akun anda</h2>
           </div>
