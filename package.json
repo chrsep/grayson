@@ -12,7 +12,8 @@
     "prepare": "husky install",
     "lint": "eslint --fix **/*.{ts,tsx}",
     "typecheck": "tsc --noEmit",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "test": "playwright test"
   },
   "dependencies": {
     "@fontsource/inria-sans": "4.5.0",
@@ -52,6 +53,7 @@
     "zustand": "3.5.10"
   },
   "devDependencies": {
+    "@playwright/test": "^1.14.1",
     "@tailwindcss/aspect-ratio": "0.2.1",
     "@tailwindcss/forms": "0.3.3",
     "@tailwindcss/typography": "0.4.1",
