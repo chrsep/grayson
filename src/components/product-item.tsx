@@ -14,30 +14,7 @@ const ProductItem: FC<{
       <a className="group">
         <div className="block overflow-hidden w-full bg-gray-100 rounded-xl border focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 aspect-w-1 aspect-h-1">
           <div className="object-cover hover:opacity-80 pointer-events-none">
-            {images?.[0]?.key ? (
-              <Image
-                layout="responsive"
-                width={500}
-                height={500}
-                objectFit="cover"
-                src={images?.[0]?.url}
-                placeholder="blur"
-                blurDataURL={images?.[0]?.base64}
-                sizes="(min-width: 1536px) 15vw, (min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 60vw"
-                alt={name}
-              />
-            ) : (
-              <Image
-                layout="responsive"
-                width={500}
-                height={505}
-                objectFit="cover"
-                src={emptyImagePlaceholder}
-                placeholder="blur"
-                sizes="(min-width: 1536px) 15vw, (min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 60vw"
-                alt="no image available"
-              />
-            )}
+            <ItemImage productName={name} image={images?.[0]} />
           </div>
           <span className="sr-only">Lihat details untuk {name}</span>
         </div>
@@ -59,5 +36,39 @@ const ProductItem: FC<{
     </Link>
   </li>
 )
+
+const ItemImage: FC<{
+  productName: string
+  image: ProductImage
+}> = ({ image, productName }) => {
+  if (image) {
+    return (
+      <Image
+        layout="responsive"
+        width={500}
+        height={500}
+        objectFit="cover"
+        src={image.url}
+        placeholder="blur"
+        blurDataURL={image.base64}
+        sizes="(min-width: 1536px) 15vw, (min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 60vw"
+        alt={productName}
+      />
+    )
+  }
+
+  return (
+    <Image
+      layout="responsive"
+      width={500}
+      height={505}
+      objectFit="cover"
+      src={emptyImagePlaceholder}
+      placeholder="blur"
+      sizes="(min-width: 1536px) 15vw, (min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 60vw"
+      alt={productName}
+    />
+  )
+}
 
 export default ProductItem
