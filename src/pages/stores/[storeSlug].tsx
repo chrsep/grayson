@@ -37,6 +37,7 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
         width={1200}
         placeholder="blur"
         objectFit="cover"
+        className="object-cover"
         alt=""
       />
 
