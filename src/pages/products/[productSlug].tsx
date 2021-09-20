@@ -46,8 +46,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   src={selectedImage.url}
                   layout="responsive"
                   objectFit="contain"
-                  width={400}
-                  height={400}
+                  width={900}
+                  height={900}
                   className="bg-black sm:rounded-2xl"
                   placeholder="blur"
                   blurDataURL={selectedImage.base64}
@@ -57,8 +57,8 @@ const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProp
                   src={PlaceholderImage}
                   layout="responsive"
                   objectFit="contain"
-                  width={400}
-                  height={400}
+                  width={900}
+                  height={900}
                   className="bg-black sm:rounded-2xl"
                   placeholder="blur"
                 />

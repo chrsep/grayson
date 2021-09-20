@@ -17,8 +17,8 @@ const ProductItem: FC<{
             {images?.[0]?.key ? (
               <Image
                 layout="responsive"
-                width={400}
-                height={404}
+                width={500}
+                height={500}
                 objectFit="cover"
                 src={images?.[0]?.url}
                 placeholder="blur"
@@ -29,8 +29,8 @@ const ProductItem: FC<{
             ) : (
               <Image
                 layout="responsive"
-                width={400}
-                height={404}
+                width={500}
+                height={505}
                 objectFit="cover"
                 src={emptyImagePlaceholder}
                 placeholder="blur"
