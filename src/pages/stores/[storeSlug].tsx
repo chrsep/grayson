@@ -37,7 +37,6 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
         width={1200}
         placeholder="blur"
         objectFit="cover"
-        className="object-cover"
         alt=""
       />
 
@@ -50,7 +49,8 @@ const Heading: FC<{ store: Props["store"] }> = ({ store }) => {
                 width={150}
                 height={150}
                 className="bg-white"
-                alt=""
+                objectFit="cover"
+                alt={`logo ${store.name}`}
               />
             ) : (
               <Image src={Hero} width={150} height={150} alt="" />
