@@ -189,6 +189,7 @@ const SearchField = () => {
           className="block sm:hidden opacity-80 hover:opacity-100 transition-opacity"
           onClick={handleShowSearchBar}
         >
+          <span className="sr-only">Cari</span>
           <Icon src="/icons/search-light.svg" className=" m-2 w-5 h-5" color="bg-white" />
         </Button>
         <button
