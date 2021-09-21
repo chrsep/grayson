@@ -2,7 +2,6 @@ import React, { ChangeEvent, FC } from "react"
 import { findStoreBySlug } from "@lib/db"
 import { getSession } from "next-auth/client"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
-import StoreAdminHeading from "@components/store-admin-heading"
 import TextField from "@components/text-field"
 import Textarea from "@components/textarea"
 import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
@@ -10,17 +9,13 @@ import Button from "@components/button"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
 import { uploadImage } from "@lib/image-client"
-import PageContainer from "@components/container"
 import Divider from "@components/divider"
 import { useRouter } from "next/router"
 import { Store } from "@prisma/client"
-import { Breadcrumb } from "@components/breadcrumbs"
 import { ParsedUrlQuery } from "querystring"
-import SEO from "@components/seo"
+import StoreManagementLayout from "@layouts/store-management-layout"
 
 const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
-  breadcrumbs,
-  tabs,
   store
 }) => {
   const { reset, watch, setValue, setError, register, handleSubmit, formState } =
@@ -81,13 +76,11 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
   }
 
   return (
-    <PageContainer>
-      <SEO title={`Ubah informasi ${store.name}`} />
-
-      <div className="px-4 sm:px-0">
-        <StoreAdminHeading breadcrumbs={breadcrumbs} name={store.name} tabs={tabs} />
-      </div>
-
+    <StoreManagementLayout
+      pageTitle={`Ubah informasi ${store.name}`}
+      storeSlug={store.slug}
+      storeName={store.name}
+    >
       <div className="mt-10">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
@@ -201,7 +194,7 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
         <Divider className="hidden sm:block" />
         <DangerZone storeId={store.id} />
       </div>
-    </PageContainer>
+    </StoreManagementLayout>
   )
 }
 
@@ -247,8 +240,6 @@ interface Query extends ParsedUrlQuery {
 
 interface Props {
   store: Store
-  breadcrumbs: Breadcrumb[]
-  tabs: { name: string; href: string; current: boolean }[]
 }
 
 export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) => {
@@ -270,12 +261,7 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) 
   // Pass data to the page via props
   return {
     props: {
-      store,
-      tabs: [
-        { name: "Produk", href: `/me/stores/${storeSlug}`, current: false },
-        { name: "Informasi toko", href: `/me/stores/${storeSlug}/profile`, current: true }
-      ],
-      breadcrumbs: [{ name: "Toko anda", href: "/me/stores", current: false }]
+      store
     }
   }
 }
