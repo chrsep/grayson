@@ -15,7 +15,7 @@ function Grayson({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-100">
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

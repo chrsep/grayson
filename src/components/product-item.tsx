@@ -48,7 +48,7 @@ const ProductItem: FC<{
           </div>
         )}
 
-        <p className="h-6 font-ui leading-tight text-gray-500 hover:text-primary-700 truncate bg-white transition -translate-x-8 group-hover:translate-x-0">
+        <p className="h-6 font-ui leading-tight text-gray-500 hover:text-primary-700 truncate bg-gray-100 transition -translate-x-8 group-hover:translate-x-0">
           {store.name}
         </p>
       </a>
