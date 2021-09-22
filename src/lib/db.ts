@@ -354,3 +354,26 @@ export const findLineItemsData = async (items: LineItem[]) => {
     return { ...product, qty: item?.qty || 0 }
   })
 }
+
+export const findStoreWithAdminsAndOwner = (storeSlug: string) => {
+  return prisma.store.findUnique({
+    where: {
+      slug: storeSlug
+    },
+    include: {
+      users: {
+        select: {
+          id: true,
+          email: true,
+          image: true,
+          name: true
+        }
+      },
+      owner: {
+        select: {
+          id: true
+        }
+      }
+    }
+  })
+}

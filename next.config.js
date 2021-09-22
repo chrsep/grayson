@@ -13,14 +13,10 @@ const withPWA = [
   {
     pwa: {
       dest: "public",
+      disable: process.env.NODE_ENV === "development",
       // don't precache anything.
       buildExcludes: [/.*/],
       publicExcludes: ["!**/*"]
-      // disable: process.env.NODE_ENV === 'development',
-      // register: true,
-      // scope: '/app',
-      // sw: 'service-worker.js',
-      // ...
     }
   }
 ]

@@ -6,8 +6,9 @@ import SEO from "@components/seo"
 
 const generateTabs = (storeSlug: string) => [
   { name: "Produk", href: `/me/stores/${storeSlug}` },
-  { name: "Informasi toko", href: `/me/stores/${storeSlug}/profile` },
-  { name: "Admin Toko", href: `/me/stores/${storeSlug}/admin` }
+  { name: "Informasi toko", href: `/me/stores/${storeSlug}/profile` }
+  // TODO: enable when ready.
+  // { name: "Admin Toko", href: `/me/stores/${storeSlug}/admin` }
 ]
 
 const StoreManagementLayout: FC<{
