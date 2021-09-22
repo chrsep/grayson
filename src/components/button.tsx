@@ -50,7 +50,7 @@ const Button: FC<Props> = ({
       className={clsx(
         className,
         baseClassName,
-        " flex justify-center items-center py-2 px-4 rounded-md",
+        "flex justify-center items-center py-2 px-4 rounded-md whitespace-nowrap",
         "focus:ring-2 focus:ring-primary-300 focus:ring-offset-2 focus:outline-none",
         "disabled:opacity-40",
         "transition-colors"

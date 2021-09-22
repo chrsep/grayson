@@ -8,7 +8,7 @@ import Textarea from "@components/textarea"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
 import { useRouter } from "next/router"
-import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
+import ImageSelectorWithSmallPreview from "@components/image-selector-with-small-preview"
 import { uploadImage } from "@lib/image-client"
 import Breadcrumbs from "@components/breadcrumbs"
 import SEO from "@components/seo"
@@ -80,7 +80,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
               <div className="overflow-hidden sm:rounded-md shadow">
                 <div className="sm:p-6 py-5 px-4 bg-white">
                   <div className="grid grid-cols-6 gap-6">
-                    <ImageSelectorWIthSmallPreview
+                    <ImageSelectorWithSmallPreview
                       label="Logo toko"
                       onChange={handleChangeLogo}
                       className="col-span-full"

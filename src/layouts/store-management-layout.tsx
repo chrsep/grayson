@@ -6,7 +6,8 @@ import SEO from "@components/seo"
 
 const generateTabs = (storeSlug: string) => [
   { name: "Produk", href: `/me/stores/${storeSlug}` },
-  { name: "Informasi toko", href: `/me/stores/${storeSlug}/profile` }
+  { name: "Informasi toko", href: `/me/stores/${storeSlug}/profile` },
+  { name: "Admin Toko", href: `/me/stores/${storeSlug}/admin` }
 ]
 
 const StoreManagementLayout: FC<{
@@ -14,11 +15,9 @@ const StoreManagementLayout: FC<{
   storeSlug: string
   storeName: string
   secondaryActions?: ReactNode
-}> = ({  pageTitle, storeSlug, storeName, secondaryActions, children }) => {
+}> = ({ pageTitle, storeSlug, storeName, secondaryActions, children }) => {
   const router = useRouter()
   const tabs = generateTabs(storeSlug)
-
-  console.log(router.asPath)
 
   return (
     <div className="sm:px-6 lg:px-8 pt-8 pb-32 mx-auto max-w-7xl">

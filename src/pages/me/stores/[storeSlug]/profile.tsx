@@ -4,7 +4,7 @@ import { getSession } from "next-auth/client"
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import TextField from "@components/text-field"
 import Textarea from "@components/textarea"
-import ImageSelectorWIthSmallPreview from "@components/ImageSelectorWIthSmallPreview"
+import ImageSelectorWithSmallPreview from "@components/image-selector-with-small-preview"
 import Button from "@components/button"
 import { useForm } from "react-hook-form"
 import { PostStoreBody } from "@api/stores"
@@ -98,7 +98,7 @@ const StoreProfile: NextPage<InferGetServerSidePropsType<typeof getServerSidePro
               <div className="sm:overflow-hidden sm:rounded-md shadow">
                 <div className="sm:p-6 py-5 px-4 bg-white">
                   <div className="grid grid-cols-6 gap-6">
-                    <ImageSelectorWIthSmallPreview
+                    <ImageSelectorWithSmallPreview
                       label="Logo toko"
                       onChange={handleChangeLogo}
                       className="col-span-full"

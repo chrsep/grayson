@@ -9,7 +9,7 @@ interface Props {
   value?: string | null
   className?: string
 }
-const ImageSelectorWIthSmallPreview: FC<Props> = ({
+const ImageSelectorWithSmallPreview: FC<Props> = ({
   placeholder,
   label,
   value,
@@ -36,6 +36,7 @@ const ImageSelectorWIthSmallPreview: FC<Props> = ({
               height={48}
               src={value || placeholder}
               className="w-full h-full text-gray-300"
+              objectFit="cover"
             />
           </span>
           <Button variant="outline" className="ml-4" onClick={() => ref.current?.click()}>
@@ -47,4 +48,4 @@ const ImageSelectorWIthSmallPreview: FC<Props> = ({
   )
 }
 
-export default ImageSelectorWIthSmallPreview
+export default ImageSelectorWithSmallPreview
