@@ -55,7 +55,7 @@
   "devDependencies": {
     "@playwright/test": "1.15.0",
     "@tailwindcss/aspect-ratio": "0.2.1",
-    "@tailwindcss/forms": "0.3.3",
+    "@tailwindcss/forms": "0.3.4",
     "@tailwindcss/typography": "0.4.1",
     "@typescript-eslint/eslint-plugin": "4.32.0",
     "autoprefixer": "10.3.6",
