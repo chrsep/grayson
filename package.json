@@ -50,7 +50,7 @@
     "slugify": "1.6.0",
     "swr": "1.0.1",
     "uuid": "8.3.2",
-    "zustand": "3.5.10"
+    "zustand": "3.5.12"
   },
   "devDependencies": {
     "@playwright/test": "1.15.0",
