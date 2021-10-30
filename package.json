@@ -57,7 +57,7 @@
     "@tailwindcss/aspect-ratio": "0.3.0",
     "@tailwindcss/forms": "0.3.4",
     "@tailwindcss/typography": "0.4.1",
-    "@typescript-eslint/eslint-plugin": "5.1.0",
+    "@typescript-eslint/eslint-plugin": "5.2.0",
     "autoprefixer": "10.3.7",
     "eslint": "8.1.0",
     "eslint-config-airbnb": "18.2.1",
