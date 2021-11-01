@@ -1146,10 +1146,10 @@
   resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
   integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
-"@plaiceholder/next@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@plaiceholder/next/-/next-2.1.0.tgz#0bf2dff97b3f2208be3d88a3162013794ccc0745"
-  integrity sha512-7iTw4Oxh0eLkAZnAl5zNkwnXjzhn3WSuuPIsGe9EszLa01eLv/vFwnG7etnX5hKNWhQ48x9vM/smltrfF3DTQw==
+"@plaiceholder/next@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@plaiceholder/next/-/next-2.2.0.tgz#e75338ec861cba62713c8876714bd602f0bf7c47"
+  integrity sha512-RRn6nivDVK5ibtcaYX50TClIS6gXVTClRp1PWaZfXvvdowTR+MRKjFSA2K4FAAk0O65pxPYLz1O2VaHiGN/6DA==
 
 "@playwright/test@1.15.2":
   version "1.15.2"
