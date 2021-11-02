@@ -21,7 +21,7 @@
     "@headlessui/react": "1.4.1",
     "@next/bundle-analyzer": "11.1.2",
     "@plaiceholder/next": "2.2.0",
-    "@preact/compat": "17.0.2",
+    "@preact/compat": "17.0.3",
     "@prisma/client": "3.3.0",
     "@sentry/nextjs": "6.13.3",
     "@tailwindcss/line-clamp": "0.2.2",
