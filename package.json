@@ -47,7 +47,7 @@
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "redaxios": "0.4.1",
     "sharp": "0.29.2",
-    "slugify": "1.6.1",
+    "slugify": "1.6.2",
     "swr": "1.0.1",
     "uuid": "8.3.2",
     "zustand": "3.6.4"
