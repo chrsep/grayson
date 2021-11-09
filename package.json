@@ -23,7 +23,7 @@
     "@plaiceholder/next": "2.2.0",
     "@preact/compat": "17.0.3",
     "@prisma/client": "3.3.0",
-    "@sentry/nextjs": "6.13.3",
+    "@sentry/nextjs": "6.14.1",
     "@tailwindcss/line-clamp": "0.2.2",
     "@types/react": "17.0.34",
     "@types/uuid": "8.3.1",
