@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "production") plugins.push(withSentryConfig)
 
 module.exports = withPlugins(plugins, {
   images: {
-    formats: ["image/avif", "image/webp"],
+    // formats: ["image/avif", "image/webp"],
     domains: ["localhost", "grayson-media.sgp1.cdn.digitaloceanspaces.com"]
   }
 })
