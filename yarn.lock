@@ -5969,10 +5969,10 @@ rc@^1.2.7:
   resolved "https://registry.yarnpkg.com/@preact/compat/-/compat-17.0.2.tgz#c1b97a4d0add60fc07898a250448fa585479a920"
   integrity sha512-svzrLCGU++qft7dPmP2hQuSfih73jge2ohoWCT+UQs7i9757p12xMTe3yefylW5t6zMkQEtQ6urPnGT3jh2VCg==
 
-react-hook-form@7.18.0:
-  version "7.18.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.18.0.tgz#2ba847096be0209e1f6e4d82e7168a037a2fe103"
-  integrity sha512-aTFs1jXGvpBBv4vYuhheVd9KbAZw/l3DOZhLIadNDyFddaDQmn+yJa63IZ14GDFz4NFgIi+ROkubfGJG2x6q2Q==
+react-hook-form@7.19.2:
+  version "7.19.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.2.tgz#684a5f0a1060c8784744830e0d1877dbd6fa9b54"
+  integrity sha512-XFsfgn0vY61AmbGonJyvbqRQ7du0hrvMBIv8nVgA8JjXX2RSNAnlSLYJeXM6TDBFBccgH6HknRIkgCD4E2/M8A==
 
 react-is@17.0.2, react-is@^17.0.1:
   version "17.0.2"
