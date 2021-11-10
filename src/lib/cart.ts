@@ -1,4 +1,4 @@
-import create from "zustand"
+import create, { SetState } from "zustand"
 import { persist } from "zustand/middleware"
 import { LineItem } from "./domain"
 
@@ -14,11 +14,11 @@ interface CartState {
   deleteAll: () => void
 }
 
-export const useCart = create<CartState>(
+export const useCart = create(
   persist(
-    (set) => ({
-      storeIds: [],
-      items: [],
+    (set: SetState<CartState>) => ({
+      storeIds: [] as string[],
+      items: [] as LineItem[],
       setQty(storeId: string, productId: string, amount: number) {
         return set(({ items }) => {
           const newItems = setQty(items, storeId, productId, amount)

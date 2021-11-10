@@ -3,11 +3,7 @@
 
 name: Test
 
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+on: [push]
 
 jobs:
   cancel-previous:
