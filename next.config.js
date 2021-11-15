@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { withSentryConfig } = require("@sentry/nextjs")
 const withPlugins = require("next-compose-plugins")
-const withPreact = require("next-plugin-preact")
 const { withPlaiceholder } = require("@plaiceholder/next")
 const nextPWA = require("next-pwa")
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -21,7 +20,7 @@ const withPWA = [
   }
 ]
 
-const plugins = [withPreact, withBundleAnalyzer, withPlaiceholder, withPWA]
+const plugins = [withBundleAnalyzer, withPlaiceholder, withPWA]
 if (process.env.NODE_ENV === "production") plugins.push(withSentryConfig)
 
 module.exports = withPlugins(plugins, {
