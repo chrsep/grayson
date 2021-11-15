@@ -1,8 +1,6 @@
 import { ChangeEventHandler, forwardRef, ForwardRefRenderFunction } from "react"
-import { ComponentChildren } from "preact"
 
 interface Props {
-  children: ComponentChildren
   label?: string
   id: string
   name?: string
@@ -10,6 +8,7 @@ interface Props {
   value?: string
   onChange?: ChangeEventHandler<HTMLSelectElement>
 }
+
 const Select: ForwardRefRenderFunction<HTMLSelectElement, Props> = (
   { label, containerClassName, children, id, name, onChange, value },
   ref
