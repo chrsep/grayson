@@ -1,11 +1,11 @@
 import { findProductsWithPrimaryImagesAndStore } from "@lib/db"
-import { InferGetStaticPropsType, NextPage } from "next"
+import { InferGetServerSidePropsType, NextPage } from "next"
 import ProductList from "@components/product-list"
 import React from "react"
 import CategoryNavigation from "@components/category-navigation"
 import SEO from "@components/seo"
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ products }) => {
+const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ products }) => {
   return (
     <div>
       <SEO
@@ -21,16 +21,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ produc
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const products = await findProductsWithPrimaryImagesAndStore()
 
   // Pass data to the page via props
-  return {
-    revalidate: 1,
-    props: {
-      products
-    }
-  }
+  return { props: { products } }
 }
 
 export default Home

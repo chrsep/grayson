@@ -1,11 +1,6 @@
 import CategoryNavigation from "@components/category-navigation"
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
-import {
-  findAllProductSlugs,
-  findCategoryHighlights,
-  findProductBySlug,
-  findStoreHighlights
-} from "@lib/db"
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
+import { findCategoryHighlights, findProductBySlug, findStoreHighlights } from "@lib/db"
 import React, { useEffect, useState } from "react"
 import { toIDR } from "@lib/currency"
 import Breadcrumbs from "@components/breadcrumbs"
@@ -22,7 +17,7 @@ import UserImagePlaceholder from "@public/store-cover-placeholder.jpg"
 import clsx from "clsx"
 import SEO from "@components/seo"
 
-const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+const ProductPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   product,
   category,
   storeProducts,
@@ -222,28 +217,21 @@ interface Query extends NodeJS.Dict<string> {
   productSlug: string
 }
 
-export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  const product = await findProductBySlug(params?.productSlug as string)
+export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
+  query: { productSlug }
+}) => {
+  const product = await findProductBySlug(productSlug as string)
   if (!product) return { notFound: true }
 
   const category = findCategoryById(product.category)
 
   return {
-    revalidate: 1,
     props: {
       product,
       category,
       storeProducts: await findStoreHighlights(product.store.slug, product.id),
       categoryProducts: await findCategoryHighlights(category?.id as Category, product.id)
     }
-  }
-}
-
-export async function getStaticPaths() {
-  const slugs = await findAllProductSlugs()
-  return {
-    paths: slugs.map((slug) => ({ params: { productSlug: slug } })),
-    fallback: "blocking" // See the "fallback" section below
   }
 }
 

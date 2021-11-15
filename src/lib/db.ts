@@ -288,14 +288,6 @@ export const findProductBySlug = (slug: string) => {
   })
 }
 
-export const findAllProductSlugs = () => {
-  return prisma.product.findMany({
-    select: {
-      slug: true
-    }
-  })
-}
-
 export const findCategoryHighlights = async (
   category: Category,
   excludedProductId?: string,
