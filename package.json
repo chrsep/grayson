@@ -13,8 +13,7 @@
     "lint": "eslint --fix **/*.{ts,tsx}",
     "typecheck": "tsc --noEmit",
     "studio": "prisma studio",
-    "test": "playwright test",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "test": "playwright test"
   },
   "dependencies": {
     "@fontsource/inria-sans": "4.5.0",
