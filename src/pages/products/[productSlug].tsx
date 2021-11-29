@@ -1,5 +1,5 @@
 import CategoryNavigation from "@components/category-navigation"
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import {
   findAllProductSlugs,
   findCategoryHighlights,
@@ -239,7 +239,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await findAllProductSlugs()
   return {
     paths: slugs.map(({ slug }) => ({ params: { productSlug: slug } })),
