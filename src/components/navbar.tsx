@@ -352,7 +352,7 @@ const Cart = () => {
         onClick={() => setOpen(!open)}
       >
         <span className="sr-only">Buka catatan belanja</span>
-        <Icon src="/icons/notes.svg" className="m-2 w-5 h-5 !bg-white" />
+        <Icon src="/icons/shopping-cart.svg" className="m-2 w-5 h-5 !bg-white" />
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
     </div>
