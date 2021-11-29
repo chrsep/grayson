@@ -13,8 +13,8 @@ const ProductItem: FC<{
   <li className="relative">
     <Link href={`/products/${slug}`}>
       <a className="group">
-        <div className="flex overflow-hidden w-full bg-gray-100 rounded-xl border focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 aspect-w-1 aspect-h-1">
-          <div className="hover:opacity-80 pointer-events-none">
+        <div className="flex overflow-hidden w-full bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 aspect-w-1 aspect-h-1">
+          <div className="overflow-hidden rounded-xl border hover:opacity-80 pointer-events-none">
             <ItemImage productName={name} image={images?.[0]} />
           </div>
           <span className="sr-only">Lihat details untuk {name}</span>
