@@ -242,7 +242,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
 export async function getStaticPaths() {
   const slugs = await findAllProductSlugs()
   return {
-    paths: slugs.map((slug) => ({ params: { productSlug: slug } })),
+    paths: slugs.map(({ slug }) => ({ params: { productSlug: slug } })),
     fallback: "blocking" // See the "fallback" section below
   }
 }

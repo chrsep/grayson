@@ -46,6 +46,7 @@
     "react-hook-form": "7.19.3",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "redaxios": "0.4.1",
+    "scheduler": "^0.20.2",
     "sharp": "0.29.2",
     "slugify": "1.6.2",
     "swr": "1.0.1",

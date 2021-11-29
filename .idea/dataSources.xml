@@ -8,11 +8,18 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="PRODUCTION" uuid="d72fac68-9c1a-4930-af8d-c92ef77f6efb">
+    <data-source source="LOCAL" name="FLY_PROD" uuid="d72fac68-9c1a-4930-af8d-c92ef77f6efb">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://grayson-db.internal/</jdbc-url>
+      <jdbc-url>jdbc:postgresql://grayson-db.internal:5432/grayson</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="SUPABASE_PROD" uuid="ba08450c-f390-4924-8034-0c036fc984ac">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://db.voagjahozmlfboxjmsrf.supabase.co:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
