@@ -141,42 +141,46 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                 </article>
               )}
 
-              <article className="pt-6 mt-8 border-t">
-                <h3 className="mb-4 text-lg font-bold">Temui pendiri UMKM ini</h3>
+              {product.store.owner.name && (
+                <article className="pt-6 mt-8 border-t">
+                  <h3 className="mb-4 text-lg font-bold">Temui pendiri UMKM ini</h3>
 
-                <div className="flex items-center pb-2">
-                  <div>
-                    {product.store.owner.image ? (
-                      <Image
-                        src={product.store.owner.image}
-                        height={72}
-                        width={72}
-                        alt=""
-                        className="rounded-full"
-                        objectFit="cover"
-                        placeholder={product.store.owner.imageBase64 ? "blur" : "empty"}
-                        blurDataURL={product.store.owner.imageBase64 || ""}
-                      />
-                    ) : (
-                      <Image
-                        src={UserImagePlaceholder}
-                        height={72}
-                        width={72}
-                        alt=""
-                        className="rounded-full"
-                        objectFit="cover"
-                        placeholder="blur"
-                      />
-                    )}
+                  <div className="flex items-center pb-2">
+                    <div>
+                      {product.store.owner.image ? (
+                        <Image
+                          src={product.store.owner.image}
+                          height={72}
+                          width={72}
+                          alt=""
+                          className="rounded-full"
+                          objectFit="cover"
+                          placeholder={product.store.owner.imageBase64 ? "blur" : "empty"}
+                          blurDataURL={product.store.owner.imageBase64 || ""}
+                        />
+                      ) : (
+                        <Image
+                          src={UserImagePlaceholder}
+                          height={72}
+                          width={72}
+                          alt=""
+                          className="rounded-full"
+                          objectFit="cover"
+                          placeholder="blur"
+                        />
+                      )}
+                    </div>
+                    <div className=" overflow-hidden ml-4 max-w-sm">
+                      <p className="ml-1 font-ui text-xl line-clamp-2">
+                        {product.store.owner.name}
+                      </p>
+                      <p className="ml-1 font-ui text-sm text-gray-700">
+                        Pendiri dari {product.store.name}
+                      </p>
+                    </div>
                   </div>
-                  <div className=" overflow-hidden ml-4 max-w-sm">
-                    <p className="ml-1 font-ui text-xl line-clamp-2">{product.store.owner.name}</p>
-                    <p className="ml-1 font-ui text-sm text-gray-700">
-                      Pendiri dari {product.store.name}
-                    </p>
-                  </div>
-                </div>
-              </article>
+                </article>
+              )}
             </div>
           </div>
         </div>
