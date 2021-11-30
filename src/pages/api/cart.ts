@@ -2,6 +2,7 @@ import { createApi } from "@lib/rest"
 import { NextApiHandler } from "next"
 import { array, number, string, type } from "io-ts"
 import { findLineItemsData } from "@lib/db"
+import { toIDR } from "@lib/currency"
 
 const message = "Hi, saya mau pesan dong:"
 
@@ -20,10 +21,15 @@ const post: NextApiHandler = async (req, res) => {
 
     let text = message
     let total = 0
+    text += "\n\n=============================="
     completeData.forEach((item) => {
       total += item.qty * item.price
-      text = `${text}\n${item.qty} x ${item.name}`
+      text = `${text}\n${item.qty} x ${item.name} \n@ ${toIDR(item.price)} = ${toIDR(
+        item.qty * item.price
+      )}`
+      text += "\n=============================="
     })
+    text += `\n\nTotalnya ${toIDR(total)} ya?`
 
     res.status(200).json({
       total,
@@ -36,15 +42,15 @@ const post: NextApiHandler = async (req, res) => {
   }
 }
 
-const createWhatsappLink = (wa: string, text: string) => {
+const createWhatsappLink = (whatsAppNumber: string, text: string) => {
   // make sure number includes a country code
-  let properWa = wa
-  const usesCountryCode = properWa.startsWith("+")
+  let formattedWhatsAppNumber = whatsAppNumber
+  const usesCountryCode = formattedWhatsAppNumber.startsWith("+")
   if (!usesCountryCode) {
-    properWa = `+62${properWa}`
+    formattedWhatsAppNumber = `+62${formattedWhatsAppNumber}`
   }
 
-  return `https://wa.me/${properWa}?text=${encodeURIComponent(text)}`
+  return `https://wa.me/${formattedWhatsAppNumber}?text=${encodeURIComponent(text)}`
 }
 
 export default createApi({ post })
