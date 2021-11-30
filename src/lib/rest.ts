@@ -5,7 +5,8 @@ import { Any, TypeOf } from "io-ts"
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next"
 import { Session } from "next-auth"
 import { getSession } from "next-auth/client"
-import { withSentry } from "@sentry/nextjs"
+
+const withSentry = <T>(fn: NextApiHandler<T>) => fn
 
 interface Handler {
   get?: NextApiHandler
