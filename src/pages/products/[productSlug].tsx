@@ -6,7 +6,7 @@ import {
   findProductBySlug,
   findStoreHighlights
 } from "@lib/db"
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { toIDR } from "@lib/currency"
 import Breadcrumbs from "@components/breadcrumbs"
 import categories, { findCategoryById } from "@lib/categories"
@@ -28,7 +28,6 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   storeProducts,
   categoryProducts
 }) => {
-  const incrementQty = useCart((state) => state.incrementQty)
   const firstImage = product.images[0]
   const [selectedImage, setSelectedImage] = useState(firstImage)
 
@@ -124,19 +123,13 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
               <h2 className="mb-4 text-2xl font-bold">{toIDR(product.price)}</h2>
 
-              <Button
-                className="py-3 my-6 w-full rounded-xl"
-                onClick={() => incrementQty(product.storeId, product.id)}
-              >
-                <Icon src="/icons/plus.svg" className="mr-4 !bg-white" />
-                Masukan ke catatan
-              </Button>
+              <BuyButton storeId={product.storeId} productId={product.id} />
 
               {product.description && (
                 <article className="mt-8 prose sm:prose-sm">
                   <h3>Tentang Produk</h3>
                   {product.description.split("\n").map((text) => (
-                    <p>{text}</p>
+                    <p key={text}>{text}</p>
                   ))}
                 </article>
               )}
@@ -211,6 +204,54 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         )}
       </main>
+    </div>
+  )
+}
+
+const BuyButton: FC<{
+  storeId: string
+  productId: string
+}> = ({ storeId, productId }) => {
+  const inc = useCart((state) => state.incrementQty)
+  const dec = useCart((state) => state.decrementQty)
+  const del = useCart((state) => state.deleteItem)
+  const items = useCart(({ items }) => items)
+  const item = items.find((item) => item.productId === productId)
+
+  if (!item || item.qty === 0) {
+    return (
+      <Button className="py-3 my-6 w-full rounded-xl" onClick={() => inc(storeId, productId)}>
+        <Icon src="/icons/plus.svg" className="mr-4 !bg-white" />
+        Masukan ke catatan
+      </Button>
+    )
+  }
+
+  return (
+    <div className="flex items-end my-8">
+      <div>
+        <div className="flex overflow-hidden rounded-lg border border-primary-300 shadow">
+          <Button
+            variant="outline"
+            onClick={() => dec(storeId, productId)}
+            className="!p-2 !rounded-none border-none"
+          >
+            <Icon src="/icons/minus.svg" className="!bg-gray-600" />
+          </Button>
+          <p className="flex items-center px-3 border-r border-l">{item.qty}</p>
+          <Button
+            variant="outline"
+            onClick={() => inc(storeId, productId)}
+            className="!p-2 !rounded-none border-none"
+          >
+            <Icon src="/icons/plus.svg" className="!bg-gray-600" />
+          </Button>
+        </div>
+      </div>
+
+      <Button variant="secondary" onClick={() => del(productId)} className="!px-2 ml-2">
+        <Icon src="/icons/trash.svg" className="!bg-gray-500" />
+      </Button>
     </div>
   )
 }
