@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { FC, Fragment, useState } from "react"
+import { FC, Fragment, useMemo, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import Button from "@components/button"
 import Icon from "@components/icon"
@@ -84,10 +84,13 @@ const StoreLineItems: FC<{
 }> = ({ storeId }) => {
   const { data } = useGetStore(storeId)
   const items = useCart(({ items }) => items)
-  const itemsByStore = items.filter((store) => store.storeId === storeId)
+  const itemsByStore = useMemo(
+    () => items.filter((store) => store.storeId === storeId),
+    [items, storeId]
+  )
   const deleteByStoreId = useCart(({ deleteByStoreId }) => deleteByStoreId)
 
-  const { isLoading, whatsappLink, total } = useGetCartDetails(items)
+  const { isLoading, whatsappLink, total } = useGetCartDetails(itemsByStore)
 
   return (
     <div className="overflow-auto px-4 md:px-6 pb-[180px]">
