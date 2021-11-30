@@ -12,7 +12,7 @@ interface Props {
   className?: string
 }
 const Breadcrumbs: FC<Props> = ({ className, breadcrumbs }) => (
-  <nav className={`flex mb-8 ${className}`} aria-label="Breadcrumb">
+  <nav className={`flex mb-8 bg-white p-4 border rounded-xl ${className}`} aria-label="Breadcrumb">
     <ol className="flex items-center space-x-4">
       <li>
         <div>

@@ -69,7 +69,7 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
               )}
 
               {product.images.length > 0 && (
-                <div className="flex overflow-auto py-4 pb-[29px] pl-4 sm:pl-1">
+                <div className="flex overflow-auto py-4 pb-1 sm:pb-[29px] pl-4 sm:pl-1">
                   {product.images.map((image, index) => {
                     const selected = selectedImage?.key === image.key
                     return (
@@ -104,7 +104,6 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <div className="flex-1 max-w-2xl text-gray-900">
             <div className="p-4 md:p-8 sm:px-8">
               <Breadcrumbs
-                className="my-4"
                 breadcrumbs={[
                   {
                     href: `/stores/${product.store.slug}`,
