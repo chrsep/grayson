@@ -12,6 +12,7 @@ import { useRouter } from "next/router"
 import categories from "@lib/categories"
 import useGetUser from "@lib/auth/useGetUser"
 import clsx from "clsx"
+import { useCart } from "@lib/cart"
 
 const navigations = [
   {
@@ -344,6 +345,12 @@ const UserProfile = () => {
 
 const Cart = () => {
   const [open, setOpen] = useState(false)
+  const items = useCart(({ items }) => items)
+  let count = 0
+  items.forEach(({ qty }) => {
+    count += qty
+  })
+
   return (
     <div className="flex-shrink-0">
       <Button
@@ -353,6 +360,7 @@ const Cart = () => {
       >
         <span className="sr-only">Buka catatan belanja</span>
         <Icon src="/icons/shopping-cart.svg" className="m-2 w-5 h-5 !bg-white" />
+        {count > 0 && <span className="mr-3 font-black text-white">{count}</span>}
       </Button>
       <CartSlideOver open={open} setOpen={setOpen} />
     </div>
