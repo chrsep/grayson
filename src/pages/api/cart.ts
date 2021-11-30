@@ -21,13 +21,13 @@ const post: NextApiHandler = async (req, res) => {
 
     let text = message
     let total = 0
-    text += "\n\n=============================="
+    text += "\n\n==="
     completeData.forEach((item) => {
       total += item.qty * item.price
       text = `${text}\n${item.qty} x ${item.name} \n@ ${toIDR(item.price)} = ${toIDR(
         item.qty * item.price
       )}`
-      text += "\n=============================="
+      text += "\n==="
     })
     text += `\n\nTotalnya ${toIDR(total)} ya?`
 
