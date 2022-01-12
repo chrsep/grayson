@@ -30,7 +30,7 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
       body: JSON.stringify(data)
     })
 
-    if (result.ok) await router.push("/me/stores")
+    if (result.ok) window.location.href = "/me/stores"
   }
 
   const handleChangeLogo = async (e: ChangeEvent<HTMLInputElement>) => {
