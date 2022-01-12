@@ -36,3 +36,5 @@ yarn-error.log*
 sentry.properties
 public/sw.js*
 public/workbox*
+
+tsconfig.tsbuildinfo
