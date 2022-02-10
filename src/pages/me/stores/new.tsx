@@ -20,7 +20,6 @@ const NewStore: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>>
       logo: null
     }
   })
-  const router = useRouter()
   const { isDirty, isValid } = formState
 
   const onSubmit = async (data: PostStoreBody) => {
