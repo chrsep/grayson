@@ -51,13 +51,14 @@
     "slugify": "1.6.3",
     "swr": "1.0.1",
     "uuid": "8.3.2",
-    "zustand": "3.6.5"
-  },
-  "devDependencies": {
-    "@playwright/test": "1.16.3",
+    "zustand": "3.6.5",
     "@tailwindcss/aspect-ratio": "0.3.0",
     "@tailwindcss/forms": "0.3.4",
     "@tailwindcss/typography": "0.4.1",
+    "tailwindcss": "2.2.19"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.16.3",
     "@typescript-eslint/eslint-plugin": "5.3.1",
     "autoprefixer": "10.4.0",
     "eslint": "7.32.0",
@@ -79,7 +80,6 @@
     "postcss": "8.4.4",
     "prettier": "2.5.0",
     "prisma": "5.16.0",
-    "tailwindcss": "2.2.19",
     "ts-node": "10.4.0",
     "typescript": "5.5.2"
   },
