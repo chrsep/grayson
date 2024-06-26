@@ -22,7 +22,7 @@
     "@headlessui/react": "1.4.2",
     "@next/bundle-analyzer": "12.0.4",
     "@plaiceholder/next": "2.2.0",
-    "@prisma/client": "3.5.0",
+    "@prisma/client": "5.16.0",
     "@sentry/nextjs": "6.15.0",
     "@tailwindcss/line-clamp": "0.2.2",
     "@types/react": "17.0.34",
@@ -78,10 +78,10 @@
     "lint-staged": "12.1.2",
     "postcss": "8.4.4",
     "prettier": "2.5.0",
-    "prisma": "3.5.0",
+    "prisma": "5.16.0",
     "tailwindcss": "2.2.19",
     "ts-node": "10.4.0",
-    "typescript": "4.5.2"
+    "typescript": "5.5.2"
   },
   "lint-staged": {
     "*.{js,ts,ts}": "eslint --cache --fix"
