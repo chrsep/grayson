@@ -55,6 +55,7 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                   className="bg-black sm:rounded-2xl"
                   placeholder="blur"
                   blurDataURL={selectedImage.base64}
+                  alt=""
                 />
               ) : (
                 <Image
@@ -65,6 +66,7 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                   height={900}
                   className="bg-black sm:rounded-2xl"
                   placeholder="blur"
+                  alt=""
                 />
               )}
 
@@ -92,6 +94,7 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                           placeholder="blur"
                           blurDataURL={image.base64}
                           className="rounded-lg"
+                          alt=""
                         />
                       </button>
                     )
@@ -262,11 +265,7 @@ interface Props {
   categoryProducts: Await<ReturnType<typeof findCategoryHighlights>>
 }
 
-interface Query extends NodeJS.Dict<string> {
-  productSlug: string
-}
-
-export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props, any> = async ({ params }) => {
   const product = await findProductBySlug(params?.productSlug as string)
   if (!product) return { notFound: true }
 

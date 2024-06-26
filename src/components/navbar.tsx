@@ -281,6 +281,7 @@ const UserProfile = () => {
                     src={data.user.image}
                     placeholder="blur"
                     blurDataURL={data.user.imageBase64}
+                    alt={""}
                   />
                 ) : (
                   <img

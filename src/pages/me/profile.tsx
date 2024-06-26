@@ -283,6 +283,7 @@ const ImageSelector: FC<{
                 src={image}
                 className="w-full h-full text-gray-300"
                 objectFit="cover"
+                alt=""
               />
             ) : (
               <img

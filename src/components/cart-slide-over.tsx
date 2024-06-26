@@ -150,6 +150,7 @@ const ProductData: FC<{
             height={150}
             src={data.images[0].url}
             className="object-cover object-center w-full h-full rounded-lg"
+            alt={""}
           />
         )}
       </div>

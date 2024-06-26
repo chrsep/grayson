@@ -37,6 +37,7 @@ const ImageSelectorWithSmallPreview: FC<Props> = ({
               src={value || placeholder}
               className="w-full h-full text-gray-300"
               objectFit="cover"
+              alt={""}
             />
           </span>
           <Button variant="outline" className="ml-4" onClick={() => ref.current?.click()}>
