@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit",
     "studio": "prisma studio",
     "test": "playwright test",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "vercel-build": "yarn add sharp --ignore-engines && prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@fontsource/inria-sans": "4.5.0",
@@ -47,6 +47,7 @@
     "react-ssr-prepass": "^1.4.0",
     "redaxios": "0.4.1",
     "scheduler": "^0.20.2",
+    "sharp": "^0.33.4",
     "slugify": "1.6.3",
     "swr": "1.0.1",
     "uuid": "8.3.2",
